@@ -1,0 +1,52 @@
+PODS:
+  - AFNetworking (3.2.1):
+    - AFNetworking/NSURLSession (= 3.2.1)
+    - AFNetworking/Reachability (= 3.2.1)
+    - AFNetworking/Security (= 3.2.1)
+    - AFNetworking/Serialization (= 3.2.1)
+    - AFNetworking/UIKit (= 3.2.1)
+  - AFNetworking/NSURLSession (3.2.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.2.1)
+  - AFNetworking/Security (3.2.1)
+  - AFNetworking/Serialization (3.2.1)
+  - AFNetworking/UIKit (3.2.1):
+    - AFNetworking/NSURLSession
+  - GKNavigationBarViewController (2.1.0)
+  - Masonry (1.1.0)
+  - SDWebImage (4.4.2):
+    - SDWebImage/Core (= 4.4.2)
+  - SDWebImage/Core (4.4.2)
+  - TXLiteAVSDK_Player (5.2.5539)
+  - YYModel (1.0.4)
+
+DEPENDENCIES:
+  - AFNetworking
+  - GKNavigationBarViewController
+  - Masonry
+  - SDWebImage
+  - TXLiteAVSDK_Player
+  - YYModel
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - AFNetworking
+    - GKNavigationBarViewController
+    - Masonry
+    - SDWebImage
+    - TXLiteAVSDK_Player
+    - YYModel
+
+SPEC CHECKSUMS:
+  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  GKNavigationBarViewController: 2ac358e48986e1db06993e07de611a089526b976
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
+  TXLiteAVSDK_Player: ca2f09c389b5bc991421277eb87b13f4a607220b
+  YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
+
+PODFILE CHECKSUM: 86f6964fa09d3100aa617f5b7dfa53d0b8d23c49
+
+COCOAPODS: 1.5.3
