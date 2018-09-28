@@ -9,5 +9,7 @@ target 'GKDYVideo' do
   pod 'YYModel'
   pod 'GKNavigationBarViewController'
   pod 'TXLiteAVSDK_Player'  # 腾讯云播放器-独立播放器版
+  pod 'GKMessageTool'
+  pod 'WMPageController'
 
 end

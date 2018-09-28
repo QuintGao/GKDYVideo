@@ -14,39 +14,51 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - GKNavigationBarViewController (2.1.0)
+  - GKMessageTool (1.0.3):
+    - MBProgressHUD
+  - GKNavigationBarViewController (2.1.2)
   - Masonry (1.1.0)
+  - MBProgressHUD (1.1.0)
   - SDWebImage (4.4.2):
     - SDWebImage/Core (= 4.4.2)
   - SDWebImage/Core (4.4.2)
-  - TXLiteAVSDK_Player (5.2.5539)
+  - TXLiteAVSDK_Player (5.2.5541)
+  - WMPageController (2.5.2)
   - YYModel (1.0.4)
 
 DEPENDENCIES:
   - AFNetworking
+  - GKMessageTool
   - GKNavigationBarViewController
   - Masonry
   - SDWebImage
   - TXLiteAVSDK_Player
+  - WMPageController
   - YYModel
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AFNetworking
+    - GKMessageTool
     - GKNavigationBarViewController
     - Masonry
+    - MBProgressHUD
     - SDWebImage
     - TXLiteAVSDK_Player
+    - WMPageController
     - YYModel
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  GKNavigationBarViewController: 2ac358e48986e1db06993e07de611a089526b976
+  GKMessageTool: 89ea6e0ecc60e36609c3e5e0c47eb7b6e81fde03
+  GKNavigationBarViewController: a9a6ca818de0ea32697ccb3c0ce8ad00910cea40
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
-  TXLiteAVSDK_Player: ca2f09c389b5bc991421277eb87b13f4a607220b
+  TXLiteAVSDK_Player: 51c380bd7384c85386e29a31f9eb6a0fda20db06
+  WMPageController: 0c7624d2b48e4f1ab92371688cf6744ed701575d
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 86f6964fa09d3100aa617f5b7dfa53d0b8d23c49
+PODFILE CHECKSUM: 99ad7734b3fbf823524942af479ea88e58208e52
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.0.beta.1

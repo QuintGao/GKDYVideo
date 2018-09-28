@@ -204,6 +204,7 @@
     if (!_coverImgView) {
         _coverImgView = [UIImageView new];
         _coverImgView.contentMode = UIViewContentModeScaleAspectFill;
+        _coverImgView.clipsToBounds = YES;
     }
     return _coverImgView;
 }
@@ -213,6 +214,8 @@
         _iconView = [UIImageView new];
         _iconView.layer.cornerRadius = ADAPTATIONRATIO * 50.0f;
         _iconView.layer.masksToBounds = YES;
+        _iconView.layer.borderColor = [UIColor whiteColor].CGColor;
+        _iconView.layer.borderWidth = 1.0f;
         _iconView.userInteractionEnabled = YES;
         
         UITapGestureRecognizer *iconTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(iconDidClick:)];
@@ -228,6 +231,7 @@
         [_praiseBtn setImage:[UIImage imageNamed:@"ss_icon_star_selected"] forState:UIControlStateSelected];
         _praiseBtn.titleLabel.font = [UIFont systemFontOfSize:13.0f];
         [_praiseBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_praiseBtn addTarget:self action:@selector(praiseBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _praiseBtn;
 }
@@ -238,6 +242,7 @@
         [_commentBtn setImage:[UIImage imageNamed:@"ss_icon_comment"] forState:UIControlStateNormal];
         _commentBtn.titleLabel.font = [UIFont systemFontOfSize:13.0f];
         [_commentBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_commentBtn addTarget:self action:@selector(commentBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _commentBtn;
 }
@@ -248,6 +253,7 @@
         [_shareBtn setImage:[UIImage imageNamed:@"ss_icon_share"] forState:UIControlStateNormal];
         _shareBtn.titleLabel.font = [UIFont systemFontOfSize:13.0f];
         [_shareBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_shareBtn addTarget:self action:@selector(shareBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _shareBtn;
 }

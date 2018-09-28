@@ -14,6 +14,7 @@
 #import <Masonry/Masonry.h>
 #import <YYModel/YYModel.h>
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <GKMessageTool/GKMessageTool.h>
 
 #pragma mark - UI
 // 屏幕宽高

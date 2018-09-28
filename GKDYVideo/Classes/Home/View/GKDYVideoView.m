@@ -158,10 +158,15 @@
     // 移除原来的播放
     [self.player removeVideo];
     
+    // 取消原来视图的代理
+    self.currentPlayView.delegate = nil;
+    
     // 切换播放视图
     self.currentPlayId    = fromView.model.post_id;
     self.currentPlayView  = fromView;
     self.currentPlayIndex = [self indexOfModel:fromView.model];
+    // 设置新视图的代理
+    self.currentPlayView.delegate = self;
     
     // 重新播放
     @weakify(self);
@@ -264,7 +269,7 @@
     
     // 当只剩最后两个的时候，获取新数据
     if (self.currentPlayIndex == self.videos.count - 2) {
-        [self.viewModel refreshMoreListWithSuccess:^(NSArray * _Nonnull list) {
+        [self.viewModel refreshNewListWithSuccess:^(NSArray * _Nonnull list) {
             [self.videos addObjectsFromArray:list];
         } failure:^(NSError * _Nonnull error) {
             NSLog(@"%@", error);
@@ -322,19 +327,19 @@
 }
 
 - (void)controlViewDidClickIcon:(GKDYVideoControlView *)controlView {
-    
+    [GKMessageTool showText:@"点击头像"];
 }
 
 - (void)controlViewDidClickPriase:(GKDYVideoControlView *)controlView {
-    
+    [GKMessageTool showText:@"点赞"];
 }
 
 - (void)controlViewDidClickComment:(GKDYVideoControlView *)controlView {
-    
+    [GKMessageTool showText:@"评论"];
 }
 
 - (void)controlViewDidClickShare:(GKDYVideoControlView *)controlView {
-    
+    [GKMessageTool showText:@"分享"];
 }
 
 #pragma mark - 懒加载
@@ -371,7 +376,6 @@
 - (GKDYVideoControlView *)topView {
     if (!_topView) {
         _topView = [GKDYVideoControlView new];
-        _topView.delegate = self;
     }
     return _topView;
 }
@@ -379,7 +383,6 @@
 - (GKDYVideoControlView *)ctrView {
     if (!_ctrView) {
         _ctrView = [GKDYVideoControlView new];
-        _ctrView.delegate = self;
     }
     return _ctrView;
 }
@@ -387,7 +390,6 @@
 - (GKDYVideoControlView *)btmView {
     if (!_btmView) {
         _btmView = [GKDYVideoControlView new];
-        _btmView.delegate = self;
     }
     return _btmView;
 }

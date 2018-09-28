@@ -8,7 +8,7 @@
 
 #import "GKDYPersonalViewController.h"
 #import "GKNetworking.h"
-#import "GKDYProfileModel.h"
+#import "GKDYPersonalModel.h"
 
 @interface GKDYPersonalViewController ()
 

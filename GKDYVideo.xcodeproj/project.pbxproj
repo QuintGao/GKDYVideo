@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		606A77DD215DFCB100DC2F63 /* GKDYPersonalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 606A77DB215DFCB000DC2F63 /* GKDYPersonalViewController.m */; };
+		606A77DF215E0B3000DC2F63 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 606A77DE215E0B3000DC2F63 /* README.md */; };
 		79CC62942157377400101773 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CC62932157377400101773 /* AppDelegate.m */; };
 		79CC629C2157377600101773 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79CC629B2157377600101773 /* Assets.xcassets */; };
 		79CC629F2157377600101773 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79CC629D2157377600101773 /* LaunchScreen.storyboard */; };
@@ -24,9 +26,8 @@
 		79CC62E82157401E00101773 /* GKDYVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CC62E72157401E00101773 /* GKDYVideoView.m */; };
 		79CC62EB2157402800101773 /* GKDYVideoControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CC62EA2157402800101773 /* GKDYVideoControlView.m */; };
 		79CC62EE2157405400101773 /* GKDYVideoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CC62ED2157405400101773 /* GKDYVideoViewModel.m */; };
-		79CC62F12158E1A500101773 /* GKDYPersonalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CC62F02158E1A500101773 /* GKDYPersonalViewController.m */; };
 		79CC62F52158E44300101773 /* GKNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CC62F42158E44300101773 /* GKNetworking.m */; };
-		79CC62FB2158F2BB00101773 /* GKDYProfileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CC62FA2158F2BB00101773 /* GKDYProfileModel.m */; };
+		79CC62FB2158F2BB00101773 /* GKDYPersonalModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CC62FA2158F2BB00101773 /* GKDYPersonalModel.m */; };
 		AA70E41FD2C5EC1F0C249206 /* Pods_GKDYVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81CC8427C037D4E8A4B61B49 /* Pods_GKDYVideo.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,9 @@
 
 /* Begin PBXFileReference section */
 		126D76C9517C38C3B7C81D53 /* Pods-GKDYVideo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GKDYVideo.release.xcconfig"; path = "Pods/Target Support Files/Pods-GKDYVideo/Pods-GKDYVideo.release.xcconfig"; sourceTree = "<group>"; };
+		606A77DB215DFCB000DC2F63 /* GKDYPersonalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKDYPersonalViewController.m; sourceTree = "<group>"; };
+		606A77DC215DFCB100DC2F63 /* GKDYPersonalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKDYPersonalViewController.h; sourceTree = "<group>"; };
+		606A77DE215E0B3000DC2F63 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		79CC628F2157377400101773 /* GKDYVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GKDYVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79CC62922157377400101773 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		79CC62932157377400101773 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -85,12 +89,10 @@
 		79CC62EA2157402800101773 /* GKDYVideoControlView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYVideoControlView.m; sourceTree = "<group>"; };
 		79CC62EC2157405400101773 /* GKDYVideoViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYVideoViewModel.h; sourceTree = "<group>"; };
 		79CC62ED2157405400101773 /* GKDYVideoViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYVideoViewModel.m; sourceTree = "<group>"; };
-		79CC62EF2158E1A500101773 /* GKDYPersonalViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYPersonalViewController.h; sourceTree = "<group>"; };
-		79CC62F02158E1A500101773 /* GKDYPersonalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYPersonalViewController.m; sourceTree = "<group>"; };
 		79CC62F32158E44300101773 /* GKNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKNetworking.h; sourceTree = "<group>"; };
 		79CC62F42158E44300101773 /* GKNetworking.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKNetworking.m; sourceTree = "<group>"; };
-		79CC62F92158F2BB00101773 /* GKDYProfileModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYProfileModel.h; sourceTree = "<group>"; };
-		79CC62FA2158F2BB00101773 /* GKDYProfileModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYProfileModel.m; sourceTree = "<group>"; };
+		79CC62F92158F2BB00101773 /* GKDYPersonalModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYPersonalModel.h; sourceTree = "<group>"; };
+		79CC62FA2158F2BB00101773 /* GKDYPersonalModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYPersonalModel.m; sourceTree = "<group>"; };
 		81CC8427C037D4E8A4B61B49 /* Pods_GKDYVideo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GKDYVideo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACB89D940248F84479D31DDA /* Pods-GKDYVideo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GKDYVideo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GKDYVideo/Pods-GKDYVideo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -169,6 +171,7 @@
 				79CC62A02157377600101773 /* Info.plist */,
 				79CC62A12157377600101773 /* main.m */,
 				79CC62C4215739FD00101773 /* PrefixHeader.pch */,
+				606A77DE215E0B3000DC2F63 /* README.md */,
 			);
 			path = GKDYVideo;
 			sourceTree = "<group>";
@@ -243,8 +246,8 @@
 				79CC62D321573C2300101773 /* GKDYSearchViewController.m */,
 				79CC62D521573C2C00101773 /* GKDYPlayerViewController.h */,
 				79CC62D621573C2C00101773 /* GKDYPlayerViewController.m */,
-				79CC62EF2158E1A500101773 /* GKDYPersonalViewController.h */,
-				79CC62F02158E1A500101773 /* GKDYPersonalViewController.m */,
+				606A77DC215DFCB100DC2F63 /* GKDYPersonalViewController.h */,
+				606A77DB215DFCB000DC2F63 /* GKDYPersonalViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -267,8 +270,8 @@
 			children = (
 				79CC62E021573F3C00101773 /* GKDYVideoModel.h */,
 				79CC62E121573F3C00101773 /* GKDYVideoModel.m */,
-				79CC62F92158F2BB00101773 /* GKDYProfileModel.h */,
-				79CC62FA2158F2BB00101773 /* GKDYProfileModel.m */,
+				79CC62F92158F2BB00101773 /* GKDYPersonalModel.h */,
+				79CC62FA2158F2BB00101773 /* GKDYPersonalModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -406,6 +409,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				606A77DF215E0B3000DC2F63 /* README.md in Resources */,
 				79CC629F2157377600101773 /* LaunchScreen.storyboard in Resources */,
 				79CC629C2157377600101773 /* Assets.xcassets in Resources */,
 			);
@@ -434,24 +438,30 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-GKDYVideo/Pods-GKDYVideo-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-GKDYVideo/Pods-GKDYVideo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/GKMessageTool/GKMessageTool.framework",
 				"${BUILT_PRODUCTS_DIR}/GKNavigationBarViewController/GKNavigationBarViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/WMPageController/WMPageController.framework",
 				"${BUILT_PRODUCTS_DIR}/YYModel/YYModel.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GKMessageTool.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GKNavigationBarViewController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WMPageController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYModel.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GKDYVideo/Pods-GKDYVideo-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GKDYVideo/Pods-GKDYVideo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EFB1AD7F2B6B2818E9A863C8 /* [CP] Check Pods Manifest.lock */ = {
@@ -488,12 +498,12 @@
 				79CC62E521573FC500101773 /* GKDYScrollView.m in Sources */,
 				79CC62EE2157405400101773 /* GKDYVideoViewModel.m in Sources */,
 				79CC62E221573F3C00101773 /* GKDYVideoModel.m in Sources */,
-				79CC62F12158E1A500101773 /* GKDYPersonalViewController.m in Sources */,
+				606A77DD215DFCB100DC2F63 /* GKDYPersonalViewController.m in Sources */,
 				79CC62F52158E44300101773 /* GKNetworking.m in Sources */,
 				79CC62942157377400101773 /* AppDelegate.m in Sources */,
 				79CC62CB21573B4700101773 /* GKSliderView.m in Sources */,
 				79CC62D121573BFD00101773 /* GKDYHomeViewController.m in Sources */,
-				79CC62FB2158F2BB00101773 /* GKDYProfileModel.m in Sources */,
+				79CC62FB2158F2BB00101773 /* GKDYPersonalModel.m in Sources */,
 				79CC62DF21573CAE00101773 /* GKDYVideoPlayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
