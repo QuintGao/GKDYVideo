@@ -41,7 +41,7 @@
 // APP退出到后台
 - (void)appDidEnterBackground:(NSNotification *)notify {
     if (self.status == GKDYVideoPlayerStatusLoading || self.status == GKDYVideoPlayerStatusPlaying) {
-        [self pause];
+        [self pausePlay];
         
         self.isNeedResume = YES;
     }
@@ -55,7 +55,7 @@
         [[AVAudioSession sharedInstance] setActive:YES error:nil];
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self resume];
+            [self resumePlay];
         });
     }
 }
@@ -87,17 +87,22 @@
     [self playerStatusChanged:GKDYVideoPlayerStatusUnload];
 }
 
-- (void)pause {
+- (void)pausePlay {
     [self playerStatusChanged:GKDYVideoPlayerStatusPaused];
     
     [self.player pause];
 }
 
-- (void)resume {
+- (void)resumePlay {
     if (self.status == GKDYVideoPlayerStatusPaused) {
         [self.player resume];
         [self playerStatusChanged:GKDYVideoPlayerStatusPlaying];
     }
+}
+
+- (void)resetPlay {
+    [self.player resume];
+    [self playerStatusChanged:GKDYVideoPlayerStatusPlaying];
 }
 
 - (BOOL)isPlaying {
@@ -129,6 +134,10 @@
         }
             break;
         case PLAY_EVT_PLAY_END:{    // 播放结束
+            if ([self.delegate respondsToSelector:@selector(player:currentTime:totalTime:progress:)]) {
+                [self.delegate player:self currentTime:self.duration totalTime:self.duration progress:1.0f];
+            }
+            
             [self playerStatusChanged:GKDYVideoPlayerStatusEnded];
         }
             break;
@@ -143,12 +152,6 @@
                 float currTime = [param[EVT_PLAY_PROGRESS] floatValue];
                 
                 float progress = self.duration == 0 ? 0 : currTime / self.duration;
-                
-                // 处理播放结束时，进度不更新问题
-                if (progress >= 0.95) progress = 1.0f;
-                
-                //                float buffTime = [param[EVT_PLAYABLE_DURATION] floatValue];
-                //                float burrProgress = self.duration == 0 ? 0 : buffTime / self.duration;
                 
                 if ([self.delegate respondsToSelector:@selector(player:currentTime:totalTime:progress:)]) {
                     [self.delegate player:self currentTime:currTime totalTime:self.duration progress:progress];
@@ -174,7 +177,6 @@
         
         _player = [TXVodPlayer new];
         _player.vodDelegate = self;
-        _player.loop = YES; // 开启循环播放功能
     }
     return _player;
 }

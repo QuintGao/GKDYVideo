@@ -14,51 +14,43 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - GKMessageTool (1.0.3):
-    - MBProgressHUD
-  - GKNavigationBarViewController (2.1.2)
+  - GKNavigationBarViewController (2.1.6)
   - Masonry (1.1.0)
-  - MBProgressHUD (1.1.0)
-  - SDWebImage (4.4.2):
-    - SDWebImage/Core (= 4.4.2)
-  - SDWebImage/Core (4.4.2)
-  - TXLiteAVSDK_Player (5.2.5541)
-  - WMPageController (2.5.2)
+  - MJRefresh (3.1.15.7)
+  - SDWebImage (4.4.3):
+    - SDWebImage/Core (= 4.4.3)
+  - SDWebImage/Core (4.4.3)
+  - TXLiteAVSDK_Player (5.3.6004)
   - YYModel (1.0.4)
 
 DEPENDENCIES:
   - AFNetworking
-  - GKMessageTool
   - GKNavigationBarViewController
   - Masonry
+  - MJRefresh
   - SDWebImage
   - TXLiteAVSDK_Player
-  - WMPageController
   - YYModel
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AFNetworking
-    - GKMessageTool
     - GKNavigationBarViewController
     - Masonry
-    - MBProgressHUD
+    - MJRefresh
     - SDWebImage
     - TXLiteAVSDK_Player
-    - WMPageController
     - YYModel
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  GKMessageTool: 89ea6e0ecc60e36609c3e5e0c47eb7b6e81fde03
-  GKNavigationBarViewController: a9a6ca818de0ea32697ccb3c0ce8ad00910cea40
+  GKNavigationBarViewController: c4f1121d2bc69acc082c280740cd70d658fde53d
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
-  MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
-  SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
-  TXLiteAVSDK_Player: 51c380bd7384c85386e29a31f9eb6a0fda20db06
-  WMPageController: 0c7624d2b48e4f1ab92371688cf6744ed701575d
+  MJRefresh: 697f8ec75ebdbe9207767bb682cf0f51b0d8a41f
+  SDWebImage: c5594f1a19c48d526d321e548902b56b479cd508
+  TXLiteAVSDK_Player: 0ae5dbfa79619f53265d88cc990b1baf7abe1d97
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 99ad7734b3fbf823524942af479ea88e58208e52
+PODFILE CHECKSUM: eecf7b8730177be6f0c661040d04dd2cddfca65a
 
-COCOAPODS: 1.6.0.beta.1
+COCOAPODS: 1.6.0.beta.2

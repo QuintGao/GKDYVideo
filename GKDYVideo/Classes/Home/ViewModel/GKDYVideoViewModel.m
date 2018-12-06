@@ -34,11 +34,11 @@
     NSMutableDictionary *params = [NSMutableDictionary new];
     params[@"new_recommend_type"] = @"3";
     params[@"pn"] = @(self.pn);
-    params[@"dl"] = @"505F80E58F3817291B7768CE59A90AF8";
-    params[@"sign"] = @"3DD6882F963C25F5FA1ECA558F8CEF48";
-    params[@"_timestamp"] = @"1537782764313";
-    params[@"timestamp"] = @"1537782764313";
-    params[@"net_type"] = @"1";
+    params[@"dl"] = @"2D41050C0F871E65D6717E7B2E4E944C";
+    params[@"sign"] = @"3AD03F91B2064D75E1B2A8285720E2F1";
+    params[@"_timestamp"] = @"1544061295026";
+    params[@"timestamp"]  = @"1544061295026";
+    params[@"net_type"]   = @"1";
     
     // 推荐列表
     NSString *url = @"http://c.tieba.baidu.com/c/f/nani/recommend/list";

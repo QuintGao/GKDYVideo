@@ -51,12 +51,23 @@
             make.edges.equalTo(self);
         }];
         
-        
         if (!isPushed) {
             [self.viewModel refreshNewListWithSuccess:^(NSArray * _Nonnull list) {
                 [self setModels:list index:0];
             } failure:^(NSError * _Nonnull error) {
                 NSLog(@"%@", error);
+            }];
+            
+            self.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+                [self.videos removeAllObjects];
+                
+                [self.viewModel refreshNewListWithSuccess:^(NSArray * _Nonnull list) {
+                    [self setModels:list index:0];
+                    [self.scrollView.mj_header endRefreshing];
+                } failure:^(NSError * _Nonnull error) {
+                    NSLog(@"%@", error);
+                    [self.scrollView.mj_header endRefreshing];
+                }];
             }];
         }
     }
@@ -139,12 +150,12 @@
         self.isPlaying_beforeScroll = NO;
     }
     
-    [self.player pause];
+    [self.player pausePlay];
 }
 
 - (void)resume {
     if (self.isPlaying_beforeScroll) {
-        [self.player resume];
+        [self.player resumePlay];
     }
 }
 
@@ -301,8 +312,12 @@
             [self.currentPlayView showPlayBtn];
         }
             break;
-        case GKDYVideoPlayerStatusEnded:   // 停止
-            
+        case GKDYVideoPlayerStatusEnded: {   // 播放结束
+            // 重新开始播放
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.player resetPlay];
+            });
+        }
             break;
         case GKDYVideoPlayerStatusError:   // 错误
             
@@ -314,15 +329,17 @@
 }
 
 - (void)player:(GKDYVideoPlayer *)player currentTime:(float)currentTime totalTime:(float)totalTime progress:(float)progress {
-    [self.currentPlayView setProgress:progress];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.currentPlayView setProgress:progress];
+    });
 }
 
 #pragma mark - GKDYVideoControlViewDelegate
 - (void)controlViewDidClickSelf:(GKDYVideoControlView *)controlView {
     if (self.player.isPlaying) {
-        [self.player pause];
+        [self.player pausePlay];
     }else {
-        [self.player resume];
+        [self.player resumePlay];
     }
 }
 

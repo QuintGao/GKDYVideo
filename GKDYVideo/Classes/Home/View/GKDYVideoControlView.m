@@ -135,10 +135,10 @@
     
     self.sliderView.value = 0;
     
-    [self.coverImgView sd_setImageWithURL:[NSURL URLWithString:model.thumbnail_url]];
+    [self.coverImgView sd_setImageWithURL:[NSURL URLWithString:model.thumbnail_url] placeholderImage:[UIImage imageNamed:@"placeholderimg"]];
     
     self.nameLabel.text = model.author.name_show;
-    [self.iconView sd_setImageWithURL:[NSURL URLWithString:model.author.portrait]];
+    [self.iconView sd_setImageWithURL:[NSURL URLWithString:model.author.portrait] placeholderImage:[UIImage imageNamed:@"placeholderimg"]];
     
     self.contentLabel.text = model.title;
     

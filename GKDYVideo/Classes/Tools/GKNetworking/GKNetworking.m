@@ -25,26 +25,26 @@
     
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:params];
     dic[@"_client_type"] = @"1";
-    dic[@"_client_version"] = @"2.2.0";
-    dic[@"_os_version"] = @"12.0";
-    dic[@"_phone_imei"] = @"9A910F65D70DBAE95866E00B75934C78|com.baidu.nani";
-    dic[@"_phone_newimei"] = @"9A910F65D70DBAE95866E00B75934C78|com.baidu.nani";
+    dic[@"_client_version"] = @"2.2.4";
+    dic[@"_os_version"] = @"12.1";
+    dic[@"_phone_imei"] = @"3230B368FC82012CA6C6E6B5CFC829EA|com.baidu.nani";
+    dic[@"_phone_newimei"] = @"3230B368FC82012CA6C6E6B5CFC829EA|com.baidu.nani";
     
-    dic[@"brand"] = @"iPad";
-    dic[@"brand_type"] = @"Unknown iPad";
-    dic[@"cuid"] = @"9A910F65D70DBAE95866E00B75934C78|com.baidu.nani";
-    dic[@"diuc"] = @"C2D95DB95D613410309F81193FB324F01F9B14E32FHFSIKTGGF";
+    dic[@"brand"] = @"iPhone";
+    dic[@"brand_type"] = @"iPhone 7 Plus";
+    dic[@"cuid"] = @"3230B368FC82012CA6C6E6B5CFC829EA|com.baidu.nani";
+    dic[@"diuc"] = @"1EA854F6332A764F436C48C069D5102C01A475EB7FHRPHGSJHA";
     dic[@"from"] = @"AppStore";
-    dic[@"model"] = @"Unknown iPad";
-    dic[@"nani_idfa"] = @"86294854-68D7-49CD-A8FD-6804980FE590";
+    dic[@"model"] = @"iPhone 7 Plus";
+    dic[@"nani_idfa"] = @"D3993E61-276E-40E2-850A-50308E018015";
     dic[@"subapp_type"] = @"nani";
 //
 //    dic[@"z_id"] = @"FWUSehM4YgkAAAACVAEAAG8Ba0plAAAQAAAAAAAAAAA8OfwlgbRLLLw6XQUnvgx0Zj0GMglnRRgjOWAYewAyClV3VyNCSQZjA0AUT1MsfCA";
 //    dic[@"dl"] = @"B650D852850FD5D326774B621C25ECCE";
 //    dic[@"sign"] = @"602DB4C8DF0203B34DBB69B3A1E1F0AC";
     
-    dic[@"z_id"] = @"rFrPVimBUvWH5P7FBld1NBSx7OoCUk8yiHZ8-LLBkC1Wfri7C904CDCrYh9EgDRp64f3LSQZAfGS3XO0hD5ri4w";
-    dic[@"tbs"] = @"73254f0d29744cbf1537693822";
+    dic[@"z_id"] = @"QalvgJaNt6mIjT6pGBD1sdxZ2aBNkPoxA9RSgEaHiHWGKC-tA7u-cCgGMAp7iQPZSknfXHa6Whwf6LQGX438_fw";
+//    dic[@"tbs"] = @"73254f0d29744cbf1537693822";
     
     if (type == GKNetworkingTypeGet) {
         [manager GET:url parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
