@@ -14,7 +14,6 @@
 #import <Masonry/Masonry.h>
 #import <YYModel/YYModel.h>
 #import <SDWebImage/UIImageView+WebCache.h>
-#import <GKMessageTool/GKMessageTool.h>
 #import <MJRefresh/MJRefresh.h>
 
 #pragma mark - UI

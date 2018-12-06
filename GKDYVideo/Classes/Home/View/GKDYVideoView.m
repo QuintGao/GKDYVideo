@@ -344,19 +344,19 @@
 }
 
 - (void)controlViewDidClickIcon:(GKDYVideoControlView *)controlView {
-    [GKMessageTool showText:@"点击头像"];
+//    [GKMessageTool showText:@"点击头像"];
 }
 
 - (void)controlViewDidClickPriase:(GKDYVideoControlView *)controlView {
-    [GKMessageTool showText:@"点赞"];
+//    [GKMessageTool showText:@"点赞"];
 }
 
 - (void)controlViewDidClickComment:(GKDYVideoControlView *)controlView {
-    [GKMessageTool showText:@"评论"];
+//    [GKMessageTool showText:@"评论"];
 }
 
 - (void)controlViewDidClickShare:(GKDYVideoControlView *)controlView {
-    [GKMessageTool showText:@"分享"];
+//    [GKMessageTool showText:@"分享"];
 }
 
 #pragma mark - 懒加载
