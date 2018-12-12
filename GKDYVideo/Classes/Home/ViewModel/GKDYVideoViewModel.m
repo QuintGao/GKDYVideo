@@ -43,25 +43,41 @@
     // 推荐列表
     NSString *url = @"http://c.tieba.baidu.com/c/f/nani/recommend/list";
     
-    [GKNetworking get:url params:params success:^(id  _Nonnull responseObject) {
-        if ([responseObject[@"error_code"] integerValue] == 0) {
-            NSDictionary *data = responseObject[@"data"];
-            
-            self.has_more = [data[@"has_more"] boolValue];
-            
-            NSMutableArray *array = [NSMutableArray new];
-            for (NSDictionary *dic in data[@"video_list"]) {
-                GKDYVideoModel *model = [GKDYVideoModel yy_modelWithDictionary:dic];
-                [array addObject:model];
-            }
-            
-            !success ? : success(array);
-        }else {
-            NSLog(@"%@", responseObject);
-        }
-    } failure:^(NSError * _Nonnull error) {
-        !failure ? : failure(error);
-    }];
+    NSString *videoPath = [[NSBundle mainBundle] pathForResource:@"video" ofType:@"json"];
+    
+    NSData *jsonData = [NSData dataWithContentsOfFile:videoPath];
+    
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableLeaves error:nil];
+    
+    NSLog(@"%@", dic);
+    NSArray *videoList = [dic[@"data"][@"list"] firstObject][@"video_list"];
+    
+    NSMutableArray *array = [NSMutableArray new];
+    for (NSDictionary *dict in videoList) {
+        GKDYVideoModel *model = [GKDYVideoModel yy_modelWithDictionary:dict];
+        [array addObject:model];
+    }
+    !success ? : success(array);
+    
+//    [GKNetworking get:url params:params success:^(id  _Nonnull responseObject) {
+//        if ([responseObject[@"error_code"] integerValue] == 0) {
+//            NSDictionary *data = responseObject[@"data"];
+//
+//            self.has_more = [data[@"has_more"] boolValue];
+//
+//            NSMutableArray *array = [NSMutableArray new];
+//            for (NSDictionary *dic in data[@"video_list"]) {
+//                GKDYVideoModel *model = [GKDYVideoModel yy_modelWithDictionary:dic];
+//                [array addObject:model];
+//            }
+//
+//            !success ? : success(array);
+//        }else {
+//            NSLog(@"%@", responseObject);
+//        }
+//    } failure:^(NSError * _Nonnull error) {
+//        !failure ? : failure(error);
+//    }];
 }
 
 @end

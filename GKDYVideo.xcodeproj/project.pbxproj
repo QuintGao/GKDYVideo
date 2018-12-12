@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		60657EFA21C1110F000F97DA /* GKDYMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60657EF921C1110F000F97DA /* GKDYMainViewController.m */; };
+		60657EFC21C117F0000F97DA /* video.json in Resources */ = {isa = PBXBuildFile; fileRef = 60657EFB21C117F0000F97DA /* video.json */; };
+		60657EFF21C12E71000F97DA /* GKDYOtherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60657EFE21C12E71000F97DA /* GKDYOtherViewController.m */; };
+		60657F0221C12F87000F97DA /* UIImage+GKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 60657F0021C12F86000F97DA /* UIImage+GKCategory.m */; };
 		606A77DD215DFCB100DC2F63 /* GKDYPersonalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 606A77DB215DFCB000DC2F63 /* GKDYPersonalViewController.m */; };
 		606A77DF215E0B3000DC2F63 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 606A77DE215E0B3000DC2F63 /* README.md */; };
 		79CC62942157377400101773 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CC62932157377400101773 /* AppDelegate.m */; };
@@ -50,6 +54,13 @@
 
 /* Begin PBXFileReference section */
 		126D76C9517C38C3B7C81D53 /* Pods-GKDYVideo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GKDYVideo.release.xcconfig"; path = "Pods/Target Support Files/Pods-GKDYVideo/Pods-GKDYVideo.release.xcconfig"; sourceTree = "<group>"; };
+		60657EF821C1110F000F97DA /* GKDYMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYMainViewController.h; sourceTree = "<group>"; };
+		60657EF921C1110F000F97DA /* GKDYMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYMainViewController.m; sourceTree = "<group>"; };
+		60657EFB21C117F0000F97DA /* video.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = video.json; sourceTree = "<group>"; };
+		60657EFD21C12E71000F97DA /* GKDYOtherViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYOtherViewController.h; sourceTree = "<group>"; };
+		60657EFE21C12E71000F97DA /* GKDYOtherViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYOtherViewController.m; sourceTree = "<group>"; };
+		60657F0021C12F86000F97DA /* UIImage+GKCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GKCategory.m"; sourceTree = "<group>"; };
+		60657F0121C12F86000F97DA /* UIImage+GKCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+GKCategory.h"; sourceTree = "<group>"; };
 		606A77DB215DFCB000DC2F63 /* GKDYPersonalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKDYPersonalViewController.m; sourceTree = "<group>"; };
 		606A77DC215DFCB100DC2F63 /* GKDYPersonalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKDYPersonalViewController.h; sourceTree = "<group>"; };
 		606A77DE215E0B3000DC2F63 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
@@ -172,6 +183,7 @@
 				79CC62A12157377600101773 /* main.m */,
 				79CC62C4215739FD00101773 /* PrefixHeader.pch */,
 				606A77DE215E0B3000DC2F63 /* README.md */,
+				60657EFB21C117F0000F97DA /* video.json */,
 			);
 			path = GKDYVideo;
 			sourceTree = "<group>";
@@ -219,6 +231,8 @@
 		79CC62C721573B2700101773 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				60657F0121C12F86000F97DA /* UIImage+GKCategory.h */,
+				60657F0021C12F86000F97DA /* UIImage+GKCategory.m */,
 				79CC62F22158E42D00101773 /* GKNetworking */,
 				79CC62DC21573C9B00101773 /* GKDYVideoPlayer */,
 				79CC62C821573B4700101773 /* GKSliderView */,
@@ -242,12 +256,16 @@
 				79CC62CD21573BD700101773 /* GKDYBaseViewController.m */,
 				79CC62CF21573BFD00101773 /* GKDYHomeViewController.h */,
 				79CC62D021573BFD00101773 /* GKDYHomeViewController.m */,
+				60657EF821C1110F000F97DA /* GKDYMainViewController.h */,
+				60657EF921C1110F000F97DA /* GKDYMainViewController.m */,
 				79CC62D221573C2300101773 /* GKDYSearchViewController.h */,
 				79CC62D321573C2300101773 /* GKDYSearchViewController.m */,
 				79CC62D521573C2C00101773 /* GKDYPlayerViewController.h */,
 				79CC62D621573C2C00101773 /* GKDYPlayerViewController.m */,
 				606A77DC215DFCB100DC2F63 /* GKDYPersonalViewController.h */,
 				606A77DB215DFCB000DC2F63 /* GKDYPersonalViewController.m */,
+				60657EFD21C12E71000F97DA /* GKDYOtherViewController.h */,
+				60657EFE21C12E71000F97DA /* GKDYOtherViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -410,6 +428,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				606A77DF215E0B3000DC2F63 /* README.md in Resources */,
+				60657EFC21C117F0000F97DA /* video.json in Resources */,
 				79CC629F2157377600101773 /* LaunchScreen.storyboard in Resources */,
 				79CC629C2157377600101773 /* Assets.xcassets in Resources */,
 			);
@@ -485,7 +504,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60657EFF21C12E71000F97DA /* GKDYOtherViewController.m in Sources */,
+				60657EFA21C1110F000F97DA /* GKDYMainViewController.m in Sources */,
 				79CC62CE21573BD700101773 /* GKDYBaseViewController.m in Sources */,
+				60657F0221C12F87000F97DA /* UIImage+GKCategory.m in Sources */,
 				79CC62D721573C2C00101773 /* GKDYPlayerViewController.m in Sources */,
 				79CC62D421573C2300101773 /* GKDYSearchViewController.m in Sources */,
 				79CC62EB2157402800101773 /* GKDYVideoControlView.m in Sources */,

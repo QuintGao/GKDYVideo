@@ -10,17 +10,20 @@
 #import "GKDYSearchViewController.h"
 #import "GKDYPlayerViewController.h"
 #import "GKDYPersonalViewController.h"
+#import "GKDYMainViewController.h"
 #import "GKDYScrollView.h"
 #import "GKDYVideoView.h"
+#import "UIImage+GKCategory.h"
 
-@interface GKDYHomeViewController()<UIScrollViewDelegate, GKViewControllerPushDelegate>
+@interface GKDYHomeViewController()<UIScrollViewDelegate, GKViewControllerPushDelegate, UITabBarControllerDelegate>
 
 @property (nonatomic, strong) GKDYScrollView    *mainScrolView;
 
 @property (nonatomic, strong) NSArray           *childVCs;
 
 @property (nonatomic, strong) GKDYSearchViewController  *searchVC;
-@property (nonatomic, strong) GKDYPlayerViewController  *playerVC;
+//@property (nonatomic, strong) GKDYPlayerViewController  *playerVC;
+@property (nonatomic, strong) GKDYMainViewController    *mainVC;
 
 
 @end
@@ -34,7 +37,7 @@
     
     [self.view addSubview:self.mainScrolView];
     
-    self.childVCs = @[self.searchVC, self.playerVC];
+    self.childVCs = @[self.searchVC, self.mainVC];
     
     CGFloat scrollW = SCREEN_WIDTH;
     CGFloat scrollH = SCREEN_HEIGHT;
@@ -49,6 +52,12 @@
     }];
     
     self.mainScrolView.contentOffset = CGPointMake(scrollW, 0);
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeToSearch:) name:@"PlayerSearchClickNotification" object:nil];
+}
+
+- (void)changeToSearch:(NSNotification *)notify {
+    [self.mainScrolView setContentOffset:CGPointZero animated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -67,7 +76,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    [self.playerVC.videoView resume];
+    [self.mainVC.playerVC.videoView resume];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -76,7 +85,7 @@
     // 取消push代理
     self.gk_pushDelegate = nil;
     
-    [self.playerVC.videoView pause];
+    [self.mainVC.playerVC.videoView pause];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -85,7 +94,7 @@
     
     // 右滑开始时暂停
     if (scrollView.contentOffset.x == SCREEN_WIDTH) {
-        [self.playerVC.videoView pause];
+        [self.mainVC.playerVC.videoView pause];
     }
 }
 
@@ -94,15 +103,32 @@
     if (scrollView.contentOffset.x == SCREEN_WIDTH) {
         self.gk_statusBarHidden = YES;
         
-        [self.playerVC.videoView resume];
+        [self.mainVC.playerVC.videoView resume];
     }
 }
 
 #pragma mark - GKViewControllerPushDelegate
 - (void)pushToNextViewController {
     GKDYPersonalViewController *personalVC = [GKDYPersonalViewController new];
-    personalVC.uid = self.playerVC.videoView.currentPlayView.model.author.user_id;
+    personalVC.uid = self.mainVC.playerVC.videoView.currentPlayView.model.author.user_id;
     [self.navigationController pushViewController:personalVC animated:YES];
+}
+
+#pragma mark - UITabBarControllerDelegate
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    NSLog(@"%@", viewController.tabBarItem.title);
+    
+    UINavigationController *nav = (UINavigationController *)viewController;
+    
+    if ([nav.topViewController isKindOfClass:[GKDYPlayerViewController class]]) {
+        [self.mainVC.tabBar setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor] size:CGSizeMake(SCREEN_WIDTH, TABBAR_HEIGHT)]];
+        
+        self.gk_statusBarHidden = YES;
+    }else {
+        [self.mainVC.tabBar setBackgroundImage:[UIImage imageWithColor:[UIColor blackColor] size:CGSizeMake(SCREEN_WIDTH, TABBAR_HEIGHT)]];
+        
+        self.gk_statusBarHidden = NO;
+    }
 }
 
 #pragma mark - 懒加载
@@ -130,11 +156,12 @@
     return _searchVC;
 }
 
-- (GKDYPlayerViewController *)playerVC {
-    if (!_playerVC) {
-        _playerVC = [GKDYPlayerViewController new];
+- (GKDYMainViewController *)mainVC {
+    if (!_mainVC) {
+        _mainVC = [GKDYMainViewController new];
+        _mainVC.delegate = self;
     }
-    return _playerVC;
+    return _mainVC;
 }
 
 @end
