@@ -1,17 +1,17 @@
 //
-//  GKDYPersonalViewController.h
+//  GKDYListCollectionViewCell.h
 //  GKDYVideo
 //
-//  Created by QuintGao on 2018/9/24.
+//  Created by gaokun on 2018/12/14.
 //  Copyright © 2018 QuintGao. All rights reserved.
 //
 
-#import "GKDYBaseViewController.h"
+#import <UIKit/UIKit.h>
 #import "GKDYVideoModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface GKDYPersonalViewController : GKDYBaseViewController
+@interface GKDYListCollectionViewCell : UICollectionViewCell
 
 @property (nonatomic, strong) GKDYVideoModel    *model;
 

@@ -11,15 +11,42 @@
 
 @interface GKDYPlayerViewController ()
 
+@property (nonatomic, strong) UIButton  *backBtn;
 @property (nonatomic, strong) UIButton  *searchBtn;
 
 @property (nonatomic, strong) UIView    *titleView;
 @property (nonatomic, strong) UIButton  *recBtn;
 @property (nonatomic, strong) UIButton  *cityBtn;
 
+@property (nonatomic, strong) GKDYVideoModel    *model;
+@property (nonatomic, strong) NSArray           *videos;
+@property (nonatomic, assign) NSInteger         playIndex;
+
+// 是否从某个控制器push过来
+@property (nonatomic, assign) BOOL              isPushed;
+
 @end
 
 @implementation GKDYPlayerViewController
+
+- (instancetype)initWithVideoModel:(GKDYVideoModel *)model {
+    if (self = [super init]) {
+        self.model = model;
+        
+        self.isPushed = YES;
+    }
+    return self;
+}
+
+- (instancetype)initWithVideos:(NSArray *)videos index:(NSInteger)index {
+    if (self = [super init]) {
+        self.videos = videos;
+        self.playIndex = index;
+        
+        self.isPushed = YES;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,37 +57,55 @@
     
     [self.view addSubview:self.videoView];
     
-    [self.view addSubview:self.searchBtn];
-    
-    [self.view addSubview:self.titleView];
-    [self.titleView addSubview:self.recBtn];
-    [self.titleView addSubview:self.cityBtn];
-    
     [self.videoView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
     
-    [self.searchBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view).offset(15.0f);
-        make.top.equalTo(self.view).offset(GK_SAVEAREA_TOP + 20.0f);
-    }];
+    if (self.isPushed) {
+        [self.view addSubview:self.backBtn];
+        [self.backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.view).offset(15.0f);
+            make.top.equalTo(self.view).offset(GK_SAVEAREA_TOP + 20.0f);
+            make.width.height.mas_equalTo(44.0f);
+        }];
+        
+        if (!self.videos) {
+            self.videos = @[self.videoView];
+        }
+        
+        [self.videoView setModels:self.videos index:self.playIndex];
+        
+    }else {
+        [self.view addSubview:self.searchBtn];
+        
+        [self.view addSubview:self.titleView];
+        [self.titleView addSubview:self.recBtn];
+        [self.titleView addSubview:self.cityBtn];
+        
+        [self.searchBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.view).offset(15.0f);
+            make.top.equalTo(self.view).offset(GK_SAVEAREA_TOP + 20.0f);
+        }];
+        
+        [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.view);
+            make.centerY.equalTo(self.searchBtn);
+            make.width.mas_equalTo(160.0f);
+            make.height.mas_equalTo(30.0f);
+        }];
+        
+        [self.recBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.titleView);
+            make.centerX.equalTo(self.titleView).offset(-24);
+        }];
+        
+        [self.cityBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.titleView);
+            make.centerX.equalTo(self.titleView).offset(24);
+        }];
+    }
     
-    [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view);
-        make.centerY.equalTo(self.searchBtn);
-        make.width.mas_equalTo(160.0f);
-        make.height.mas_equalTo(30.0f);
-    }];
-    
-    [self.recBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.titleView);
-        make.centerX.equalTo(self.titleView).offset(-24);
-    }];
-    
-    [self.cityBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.titleView);
-        make.centerX.equalTo(self.titleView).offset(24);
-    }];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushToNextViewController) name:@"IconClickNotification" object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -68,11 +113,19 @@
 }
 
 - (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"IconClickNotification" object:nil];
+    
     [self.videoView destoryPlayer];
+    
+    NSLog(@"playerVC dealloc");
 }
 
 - (void)searchClick:(id)sender {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"PlayerSearchClickNotification" object:nil];
+}
+
+- (void)backClick:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)itemClick:(id)sender {
@@ -94,9 +147,18 @@
 #pragma mark - 懒加载
 - (GKDYVideoView *)videoView {
     if (!_videoView) {
-        _videoView = [[GKDYVideoView alloc] initWithVC:self isPushed:NO];
+        _videoView = [[GKDYVideoView alloc] initWithVC:self isPushed:self.isPushed];
     }
     return _videoView;
+}
+
+- (UIButton *)backBtn {
+    if (!_backBtn) {
+        _backBtn = [UIButton new];
+        [_backBtn setImage:GKImage(@"btn_back_white") forState:UIControlStateNormal];
+        [_backBtn addTarget:self action:@selector(backClick:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _backBtn;
 }
 
 - (UIButton *)searchBtn {

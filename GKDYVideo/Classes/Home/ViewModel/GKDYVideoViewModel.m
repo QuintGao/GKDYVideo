@@ -49,7 +49,6 @@
     
     NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableLeaves error:nil];
     
-    NSLog(@"%@", dic);
     NSArray *videoList = [dic[@"data"][@"list"] firstObject][@"video_list"];
     
     NSMutableArray *array = [NSMutableArray new];

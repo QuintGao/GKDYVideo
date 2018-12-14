@@ -110,7 +110,7 @@
 #pragma mark - GKViewControllerPushDelegate
 - (void)pushToNextViewController {
     GKDYPersonalViewController *personalVC = [GKDYPersonalViewController new];
-    personalVC.uid = self.mainVC.playerVC.videoView.currentPlayView.model.author.user_id;
+    personalVC.model = self.mainVC.playerVC.videoView.currentPlayView.model;
     [self.navigationController pushViewController:personalVC animated:YES];
 }
 

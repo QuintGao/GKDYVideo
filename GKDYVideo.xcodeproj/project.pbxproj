@@ -13,6 +13,9 @@
 		60657F0221C12F87000F97DA /* UIImage+GKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 60657F0021C12F86000F97DA /* UIImage+GKCategory.m */; };
 		606A77DD215DFCB100DC2F63 /* GKDYPersonalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 606A77DB215DFCB000DC2F63 /* GKDYPersonalViewController.m */; };
 		606A77DF215E0B3000DC2F63 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 606A77DE215E0B3000DC2F63 /* README.md */; };
+		60C6E09F21C33F7900C12F93 /* GKDYHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C6E09D21C33F7900C12F93 /* GKDYHeaderView.m */; };
+		60C6E0A221C345BD00C12F93 /* GKDYListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C6E0A121C345BD00C12F93 /* GKDYListViewController.m */; };
+		60C6E0A521C345E100C12F93 /* GKDYListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C6E0A421C345E100C12F93 /* GKDYListCollectionViewCell.m */; };
 		79CC62942157377400101773 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CC62932157377400101773 /* AppDelegate.m */; };
 		79CC629C2157377600101773 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79CC629B2157377600101773 /* Assets.xcassets */; };
 		79CC629F2157377600101773 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79CC629D2157377600101773 /* LaunchScreen.storyboard */; };
@@ -64,6 +67,12 @@
 		606A77DB215DFCB000DC2F63 /* GKDYPersonalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKDYPersonalViewController.m; sourceTree = "<group>"; };
 		606A77DC215DFCB100DC2F63 /* GKDYPersonalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKDYPersonalViewController.h; sourceTree = "<group>"; };
 		606A77DE215E0B3000DC2F63 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		60C6E09D21C33F7900C12F93 /* GKDYHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKDYHeaderView.m; sourceTree = "<group>"; };
+		60C6E09E21C33F7900C12F93 /* GKDYHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKDYHeaderView.h; sourceTree = "<group>"; };
+		60C6E0A021C345BD00C12F93 /* GKDYListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYListViewController.h; sourceTree = "<group>"; };
+		60C6E0A121C345BD00C12F93 /* GKDYListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYListViewController.m; sourceTree = "<group>"; };
+		60C6E0A321C345E100C12F93 /* GKDYListCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYListCollectionViewCell.h; sourceTree = "<group>"; };
+		60C6E0A421C345E100C12F93 /* GKDYListCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYListCollectionViewCell.m; sourceTree = "<group>"; };
 		79CC628F2157377400101773 /* GKDYVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GKDYVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79CC62922157377400101773 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		79CC62932157377400101773 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -264,8 +273,14 @@
 				79CC62D621573C2C00101773 /* GKDYPlayerViewController.m */,
 				606A77DC215DFCB100DC2F63 /* GKDYPersonalViewController.h */,
 				606A77DB215DFCB000DC2F63 /* GKDYPersonalViewController.m */,
+				60C6E0A021C345BD00C12F93 /* GKDYListViewController.h */,
+				60C6E0A121C345BD00C12F93 /* GKDYListViewController.m */,
+				60C6E0A321C345E100C12F93 /* GKDYListCollectionViewCell.h */,
+				60C6E0A421C345E100C12F93 /* GKDYListCollectionViewCell.m */,
 				60657EFD21C12E71000F97DA /* GKDYOtherViewController.h */,
 				60657EFE21C12E71000F97DA /* GKDYOtherViewController.m */,
+				60C6E09E21C33F7900C12F93 /* GKDYHeaderView.h */,
+				60C6E09D21C33F7900C12F93 /* GKDYHeaderView.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -460,6 +475,8 @@
 				"${PODS_ROOT}/Target Support Files/Pods-GKDYVideo/Pods-GKDYVideo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/GKNavigationBarViewController/GKNavigationBarViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/GKPageScrollView/GKPageScrollView.framework",
+				"${BUILT_PRODUCTS_DIR}/JXCategoryView/JXCategoryView.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
@@ -469,6 +486,8 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GKNavigationBarViewController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GKPageScrollView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JXCategoryView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
@@ -504,9 +523,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60C6E0A221C345BD00C12F93 /* GKDYListViewController.m in Sources */,
 				60657EFF21C12E71000F97DA /* GKDYOtherViewController.m in Sources */,
 				60657EFA21C1110F000F97DA /* GKDYMainViewController.m in Sources */,
+				60C6E09F21C33F7900C12F93 /* GKDYHeaderView.m in Sources */,
 				79CC62CE21573BD700101773 /* GKDYBaseViewController.m in Sources */,
+				60C6E0A521C345E100C12F93 /* GKDYListCollectionViewCell.m in Sources */,
 				60657F0221C12F87000F97DA /* UIImage+GKCategory.m in Sources */,
 				79CC62D721573C2C00101773 /* GKDYPlayerViewController.m in Sources */,
 				79CC62D421573C2300101773 /* GKDYSearchViewController.m in Sources */,

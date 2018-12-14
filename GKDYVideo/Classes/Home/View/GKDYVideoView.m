@@ -51,6 +51,7 @@
             make.edges.equalTo(self);
         }];
         
+        // 不是push过来的，添加下拉刷新
         if (!isPushed) {
             [self.viewModel refreshNewListWithSuccess:^(NSArray * _Nonnull list) {
                 [self setModels:list index:0];
@@ -345,6 +346,7 @@
 
 - (void)controlViewDidClickIcon:(GKDYVideoControlView *)controlView {
 //    [GKMessageTool showText:@"点击头像"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"IconClickNotification" object:nil];
 }
 
 - (void)controlViewDidClickPriase:(GKDYVideoControlView *)controlView {

@@ -15,6 +15,8 @@ PODS:
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
   - GKNavigationBarViewController (2.1.6)
+  - GKPageScrollView (1.0.3)
+  - JXCategoryView (1.1.3)
   - Masonry (1.1.0)
   - MJRefresh (3.1.15.7)
   - SDWebImage (4.4.3):
@@ -26,6 +28,8 @@ PODS:
 DEPENDENCIES:
   - AFNetworking
   - GKNavigationBarViewController
+  - GKPageScrollView
+  - JXCategoryView
   - Masonry
   - MJRefresh
   - SDWebImage
@@ -36,6 +40,8 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AFNetworking
     - GKNavigationBarViewController
+    - GKPageScrollView
+    - JXCategoryView
     - Masonry
     - MJRefresh
     - SDWebImage
@@ -45,12 +51,14 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   GKNavigationBarViewController: c4f1121d2bc69acc082c280740cd70d658fde53d
+  GKPageScrollView: b7088328c2673e48dfc60ab61685939370f5e45b
+  JXCategoryView: 10bf2cf22d6e25b4086df4d199490b0621fc73bb
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJRefresh: 697f8ec75ebdbe9207767bb682cf0f51b0d8a41f
   SDWebImage: c5594f1a19c48d526d321e548902b56b479cd508
   TXLiteAVSDK_Player: 0ae5dbfa79619f53265d88cc990b1baf7abe1d97
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: eecf7b8730177be6f0c661040d04dd2cddfca65a
+PODFILE CHECKSUM: 4d8f3f8080ebe30b528829682d8e86a47f8719ed
 
 COCOAPODS: 1.6.0.beta.2
