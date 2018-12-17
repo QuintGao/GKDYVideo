@@ -103,6 +103,8 @@
         self.scrollView.contentSize = CGSizeMake(0, SCREEN_HEIGHT);
         
         self.topView.model = self.videos.firstObject;
+        
+        [self playVideoFrom:self.topView];
     }else if (models.count == 2) {
         [self.btmView removeFromSuperview];
         
@@ -113,6 +115,10 @@
         
         if (index == 1) {
             self.scrollView.contentOffset = CGPointMake(0, SCREEN_HEIGHT);
+            
+            [self playVideoFrom:self.ctrView];
+        }else {
+            [self playVideoFrom:self.topView];
         }
     }else {
         if (index == 0) {   // 如果是第一个，则显示上视图，且预加载中下视图
