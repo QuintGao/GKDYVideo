@@ -54,7 +54,7 @@
             
             self.isRefresh = YES;
             
-            self.videos = [array subarrayWithRange:NSMakeRange(0, 2)];
+            self.videos = array;
             
             [self.collectionView.mj_header endRefreshing];
             
