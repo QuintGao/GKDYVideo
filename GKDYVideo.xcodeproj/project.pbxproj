@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		60657EFA21C1110F000F97DA /* GKDYMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60657EF921C1110F000F97DA /* GKDYMainViewController.m */; };
-		60657EFC21C117F0000F97DA /* video.json in Resources */ = {isa = PBXBuildFile; fileRef = 60657EFB21C117F0000F97DA /* video.json */; };
+		60657EFC21C117F0000F97DA /* video1.json in Resources */ = {isa = PBXBuildFile; fileRef = 60657EFB21C117F0000F97DA /* video1.json */; };
 		60657EFF21C12E71000F97DA /* GKDYOtherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60657EFE21C12E71000F97DA /* GKDYOtherViewController.m */; };
 		60657F0221C12F87000F97DA /* UIImage+GKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 60657F0021C12F86000F97DA /* UIImage+GKCategory.m */; };
 		606A77DD215DFCB100DC2F63 /* GKDYPersonalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 606A77DB215DFCB000DC2F63 /* GKDYPersonalViewController.m */; };
@@ -16,6 +16,8 @@
 		60C6E09F21C33F7900C12F93 /* GKDYHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C6E09D21C33F7900C12F93 /* GKDYHeaderView.m */; };
 		60C6E0A221C345BD00C12F93 /* GKDYListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C6E0A121C345BD00C12F93 /* GKDYListViewController.m */; };
 		60C6E0A521C345E100C12F93 /* GKDYListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C6E0A421C345E100C12F93 /* GKDYListCollectionViewCell.m */; };
+		60C6E0B021CC8A9F00C12F93 /* video2.json in Resources */ = {isa = PBXBuildFile; fileRef = 60C6E0AF21CC8A9E00C12F93 /* video2.json */; };
+		60C6E0B221CC8AD600C12F93 /* video3.json in Resources */ = {isa = PBXBuildFile; fileRef = 60C6E0B121CC8AD600C12F93 /* video3.json */; };
 		79CC62942157377400101773 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CC62932157377400101773 /* AppDelegate.m */; };
 		79CC629C2157377600101773 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79CC629B2157377600101773 /* Assets.xcassets */; };
 		79CC629F2157377600101773 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79CC629D2157377600101773 /* LaunchScreen.storyboard */; };
@@ -59,7 +61,7 @@
 		126D76C9517C38C3B7C81D53 /* Pods-GKDYVideo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GKDYVideo.release.xcconfig"; path = "Pods/Target Support Files/Pods-GKDYVideo/Pods-GKDYVideo.release.xcconfig"; sourceTree = "<group>"; };
 		60657EF821C1110F000F97DA /* GKDYMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYMainViewController.h; sourceTree = "<group>"; };
 		60657EF921C1110F000F97DA /* GKDYMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYMainViewController.m; sourceTree = "<group>"; };
-		60657EFB21C117F0000F97DA /* video.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = video.json; sourceTree = "<group>"; };
+		60657EFB21C117F0000F97DA /* video1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = video1.json; sourceTree = "<group>"; };
 		60657EFD21C12E71000F97DA /* GKDYOtherViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYOtherViewController.h; sourceTree = "<group>"; };
 		60657EFE21C12E71000F97DA /* GKDYOtherViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYOtherViewController.m; sourceTree = "<group>"; };
 		60657F0021C12F86000F97DA /* UIImage+GKCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GKCategory.m"; sourceTree = "<group>"; };
@@ -73,6 +75,8 @@
 		60C6E0A121C345BD00C12F93 /* GKDYListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYListViewController.m; sourceTree = "<group>"; };
 		60C6E0A321C345E100C12F93 /* GKDYListCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYListCollectionViewCell.h; sourceTree = "<group>"; };
 		60C6E0A421C345E100C12F93 /* GKDYListCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYListCollectionViewCell.m; sourceTree = "<group>"; };
+		60C6E0AF21CC8A9E00C12F93 /* video2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = video2.json; sourceTree = "<group>"; };
+		60C6E0B121CC8AD600C12F93 /* video3.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = video3.json; sourceTree = "<group>"; };
 		79CC628F2157377400101773 /* GKDYVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GKDYVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79CC62922157377400101773 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		79CC62932157377400101773 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -192,7 +196,9 @@
 				79CC62A12157377600101773 /* main.m */,
 				79CC62C4215739FD00101773 /* PrefixHeader.pch */,
 				606A77DE215E0B3000DC2F63 /* README.md */,
-				60657EFB21C117F0000F97DA /* video.json */,
+				60657EFB21C117F0000F97DA /* video1.json */,
+				60C6E0AF21CC8A9E00C12F93 /* video2.json */,
+				60C6E0B121CC8AD600C12F93 /* video3.json */,
 			);
 			path = GKDYVideo;
 			sourceTree = "<group>";
@@ -443,9 +449,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				606A77DF215E0B3000DC2F63 /* README.md in Resources */,
-				60657EFC21C117F0000F97DA /* video.json in Resources */,
+				60657EFC21C117F0000F97DA /* video1.json in Resources */,
+				60C6E0B021CC8A9F00C12F93 /* video2.json in Resources */,
 				79CC629F2157377600101773 /* LaunchScreen.storyboard in Resources */,
 				79CC629C2157377600101773 /* Assets.xcassets in Resources */,
+				60C6E0B221CC8AD600C12F93 /* video3.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

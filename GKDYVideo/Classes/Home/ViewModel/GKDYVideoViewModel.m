@@ -21,13 +21,55 @@
 - (void)refreshNewListWithSuccess:(void (^)(NSArray * _Nonnull))success failure:(void (^)(NSError * _Nonnull))failure {
     self.pn = 1;
     
-    [self videoListRequestWithSuccess:success failure:failure];
+    NSString *videoPath = [[NSBundle mainBundle] pathForResource:@"video1" ofType:@"json"];
+    
+    NSData *jsonData = [NSData dataWithContentsOfFile:videoPath];
+    
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableLeaves error:nil];
+    
+    NSArray *videoList = dic[@"data"][@"video_list"];
+    
+    NSMutableArray *array = [NSMutableArray new];
+    for (NSDictionary *dict in videoList) {
+        GKDYVideoModel *model = [GKDYVideoModel yy_modelWithDictionary:dict];
+        [array addObject:model];
+    }
+    
+    !success ? : success(array);
+    
+    
+//    [self videoListRequestWithSuccess:success failure:failure];
 }
 
 - (void)refreshMoreListWithSuccess:(void (^)(NSArray * _Nonnull))success failure:(void (^)(NSError * _Nonnull))failure {
     self.pn ++;
+//
+//    [self videoListRequestWithSuccess:success failure:failure];
+    NSString *fileName = [NSString stringWithFormat:@"video%zd", self.pn];
     
-    [self videoListRequestWithSuccess:success failure:failure];
+    NSString *videoPath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"json"];
+    
+    NSData *jsonData = [NSData dataWithContentsOfFile:videoPath];
+    
+    if (!jsonData) {
+        NSArray *array = nil;
+        !success ? : success(array);
+        return;
+    }
+    
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableLeaves error:nil];
+    
+    NSArray *videoList = dic[@"data"][@"video_list"];
+    
+    NSMutableArray *array = [NSMutableArray new];
+    for (NSDictionary *dict in videoList) {
+        GKDYVideoModel *model = [GKDYVideoModel yy_modelWithDictionary:dict];
+        [array addObject:model];
+    }
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        !success ? : success(array);
+    });
 }
 
 - (void)videoListRequestWithSuccess:(void (^)(NSArray * _Nonnull))success failure:(void (^)(NSError * _Nonnull))failure {
@@ -56,6 +98,7 @@
         GKDYVideoModel *model = [GKDYVideoModel yy_modelWithDictionary:dict];
         [array addObject:model];
     }
+    
     !success ? : success(array);
     
 //    [GKNetworking get:url params:params success:^(id  _Nonnull responseObject) {

@@ -38,13 +38,13 @@
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         // 模拟刷新，获取本地数据
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            NSString *videoPath = [[NSBundle mainBundle] pathForResource:@"video" ofType:@"json"];
+            NSString *videoPath = [[NSBundle mainBundle] pathForResource:@"video1" ofType:@"json"];
             
             NSData *jsonData = [NSData dataWithContentsOfFile:videoPath];
             
             NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableLeaves error:nil];
             
-            NSArray *videoList = [dic[@"data"][@"list"] firstObject][@"video_list"];
+            NSArray *videoList = dic[@"data"][@"video_list"];
             
             NSMutableArray *array = [NSMutableArray new];
             for (NSDictionary *dict in videoList) {
