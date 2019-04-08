@@ -14,15 +14,15 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - GKNavigationBarViewController (2.1.6)
-  - GKPageScrollView (1.0.3)
-  - JXCategoryView (1.1.3)
+  - GKNavigationBarViewController (2.2.2)
+  - GKPageScrollView (1.0.9)
+  - JXCategoryView (1.2.9)
   - Masonry (1.1.0)
   - MJRefresh (3.1.15.7)
-  - SDWebImage (4.4.3):
-    - SDWebImage/Core (= 4.4.3)
-  - SDWebImage/Core (4.4.3)
-  - TXLiteAVSDK_Player (5.3.6004)
+  - SDWebImage (4.4.6):
+    - SDWebImage/Core (= 4.4.6)
+  - SDWebImage/Core (4.4.6)
+  - TXLiteAVSDK_Player (5.4.6097)
   - YYModel (1.0.4)
 
 DEPENDENCIES:
@@ -50,15 +50,15 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  GKNavigationBarViewController: c4f1121d2bc69acc082c280740cd70d658fde53d
-  GKPageScrollView: b7088328c2673e48dfc60ab61685939370f5e45b
-  JXCategoryView: 10bf2cf22d6e25b4086df4d199490b0621fc73bb
+  GKNavigationBarViewController: fb2693efaf2283ddd6b74865a5c27c48740463d7
+  GKPageScrollView: 3f410e19b3b2573882001f5cde100ad4ebfe0fe0
+  JXCategoryView: 88a56da74d553ef98e9fc827dde46e277a2c3ed4
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJRefresh: 697f8ec75ebdbe9207767bb682cf0f51b0d8a41f
-  SDWebImage: c5594f1a19c48d526d321e548902b56b479cd508
-  TXLiteAVSDK_Player: 0ae5dbfa79619f53265d88cc990b1baf7abe1d97
+  SDWebImage: 3f3f0c02f09798048c47a5ed0a13f17b063572d8
+  TXLiteAVSDK_Player: 3465cf9ca986016e64c8c66694abb39f213a1492
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
 PODFILE CHECKSUM: 4d8f3f8080ebe30b528829682d8e86a47f8719ed
 
-COCOAPODS: 1.6.0.beta.2
+COCOAPODS: 1.6.1

@@ -464,7 +464,11 @@
 
 - (void)controlViewDidClickIcon:(GKDYVideoControlView *)controlView {
 //    [GKMessageTool showText:@"点击头像"];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"IconClickNotification" object:nil];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"IconClickNotification" object:nil];
+    
+    if ([self.delegate respondsToSelector:@selector(videoView:didClickIcon:)]) {
+        [self.delegate videoView:self didClickIcon:controlView.model];
+    }
 }
 
 - (void)controlViewDidClickPriase:(GKDYVideoControlView *)controlView {

@@ -8,8 +8,9 @@
 
 #import "GKDYPlayerViewController.h"
 #import "UIImage+GKCategory.h"
+#import "GKDYPersonalViewController.h"
 
-@interface GKDYPlayerViewController ()
+@interface GKDYPlayerViewController ()<GKDYVideoViewDelegate>
 
 @property (nonatomic, strong) UIButton  *backBtn;
 @property (nonatomic, strong) UIButton  *searchBtn;
@@ -144,10 +145,18 @@
     }
 }
 
+#pragma mark - GKDYVideoViewDelegate
+- (void)videoView:(GKDYVideoView *)videoView didClickIcon:(GKDYVideoModel *)videoModel {
+    GKDYPersonalViewController *personalVC = [GKDYPersonalViewController new];
+    personalVC.model = videoModel;
+    [self.navigationController pushViewController:personalVC animated:YES];
+}
+
 #pragma mark - 懒加载
 - (GKDYVideoView *)videoView {
     if (!_videoView) {
         _videoView = [[GKDYVideoView alloc] initWithVC:self isPushed:self.isPushed];
+        _videoView.delegate = self;
     }
     return _videoView;
 }

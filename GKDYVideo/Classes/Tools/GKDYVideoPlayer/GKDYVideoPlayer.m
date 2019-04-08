@@ -118,8 +118,22 @@
     }
 }
 
+- (NSString *)jsonStringFromDic:(NSDictionary *)dic {
+    NSString *jsonStr = nil;
+    
+    if ([NSJSONSerialization isValidJSONObject:dic]) {
+        NSError *error;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&error];
+        
+        jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    }
+    
+    return jsonStr;
+}
+
 #pragma mark - TXVodPlayListener
 - (void)onPlayEvent:(TXVodPlayer *)player event:(int)EvtID withParam:(NSDictionary *)param {
+    NSLog(@"%d====%@", EvtID, [self jsonStringFromDic:param]);
     switch (EvtID) {
         case PLAY_EVT_PLAY_LOADING:{    // loading
             if (self.status == GKDYVideoPlayerStatusPaused) {
