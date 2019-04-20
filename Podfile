@@ -8,8 +8,9 @@ target 'GKDYVideo' do
   pod 'Masonry'
   pod 'YYModel'
   pod 'GKNavigationBarViewController'
-  pod 'TXLiteAVSDK_Player'  # 腾讯云播放器-独立播放器版
-  pod 'GKMessageTool'
-  pod 'WMPageController'
+  pod 'TXLiteAVSDK_Player'  # 腾讯云播放器-独立播放器
+  pod 'MJRefresh'
+  pod 'GKPageScrollView'
+  pod 'JXCategoryView'
 
 end

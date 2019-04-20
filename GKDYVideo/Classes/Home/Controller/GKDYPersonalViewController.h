@@ -7,12 +7,13 @@
 //
 
 #import "GKDYBaseViewController.h"
+#import "GKDYVideoModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface GKDYPersonalViewController : GKDYBaseViewController
 
-@property (nonatomic, copy) NSString    *uid;
+@property (nonatomic, strong) GKDYVideoModel    *model;
 
 @end
 

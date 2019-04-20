@@ -73,12 +73,12 @@
             make.edges.equalTo(self);
         }];
         
-        CGFloat bottomM = IS_iPhoneX ? (34.0f + ADAPTATIONRATIO * 40.0f) : ADAPTATIONRATIO * 40.0f;
+        CGFloat bottomM = TABBAR_HEIGHT;
         
         [self.sliderView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.equalTo(self);
             make.bottom.equalTo(self).offset(-bottomM);
-            make.height.mas_equalTo(ADAPTATIONRATIO * 2.0f);
+            make.height.mas_equalTo(ADAPTATIONRATIO * 1.0f);
         }];
         
         [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -93,7 +93,7 @@
         }];
         
         [self.shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(self).offset(-ADAPTATIONRATIO * 20.0f);
+            make.right.equalTo(self).offset(-ADAPTATIONRATIO * 30.0f);
             make.bottom.equalTo(self.nameLabel.mas_top).offset(-ADAPTATIONRATIO * 50.0f);
             make.height.mas_equalTo(ADAPTATIONRATIO * 110.0f);
         }];
@@ -135,10 +135,10 @@
     
     self.sliderView.value = 0;
     
-    [self.coverImgView sd_setImageWithURL:[NSURL URLWithString:model.thumbnail_url]];
+    [self.coverImgView sd_setImageWithURL:[NSURL URLWithString:model.thumbnail_url] placeholderImage:[UIImage imageNamed:@"placeholderimg"]];
     
-    self.nameLabel.text = model.author.name_show;
-    [self.iconView sd_setImageWithURL:[NSURL URLWithString:model.author.portrait]];
+    self.nameLabel.text = [NSString stringWithFormat:@"@%@", model.author.name_show];
+    [self.iconView sd_setImageWithURL:[NSURL URLWithString:model.author.portrait] placeholderImage:[UIImage imageNamed:@"placeholderimg"]];
     
     self.contentLabel.text = model.title;
     
@@ -285,7 +285,7 @@
     if (!_sliderView) {
         _sliderView = [GKSliderView new];
         _sliderView.isHideSliderBlock = YES;
-        _sliderView.sliderHeight = ADAPTATIONRATIO * 2.0f;
+        _sliderView.sliderHeight = ADAPTATIONRATIO * 1.0f;
         _sliderView.maximumTrackTintColor = [UIColor grayColor];
         _sliderView.minimumTrackTintColor = [UIColor whiteColor];
     }

@@ -55,12 +55,17 @@ typedef NS_ENUM(NSUInteger, GKDYVideoPlayerStatus) {
 /**
  暂停播放
  */
-- (void)pause;
+- (void)pausePlay;
 
 /**
  恢复播放
  */
-- (void)resume;
+- (void)resumePlay;
+
+/**
+ 重新播放
+ */
+- (void)resetPlay;
 
 @end
 

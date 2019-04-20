@@ -6,5 +6,7 @@ iOS仿抖音短视频
 ## 效果图
 ![抖音](https://github.com/QuintGao/GKDYVideo/blob/master/douyin.gif)
 
+![带tabbar](https://github.com/QuintGao/GKDYVideo/blob/master/dy_tabbar.gif)
+
 ## 说明
 简书：[iOS仿抖音上下滑动播放视频](https://www.jianshu.com/p/36a4e57f1a53)

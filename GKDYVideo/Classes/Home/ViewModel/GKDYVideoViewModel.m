@@ -21,47 +21,105 @@
 - (void)refreshNewListWithSuccess:(void (^)(NSArray * _Nonnull))success failure:(void (^)(NSError * _Nonnull))failure {
     self.pn = 1;
     
-    [self videoListRequestWithSuccess:success failure:failure];
+    NSString *videoPath = [[NSBundle mainBundle] pathForResource:@"video1" ofType:@"json"];
+    
+    NSData *jsonData = [NSData dataWithContentsOfFile:videoPath];
+    
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableLeaves error:nil];
+    
+    NSArray *videoList = dic[@"data"][@"video_list"];
+    
+    NSMutableArray *array = [NSMutableArray new];
+    for (NSDictionary *dict in videoList) {
+        GKDYVideoModel *model = [GKDYVideoModel yy_modelWithDictionary:dict];
+        [array addObject:model];
+    }
+    
+    !success ? : success(array);
+    
+    
+//    [self videoListRequestWithSuccess:success failure:failure];
 }
 
 - (void)refreshMoreListWithSuccess:(void (^)(NSArray * _Nonnull))success failure:(void (^)(NSError * _Nonnull))failure {
     self.pn ++;
+//
+//    [self videoListRequestWithSuccess:success failure:failure];
+    NSString *fileName = [NSString stringWithFormat:@"video%zd", self.pn];
     
-    [self videoListRequestWithSuccess:success failure:failure];
+    NSString *videoPath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"json"];
+    
+    NSData *jsonData = [NSData dataWithContentsOfFile:videoPath];
+    
+    if (!jsonData) {
+        NSArray *array = nil;
+        !success ? : success(array);
+        return;
+    }
+    
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableLeaves error:nil];
+    
+    NSArray *videoList = dic[@"data"][@"video_list"];
+    
+    NSMutableArray *array = [NSMutableArray new];
+    for (NSDictionary *dict in videoList) {
+        GKDYVideoModel *model = [GKDYVideoModel yy_modelWithDictionary:dict];
+        [array addObject:model];
+    }
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        !success ? : success(array);
+    });
 }
 
 - (void)videoListRequestWithSuccess:(void (^)(NSArray * _Nonnull))success failure:(void (^)(NSError * _Nonnull))failure {
     NSMutableDictionary *params = [NSMutableDictionary new];
     params[@"new_recommend_type"] = @"3";
     params[@"pn"] = @(self.pn);
-    params[@"dl"] = @"505F80E58F3817291B7768CE59A90AF8";
-    params[@"sign"] = @"3DD6882F963C25F5FA1ECA558F8CEF48";
-    params[@"_timestamp"] = @"1537782764313";
-    params[@"timestamp"] = @"1537782764313";
-    params[@"net_type"] = @"1";
+    params[@"dl"] = @"2D41050C0F871E65D6717E7B2E4E944C";
+    params[@"sign"] = @"3AD03F91B2064D75E1B2A8285720E2F1";
+    params[@"_timestamp"] = @"1544061295026";
+    params[@"timestamp"]  = @"1544061295026";
+    params[@"net_type"]   = @"1";
     
     // 推荐列表
     NSString *url = @"http://c.tieba.baidu.com/c/f/nani/recommend/list";
     
-    [GKNetworking get:url params:params success:^(id  _Nonnull responseObject) {
-        if ([responseObject[@"error_code"] integerValue] == 0) {
-            NSDictionary *data = responseObject[@"data"];
-            
-            self.has_more = [data[@"has_more"] boolValue];
-            
-            NSMutableArray *array = [NSMutableArray new];
-            for (NSDictionary *dic in data[@"video_list"]) {
-                GKDYVideoModel *model = [GKDYVideoModel yy_modelWithDictionary:dic];
-                [array addObject:model];
-            }
-            
-            !success ? : success(array);
-        }else {
-            NSLog(@"%@", responseObject);
-        }
-    } failure:^(NSError * _Nonnull error) {
-        !failure ? : failure(error);
-    }];
+    NSString *videoPath = [[NSBundle mainBundle] pathForResource:@"video" ofType:@"json"];
+    
+    NSData *jsonData = [NSData dataWithContentsOfFile:videoPath];
+    
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableLeaves error:nil];
+    
+    NSArray *videoList = [dic[@"data"][@"list"] firstObject][@"video_list"];
+    
+    NSMutableArray *array = [NSMutableArray new];
+    for (NSDictionary *dict in videoList) {
+        GKDYVideoModel *model = [GKDYVideoModel yy_modelWithDictionary:dict];
+        [array addObject:model];
+    }
+    
+    !success ? : success(array);
+    
+//    [GKNetworking get:url params:params success:^(id  _Nonnull responseObject) {
+//        if ([responseObject[@"error_code"] integerValue] == 0) {
+//            NSDictionary *data = responseObject[@"data"];
+//
+//            self.has_more = [data[@"has_more"] boolValue];
+//
+//            NSMutableArray *array = [NSMutableArray new];
+//            for (NSDictionary *dic in data[@"video_list"]) {
+//                GKDYVideoModel *model = [GKDYVideoModel yy_modelWithDictionary:dic];
+//                [array addObject:model];
+//            }
+//
+//            !success ? : success(array);
+//        }else {
+//            NSLog(@"%@", responseObject);
+//        }
+//    } failure:^(NSError * _Nonnull error) {
+//        !failure ? : failure(error);
+//    }];
 }
 
 @end

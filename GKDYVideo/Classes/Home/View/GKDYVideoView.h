@@ -12,7 +12,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GKDYVideoView;
+
+@protocol GKDYVideoViewDelegate <NSObject>
+
+- (void)videoView:(GKDYVideoView *)videoView didClickIcon:(GKDYVideoModel *)videoModel;
+
+@end
+
 @interface GKDYVideoView : UIView
+
+@property (nonatomic, weak) id<GKDYVideoViewDelegate> delegate;
 
 @property (nonatomic, strong) GKDYVideoViewModel    *viewModel;
 
