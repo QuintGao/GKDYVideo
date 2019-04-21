@@ -75,8 +75,8 @@
 - (void)videoListRequestWithSuccess:(void (^)(NSArray * _Nonnull))success failure:(void (^)(NSError * _Nonnull))failure {
     NSMutableDictionary *params = [NSMutableDictionary new];
     params[@"new_recommend_type"] = @"3";
-    params[@"pn"] = @(self.pn);
-    params[@"dl"] = @"2D41050C0F871E65D6717E7B2E4E944C";
+    params[@"pn"]   = @(self.pn);
+    params[@"dl"]   = @"2D41050C0F871E65D6717E7B2E4E944C";
     params[@"sign"] = @"3AD03F91B2064D75E1B2A8285720E2F1";
     params[@"_timestamp"] = @"1544061295026";
     params[@"timestamp"]  = @"1544061295026";

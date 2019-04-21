@@ -7,6 +7,7 @@
 //
 
 #import "GKDYMainViewController.h"
+#import "GKDYNavigationController.h"
 #import "GKDYOtherViewController.h"
 #import "UIImage+GKCategory.h"
 
@@ -44,7 +45,7 @@
     [childVC.tabBarItem setTitleTextAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:16], NSForegroundColorAttributeName: [UIColor colorWithWhite:1.0 alpha:0.6]} forState:UIControlStateNormal];
     [childVC.tabBarItem setTitleTextAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:16.0f], NSForegroundColorAttributeName: [UIColor whiteColor]} forState:UIControlStateSelected];
 
-    UINavigationController *nav = [UINavigationController rootVC:childVC translationScale:NO];
+    GKDYNavigationController *nav = [GKDYNavigationController rootVC:childVC translationScale:NO];
     [self addChildViewController:nav];
 }
 
