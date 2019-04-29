@@ -203,7 +203,7 @@
 - (UIImageView *)coverImgView {
     if (!_coverImgView) {
         _coverImgView = [UIImageView new];
-        _coverImgView.contentMode = UIViewContentModeScaleAspectFill;
+        _coverImgView.contentMode = UIViewContentModeScaleAspectFit;
         _coverImgView.clipsToBounds = YES;
     }
     return _coverImgView;
