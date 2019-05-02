@@ -39,6 +39,8 @@
 		79CC62F52158E44300101773 /* GKNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CC62F42158E44300101773 /* GKNetworking.m */; };
 		79CC62FB2158F2BB00101773 /* GKDYPersonalModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CC62FA2158F2BB00101773 /* GKDYPersonalModel.m */; };
 		79DD87CE226C268D008FB903 /* GKDYNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DD87CD226C268D008FB903 /* GKDYNavigationController.m */; };
+		79E16A132274748F00DE4967 /* GKSlidePopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79E16A122274748F00DE4967 /* GKSlidePopupView.m */; };
+		79E16A162279A63200DE4967 /* GKDYCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79E16A152279A63200DE4967 /* GKDYCommentView.m */; };
 		AA70E41FD2C5EC1F0C249206 /* Pods_GKDYVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81CC8427C037D4E8A4B61B49 /* Pods_GKDYVideo.framework */; };
 /* End PBXBuildFile section */
 
@@ -123,6 +125,10 @@
 		79CC62FA2158F2BB00101773 /* GKDYPersonalModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYPersonalModel.m; sourceTree = "<group>"; };
 		79DD87CC226C268D008FB903 /* GKDYNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYNavigationController.h; sourceTree = "<group>"; };
 		79DD87CD226C268D008FB903 /* GKDYNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYNavigationController.m; sourceTree = "<group>"; };
+		79E16A112274748F00DE4967 /* GKSlidePopupView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKSlidePopupView.h; sourceTree = "<group>"; };
+		79E16A122274748F00DE4967 /* GKSlidePopupView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKSlidePopupView.m; sourceTree = "<group>"; };
+		79E16A142279A63200DE4967 /* GKDYCommentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYCommentView.h; sourceTree = "<group>"; };
+		79E16A152279A63200DE4967 /* GKDYCommentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYCommentView.m; sourceTree = "<group>"; };
 		81CC8427C037D4E8A4B61B49 /* Pods_GKDYVideo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GKDYVideo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACB89D940248F84479D31DDA /* Pods-GKDYVideo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GKDYVideo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GKDYVideo/Pods-GKDYVideo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -298,6 +304,7 @@
 		79CC62C721573B2700101773 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				79E16A102274746200DE4967 /* GKSlidePopupView */,
 				60657F0121C12F86000F97DA /* UIImage+GKCategory.h */,
 				60657F0021C12F86000F97DA /* UIImage+GKCategory.m */,
 				79CC62F22158E42D00101773 /* GKNetworking */,
@@ -350,6 +357,8 @@
 				79CC62EA2157402800101773 /* GKDYVideoControlView.m */,
 				60C6E09E21C33F7900C12F93 /* GKDYHeaderView.h */,
 				60C6E09D21C33F7900C12F93 /* GKDYHeaderView.m */,
+				79E16A142279A63200DE4967 /* GKDYCommentView.h */,
+				79E16A152279A63200DE4967 /* GKDYCommentView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -390,6 +399,15 @@
 				79CC62F42158E44300101773 /* GKNetworking.m */,
 			);
 			path = GKNetworking;
+			sourceTree = "<group>";
+		};
+		79E16A102274746200DE4967 /* GKSlidePopupView */ = {
+			isa = PBXGroup;
+			children = (
+				79E16A112274748F00DE4967 /* GKSlidePopupView.h */,
+				79E16A122274748F00DE4967 /* GKSlidePopupView.m */,
+			);
+			path = GKSlidePopupView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -569,6 +587,7 @@
 				60581BC021FC6177001A3762 /* GKDYTabBarController.m in Sources */,
 				60C6E0A221C345BD00C12F93 /* GKDYListViewController.m in Sources */,
 				60657EFF21C12E71000F97DA /* GKDYOtherViewController.m in Sources */,
+				79E16A162279A63200DE4967 /* GKDYCommentView.m in Sources */,
 				60657EFA21C1110F000F97DA /* GKDYMainViewController.m in Sources */,
 				60C6E09F21C33F7900C12F93 /* GKDYHeaderView.m in Sources */,
 				79CC62CE21573BD700101773 /* GKDYBaseViewController.m in Sources */,
@@ -589,6 +608,7 @@
 				79CC62CB21573B4700101773 /* GKSliderView.m in Sources */,
 				79CC62D121573BFD00101773 /* GKDYHomeViewController.m in Sources */,
 				79CC62FB2158F2BB00101773 /* GKDYPersonalModel.m in Sources */,
+				79E16A132274748F00DE4967 /* GKSlidePopupView.m in Sources */,
 				79CC62DF21573CAE00101773 /* GKDYVideoPlayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -754,7 +774,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = X52753HQNM;
+				DEVELOPMENT_TEAM = HEX694ERE4;
 				GCC_PREFIX_HEADER = GKDYVideo/PrefixHeader.pch;
 				INFOPLIST_FILE = GKDYVideo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -762,9 +782,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.test.GKDYVideo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yisu.CloudCampus2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = aystfm_dev_test;
+				PROVISIONING_PROFILE_SPECIFIER = gongshangweixiao__test;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -775,7 +795,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = X52753HQNM;
+				DEVELOPMENT_TEAM = HEX694ERE4;
 				GCC_PREFIX_HEADER = GKDYVideo/PrefixHeader.pch;
 				INFOPLIST_FILE = GKDYVideo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -783,9 +803,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.test.GKDYVideo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yisu.CloudCampus2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = aystfm_dev_test;
+				PROVISIONING_PROFILE_SPECIFIER = gongshangweixiao__test;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

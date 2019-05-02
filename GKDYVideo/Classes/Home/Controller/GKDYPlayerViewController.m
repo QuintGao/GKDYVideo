@@ -9,6 +9,8 @@
 #import "GKDYPlayerViewController.h"
 #import "UIImage+GKCategory.h"
 #import "GKDYPersonalViewController.h"
+#import "GKSlidePopupView.h"
+#import "GKDYCommentView.h"
 
 @interface GKDYPlayerViewController ()<GKDYVideoViewDelegate>
 
@@ -150,6 +152,23 @@
     GKDYPersonalViewController *personalVC = [GKDYPersonalViewController new];
     personalVC.model = videoModel;
     [self.navigationController pushViewController:personalVC animated:YES];
+}
+
+- (void)videoView:(GKDYVideoView *)videoView didClickPraise:(GKDYVideoModel *)videoModel {
+    
+}
+
+- (void)videoView:(GKDYVideoView *)videoView didClickComment:(GKDYVideoModel *)videoModel {
+    GKDYCommentView *commentView = [GKDYCommentView new];
+    commentView.frame = CGRectMake(0, 0, GK_SCREEN_WIDTH, ADAPTATIONRATIO * 980.0f);
+    
+    
+    GKSlidePopupView *popupView = [GKSlidePopupView popupViewWithFrame:[UIScreen mainScreen].bounds contentView:commentView];
+    [popupView showFrom:[UIApplication sharedApplication].keyWindow];
+}
+
+- (void)videoView:(GKDYVideoView *)videoView didClickShare:(GKDYVideoModel *)videoModel {
+    
 }
 
 #pragma mark - 懒加载

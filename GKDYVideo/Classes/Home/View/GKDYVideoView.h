@@ -17,6 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol GKDYVideoViewDelegate <NSObject>
 
 - (void)videoView:(GKDYVideoView *)videoView didClickIcon:(GKDYVideoModel *)videoModel;
+- (void)videoView:(GKDYVideoView *)videoView didClickPraise:(GKDYVideoModel *)videoModel;
+- (void)videoView:(GKDYVideoView *)videoView didClickComment:(GKDYVideoModel *)videoModel;
+- (void)videoView:(GKDYVideoView *)videoView didClickShare:(GKDYVideoModel *)videoModel;
 
 @end
 

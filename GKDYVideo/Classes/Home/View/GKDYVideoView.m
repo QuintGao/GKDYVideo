@@ -271,6 +271,9 @@
     self.currentPlayId    = fromView.model.post_id;
     self.currentPlayView  = fromView;
     self.currentPlayIndex = [self indexOfModel:fromView.model];
+    
+    NSLog(@"当前播放索引====%zd", self.currentPlayIndex);
+
     // 设置新视图的代理
     self.currentPlayView.delegate = self;
     
@@ -364,13 +367,11 @@
         if (self.isRefreshMore) return;
         
         // 播放到倒数第二个时，请求更多内容
-        if (self.currentPlayIndex == self.videos.count - 2) {
+        if (self.currentPlayIndex == self.videos.count - 3) {
             self.isRefreshMore = YES;
             [self refreshMore];
         }
     }
-    
-    if (self.isRefreshMore) return;
     
     if (scrollView.contentOffset.y == 2 * SCREEN_HEIGHT) {
         [self refreshMore];
@@ -463,24 +464,27 @@
 }
 
 - (void)controlViewDidClickIcon:(GKDYVideoControlView *)controlView {
-//    [GKMessageTool showText:@"点击头像"];
-//    [[NSNotificationCenter defaultCenter] postNotificationName:@"IconClickNotification" object:nil];
-    
     if ([self.delegate respondsToSelector:@selector(videoView:didClickIcon:)]) {
         [self.delegate videoView:self didClickIcon:controlView.model];
     }
 }
 
 - (void)controlViewDidClickPriase:(GKDYVideoControlView *)controlView {
-//    [GKMessageTool showText:@"点赞"];
+    if ([self.delegate respondsToSelector:@selector(videoView:didClickPraise:)]) {
+        [self.delegate videoView:self didClickPraise:controlView.model];
+    }
 }
 
 - (void)controlViewDidClickComment:(GKDYVideoControlView *)controlView {
-//    [GKMessageTool showText:@"评论"];
+    if ([self.delegate respondsToSelector:@selector(videoView:didClickComment:)]) {
+        [self.delegate videoView:self didClickComment:controlView.model];
+    }
 }
 
 - (void)controlViewDidClickShare:(GKDYVideoControlView *)controlView {
-//    [GKMessageTool showText:@"分享"];
+    if ([self.delegate respondsToSelector:@selector(videoView:didClickShare:)]) {
+        [self.delegate videoView:self didClickShare:controlView.model];
+    }
 }
 
 #pragma mark - 懒加载
