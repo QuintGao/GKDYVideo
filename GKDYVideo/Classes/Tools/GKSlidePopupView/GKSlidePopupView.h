@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)popupViewWithFrame:(CGRect)frame contentView:(UIView *)contentView;
 
+- (instancetype)initWithFrame:(CGRect)frame contentView:(UIView *)contentView;
+
 - (void)showFrom:(UIView *)fromView;
 
 - (void)dismiss;

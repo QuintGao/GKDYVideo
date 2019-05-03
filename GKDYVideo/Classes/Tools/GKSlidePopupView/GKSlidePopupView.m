@@ -10,14 +10,14 @@
 
 @interface GKSlidePopupView()<UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) UIView    *contentView;
+@property (nonatomic, weak) UIView                      *contentView;
 
 @property (nonatomic, strong) UITapGestureRecognizer    *tapGesture;
 @property (nonatomic, strong) UIPanGestureRecognizer    *panGesture;
 
 @property (nonatomic, weak) UIScrollView                *scrollView;
 @property (nonatomic, assign) BOOL                      isDragScrollView;
-@property (nonatomic, assign) CGFloat                   lastDragDistance;
+@property (nonatomic, assign) CGFloat                   lastTransitionY;
 
 @end
 
@@ -31,6 +31,7 @@
     if (self = [super initWithFrame:frame]) {
         self.contentView = contentView;
         
+        // 默认不展示内容视图
         CGRect contentFrame = contentView.frame;
         contentFrame.origin.y = frame.size.height;
         self.contentView.frame = contentFrame;
@@ -50,21 +51,19 @@
 }
 
 - (void)show {
-    [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^{
+    [UIView animateWithDuration:0.25f animations:^{
         CGRect frame = self.contentView.frame;
         frame.origin.y = self.frame.size.height - frame.size.height;
         self.contentView.frame = frame;
-    } completion:^(BOOL finished) {
-        
     }];
 }
 
 - (void)dismiss {
-    [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^{
+    [UIView animateWithDuration:0.25f animations:^{
         CGRect frame = self.contentView.frame;
         frame.origin.y = self.frame.size.height;
         self.contentView.frame = frame;
-    } completion:^(BOOL finished) {
+    }completion:^(BOOL finished) {
         [self removeFromSuperview];
     }];
 }
@@ -123,7 +122,8 @@
 - (void)handlePanGesture:(UIPanGestureRecognizer *)panGesture {
     CGPoint translation = [panGesture translationInView:self.contentView];
     if (self.isDragScrollView) {
-        if (self.scrollView.contentOffset.y <= 0) { // UIScrollView未滑动
+        // 当UIScrollView在最顶部时，处理视图的滑动
+        if (self.scrollView.contentOffset.y <= 0) {
             if (translation.y > 0) { // 向下拖拽
                 self.scrollView.contentOffset = CGPointZero;
                 self.scrollView.panGestureRecognizer.enabled = NO;
@@ -156,14 +156,14 @@
         self.scrollView.panGestureRecognizer.enabled = YES;
         
         // 结束时的速度>0 滑动距离> 5 且UIScrollView滑动到最顶部
-        if (velocity.y > 0 && self.lastDragDistance > 5 && !self.isDragScrollView) {
+        if (velocity.y > 0 && self.lastTransitionY > 5 && !self.isDragScrollView) {
             [self dismiss];
         }else {
             [self show];
         }
     }
     
-    self.lastDragDistance = translation.y;
+    self.lastTransitionY = translation.y;
 }
 
 #pragma mark - 懒加载
