@@ -138,7 +138,12 @@
     [self.coverImgView sd_setImageWithURL:[NSURL URLWithString:model.thumbnail_url] placeholderImage:[UIImage imageNamed:@"placeholderimg"]];
     
     self.nameLabel.text = [NSString stringWithFormat:@"@%@", model.author.name_show];
-    [self.iconView sd_setImageWithURL:[NSURL URLWithString:model.author.portrait] placeholderImage:[UIImage imageNamed:@"placeholderimg"]];
+    
+    if ([model.author.portrait containsString:@"http"]) {
+         [self.iconView sd_setImageWithURL:[NSURL URLWithString:model.author.portrait] placeholderImage:[UIImage imageNamed:@"placeholderimg"]];
+    }else {
+        self.iconView.image = [UIImage imageNamed:@"placeholderimg"];
+    }
     
     self.contentLabel.text = model.title;
     

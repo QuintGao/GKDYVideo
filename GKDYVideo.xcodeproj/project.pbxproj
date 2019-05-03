@@ -19,6 +19,9 @@
 		60C6E0A521C345E100C12F93 /* GKDYListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C6E0A421C345E100C12F93 /* GKDYListCollectionViewCell.m */; };
 		60C6E0B021CC8A9F00C12F93 /* video2.json in Resources */ = {isa = PBXBuildFile; fileRef = 60C6E0AF21CC8A9E00C12F93 /* video2.json */; };
 		60C6E0B221CC8AD600C12F93 /* video3.json in Resources */ = {isa = PBXBuildFile; fileRef = 60C6E0B121CC8AD600C12F93 /* video3.json */; };
+		7988CB19227C4BAA00023A2B /* video5.json in Resources */ = {isa = PBXBuildFile; fileRef = 7988CB16227C4BAA00023A2B /* video5.json */; };
+		7988CB1A227C4BAA00023A2B /* video6.json in Resources */ = {isa = PBXBuildFile; fileRef = 7988CB17227C4BAA00023A2B /* video6.json */; };
+		7988CB1B227C4BAA00023A2B /* video4.json in Resources */ = {isa = PBXBuildFile; fileRef = 7988CB18227C4BAA00023A2B /* video4.json */; };
 		79CC62942157377400101773 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CC62932157377400101773 /* AppDelegate.m */; };
 		79CC629C2157377600101773 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79CC629B2157377600101773 /* Assets.xcassets */; };
 		79CC629F2157377600101773 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79CC629D2157377600101773 /* LaunchScreen.storyboard */; };
@@ -83,6 +86,9 @@
 		60C6E0A421C345E100C12F93 /* GKDYListCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYListCollectionViewCell.m; sourceTree = "<group>"; };
 		60C6E0AF21CC8A9E00C12F93 /* video2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = video2.json; sourceTree = "<group>"; };
 		60C6E0B121CC8AD600C12F93 /* video3.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = video3.json; sourceTree = "<group>"; };
+		7988CB16227C4BAA00023A2B /* video5.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = video5.json; sourceTree = "<group>"; };
+		7988CB17227C4BAA00023A2B /* video6.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = video6.json; sourceTree = "<group>"; };
+		7988CB18227C4BAA00023A2B /* video4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = video4.json; sourceTree = "<group>"; };
 		79CC628F2157377400101773 /* GKDYVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GKDYVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79CC62922157377400101773 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		79CC62932157377400101773 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -220,6 +226,19 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		7988CB1C227C4CAB00023A2B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				60657EFB21C117F0000F97DA /* video1.json */,
+				60C6E0AF21CC8A9E00C12F93 /* video2.json */,
+				60C6E0B121CC8AD600C12F93 /* video3.json */,
+				7988CB18227C4BAA00023A2B /* video4.json */,
+				7988CB16227C4BAA00023A2B /* video5.json */,
+				7988CB17227C4BAA00023A2B /* video6.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		79CC62862157377400101773 = {
 			isa = PBXGroup;
 			children = (
@@ -245,6 +264,7 @@
 		79CC62912157377400101773 /* GKDYVideo */ = {
 			isa = PBXGroup;
 			children = (
+				7988CB1C227C4CAB00023A2B /* Resources */,
 				79CC62C521573AB400101773 /* Classes */,
 				79CC629B2157377600101773 /* Assets.xcassets */,
 				79CC629D2157377600101773 /* LaunchScreen.storyboard */,
@@ -252,9 +272,6 @@
 				79CC62A12157377600101773 /* main.m */,
 				79CC62C4215739FD00101773 /* PrefixHeader.pch */,
 				606A77DE215E0B3000DC2F63 /* README.md */,
-				60657EFB21C117F0000F97DA /* video1.json */,
-				60C6E0AF21CC8A9E00C12F93 /* video2.json */,
-				60C6E0B121CC8AD600C12F93 /* video3.json */,
 			);
 			path = GKDYVideo;
 			sourceTree = "<group>";
@@ -516,10 +533,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7988CB1A227C4BAA00023A2B /* video6.json in Resources */,
 				606A77DF215E0B3000DC2F63 /* README.md in Resources */,
 				60657EFC21C117F0000F97DA /* video1.json in Resources */,
 				60C6E0B021CC8A9F00C12F93 /* video2.json in Resources */,
 				79CC629F2157377600101773 /* LaunchScreen.storyboard in Resources */,
+				7988CB1B227C4BAA00023A2B /* video4.json in Resources */,
+				7988CB19227C4BAA00023A2B /* video5.json in Resources */,
 				79CC629C2157377600101773 /* Assets.xcassets in Resources */,
 				60C6E0B221CC8AD600C12F93 /* video3.json in Resources */,
 			);
