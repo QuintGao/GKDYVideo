@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "GKDYHomeViewController.h"
+#import "GKDYShootViewController.h"
+#import "GKDYNavigationController.h"
 
 @interface AppDelegate ()
 
@@ -30,8 +32,11 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     
-    UINavigationController *nav = [UINavigationController rootVC:[GKDYHomeViewController new] translationScale:NO];
+//    GKDYNavigationController *nav = [GKDYNavigationController rootVC:[GKDYShootViewController new] translationScale:YES];
+    
+    GKDYNavigationController *nav = [GKDYNavigationController rootVC:[GKDYHomeViewController new] translationScale:NO];
     nav.gk_openScrollLeftPush = YES; // 开启左滑push功能
+    nav.navigationBar.hidden = YES;
     
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];

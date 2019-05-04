@@ -22,6 +22,7 @@
 		7988CB19227C4BAA00023A2B /* video5.json in Resources */ = {isa = PBXBuildFile; fileRef = 7988CB16227C4BAA00023A2B /* video5.json */; };
 		7988CB1A227C4BAA00023A2B /* video6.json in Resources */ = {isa = PBXBuildFile; fileRef = 7988CB17227C4BAA00023A2B /* video6.json */; };
 		7988CB1B227C4BAA00023A2B /* video4.json in Resources */ = {isa = PBXBuildFile; fileRef = 7988CB18227C4BAA00023A2B /* video4.json */; };
+		7988CB1F227C9DB900023A2B /* GKDYShootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7988CB1E227C9DB900023A2B /* GKDYShootViewController.m */; };
 		79CC62942157377400101773 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CC62932157377400101773 /* AppDelegate.m */; };
 		79CC629C2157377600101773 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79CC629B2157377600101773 /* Assets.xcassets */; };
 		79CC629F2157377600101773 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79CC629D2157377600101773 /* LaunchScreen.storyboard */; };
@@ -82,13 +83,15 @@
 		60C6E09E21C33F7900C12F93 /* GKDYHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKDYHeaderView.h; sourceTree = "<group>"; };
 		60C6E0A021C345BD00C12F93 /* GKDYListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYListViewController.h; sourceTree = "<group>"; };
 		60C6E0A121C345BD00C12F93 /* GKDYListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYListViewController.m; sourceTree = "<group>"; };
-		60C6E0A321C345E100C12F93 /* GKDYListCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYListCollectionViewCell.h; sourceTree = "<group>"; };
-		60C6E0A421C345E100C12F93 /* GKDYListCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYListCollectionViewCell.m; sourceTree = "<group>"; };
+		60C6E0A321C345E100C12F93 /* GKDYListCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GKDYListCollectionViewCell.h; path = ../Controller/GKDYListCollectionViewCell.h; sourceTree = "<group>"; };
+		60C6E0A421C345E100C12F93 /* GKDYListCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GKDYListCollectionViewCell.m; path = ../Controller/GKDYListCollectionViewCell.m; sourceTree = "<group>"; };
 		60C6E0AF21CC8A9E00C12F93 /* video2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = video2.json; sourceTree = "<group>"; };
 		60C6E0B121CC8AD600C12F93 /* video3.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = video3.json; sourceTree = "<group>"; };
 		7988CB16227C4BAA00023A2B /* video5.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = video5.json; sourceTree = "<group>"; };
 		7988CB17227C4BAA00023A2B /* video6.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = video6.json; sourceTree = "<group>"; };
 		7988CB18227C4BAA00023A2B /* video4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = video4.json; sourceTree = "<group>"; };
+		7988CB1D227C9DB900023A2B /* GKDYShootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYShootViewController.h; sourceTree = "<group>"; };
+		7988CB1E227C9DB900023A2B /* GKDYShootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYShootViewController.m; sourceTree = "<group>"; };
 		79CC628F2157377400101773 /* GKDYVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GKDYVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79CC62922157377400101773 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		79CC62932157377400101773 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -355,10 +358,10 @@
 				606A77DB215DFCB000DC2F63 /* GKDYPersonalViewController.m */,
 				60C6E0A021C345BD00C12F93 /* GKDYListViewController.h */,
 				60C6E0A121C345BD00C12F93 /* GKDYListViewController.m */,
-				60C6E0A321C345E100C12F93 /* GKDYListCollectionViewCell.h */,
-				60C6E0A421C345E100C12F93 /* GKDYListCollectionViewCell.m */,
 				60657EFD21C12E71000F97DA /* GKDYOtherViewController.h */,
 				60657EFE21C12E71000F97DA /* GKDYOtherViewController.m */,
+				7988CB1D227C9DB900023A2B /* GKDYShootViewController.h */,
+				7988CB1E227C9DB900023A2B /* GKDYShootViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -374,6 +377,8 @@
 				79CC62EA2157402800101773 /* GKDYVideoControlView.m */,
 				60C6E09E21C33F7900C12F93 /* GKDYHeaderView.h */,
 				60C6E09D21C33F7900C12F93 /* GKDYHeaderView.m */,
+				60C6E0A321C345E100C12F93 /* GKDYListCollectionViewCell.h */,
+				60C6E0A421C345E100C12F93 /* GKDYListCollectionViewCell.m */,
 				79E16A142279A63200DE4967 /* GKDYCommentView.h */,
 				79E16A152279A63200DE4967 /* GKDYCommentView.m */,
 			);
@@ -618,6 +623,7 @@
 				79CC62EB2157402800101773 /* GKDYVideoControlView.m in Sources */,
 				79CC62A22157377600101773 /* main.m in Sources */,
 				79CC62E82157401E00101773 /* GKDYVideoView.m in Sources */,
+				7988CB1F227C9DB900023A2B /* GKDYShootViewController.m in Sources */,
 				79CC62E521573FC500101773 /* GKDYScrollView.m in Sources */,
 				79CC62EE2157405400101773 /* GKDYVideoViewModel.m in Sources */,
 				79CC62E221573F3C00101773 /* GKDYVideoModel.m in Sources */,

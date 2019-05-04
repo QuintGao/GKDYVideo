@@ -12,7 +12,7 @@
 #import "GKSlidePopupView.h"
 #import "GKDYCommentView.h"
 
-@interface GKDYPlayerViewController ()<GKDYVideoViewDelegate>
+@interface GKDYPlayerViewController ()<GKDYVideoViewDelegate, GKViewControllerPushDelegate>
 
 @property (nonatomic, strong) UIButton  *backBtn;
 @property (nonatomic, strong) UIButton  *searchBtn;
@@ -107,24 +107,37 @@
             make.centerX.equalTo(self.titleView).offset(24);
         }];
     }
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushToNextViewController) name:@"IconClickNotification" object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
+    self.gk_pushDelegate = self;
+    
+    [self.videoView resume];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    self.gk_pushDelegate = nil;
+    
+    // 停止播放
+    [self.videoView pause];
 }
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"IconClickNotification" object:nil];
-    
     [self.videoView destoryPlayer];
     
     NSLog(@"playerVC dealloc");
 }
 
 - (void)searchClick:(id)sender {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"PlayerSearchClickNotification" object:nil];
+    
 }
 
 - (void)backClick:(id)sender {
@@ -145,6 +158,13 @@
         [self.recBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         [self.cityBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
+}
+
+#pragma mark - GKViewControllerPushDelegate
+- (void)pushToNextViewController {
+    GKDYPersonalViewController *personalVC = [GKDYPersonalViewController new];
+    personalVC.model = self.videoView.currentPlayView.model;
+    [self.navigationController pushViewController:personalVC animated:YES];
 }
 
 #pragma mark - GKDYVideoViewDelegate

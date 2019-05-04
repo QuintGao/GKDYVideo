@@ -46,6 +46,7 @@
     [childVC.tabBarItem setTitleTextAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:16.0f], NSForegroundColorAttributeName: [UIColor whiteColor]} forState:UIControlStateSelected];
 
     GKDYNavigationController *nav = [GKDYNavigationController rootVC:childVC translationScale:NO];
+    nav.gk_openScrollLeftPush = YES;
     [self addChildViewController:nav];
 }
 
