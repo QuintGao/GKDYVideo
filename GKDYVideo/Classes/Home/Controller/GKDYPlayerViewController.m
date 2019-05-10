@@ -320,12 +320,8 @@
             CGRect loadingFrame = self.loadingBgView.frame;
             loadingFrame.origin.y = frame.origin.y;
             self.loadingBgView.frame = loadingFrame;
-        }else if (distance >= kTransitionCenter && distance <= 2 * kTransitionCenter) {
+        }else if (distance >= kTransitionCenter && distance < 2 * kTransitionCenter) {
             CGFloat alpha = (2 * kTransitionCenter - distance) / kTransitionCenter;
-            
-            if (distance == 2 * kTransitionCenter) {
-                alpha = 1;
-            }
             
             self.refreshView.alpha      = 1 - alpha;
             self.titleView.alpha        = 0;

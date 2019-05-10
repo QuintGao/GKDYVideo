@@ -104,7 +104,7 @@
                 }];
             }];
             
-            [self.scrollView addGestureRecognizer:self.panGesture];
+//            [self.scrollView addGestureRecognizer:self.panGesture];
         }
     }
     return self;
@@ -193,7 +193,8 @@
 }
 
 - (void)resetModels:(NSArray *)models {
-    [self.videos removeAllObjects];
+//    [self.videos removeAllObjects];
+//    [self.videos addObjectsFromArray:models];
     [self.videos addObjectsFromArray:models];
 }
 
@@ -467,7 +468,6 @@
         } else if (absY > absX) {
             if (translation.y < 0) {
                 //向上滑动
-                return;
             }else{
                 //向下滑动
             }
@@ -486,8 +486,10 @@
                     self.scrollView.panGestureRecognizer.enabled = NO;
                 }
                 
-                if ([self.delegate respondsToSelector:@selector(videoView:didPanWithDistance:isEnd:)]) {
-                    [self.delegate videoView:self didPanWithDistance:distance isEnd:NO];
+                if (self.scrollView.panGestureRecognizer.enabled == NO) {
+                    if ([self.delegate respondsToSelector:@selector(videoView:didPanWithDistance:isEnd:)]) {
+                        [self.delegate videoView:self didPanWithDistance:distance isEnd:NO];
+                    }
                 }
             }
                 break;
