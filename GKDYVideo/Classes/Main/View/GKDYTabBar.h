@@ -1,8 +1,8 @@
 //
-//  GKDYTabBarController.h
+//  GKDYTabBar.h
 //  GKDYVideo
 //
-//  Created by gaokun on 2019/1/26.
+//  Created by gaokun on 2019/5/8.
 //  Copyright © 2019 QuintGao. All rights reserved.
 //
 
@@ -10,7 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface GKDYTabBarController : UITabBarController
+@interface GKDYTabBar : UITabBar
+
+- (void)showLine;
+- (void)hideLine;
 
 @end
 

@@ -11,9 +11,21 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GKDYPlayerViewController;
+
+@protocol GKDYPlayerViewControllerDelegate <NSObject>
+
+- (void)playerVCDidClickShoot:(GKDYPlayerViewController *)playerVC;
+
+- (void)playerVC:(GKDYPlayerViewController *)playerVC controlView:(GKDYVideoControlView *)controlView isCritical:(BOOL)isCritical;
+
+@end
+
 @interface GKDYPlayerViewController : GKDYBaseViewController
 
 @property (nonatomic, strong) GKDYVideoView *videoView;
+
+@property (nonatomic, weak) id<GKDYPlayerViewControllerDelegate> delegate;
 
 // 播放单个视频
 - (instancetype)initWithVideoModel:(GKDYVideoModel *)model;

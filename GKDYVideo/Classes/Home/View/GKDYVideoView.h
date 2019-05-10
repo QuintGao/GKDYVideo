@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)videoView:(GKDYVideoView *)videoView didClickPraise:(GKDYVideoModel *)videoModel;
 - (void)videoView:(GKDYVideoView *)videoView didClickComment:(GKDYVideoModel *)videoModel;
 - (void)videoView:(GKDYVideoView *)videoView didClickShare:(GKDYVideoModel *)videoModel;
+- (void)videoView:(GKDYVideoView *)videoView didScrollIsCritical:(BOOL)isCritical;
+- (void)videoView:(GKDYVideoView *)videoView didPanWithDistance:(CGFloat)distance isEnd:(BOOL)isEnd;
 
 @end
 

@@ -8,6 +8,7 @@
 
 #import "GKDYCommentView.h"
 #import "UIImage+GKCategory.h"
+#import "GKBallLoadingView.h"
 
 @interface GKDYCommentView()<UITableViewDataSource, UITableViewDelegate>
 
@@ -59,12 +60,23 @@
             make.top.equalTo(self.topView.mas_bottom);
         }];
         
-        self.count = 30;
-        
         self.countLabel.text = [NSString stringWithFormat:@"%zd条评论", self.count];
-        [self.tableView reloadData];
     }
     return self;
+}
+
+- (void)requestData {
+    GKBallLoadingView *loadingView = [GKBallLoadingView loadingViewInView:self.tableView];
+    [loadingView startLoading];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [loadingView stopLoading];
+        [loadingView removeFromSuperview];
+        
+        self.count = 30;
+        self.countLabel.text = [NSString stringWithFormat:@"%zd条评论", self.count];
+        [self.tableView reloadData];
+    });
 }
 
 #pragma mark - <UITableViewDataSource, UITableViewDelegate>

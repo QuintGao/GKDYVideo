@@ -44,17 +44,19 @@
     return self;
 }
 
-- (void)showFrom:(UIView *)fromView {
+- (void)showFrom:(UIView *)fromView completion:(nonnull void (^)(void))completion {
     [fromView addSubview:self];
     
-    [self show];
+    [self showWithCompletion:completion];
 }
 
-- (void)show {
+- (void)showWithCompletion:(void (^)(void))completion {
     [UIView animateWithDuration:0.25f animations:^{
         CGRect frame = self.contentView.frame;
         frame.origin.y = self.frame.size.height - frame.size.height;
         self.contentView.frame = frame;
+    } completion:^(BOOL finished) {
+        !completion ? : completion();
     }];
 }
 
@@ -159,7 +161,7 @@
         if (velocity.y > 0 && self.lastTransitionY > 5 && !self.isDragScrollView) {
             [self dismiss];
         }else {
-            [self show];
+            [self showWithCompletion:nil];
         }
     }
     

@@ -63,6 +63,9 @@
 // 隐藏菊花动画
 - (void)hideLoading;
 
+- (void)showLineLoading;
+- (void)hideLineLoading;
+
 @end
 
 @interface GKSliderButton : UIButton

@@ -9,7 +9,7 @@
 #import "GKDYVideoView.h"
 #import "GKDYVideoPlayer.h"
 
-@interface GKDYVideoView()<UIScrollViewDelegate, GKDYVideoPlayerDelegate, GKDYVideoControlViewDelegate>
+@interface GKDYVideoView()<UIScrollViewDelegate, GKDYVideoPlayerDelegate, GKDYVideoControlViewDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UIScrollView              *scrollView;
 
@@ -39,6 +39,10 @@
 
 @property (nonatomic, assign) BOOL                      isRefreshMore;
 
+@property (nonatomic, strong) UIPanGestureRecognizer    *panGesture;
+// 开始移动时的位置
+@property (nonatomic, assign) CGFloat                   startLocationY;
+
 @end
 
 @implementation GKDYVideoView
@@ -55,25 +59,25 @@
         
         // 不是push过来的，添加下拉刷新
         if (!isPushed) {
-            [self.viewModel refreshNewListWithSuccess:^(NSArray * _Nonnull list) {
-                [self setModels:list index:0];
-            } failure:^(NSError * _Nonnull error) {
-                NSLog(@"%@", error);
-            }];
+//            [self.viewModel refreshNewListWithSuccess:^(NSArray * _Nonnull list) {
+//                [self setModels:list index:0];
+//            } failure:^(NSError * _Nonnull error) {
+//                NSLog(@"%@", error);
+//            }];
             
-            self.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-                [self.videos removeAllObjects];
-                
-                [self.viewModel refreshNewListWithSuccess:^(NSArray * _Nonnull list) {
-                    [self setModels:list index:0];
-                    [self.scrollView.mj_header endRefreshing];
-                    [self.scrollView.mj_footer endRefreshing];
-                } failure:^(NSError * _Nonnull error) {
-                    NSLog(@"%@", error);
-                    [self.scrollView.mj_header endRefreshing];
-                    [self.scrollView.mj_footer endRefreshing];
-                }];
-            }];
+//            self.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+//                [self.videos removeAllObjects];
+//
+//                [self.viewModel refreshNewListWithSuccess:^(NSArray * _Nonnull list) {
+//                    [self setModels:list index:0];
+//                    [self.scrollView.mj_header endRefreshing];
+//                    [self.scrollView.mj_footer endRefreshing];
+//                } failure:^(NSError * _Nonnull error) {
+//                    NSLog(@"%@", error);
+//                    [self.scrollView.mj_header endRefreshing];
+//                    [self.scrollView.mj_footer endRefreshing];
+//                }];
+//            }];
             
             self.scrollView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
                 [self.player pausePlay];
@@ -82,9 +86,13 @@
                 
                 [self.viewModel refreshMoreListWithSuccess:^(NSArray * _Nonnull list) {
                     self.isRefreshMore = NO;
+                    
                     if (list) {
-                        // 处理数据不准问题
-                        [self addModels:list index:self.currentPlayIndex];
+                        if (self.videos.count == 0) {
+                            [self setModels:list index:0];
+                        }else {
+                            [self resetModels:list];
+                        }
                         [self.scrollView.mj_footer endRefreshing];
                     }else {
                         [self.scrollView.mj_footer endRefreshingWithNoMoreData];
@@ -95,6 +103,8 @@
                     [self.scrollView.mj_footer endRefreshingWithNoMoreData];
                 }];
             }];
+            
+            [self.scrollView addGestureRecognizer:self.panGesture];
         }
     }
     return self;
@@ -127,6 +137,7 @@
         
         self.scrollView.contentSize = CGSizeMake(0, SCREEN_HEIGHT);
         
+        self.topView.hidden = NO;
         self.topView.model = self.videos.firstObject;
         
         [self playVideoFrom:self.topView];
@@ -135,8 +146,10 @@
         
         self.scrollView.contentSize = CGSizeMake(0, SCREEN_HEIGHT * 2);
         
-        self.topView.model = self.videos.firstObject;
-        self.ctrView.model = self.videos.lastObject;
+        self.topView.hidden = NO;
+        self.ctrView.hidden = NO;
+        self.topView.model  = self.videos.firstObject;
+        self.ctrView.model  = self.videos.lastObject;
         
         if (index == 1) {
             self.scrollView.contentOffset = CGPointMake(0, SCREEN_HEIGHT);
@@ -146,6 +159,10 @@
             [self playVideoFrom:self.topView];
         }
     }else {
+        self.topView.hidden = NO;
+        self.ctrView.hidden = NO;
+        self.btmView.hidden = NO;
+        
         if (index == 0) {   // 如果是第一个，则显示上视图，且预加载中下视图
             self.topView.model = self.videos[index];
             self.ctrView.model = self.videos[index + 1];
@@ -175,6 +192,11 @@
     }
 }
 
+- (void)resetModels:(NSArray *)models {
+    [self.videos removeAllObjects];
+    [self.videos addObjectsFromArray:models];
+}
+
 // 添加播放数据后，重置index，防止出现错位的情况
 - (void)addModels:(NSArray *)models index:(NSInteger)index {
     [self.videos addObjectsFromArray:models];
@@ -190,6 +212,7 @@
         
         self.scrollView.contentSize = CGSizeMake(0, SCREEN_HEIGHT);
         
+        self.topView.hidden = NO;
         self.topView.model = self.videos.firstObject;
         
         [self playVideoFrom:self.topView];
@@ -198,6 +221,8 @@
         
         self.scrollView.contentSize = CGSizeMake(0, SCREEN_HEIGHT * 2);
         
+        self.topView.hidden = NO;
+        self.ctrView.hidden = NO;
         self.topView.model = self.videos.firstObject;
         self.ctrView.model = self.videos.lastObject;
         
@@ -209,6 +234,10 @@
             [self playVideoFrom:self.topView];
         }
     }else {
+        self.topView.hidden = NO;
+        self.ctrView.hidden = NO;
+        self.btmView.hidden = NO;
+        
         if (index == 0) {   // 如果是第一个，则显示上视图，且预加载中下视图
             self.topView.model = self.videos[index];
             self.ctrView.model = self.videos[index + 1];
@@ -298,6 +327,21 @@
 
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (self.currentPlayIndex == 0 && scrollView.contentOffset.y < 0) {
+        self.scrollView.contentOffset = CGPointZero;
+    }
+    
+    // slier处理
+    if (scrollView.contentOffset.y == 0 || scrollView.contentOffset.y == SCREEN_HEIGHT || scrollView.contentOffset.y == 2 * SCREEN_HEIGHT) {
+        if ([self.delegate respondsToSelector:@selector(videoView:didScrollIsCritical:)]) {
+            [self.delegate videoView:self didScrollIsCritical:YES];
+        }
+    }else {
+        if ([self.delegate respondsToSelector:@selector(videoView:didScrollIsCritical:)]) {
+            [self.delegate videoView:self didScrollIsCritical:NO];
+        }
+    }
+    
     // 小于等于三个，不用处理
     if (self.videos.count <= 3) return;
     
@@ -306,7 +350,7 @@
         return;
     }
     // 下滑到最后一个
-    if (self.index == self.videos.count - 1 && scrollView.contentOffset.y > SCREEN_HEIGHT) {
+    if (self.index > 0 && self.index == self.videos.count - 1 && scrollView.contentOffset.y > SCREEN_HEIGHT) {
         return;
     }
     
@@ -333,7 +377,7 @@
                 self.ctrView.model = self.btmView.model;
             }
         }
-        if (self.index < self.videos.count - 1) {
+        if (self.index < self.videos.count - 1 && self.videos.count >= 3) {
             self.btmView.model = self.videos[self.index + 1];
         }
     }else if (scrollView.contentOffset.y <= 0) { // 下滑
@@ -406,6 +450,70 @@
         self.isRefreshMore = NO;
         [self.scrollView.mj_footer endRefreshingWithNoMoreData];
     }];
+}
+
+#pragma mark - Gesture
+- (void)handlePanGesture:(UIPanGestureRecognizer *)panGesture {
+    if (self.currentPlayIndex == 0) {
+        CGPoint translation = [panGesture translationInView:panGesture.view];
+        
+        CGFloat absX = fabs(translation.x);
+        CGFloat absY = fabs(translation.y);
+        
+//        if (MAX(absX, absY) < 10)
+//            return;
+        if (absX > absY ) { // 左右滑动
+            return;
+        } else if (absY > absX) {
+            if (translation.y < 0) {
+                //向上滑动
+                return;
+            }else{
+                //向下滑动
+            }
+        }
+        
+        CGPoint location = [panGesture locationInView:panGesture.view];
+        
+        switch (panGesture.state) {
+            case UIGestureRecognizerStateBegan: {
+                self.startLocationY = location.y;
+            }
+                break;
+            case UIGestureRecognizerStateChanged: {
+                CGFloat distance = location.y - self.startLocationY;
+                if (distance > 0) { // 只要distance>0且没松手 就认为是下滑
+                    self.scrollView.panGestureRecognizer.enabled = NO;
+                }
+                
+                if ([self.delegate respondsToSelector:@selector(videoView:didPanWithDistance:isEnd:)]) {
+                    [self.delegate videoView:self didPanWithDistance:distance isEnd:NO];
+                }
+            }
+                break;
+            case UIGestureRecognizerStateFailed:
+            case UIGestureRecognizerStateCancelled:
+            case UIGestureRecognizerStateEnded: {
+                CGFloat distance = location.y - self.startLocationY;
+                if ([self.delegate respondsToSelector:@selector(videoView:didPanWithDistance:isEnd:)]) {
+                    [self.delegate videoView:self didPanWithDistance:distance isEnd:YES];
+                }
+                
+                self.scrollView.panGestureRecognizer.enabled = YES;
+            }
+                break;
+                
+            default:
+                break;
+        }
+        
+        [panGesture setTranslation:CGPointZero inView:panGesture.view];
+    }
+}
+
+// 允许多个手势响应
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
 }
 
 #pragma mark - GKDYVideoPlayerDelegate
@@ -511,8 +619,6 @@
         
         if (@available(iOS 11.0, *)) {
             _scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-        } else {
-            // Fallback on earlier versions
         }
     }
     return _scrollView;
@@ -521,6 +627,7 @@
 - (GKDYVideoControlView *)topView {
     if (!_topView) {
         _topView = [GKDYVideoControlView new];
+        _topView.hidden = YES;
     }
     return _topView;
 }
@@ -528,6 +635,7 @@
 - (GKDYVideoControlView *)ctrView {
     if (!_ctrView) {
         _ctrView = [GKDYVideoControlView new];
+        _ctrView.hidden = YES;
     }
     return _ctrView;
 }
@@ -535,6 +643,7 @@
 - (GKDYVideoControlView *)btmView {
     if (!_btmView) {
         _btmView = [GKDYVideoControlView new];
+        _btmView.hidden = YES;
     }
     return _btmView;
 }
@@ -552,6 +661,14 @@
         _player.delegate = self;
     }
     return _player;
+}
+
+- (UIPanGestureRecognizer *)panGesture {
+    if (!_panGesture) {
+        _panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
+        _panGesture.delegate = self;
+    }
+    return _panGesture;
 }
 
 @end

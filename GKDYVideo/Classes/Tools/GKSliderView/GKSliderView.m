@@ -7,6 +7,7 @@
 //
 
 #import "GKSliderView.h"
+#import "GKLineLoadingView.h"
 
 /** 滑块的大小 */
 #define kSliderBtnWH  19.0
@@ -174,6 +175,14 @@
 
 - (void)hideLoading {
     [self.sliderBtn hideActivityAnim];
+}
+
+- (void)showLineLoading {
+    [GKLineLoadingView showLoadingInView:self withLineHeight:self.gk_height];
+}
+
+- (void)hideLineLoading {
+    [GKLineLoadingView hideLoadingInView:self];
 }
 
 - (void)setAllowTapped:(BOOL)allowTapped {

@@ -7,7 +7,6 @@
 //
 
 #import "GKDYVideoControlView.h"
-#import "GKSliderView.h"
 
 @interface GKDYVideoItemButton : UIButton
 
@@ -46,9 +45,8 @@
 
 @property (nonatomic, strong) UILabel               *nameLabel;
 @property (nonatomic, strong) UILabel               *contentLabel;
-@property (nonatomic, strong) GKSliderView          *sliderView;
 
-@property (nonatomic, strong) UIActivityIndicatorView   *loadingView;
+//@property (nonatomic, strong) UIActivityIndicatorView   *loadingView;
 @property (nonatomic, strong) UIButton                  *playBtn;
 
 @end
@@ -66,7 +64,7 @@
         [self addSubview:self.contentLabel];
         [self addSubview:self.sliderView];
         
-        [self addSubview:self.loadingView];
+//        [self addSubview:self.loadingView];
         [self addSubview:self.playBtn];
         
         [self.coverImgView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -75,15 +73,11 @@
         
         CGFloat bottomM = TABBAR_HEIGHT;
         
-        [self.sliderView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.equalTo(self);
-            make.bottom.equalTo(self).offset(-bottomM);
-            make.height.mas_equalTo(ADAPTATIONRATIO * 1.0f);
-        }];
+        self.sliderView.frame = CGRectMake(0, SCREEN_HEIGHT - TABBAR_HEIGHT - 0.5, SCREEN_WIDTH, ADAPTATIONRATIO * 1.0f);
         
         [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self).offset(ADAPTATIONRATIO * 30.0f);
-            make.bottom.equalTo(self.sliderView).offset(-ADAPTATIONRATIO * 30.0f);
+            make.bottom.equalTo(self).offset(-(ADAPTATIONRATIO * 30.0f + bottomM));
             make.width.mas_equalTo(ADAPTATIONRATIO * 504.0f);
         }];
         
@@ -116,9 +110,9 @@
             make.width.height.mas_equalTo(ADAPTATIONRATIO * 100.0f);
         }];
         
-        [self.loadingView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.center.equalTo(self);
-        }];
+//        [self.loadingView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.center.equalTo(self);
+//        }];
         
         [self.playBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.center.equalTo(self);
@@ -135,7 +129,7 @@
     
     self.sliderView.value = 0;
     
-    [self.coverImgView sd_setImageWithURL:[NSURL URLWithString:model.thumbnail_url] placeholderImage:[UIImage imageNamed:@"placeholderimg"]];
+    [self.coverImgView sd_setImageWithURL:[NSURL URLWithString:model.thumbnail_url] placeholderImage:[UIImage imageNamed:@"img_video_loading"]];
     
     self.nameLabel.text = [NSString stringWithFormat:@"@%@", model.author.name_show];
     
@@ -147,6 +141,7 @@
     
     self.contentLabel.text = model.title;
     
+    self.praiseBtn.selected = model.isAgree;
     [self.praiseBtn setTitle:model.agree_num forState:UIControlStateNormal];
     [self.commentBtn setTitle:model.comment_num forState:UIControlStateNormal];
     [self.shareBtn setTitle:model.share_num forState:UIControlStateNormal];
@@ -158,11 +153,13 @@
 }
 
 - (void)startLoading {
-    [self.loadingView startAnimating];
+//    [self.loadingView startAnimating];
+    [self.sliderView showLineLoading];
 }
 
 - (void)stopLoading {
-    [self.loadingView stopAnimating];
+//    [self.loadingView stopAnimating];
+    [self.sliderView hideLineLoading];
 }
 
 - (void)showPlayBtn {
@@ -291,19 +288,20 @@
         _sliderView = [GKSliderView new];
         _sliderView.isHideSliderBlock = YES;
         _sliderView.sliderHeight = ADAPTATIONRATIO * 1.0f;
-        _sliderView.maximumTrackTintColor = [UIColor grayColor];
+        _sliderView.maximumTrackTintColor = [UIColor clearColor];
         _sliderView.minimumTrackTintColor = [UIColor whiteColor];
+//        _sliderView.hidden = YES;
     }
     return _sliderView;
 }
 
-- (UIActivityIndicatorView *)loadingView {
-    if (!_loadingView) {
-        _loadingView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-        _loadingView.hidesWhenStopped = YES;
-    }
-    return _loadingView;
-}
+//- (UIActivityIndicatorView *)loadingView {
+//    if (!_loadingView) {
+//        _loadingView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+//        _loadingView.hidesWhenStopped = YES;
+//    }
+//    return _loadingView;
+//}
 
 - (UIButton *)playBtn {
     if (!_playBtn) {

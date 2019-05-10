@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithFrame:(CGRect)frame contentView:(UIView *)contentView;
 
-- (void)showFrom:(UIView *)fromView;
+- (void)showFrom:(UIView *)fromView completion:(void (^)(void))completion;
 
 - (void)dismiss;
 

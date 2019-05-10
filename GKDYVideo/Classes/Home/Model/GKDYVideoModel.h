@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GKDYVideoModel : NSObject
 
+@property (nonatomic, assign) BOOL          isAgree;
 @property (nonatomic, copy) NSString        *agree_num;
 @property (nonatomic, copy) NSString        *agreed_num;
 @property (nonatomic, strong) GKDYVideoAuthorModel   *author;

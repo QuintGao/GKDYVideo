@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GKDYVideoModel.h"
+#import "GKSliderView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -32,9 +33,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) id<GKDYVideoControlViewDelegate> delegate;
 
 // 视频封面图:显示封面并播放视频
-@property (nonatomic, strong) UIImageView       *coverImgView;
+@property (nonatomic, strong) UIImageView           *coverImgView;
 
-@property (nonatomic, strong) GKDYVideoModel    *model;
+@property (nonatomic, strong) GKDYVideoModel        *model;
+
+@property (nonatomic, strong) GKSliderView          *sliderView;
 
 - (void)setProgress:(float)progress;
 

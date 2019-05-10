@@ -135,14 +135,14 @@
 - (void)onPlayEvent:(TXVodPlayer *)player event:(int)EvtID withParam:(NSDictionary *)param {
     switch (EvtID) {
         case PLAY_EVT_CHANGE_RESOLUTION: {  // 视频分辨率改变
-//            float width  = [param[@"EVT_PARAM1"] floatValue];
-//            float height = [param[@"EVT_PARAM2"] floatValue];
-//
-//            if (width > height) {
-//                [player setRenderMode:RENDER_MODE_FILL_EDGE];
-//            }else {
-//                [player setRenderMode:RENDER_MODE_FILL_SCREEN];
-//            }
+            float width  = [param[@"EVT_PARAM1"] floatValue];
+            float height = [param[@"EVT_PARAM2"] floatValue];
+
+            if (width > height) {
+                [player setRenderMode:RENDER_MODE_FILL_EDGE];
+            }else {
+                [player setRenderMode:RENDER_MODE_FILL_SCREEN];
+            }
         }
             break;
         case PLAY_EVT_PLAY_LOADING:{    // loading

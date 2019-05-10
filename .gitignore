@@ -512,3 +512,6 @@ Pods/YYModel/YYModel/YYClassInfo.h
 Pods/YYModel/YYModel/YYClassInfo.m
 Pods/YYModel/YYModel/YYModel.h
 Podfile.lock
+Pods/MJRefresh/MJRefresh/MJRefreshConfig.h
+Pods/MJRefresh/MJRefresh/MJRefreshConfig.m
+Pods/MJRefresh/MJRefresh/MJRefresh.bundle/ko.lproj/Localizable.strings
