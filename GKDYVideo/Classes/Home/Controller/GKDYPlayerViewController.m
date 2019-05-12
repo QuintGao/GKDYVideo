@@ -320,12 +320,14 @@
             CGRect loadingFrame = self.loadingBgView.frame;
             loadingFrame.origin.y = frame.origin.y;
             self.loadingBgView.frame = loadingFrame;
-        }else if (distance >= kTransitionCenter && distance < 2 * kTransitionCenter) {
+        }else if (distance >= kTransitionCenter && distance <= 2 * kTransitionCenter) {
             CGFloat alpha = (2 * kTransitionCenter - distance) / kTransitionCenter;
             
             self.refreshView.alpha      = 1 - alpha;
             self.titleView.alpha        = 0;
             self.loadingBgView.alpha    = 1 - alpha;
+            
+            NSLog(@"%f", alpha);
             
             // 位置改变
             CGRect frame = self.titleView.frame;
@@ -341,6 +343,8 @@
         }else {
             self.titleView.alpha    = 0;
             self.refreshView.alpha  = 1;
+            self.loadingBgView.alpha = 1;
+            [self.refreshLoadingView startLoadingWithProgress:1];
         }
     }
 }

@@ -104,7 +104,7 @@
                 }];
             }];
             
-//            [self.scrollView addGestureRecognizer:self.panGesture];
+            [self.scrollView addGestureRecognizer:self.panGesture];
         }
     }
     return self;
@@ -456,23 +456,6 @@
 #pragma mark - Gesture
 - (void)handlePanGesture:(UIPanGestureRecognizer *)panGesture {
     if (self.currentPlayIndex == 0) {
-        CGPoint translation = [panGesture translationInView:panGesture.view];
-        
-        CGFloat absX = fabs(translation.x);
-        CGFloat absY = fabs(translation.y);
-        
-//        if (MAX(absX, absY) < 10)
-//            return;
-        if (absX > absY ) { // 左右滑动
-            return;
-        } else if (absY > absX) {
-            if (translation.y < 0) {
-                //向上滑动
-            }else{
-                //向下滑动
-            }
-        }
-        
         CGPoint location = [panGesture locationInView:panGesture.view];
         
         switch (panGesture.state) {
@@ -481,6 +464,23 @@
             }
                 break;
             case UIGestureRecognizerStateChanged: {
+                CGPoint translation = [panGesture translationInView:panGesture.view];
+                
+                CGFloat absX = fabs(translation.x);
+                CGFloat absY = fabs(translation.y);
+                
+                //        if (MAX(absX, absY) < 10)
+                //            return;
+                if (absX > absY ) { // 左右滑动
+                    return;
+                } else if (absY > absX) {
+                    if (translation.y < 0) {
+                        //向上滑动
+                    }else{
+                        //向下滑动
+                    }
+                }
+                
                 CGFloat distance = location.y - self.startLocationY;
                 if (distance > 0) { // 只要distance>0且没松手 就认为是下滑
                     self.scrollView.panGestureRecognizer.enabled = NO;
