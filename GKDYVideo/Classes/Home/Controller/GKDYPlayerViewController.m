@@ -105,6 +105,12 @@
         self.loadingBgView.frame = CGRectMake(SCREEN_WIDTH - 15 - 44, GK_SAVEAREA_TOP, 44, 44);
         self.refreshLoadingView = [GKBallLoadingView loadingViewInView:self.loadingBgView];
         
+        [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.equalTo(self.view);
+            make.top.equalTo(self.view).offset(GK_SAVEAREA_TOP + 20.0f);
+            make.height.mas_equalTo(44.0f);
+        }];
+        
         [self.shootBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.titleView);
             make.left.equalTo(self.view).offset(15.0f);
@@ -115,12 +121,6 @@
         [self.searchBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self.view).offset(-15.0f);
             make.centerY.equalTo(self.titleView);
-        }];
-        
-        [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.equalTo(self.view);
-            make.top.equalTo(self.view).offset(GK_SAVEAREA_TOP + 20.0f);
-            make.height.mas_offset(44.0f);
         }];
         
         [self.recBtn mas_makeConstraints:^(MASConstraintMaker *make) {
