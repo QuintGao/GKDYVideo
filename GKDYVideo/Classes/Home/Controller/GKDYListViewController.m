@@ -9,10 +9,13 @@
 #import "GKDYListViewController.h"
 #import "GKDYListCollectionViewCell.h"
 #import "GKDYPlayerViewController.h"
+#import "GKBallLoadingView.h"
 
 @interface GKDYListViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic, strong) UICollectionView  *collectionView;
+
+@property (nonatomic, strong) UIView            *loadingBgView;
 
 @property (nonatomic, strong) NSArray           *videos;
 
@@ -35,32 +38,40 @@
         make.edges.equalTo(self.view);
     }];
     
-    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        // 模拟刷新，获取本地数据
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            NSString *videoPath = [[NSBundle mainBundle] pathForResource:@"video1" ofType:@"json"];
-            
-            NSData *jsonData = [NSData dataWithContentsOfFile:videoPath];
-            
-            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableLeaves error:nil];
-            
-            NSArray *videoList = dic[@"data"][@"video_list"];
-            
-            NSMutableArray *array = [NSMutableArray new];
-            for (NSDictionary *dict in videoList) {
-                GKDYVideoModel *model = [GKDYVideoModel yy_modelWithDictionary:dict];
-                [array addObject:model];
-            }
-            
-            self.isRefresh = YES;
-            
-            self.videos = array;
-            
-            [self.collectionView.mj_header endRefreshing];
-            
-            [self.collectionView reloadData];
-        });
-    }];
+    [self.view addSubview:self.loadingBgView];
+    self.loadingBgView.frame = CGRectMake(0, 0, SCREEN_WIDTH, ADAPTATIONRATIO * 400.0f);
+    
+    // 模拟数据加载
+    GKBallLoadingView *loadingView = [GKBallLoadingView loadingViewInView:self.loadingBgView];
+    [loadingView startLoading];;
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [loadingView stopLoading];
+        [loadingView removeFromSuperview];
+        self.loadingBgView.hidden = YES;
+        
+        NSString *videoPath = [[NSBundle mainBundle] pathForResource:@"video1" ofType:@"json"];
+        
+        NSData *jsonData = [NSData dataWithContentsOfFile:videoPath];
+        
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableLeaves error:nil];
+        
+        NSArray *videoList = dic[@"data"][@"video_list"];
+        
+        NSMutableArray *array = [NSMutableArray new];
+        for (NSDictionary *dict in videoList) {
+            GKDYVideoModel *model = [GKDYVideoModel yy_modelWithDictionary:dict];
+            [array addObject:model];
+        }
+        
+        self.isRefresh = YES;
+        
+        self.videos = array;
+        
+        [self.collectionView.mj_header endRefreshing];
+        
+        [self.collectionView reloadData];
+    });
 }
 
 - (void)refreshData {
@@ -91,6 +102,10 @@
 }
 
 #pragma mark - GKPageListViewDelegate
+- (UIView *)listView {
+    return self.view;
+}
+
 - (UIScrollView *)listScrollView {
     return self.collectionView;
 }
@@ -114,8 +129,16 @@
         _collectionView.delegate = self;
         _collectionView.backgroundColor = [UIColor blackColor];
         [_collectionView registerClass:[GKDYListCollectionViewCell class] forCellWithReuseIdentifier:@"GKDYListCollectionViewCell"];
+        _collectionView.alwaysBounceVertical = YES;
     }
     return _collectionView;
+}
+
+- (UIView *)loadingBgView {
+    if (!_loadingBgView) {
+        _loadingBgView = [UIView new];
+    }
+    return _loadingBgView;
 }
 
 @end

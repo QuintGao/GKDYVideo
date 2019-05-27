@@ -91,7 +91,7 @@
                         if (self.videos.count == 0) {
                             [self setModels:list index:0];
                         }else {
-                            [self resetModels:list];
+                            [self.videos addObjectsFromArray:list];
                         }
                         [self.scrollView.mj_footer endRefreshing];
                     }else {
@@ -190,12 +190,6 @@
             [self playVideoFrom:self.ctrView];
         }
     }
-}
-
-- (void)resetModels:(NSArray *)models {
-//    [self.videos removeAllObjects];
-//    [self.videos addObjectsFromArray:models];
-    [self.videos addObjectsFromArray:models];
 }
 
 // 添加播放数据后，重置index，防止出现错位的情况
@@ -469,16 +463,8 @@
                 CGFloat absX = fabs(translation.x);
                 CGFloat absY = fabs(translation.y);
                 
-                //        if (MAX(absX, absY) < 10)
-                //            return;
                 if (absX > absY ) { // 左右滑动
                     return;
-                } else if (absY > absX) {
-                    if (translation.y < 0) {
-                        //向上滑动
-                    }else{
-                        //向下滑动
-                    }
                 }
                 
                 CGFloat distance = location.y - self.startLocationY;
@@ -496,12 +482,14 @@
             case UIGestureRecognizerStateFailed:
             case UIGestureRecognizerStateCancelled:
             case UIGestureRecognizerStateEnded: {
-                CGFloat distance = location.y - self.startLocationY;
-                if ([self.delegate respondsToSelector:@selector(videoView:didPanWithDistance:isEnd:)]) {
-                    [self.delegate videoView:self didPanWithDistance:distance isEnd:YES];
+                if (self.scrollView.panGestureRecognizer.enabled == NO) {
+                    CGFloat distance = location.y - self.startLocationY;
+                    if ([self.delegate respondsToSelector:@selector(videoView:didPanWithDistance:isEnd:)]) {
+                        [self.delegate videoView:self didPanWithDistance:distance isEnd:YES];
+                    }
+                    
+                    self.scrollView.panGestureRecognizer.enabled = YES;
                 }
-                
-                self.scrollView.panGestureRecognizer.enabled = YES;
             }
                 break;
                 

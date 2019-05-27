@@ -229,8 +229,8 @@
 - (GKDYVideoItemButton *)praiseBtn {
     if (!_praiseBtn) {
         _praiseBtn = [GKDYVideoItemButton new];
-        [_praiseBtn setImage:[UIImage imageNamed:@"ss_icon_star_normal"] forState:UIControlStateNormal];
-        [_praiseBtn setImage:[UIImage imageNamed:@"ss_icon_star_selected"] forState:UIControlStateSelected];
+        [_praiseBtn setImage:[UIImage imageNamed:@"icon_home_like_before"] forState:UIControlStateNormal];
+        [_praiseBtn setImage:[UIImage imageNamed:@"icon_home_like_after"] forState:UIControlStateSelected];
         _praiseBtn.titleLabel.font = [UIFont systemFontOfSize:13.0f];
         [_praiseBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_praiseBtn addTarget:self action:@selector(praiseBtnClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -241,7 +241,7 @@
 - (GKDYVideoItemButton *)commentBtn {
     if (!_commentBtn) {
         _commentBtn = [GKDYVideoItemButton new];
-        [_commentBtn setImage:[UIImage imageNamed:@"ss_icon_comment"] forState:UIControlStateNormal];
+        [_commentBtn setImage:[UIImage imageNamed:@"icon_home_comment"] forState:UIControlStateNormal];
         _commentBtn.titleLabel.font = [UIFont systemFontOfSize:13.0f];
         [_commentBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_commentBtn addTarget:self action:@selector(commentBtnClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -252,7 +252,7 @@
 - (GKDYVideoItemButton *)shareBtn {
     if (!_shareBtn) {
         _shareBtn = [GKDYVideoItemButton new];
-        [_shareBtn setImage:[UIImage imageNamed:@"ss_icon_share"] forState:UIControlStateNormal];
+        [_shareBtn setImage:[UIImage imageNamed:@"icon_home_share"] forState:UIControlStateNormal];
         _shareBtn.titleLabel.font = [UIFont systemFontOfSize:13.0f];
         [_shareBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_shareBtn addTarget:self action:@selector(shareBtnClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -290,18 +290,9 @@
         _sliderView.sliderHeight = ADAPTATIONRATIO * 1.0f;
         _sliderView.maximumTrackTintColor = [UIColor clearColor];
         _sliderView.minimumTrackTintColor = [UIColor whiteColor];
-//        _sliderView.hidden = YES;
     }
     return _sliderView;
 }
-
-//- (UIActivityIndicatorView *)loadingView {
-//    if (!_loadingView) {
-//        _loadingView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-//        _loadingView.hidesWhenStopped = YES;
-//    }
-//    return _loadingView;
-//}
 
 - (UIButton *)playBtn {
     if (!_playBtn) {

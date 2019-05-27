@@ -25,7 +25,6 @@
 @property (nonatomic, strong) UIScrollView          *scrollView;
 
 @property (nonatomic, strong) NSArray               *titles;
-@property (nonatomic, strong) NSArray               *childVCs;
 
 @property (nonatomic, strong) UILabel               *titleView;
 
@@ -60,19 +59,24 @@
 
 #pragma mark - GKPageScrollViewDelegate
 - (BOOL)shouldLazyLoadListInPageScrollView:(GKPageScrollView *)pageScrollView {
-    return NO;
+    return YES;
 }
 
 - (UIView *)headerViewInPageScrollView:(GKPageScrollView *)pageScrollView {
     return self.headerView;
 }
 
-- (UIView *)pageViewInPageScrollView:(GKPageScrollView *)pageScrollView {
-    return self.pageView;
+- (UIView *)segmentedViewInPageScrollView:(GKPageScrollView *)pageScrollView {
+    return self.categoryView;
 }
 
-- (NSArray<id<GKPageListViewDelegate>> *)listViewsInPageScrollView:(GKPageScrollView *)pageScrollView {
-    return self.childVCs;
+- (NSInteger)numberOfListsInPageScrollView:(GKPageScrollView *)pageScrollView {
+    return self.titles.count;
+}
+
+- (id<GKPageListViewDelegate>)pageScrollView:(GKPageScrollView *)pageScrollView initListAtIndex:(NSInteger)index {
+    GKDYListViewController *listVC = [GKDYListViewController new];
+    return listVC;
 }
 
 - (void)mainTableViewDidScroll:(UIScrollView *)scrollView isMainCanScroll:(BOOL)isMainCanScroll {
@@ -97,9 +101,7 @@
 
 #pragma mark - JXCategoryViewDelegate
 - (void)categoryView:(JXCategoryBaseView *)categoryView didSelectedItemAtIndex:(NSInteger)index {
-    GKDYListViewController *listVC = self.childVCs[index];
     
-    [listVC refreshData];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -116,7 +118,6 @@
 - (GKPageScrollView *)pageScrollView {
     if (!_pageScrollView) {
         _pageScrollView = [[GKPageScrollView alloc] initWithDelegate:self];
-        _pageScrollView.isAllowListRefresh = YES;   // 允许列表刷新
     }
     return _pageScrollView;
 }
@@ -157,7 +158,7 @@
         lineView.lineStyle = JXCategoryIndicatorLineStyle_Normal;
         _categoryView.indicators = @[lineView];
         
-        _categoryView.contentScrollView = self.scrollView;
+        _categoryView.contentScrollView = self.pageScrollView.listContainerView.collectionView;
         
         // 添加分割线
         UIView *btmLineView = [UIView new];
@@ -168,47 +169,11 @@
     return _categoryView;
 }
 
-- (UIScrollView *)scrollView {
-    if (!_scrollView) {
-        CGFloat scrollW = SCREEN_WIDTH;
-        CGFloat scrollH = SCREEN_HEIGHT - NAVBAR_HEIGHT - 40.0f;
-        
-        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 40, scrollW, scrollH)];
-        _scrollView.pagingEnabled = YES;
-        _scrollView.bounces = NO;
-        _scrollView.delegate = self;
-        _scrollView.showsHorizontalScrollIndicator = NO;
-        
-        [self.childVCs enumerateObjectsUsingBlock:^(UIViewController *vc, NSUInteger idx, BOOL * _Nonnull stop) {
-            [self addChildViewController:vc];
-            [self->_scrollView addSubview:vc.view];
-            
-            vc.view.frame = CGRectMake(idx * scrollW, 0, scrollW, scrollH);
-        }];
-        _scrollView.contentSize = CGSizeMake(self.childVCs.count * scrollW, 0);
-        
-    }
-    return _scrollView;
-}
-
 - (NSArray *)titles {
     if (!_titles) {
         _titles = @[@"作品 129", @"动态 129", @"喜欢 591"];
     }
     return _titles;
-}
-
-- (NSArray *)childVCs {
-    if (!_childVCs) {
-        GKDYListViewController *publishVC = [GKDYListViewController new];
-        
-        GKDYListViewController *dynamicVC = [GKDYListViewController new];
-        
-        GKDYListViewController *lovedVC = [GKDYListViewController new];
-        
-        _childVCs = @[publishVC, dynamicVC, lovedVC];
-    }
-    return _childVCs;
 }
 
 - (UILabel *)titleView {

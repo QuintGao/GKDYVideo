@@ -39,6 +39,7 @@
 
 // 是否从某个控制器push过来
 @property (nonatomic, assign) BOOL                  isPushed;
+@property (nonatomic, assign) BOOL                  isRefreshing;
 
 @end
 
@@ -148,7 +149,7 @@
         [loadingView startLoading];
         
         @weakify(self);
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             @strongify(self);
             
             [loadingView stopLoading];
@@ -272,6 +273,8 @@
 }
 
 - (void)videoView:(GKDYVideoView *)videoView didPanWithDistance:(CGFloat)distance isEnd:(BOOL)isEnd {
+    if (self.isRefreshing) return;
+    
     if (isEnd) {
         [UIView animateWithDuration:0.25 animations:^{
             CGRect frame = self.titleView.frame;
@@ -291,11 +294,13 @@
         if (distance >= 2 * kTransitionCenter) { // 刷新
             self.searchBtn.hidden = YES;
             [self.refreshLoadingView startLoading];
+            self.isRefreshing = YES;
             
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.refreshLoadingView stopLoading];
                 self.loadingBgView.alpha = 0;
                 self.searchBtn.hidden = NO;
+                self.isRefreshing = NO;
             });
         }else {
             self.loadingBgView.alpha = 0;
@@ -326,8 +331,6 @@
             self.refreshView.alpha      = 1 - alpha;
             self.titleView.alpha        = 0;
             self.loadingBgView.alpha    = 1 - alpha;
-            
-            NSLog(@"%f", alpha);
             
             // 位置改变
             CGRect frame = self.titleView.frame;
