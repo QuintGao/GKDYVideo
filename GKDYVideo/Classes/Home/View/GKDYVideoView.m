@@ -91,7 +91,7 @@
                         if (self.videos.count == 0) {
                             [self setModels:list index:0];
                         }else {
-                            [self.videos addObjectsFromArray:list];
+                            [self resetModels:list];
                         }
                         [self.scrollView.mj_footer endRefreshing];
                     }else {
@@ -192,74 +192,10 @@
     }
 }
 
-// 添加播放数据后，重置index，防止出现错位的情况
-- (void)addModels:(NSArray *)models index:(NSInteger)index {
+- (void)resetModels:(NSArray *)models {
+//    [self.videos removeAllObjects];
+//    [self.videos addObjectsFromArray:models];
     [self.videos addObjectsFromArray:models];
-    
-    self.index = index;
-    self.currentPlayIndex = index;
-    
-    if (self.videos.count == 0) return;
-    
-    if (self.videos.count == 1) {
-        [self.ctrView removeFromSuperview];
-        [self.btmView removeFromSuperview];
-        
-        self.scrollView.contentSize = CGSizeMake(0, SCREEN_HEIGHT);
-        
-        self.topView.hidden = NO;
-        self.topView.model = self.videos.firstObject;
-        
-        [self playVideoFrom:self.topView];
-    }else if (self.videos.count == 2) {
-        [self.btmView removeFromSuperview];
-        
-        self.scrollView.contentSize = CGSizeMake(0, SCREEN_HEIGHT * 2);
-        
-        self.topView.hidden = NO;
-        self.ctrView.hidden = NO;
-        self.topView.model = self.videos.firstObject;
-        self.ctrView.model = self.videos.lastObject;
-        
-        if (index == 1) {
-            self.scrollView.contentOffset = CGPointMake(0, SCREEN_HEIGHT);
-            
-            [self playVideoFrom:self.ctrView];
-        }else {
-            [self playVideoFrom:self.topView];
-        }
-    }else {
-        self.topView.hidden = NO;
-        self.ctrView.hidden = NO;
-        self.btmView.hidden = NO;
-        
-        if (index == 0) {   // 如果是第一个，则显示上视图，且预加载中下视图
-            self.topView.model = self.videos[index];
-            self.ctrView.model = self.videos[index + 1];
-            self.btmView.model = self.videos[index + 2];
-            
-            // 播放第一个
-            [self playVideoFrom:self.topView];
-        }else if (index == self.videos.count - 1) { // 如果是最后一个，则显示最后视图，且预加载前两个
-            self.btmView.model = self.videos[index];
-            self.ctrView.model = self.videos[index - 1];
-            self.topView.model = self.videos[index - 2];
-            
-            // 显示最后一个
-            self.scrollView.contentOffset = CGPointMake(0, SCREEN_HEIGHT * 2);
-            // 播放最后一个
-            [self playVideoFrom:self.btmView];
-        }else { // 显示中间，播放中间，预加载上下
-            self.ctrView.model = self.videos[index];
-            self.topView.model = self.videos[index - 1];
-            self.btmView.model = self.videos[index + 1];
-            
-            // 显示中间
-            self.scrollView.contentOffset = CGPointMake(0, SCREEN_HEIGHT);
-            // 播放中间
-            [self playVideoFrom:self.ctrView];
-        }
-    }
 }
 
 - (void)pause {
@@ -463,8 +399,16 @@
                 CGFloat absX = fabs(translation.x);
                 CGFloat absY = fabs(translation.y);
                 
+                //        if (MAX(absX, absY) < 10)
+                //            return;
                 if (absX > absY ) { // 左右滑动
                     return;
+                } else if (absY > absX) {
+                    if (translation.y < 0) {
+                        //向上滑动
+                    }else{
+                        //向下滑动
+                    }
                 }
                 
                 CGFloat distance = location.y - self.startLocationY;
@@ -482,14 +426,12 @@
             case UIGestureRecognizerStateFailed:
             case UIGestureRecognizerStateCancelled:
             case UIGestureRecognizerStateEnded: {
-                if (self.scrollView.panGestureRecognizer.enabled == NO) {
-                    CGFloat distance = location.y - self.startLocationY;
-                    if ([self.delegate respondsToSelector:@selector(videoView:didPanWithDistance:isEnd:)]) {
-                        [self.delegate videoView:self didPanWithDistance:distance isEnd:YES];
-                    }
-                    
-                    self.scrollView.panGestureRecognizer.enabled = YES;
+                CGFloat distance = location.y - self.startLocationY;
+                if ([self.delegate respondsToSelector:@selector(videoView:didPanWithDistance:isEnd:)]) {
+                    [self.delegate videoView:self didPanWithDistance:distance isEnd:YES];
                 }
+                
+                self.scrollView.panGestureRecognizer.enabled = YES;
             }
                 break;
                 
