@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		60089113229BE0BD002A6D52 /* GKLikeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60089112229BE0BD002A6D52 /* GKLikeView.m */; };
 		60657EFA21C1110F000F97DA /* GKDYMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60657EF921C1110F000F97DA /* GKDYMainViewController.m */; };
 		60657EFC21C117F0000F97DA /* video1.json in Resources */ = {isa = PBXBuildFile; fileRef = 60657EFB21C117F0000F97DA /* video1.json */; };
 		60657F0221C12F87000F97DA /* UIImage+GKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 60657F0021C12F86000F97DA /* UIImage+GKCategory.m */; };
@@ -71,6 +72,8 @@
 
 /* Begin PBXFileReference section */
 		126D76C9517C38C3B7C81D53 /* Pods-GKDYVideo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GKDYVideo.release.xcconfig"; path = "Pods/Target Support Files/Pods-GKDYVideo/Pods-GKDYVideo.release.xcconfig"; sourceTree = "<group>"; };
+		60089111229BE0BD002A6D52 /* GKLikeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKLikeView.h; sourceTree = "<group>"; };
+		60089112229BE0BD002A6D52 /* GKLikeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKLikeView.m; sourceTree = "<group>"; };
 		60657EF821C1110F000F97DA /* GKDYMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYMainViewController.h; sourceTree = "<group>"; };
 		60657EF921C1110F000F97DA /* GKDYMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYMainViewController.m; sourceTree = "<group>"; };
 		60657EFB21C117F0000F97DA /* video1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = video1.json; sourceTree = "<group>"; };
@@ -195,6 +198,15 @@
 				126D76C9517C38C3B7C81D53 /* Pods-GKDYVideo.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		60089110229BDDB4002A6D52 /* GKLikeView */ = {
+			isa = PBXGroup;
+			children = (
+				60089111229BE0BD002A6D52 /* GKLikeView.h */,
+				60089112229BE0BD002A6D52 /* GKLikeView.m */,
+			);
+			path = GKLikeView;
 			sourceTree = "<group>";
 		};
 		60581BB821FC59EA001A3762 /* Main */ = {
@@ -412,6 +424,7 @@
 		79CC62C721573B2700101773 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				60089110229BDDB4002A6D52 /* GKLikeView */,
 				607CAB7022818FC20062AC0F /* GKLoadingView */,
 				607CAB6F22818FAE0062AC0F /* GKCategory */,
 				79E16A102274746200DE4967 /* GKSlidePopupView */,
@@ -718,6 +731,7 @@
 				606A77DD215DFCB100DC2F63 /* GKDYPersonalViewController.m in Sources */,
 				79CC62F52158E44300101773 /* GKNetworking.m in Sources */,
 				79CC62942157377400101773 /* AppDelegate.m in Sources */,
+				60089113229BE0BD002A6D52 /* GKLikeView.m in Sources */,
 				79CC62CB21573B4700101773 /* GKSliderView.m in Sources */,
 				79CC62D121573BFD00101773 /* GKDYHomeViewController.m in Sources */,
 				79CC62FB2158F2BB00101773 /* GKDYPersonalModel.m in Sources */,

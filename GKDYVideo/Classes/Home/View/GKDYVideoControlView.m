@@ -7,6 +7,7 @@
 //
 
 #import "GKDYVideoControlView.h"
+#import "GKLikeView.h"
 
 @interface GKDYVideoItemButton : UIButton
 
@@ -39,7 +40,8 @@
 @interface GKDYVideoControlView()
 
 @property (nonatomic, strong) UIImageView           *iconView;
-@property (nonatomic, strong) GKDYVideoItemButton   *praiseBtn;
+//@property (nonatomic, strong) GKDYVideoItemButton   *praiseBtn;
+@property (nonatomic, strong) GKLikeView            *likeView;
 @property (nonatomic, strong) GKDYVideoItemButton   *commentBtn;
 @property (nonatomic, strong) GKDYVideoItemButton   *shareBtn;
 
@@ -57,7 +59,7 @@
     if (self = [super init]) {
         [self addSubview:self.coverImgView];
         [self addSubview:self.iconView];
-        [self addSubview:self.praiseBtn];
+        [self addSubview:self.likeView];
         [self addSubview:self.commentBtn];
         [self addSubview:self.shareBtn];
         [self addSubview:self.nameLabel];
@@ -98,15 +100,15 @@
             make.height.mas_equalTo(ADAPTATIONRATIO * 110.0f);
         }];
         
-        [self.praiseBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self.likeView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.shareBtn);
             make.bottom.equalTo(self.commentBtn.mas_top).offset(-ADAPTATIONRATIO * 45.0f);
-            make.height.mas_equalTo(ADAPTATIONRATIO * 110.0f);
+            make.width.height.mas_equalTo(ADAPTATIONRATIO * 80.0f);
         }];
         
         [self.iconView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.shareBtn);
-            make.bottom.equalTo(self.praiseBtn.mas_top).offset(-ADAPTATIONRATIO * 70.0f);
+            make.bottom.equalTo(self.likeView.mas_top).offset(-ADAPTATIONRATIO * 70.0f);
             make.width.height.mas_equalTo(ADAPTATIONRATIO * 100.0f);
         }];
         
@@ -141,8 +143,8 @@
     
     self.contentLabel.text = model.title;
     
-    self.praiseBtn.selected = model.isAgree;
-    [self.praiseBtn setTitle:model.agree_num forState:UIControlStateNormal];
+//    self.praiseBtn.selected = model.isAgree;
+//    [self.praiseBtn setTitle:model.agree_num forState:UIControlStateNormal];
     [self.commentBtn setTitle:model.comment_num forState:UIControlStateNormal];
     [self.shareBtn setTitle:model.share_num forState:UIControlStateNormal];
 }
@@ -226,16 +228,11 @@
     return _iconView;
 }
 
-- (GKDYVideoItemButton *)praiseBtn {
-    if (!_praiseBtn) {
-        _praiseBtn = [GKDYVideoItemButton new];
-        [_praiseBtn setImage:[UIImage imageNamed:@"icon_home_like_before"] forState:UIControlStateNormal];
-        [_praiseBtn setImage:[UIImage imageNamed:@"icon_home_like_after"] forState:UIControlStateSelected];
-        _praiseBtn.titleLabel.font = [UIFont systemFontOfSize:13.0f];
-        [_praiseBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_praiseBtn addTarget:self action:@selector(praiseBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+- (GKLikeView *)likeView {
+    if (!_likeView) {
+        _likeView = [GKLikeView new];
     }
-    return _praiseBtn;
+    return _likeView;
 }
 
 - (GKDYVideoItemButton *)commentBtn {

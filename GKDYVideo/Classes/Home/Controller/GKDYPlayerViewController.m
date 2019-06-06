@@ -12,6 +12,7 @@
 #import "GKSlidePopupView.h"
 #import "GKDYCommentView.h"
 #import "GKBallLoadingView.h"
+#import "GKLikeView.h"
 
 #define kTitleViewY         (GK_SAVEAREA_TOP + 20.0f)
 // 过渡中心点
@@ -84,10 +85,6 @@
             make.top.equalTo(self.view).offset(GK_SAVEAREA_TOP + 20.0f);
             make.width.height.mas_equalTo(44.0f);
         }];
-        
-        if (!self.videos) {
-            self.videos = @[self.videoView];
-        }
         
         [self.videoView setModels:self.videos index:self.playIndex];
     }else {
@@ -171,7 +168,10 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    self.gk_pushDelegate = self;
+    if (!self.isPushed) {
+        self.gk_pushDelegate = self;
+    }
+    self.videoView.delegate = self;
     
     [self.videoView resume];
 }
@@ -179,7 +179,10 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    self.gk_pushDelegate = nil;
+    if (!self.isPushed) {
+        self.gk_pushDelegate = nil;
+    }
+    self.videoView.delegate = nil;
     
     // 停止播放
     [self.videoView pause];
@@ -356,7 +359,7 @@
 - (GKDYVideoView *)videoView {
     if (!_videoView) {
         _videoView = [[GKDYVideoView alloc] initWithVC:self isPushed:self.isPushed];
-        _videoView.delegate = self;
+//        _videoView.delegate = self;
     }
     return _videoView;
 }

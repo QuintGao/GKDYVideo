@@ -1,0 +1,22 @@
+//
+//  GKLikeView.h
+//  GKDYVideo
+//
+//  Created by gaokun on 2019/5/27.
+//  Copyright © 2019 QuintGao. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface GKLikeView : UIView
+
+@property (nonatomic, assign) CGFloat   duration;
+@property (nonatomic, strong) UIColor   *fillColor;
+
+- (void)startAnimIsLike:(BOOL)isLike;
+
+@end
+
+NS_ASSUME_NONNULL_END

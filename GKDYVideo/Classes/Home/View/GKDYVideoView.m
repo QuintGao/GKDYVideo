@@ -59,26 +59,6 @@
         
         // 不是push过来的，添加下拉刷新
         if (!isPushed) {
-//            [self.viewModel refreshNewListWithSuccess:^(NSArray * _Nonnull list) {
-//                [self setModels:list index:0];
-//            } failure:^(NSError * _Nonnull error) {
-//                NSLog(@"%@", error);
-//            }];
-            
-//            self.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-//                [self.videos removeAllObjects];
-//
-//                [self.viewModel refreshNewListWithSuccess:^(NSArray * _Nonnull list) {
-//                    [self setModels:list index:0];
-//                    [self.scrollView.mj_header endRefreshing];
-//                    [self.scrollView.mj_footer endRefreshing];
-//                } failure:^(NSError * _Nonnull error) {
-//                    NSLog(@"%@", error);
-//                    [self.scrollView.mj_header endRefreshing];
-//                    [self.scrollView.mj_footer endRefreshing];
-//                }];
-//            }];
-            
             self.scrollView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
                 [self.player pausePlay];
                 // 当播放索引为最后一个时才会触发下拉刷新
