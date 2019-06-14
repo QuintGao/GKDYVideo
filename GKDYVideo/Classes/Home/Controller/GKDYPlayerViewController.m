@@ -171,7 +171,6 @@
     if (!self.isPushed) {
         self.gk_pushDelegate = self;
     }
-    self.videoView.delegate = self;
     
     [self.videoView resume];
 }
@@ -182,7 +181,6 @@
     if (!self.isPushed) {
         self.gk_pushDelegate = nil;
     }
-    self.videoView.delegate = nil;
     
     // 停止播放
     [self.videoView pause];
@@ -359,7 +357,7 @@
 - (GKDYVideoView *)videoView {
     if (!_videoView) {
         _videoView = [[GKDYVideoView alloc] initWithVC:self isPushed:self.isPushed];
-//        _videoView.delegate = self;
+        _videoView.delegate = self;
     }
     return _videoView;
 }
