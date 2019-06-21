@@ -24,70 +24,71 @@
         
         self.likeBeforeImgView.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
         self.likeAfterImgView.frame  = CGRectMake(0, 0, frame.size.width, frame.size.height);
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
     }
     return self;
-}
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    
-//    self.likeBeforeImgView.frame = self.bounds;
-//    self.likeAfterImgView.frame  = self.bounds;
 }
 
 - (void)startAnimIsLike:(BOOL)isLike {
     self.likeBeforeImgView.userInteractionEnabled = NO;
     self.likeAfterImgView.userInteractionEnabled  = NO;
     
+    if (self.isLike == isLike) {
+        return;
+    }
+    
+    self.isLike = isLike;
+    
     if (isLike) {
-//        CGFloat length = 30;
-//        CGFloat duration = self.duration > 0 ? self.duration : 0.5f;
-//        for (NSInteger i = 0; i < 6; i++) {
-//            CAShapeLayer *layer = [CAShapeLayer layer];
-//            layer.position = self.likeBeforeImgView.center;
-//            layer.fillColor = self.fillColor ? self.fillColor.CGColor : [UIColor redColor].CGColor;
-//
-//            UIBezierPath *startPath = [UIBezierPath bezierPath];
-//            [startPath moveToPoint:CGPointMake(-2, -length)];
-//            [startPath addLineToPoint:CGPointMake(2, -length)];
-//            [startPath addLineToPoint:CGPointMake(0, 0)];
-//            layer.path = startPath.CGPath;
-//
-//            // 当x，y，z值为0时，代表在该轴方向上不进行旋转，当值为-1时，代表在该轴方向上进行逆时针旋转，当值为1时，代表在该轴方向上进行顺时针旋转
-//            layer.transform = CATransform3DMakeRotation(M_PI / 3.0f * i, 0, 0, 1.0);
-//            [self.layer addSublayer:layer];
-//
-//            CAAnimationGroup *group = [CAAnimationGroup animation];
-//            group.removedOnCompletion = YES;
-//            group.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-//            group.fillMode = kCAFillModeForwards;
-//            group.duration = duration;
-//
-//            CABasicAnimation *scaleAnim = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
-//            scaleAnim.fromValue = @(0.0f);
-//            scaleAnim.toValue = @(1.0f);
-//            scaleAnim.duration = duration * 0.2f;
-//
-//            UIBezierPath *endPath = [UIBezierPath bezierPath];
-//            [endPath moveToPoint:CGPointMake(-2, -length)];
-//            [endPath addLineToPoint:CGPointMake(2, -length)];
-//            [endPath addLineToPoint:CGPointMake(0, -length)];
-//
-//            CABasicAnimation *pathAnim = [CABasicAnimation animationWithKeyPath:@"path"];
-//            pathAnim.fromValue = (__bridge id)layer.path;
-//            pathAnim.toValue = (__bridge id)endPath.CGPath;
-//            pathAnim.beginTime = duration * 0.2f;
-//            pathAnim.duration = duration * 0.8f;
-//
-//            [group setAnimations:@[scaleAnim, pathAnim]];
-//            [layer addAnimation:group forKey:nil];
-//        }
+        CGFloat length = 30;
+        CGFloat duration = self.duration > 0 ? self.duration : 0.5f;
+        for (NSInteger i = 0; i < 6; i++) {
+            CAShapeLayer *layer = [CAShapeLayer layer];
+            layer.position = self.likeBeforeImgView.center;
+            layer.fillColor = self.fillColor ? self.fillColor.CGColor : [UIColor redColor].CGColor;
+
+            UIBezierPath *startPath = [UIBezierPath bezierPath];
+            [startPath moveToPoint:CGPointMake(-2, -length)];
+            [startPath addLineToPoint:CGPointMake(2, -length)];
+            [startPath addLineToPoint:CGPointMake(0, 0)];
+            layer.path = startPath.CGPath;
+
+            // 当x，y，z值为0时，代表在该轴方向上不进行旋转，当值为-1时，代表在该轴方向上进行逆时针旋转，当值为1时，代表在该轴方向上进行顺时针旋转
+            layer.transform = CATransform3DMakeRotation(M_PI / 3.0f * i, 0, 0, 1.0);
+            [self.layer addSublayer:layer];
+
+            CAAnimationGroup *group = [CAAnimationGroup animation];
+            group.removedOnCompletion = NO;
+            group.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+            group.fillMode = kCAFillModeForwards;
+            group.duration = duration;
+
+            CABasicAnimation *scaleAnim = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+            scaleAnim.fromValue = @(0.0f);
+            scaleAnim.toValue = @(1.0f);
+            scaleAnim.duration = duration * 0.2f;
+
+            UIBezierPath *endPath = [UIBezierPath bezierPath];
+            [endPath moveToPoint:CGPointMake(-2, -length)];
+            [endPath addLineToPoint:CGPointMake(2, -length)];
+            [endPath addLineToPoint:CGPointMake(0, -length)];
+
+            CABasicAnimation *pathAnim = [CABasicAnimation animationWithKeyPath:@"path"];
+            pathAnim.fromValue = (__bridge id)layer.path;
+            pathAnim.toValue = (__bridge id)endPath.CGPath;
+            pathAnim.beginTime = duration * 0.2f;
+            pathAnim.duration = duration * 0.8f;
+
+            [group setAnimations:@[scaleAnim, pathAnim]];
+            [layer addAnimation:group forKey:nil];
+        }
         self.likeAfterImgView.hidden = NO;
         self.likeAfterImgView.alpha = 0.0f;
         
         self.likeAfterImgView.transform = CGAffineTransformMakeScale(0.1f, 0.1f);
         
-        [UIView animateWithDuration:0.35 animations:^{
+        [UIView animateWithDuration:0.15 animations:^{
             self.likeAfterImgView.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
             self.likeAfterImgView.alpha = 1.0f;
             self.likeBeforeImgView.alpha = 0.0f;
@@ -97,32 +98,11 @@
             self.likeBeforeImgView.userInteractionEnabled = YES;
             self.likeAfterImgView.userInteractionEnabled = YES;
         }];
-//        self.likeAfterImgView.transform = CGAffineTransformScale(CGAffineTransformMakeRotation(-M_PI / 3 * 2), 0.5f, 0.5f);
-//        [UIView animateWithDuration:0.4f delay:0.2f usingSpringWithDamping:0.6f initialSpringVelocity:0.8f options:UIViewAnimationOptionCurveEaseIn animations:^{
-//            self.likeBeforeImgView.alpha = 0.0f;
-//            self.likeAfterImgView.alpha = 1.0f;
-//            self.likeAfterImgView.transform = CGAffineTransformScale(CGAffineTransformMakeRotation(0), 1.0f, 1.0f);
-//        } completion:^(BOOL finished) {
-//            self.likeAfterImgView.transform = CGAffineTransformIdentity;
-//            self.likeBeforeImgView.alpha = 1.0f;
-//            self.likeBeforeImgView.userInteractionEnabled = YES;
-//            self.likeAfterImgView.userInteractionEnabled = YES;
-//        }];
     }else {
         self.likeAfterImgView.alpha = 1.0f;
-        self.likeAfterImgView.transform = CGAffineTransformIdentity;
         self.likeAfterImgView.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
-//        [UIView animateWithDuration:10.35 delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^{
-//            self.likeAfterImgView.transform = CGAffineTransformMakeScale(0.1f, 0.1f);
-//        } completion:^(BOOL finished) {
-//            self.likeAfterImgView.transform = CGAffineTransformIdentity;
-//            self.likeAfterImgView.hidden = YES;
-//            self.likeBeforeImgView.userInteractionEnabled = YES;
-//            self.likeAfterImgView.userInteractionEnabled = YES;
-//        }];
-        
-        [UIView animateWithDuration:0.35 animations:^{
-            self.likeAfterImgView.transform = CGAffineTransformMakeScale(0.1f, 0.1f);
+        [UIView animateWithDuration:0.15 animations:^{
+            self.likeAfterImgView.transform = CGAffineTransformMakeScale(0.3f, 0.3f);
         } completion:^(BOOL finished) {
             self.likeAfterImgView.transform = CGAffineTransformIdentity;
             self.likeAfterImgView.hidden = YES;
@@ -143,13 +123,16 @@
     }
 }
 
+- (void)tapAction:(UITapGestureRecognizer *)tap {
+    NSLog(@"点赞。。。。");
+}
+
 #pragma mark - 懒加载
 - (UIImageView *)likeBeforeImgView {
     if (!_likeBeforeImgView) {
         _likeBeforeImgView = [UIImageView new];
-//        _likeBeforeImgView.contentMode = UIViewContentModeCenter;
         _likeBeforeImgView.image = [UIImage imageNamed:@"ic_home_like_before"];
-        _likeBeforeImgView.userInteractionEnabled = YES;
+//        _likeBeforeImgView.userInteractionEnabled = YES;
         _likeBeforeImgView.tag = 0;
         
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
@@ -161,9 +144,8 @@
 - (UIImageView *)likeAfterImgView {
     if (!_likeAfterImgView) {
         _likeAfterImgView = [UIImageView new];
-//        _likeAfterImgView.contentMode = UIViewContentModeCenter;
         _likeAfterImgView.image = [UIImage imageNamed:@"ic_home_like_after"];
-        _likeAfterImgView.userInteractionEnabled = YES;
+//        _likeAfterImgView.userInteractionEnabled = YES;
         _likeAfterImgView.tag = 1;
         _likeAfterImgView.hidden = YES;
         

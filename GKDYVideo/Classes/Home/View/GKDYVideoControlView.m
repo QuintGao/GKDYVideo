@@ -40,7 +40,6 @@
 @interface GKDYVideoControlView()
 
 @property (nonatomic, strong) UIImageView           *iconView;
-//@property (nonatomic, strong) GKDYVideoItemButton   *praiseBtn;
 @property (nonatomic, strong) GKLikeView            *likeView;
 @property (nonatomic, strong) GKDYVideoItemButton   *commentBtn;
 @property (nonatomic, strong) GKDYVideoItemButton   *shareBtn;
@@ -48,7 +47,6 @@
 @property (nonatomic, strong) UILabel               *nameLabel;
 @property (nonatomic, strong) UILabel               *contentLabel;
 
-//@property (nonatomic, strong) UIActivityIndicatorView   *loadingView;
 @property (nonatomic, strong) UIButton                  *playBtn;
 
 @end
@@ -66,7 +64,6 @@
         [self addSubview:self.contentLabel];
         [self addSubview:self.sliderView];
         
-//        [self addSubview:self.loadingView];
         [self addSubview:self.playBtn];
         
         [self.coverImgView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -90,21 +87,17 @@
         
         [self.shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self).offset(-ADAPTATIONRATIO * 30.0f);
-            make.bottom.equalTo(self.nameLabel.mas_top).offset(-ADAPTATIONRATIO * 50.0f);
-            make.height.mas_equalTo(ADAPTATIONRATIO * 110.0f);
+            make.bottom.equalTo(self.sliderView.mas_top).offset(-ADAPTATIONRATIO * 100.0f);
+            make.width.height.mas_equalTo(ADAPTATIONRATIO * 110.0f);
         }];
         
         [self.commentBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.shareBtn);
             make.bottom.equalTo(self.shareBtn.mas_top).offset(-ADAPTATIONRATIO * 45.0f);
-            make.height.mas_equalTo(ADAPTATIONRATIO * 110.0f);
+            make.width.height.mas_equalTo(ADAPTATIONRATIO * 110.0f);
         }];
         
-        [self.likeView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.shareBtn);
-            make.bottom.equalTo(self.commentBtn.mas_top).offset(-ADAPTATIONRATIO * 45.0f);
-            make.width.height.mas_equalTo(ADAPTATIONRATIO * 80.0f);
-        }];
+        self.likeView.frame = CGRectMake(SCREEN_WIDTH - ADAPTATIONRATIO * 125.0f, SCREEN_HEIGHT - TABBAR_HEIGHT - ADAPTATIONRATIO * 520.0f, ADAPTATIONRATIO * 80.0f, ADAPTATIONRATIO * 80.0f);
         
         [self.iconView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.shareBtn);
@@ -112,16 +105,9 @@
             make.width.height.mas_equalTo(ADAPTATIONRATIO * 100.0f);
         }];
         
-//        [self.loadingView mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.center.equalTo(self);
-//        }];
-        
         [self.playBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.center.equalTo(self);
         }];
-        
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(controlViewDidClick:)];
-        [self addGestureRecognizer:tap];
     }
     return self;
 }
@@ -155,12 +141,10 @@
 }
 
 - (void)startLoading {
-//    [self.loadingView startAnimating];
     [self.sliderView showLineLoading];
 }
 
 - (void)stopLoading {
-//    [self.loadingView stopAnimating];
     [self.sliderView hideLineLoading];
 }
 
@@ -172,8 +156,16 @@
     self.playBtn.hidden = YES;
 }
 
+- (void)showLikeAnimation {
+    [self.likeView startAnimIsLike:YES];
+}
+
+- (void)showUnLikeAnimation {
+    [self.likeView startAnimIsLike:NO];
+}
+
 #pragma mark - Action
-- (void)controlViewDidClick:(id)sender {
+- (void)controlViewDidClick {
     if ([self.delegate respondsToSelector:@selector(controlViewDidClickSelf:)]) {
         [self.delegate controlViewDidClickSelf:self];
     }
@@ -200,6 +192,22 @@
 - (void)shareBtnClick:(id)sender {
     if ([self.delegate respondsToSelector:@selector(controlViewDidClickShare:)]) {
         [self.delegate controlViewDidClickShare:self];
+    }
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+    
+    NSTimeInterval delayTime = 0.3f;
+    
+    if (touch.tapCount <= 1) {
+        [self performSelector:@selector(controlViewDidClick) withObject:nil afterDelay:delayTime];
+    }else {
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(controlViewDidClick) object:nil];
+        
+        if ([self.delegate respondsToSelector:@selector(controlView:touchesBegan:withEvent:)]) {
+            [self.delegate controlView:self touchesBegan:touches withEvent:event];
+        }
     }
 }
 
@@ -230,7 +238,7 @@
 
 - (GKLikeView *)likeView {
     if (!_likeView) {
-        _likeView = [GKLikeView new];
+        _likeView = [[GKLikeView alloc] initWithFrame:CGRectMake(0, 0, ADAPTATIONRATIO * 80.0f, ADAPTATIONRATIO * 80.0f)];
     }
     return _likeView;
 }

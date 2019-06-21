@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat   duration;
 @property (nonatomic, strong) UIColor   *fillColor;
 
+@property (nonatomic, assign) BOOL      isLike;
+
 - (void)startAnimIsLike:(BOOL)isLike;
 
 @end

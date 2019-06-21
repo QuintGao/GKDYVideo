@@ -8,6 +8,7 @@
 
 #import "GKDYVideoView.h"
 #import "GKDYVideoPlayer.h"
+#import "GKDoubleLikeView.h"
 
 @interface GKDYVideoView()<UIScrollViewDelegate, GKDYVideoPlayerDelegate, GKDYVideoControlViewDelegate, UIGestureRecognizerDelegate>
 
@@ -42,6 +43,8 @@
 @property (nonatomic, strong) UIPanGestureRecognizer    *panGesture;
 // 开始移动时的位置
 @property (nonatomic, assign) CGFloat                   startLocationY;
+
+@property (nonatomic, strong) GKDoubleLikeView          *doubleLikeView;
 
 @end
 
@@ -374,24 +377,8 @@
             }
                 break;
             case UIGestureRecognizerStateChanged: {
-                CGPoint translation = [panGesture translationInView:panGesture.view];
-                
-                CGFloat absX = fabs(translation.x);
-                CGFloat absY = fabs(translation.y);
-                
-                //        if (MAX(absX, absY) < 10)
-                //            return;
-                if (absX > absY ) { // 左右滑动
-                    return;
-                } else if (absY > absX) {
-                    if (translation.y < 0) {
-                        //向上滑动
-                    }else{
-                        //向下滑动
-                    }
-                }
-                
-                CGFloat distance = location.y - self.startLocationY;
+                // 这里取整是解决上滑时可能出现的distance > 0的情况
+                CGFloat distance = ceil(location.y) - ceil(self.startLocationY);
                 if (distance > 0) { // 只要distance>0且没松手 就认为是下滑
                     self.scrollView.panGestureRecognizer.enabled = NO;
                 }
@@ -406,12 +393,14 @@
             case UIGestureRecognizerStateFailed:
             case UIGestureRecognizerStateCancelled:
             case UIGestureRecognizerStateEnded: {
-                CGFloat distance = location.y - self.startLocationY;
-                if ([self.delegate respondsToSelector:@selector(videoView:didPanWithDistance:isEnd:)]) {
-                    [self.delegate videoView:self didPanWithDistance:distance isEnd:YES];
+                if (self.scrollView.panGestureRecognizer.enabled == NO) {
+                    CGFloat distance = location.y - self.startLocationY;
+                    if ([self.delegate respondsToSelector:@selector(videoView:didPanWithDistance:isEnd:)]) {
+                        [self.delegate videoView:self didPanWithDistance:distance isEnd:YES];
+                    }
+                    
+                    self.scrollView.panGestureRecognizer.enabled = YES;
                 }
-                
-                self.scrollView.panGestureRecognizer.enabled = YES;
             }
                 break;
                 
@@ -481,6 +470,12 @@
     }else {
         [self.player resumePlay];
     }
+}
+
+- (void)controlView:(GKDYVideoControlView *)controlView touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.doubleLikeView createAnimationWithTouch:touches withEvent:event];
+    
+    [controlView showLikeAnimation];
 }
 
 - (void)controlViewDidClickIcon:(GKDYVideoControlView *)controlView {
@@ -581,6 +576,13 @@
         _panGesture.delegate = self;
     }
     return _panGesture;
+}
+
+- (GKDoubleLikeView *)doubleLikeView {
+    if (!_doubleLikeView) {
+        _doubleLikeView = [GKDoubleLikeView new];
+    }
+    return _doubleLikeView;
 }
 
 @end

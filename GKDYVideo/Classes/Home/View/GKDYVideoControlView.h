@@ -26,6 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)controlViewDidClickShare:(GKDYVideoControlView *)controlView;
 
+- (void)controlView:(GKDYVideoControlView *)controlView touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event;
+
 @end
 
 @interface GKDYVideoControlView : UIView
@@ -46,6 +48,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showPlayBtn;
 - (void)hidePlayBtn;
+
+- (void)showLikeAnimation;
+- (void)showUnLikeAnimation;
 
 @end
 
