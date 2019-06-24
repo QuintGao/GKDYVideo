@@ -26,6 +26,7 @@
         self.likeAfterImgView.frame  = CGRectMake(0, 0, frame.size.width, frame.size.height);
         
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+        [self addGestureRecognizer:tap];
     }
     return self;
 }
