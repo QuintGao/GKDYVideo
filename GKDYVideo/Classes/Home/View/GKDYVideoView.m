@@ -81,7 +81,6 @@
                         [self.scrollView.mj_footer endRefreshingWithNoMoreData];
                     }
                 } failure:^(NSError * _Nonnull error) {
-                    NSLog(@"%@", error);
                     self.isRefreshMore = NO;
                     [self.scrollView.mj_footer endRefreshingWithNoMoreData];
                 }];
@@ -176,8 +175,6 @@
 }
 
 - (void)resetModels:(NSArray *)models {
-//    [self.videos removeAllObjects];
-//    [self.videos addObjectsFromArray:models];
     [self.videos addObjectsFromArray:models];
 }
 
@@ -424,10 +421,9 @@
             
             break;
         case GKDYVideoPlayerStatusPrepared:   // 准备播放
-            
+            [self.currentPlayView startLoading];
             break;
         case GKDYVideoPlayerStatusLoading: {     // 加载中
-            [self.currentPlayView startLoading];
             [self.currentPlayView hidePlayBtn];
         }
             break;

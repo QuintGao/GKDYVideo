@@ -12,12 +12,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GKLikeView : UIView
 
-@property (nonatomic, assign) CGFloat   duration;
-@property (nonatomic, strong) UIColor   *fillColor;
-
 @property (nonatomic, assign) BOOL      isLike;
 
-- (void)startAnimIsLike:(BOOL)isLike;
+- (void)startAnimationWithIsLike:(BOOL)isLike;
+
+- (void)setupLikeState:(BOOL)isLike;
+
+- (void)setupLikeCount:(NSString *)count;
 
 @end
 

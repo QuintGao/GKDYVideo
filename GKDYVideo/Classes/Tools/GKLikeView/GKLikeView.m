@@ -13,41 +13,71 @@
 @property (nonatomic, strong) UIImageView   *likeBeforeImgView;
 @property (nonatomic, strong) UIImageView   *likeAfterImgView;
 
+@property (nonatomic, strong) UILabel       *countLabel;
+
 @end
 
 @implementation GKLikeView
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    if (self = [super initWithFrame:frame]) {
+- (instancetype)init {
+    if (self = [super init]) {
         [self addSubview:self.likeBeforeImgView];
         [self addSubview:self.likeAfterImgView];
+        [self addSubview:self.countLabel];
         
-        self.likeBeforeImgView.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
-        self.likeAfterImgView.frame  = CGRectMake(0, 0, frame.size.width, frame.size.height);
+        CGFloat imgWH = ADAPTATIONRATIO * 80.0f;
+        self.likeBeforeImgView.frame = CGRectMake(0, 0, imgWH, imgWH);
+        self.likeAfterImgView.frame  = CGRectMake(0, 0, imgWH, imgWH);
         
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
-        [self addGestureRecognizer:tap];
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+        [self addGestureRecognizer:tapGesture];
     }
     return self;
 }
 
-- (void)startAnimIsLike:(BOOL)isLike {
-    self.likeBeforeImgView.userInteractionEnabled = NO;
-    self.likeAfterImgView.userInteractionEnabled  = NO;
+- (void)layoutSubviews {
+    [super layoutSubviews];
     
-    if (self.isLike == isLike) {
-        return;
+    CGPoint imgCenter = self.likeBeforeImgView.center;
+    imgCenter.x = self.frame.size.width / 2;
+    self.likeBeforeImgView.center = imgCenter;
+    self.likeAfterImgView.center  = imgCenter;
+    
+    [self.countLabel sizeToFit];
+    
+    CGFloat countX = (self.frame.size.width - self.countLabel.frame.size.width) / 2;
+    CGFloat countY = self.frame.size.height - self.countLabel.frame.size.height;
+    self.countLabel.frame = CGRectMake(countX, countY, self.countLabel.frame.size.width, self.countLabel.frame.size.height);
+}
+
+- (void)setupLikeState:(BOOL)isLike {
+    self.isLike = isLike;
+    
+    if (isLike) {
+        self.likeAfterImgView.hidden = NO;
+    }else {
+        self.likeAfterImgView.hidden = YES;
     }
+}
+
+- (void)setupLikeCount:(NSString *)count {
+    self.countLabel.text = count;
+    
+    [self layoutSubviews];
+}
+
+- (void)startAnimationWithIsLike:(BOOL)isLike {
+    if (self.isLike == isLike) return;
     
     self.isLike = isLike;
     
     if (isLike) {
-        CGFloat length = 30;
-        CGFloat duration = self.duration > 0 ? self.duration : 0.5f;
+        CGFloat length      = 30;
+        CGFloat duration    = 0.5f;
         for (NSInteger i = 0; i < 6; i++) {
             CAShapeLayer *layer = [CAShapeLayer layer];
             layer.position = self.likeBeforeImgView.center;
-            layer.fillColor = self.fillColor ? self.fillColor.CGColor : [UIColor redColor].CGColor;
+            layer.fillColor = GKColorRGB(232, 50, 85).CGColor;
 
             UIBezierPath *startPath = [UIBezierPath bezierPath];
             [startPath moveToPoint:CGPointMake(-2, -length)];
@@ -55,7 +85,6 @@
             [startPath addLineToPoint:CGPointMake(0, 0)];
             layer.path = startPath.CGPath;
 
-            // 当x，y，z值为0时，代表在该轴方向上不进行旋转，当值为-1时，代表在该轴方向上进行逆时针旋转，当值为1时，代表在该轴方向上进行顺时针旋转
             layer.transform = CATransform3DMakeRotation(M_PI / 3.0f * i, 0, 0, 1.0);
             [self.layer addSublayer:layer];
 
@@ -96,8 +125,6 @@
         } completion:^(BOOL finished) {
             self.likeAfterImgView.transform = CGAffineTransformIdentity;
             self.likeBeforeImgView.alpha = 1.0f;
-            self.likeBeforeImgView.userInteractionEnabled = YES;
-            self.likeAfterImgView.userInteractionEnabled = YES;
         }];
     }else {
         self.likeAfterImgView.alpha = 1.0f;
@@ -107,25 +134,17 @@
         } completion:^(BOOL finished) {
             self.likeAfterImgView.transform = CGAffineTransformIdentity;
             self.likeAfterImgView.hidden = YES;
-            self.likeBeforeImgView.userInteractionEnabled = YES;
-            self.likeAfterImgView.userInteractionEnabled = YES;
         }];
     }
 }
 
-#pragma mark - Gesture
-- (void)handleTapGesture:(UITapGestureRecognizer *)tap {
-    UIView *tapView = tap.view;
-    
-    if (tapView.tag == 0) { // 点赞
-        [self startAnimIsLike:YES];
-    }else if (tapView.tag == 1) { // 取消点赞
-        [self startAnimIsLike:NO];
-    }
-}
-
+#pragma mark - UITapGestureRecognizer
 - (void)tapAction:(UITapGestureRecognizer *)tap {
-    NSLog(@"点赞。。。。");
+    if (self.isLike) {
+        [self startAnimationWithIsLike:NO];
+    }else {
+        [self startAnimationWithIsLike:YES];
+    }
 }
 
 #pragma mark - 懒加载
@@ -133,11 +152,6 @@
     if (!_likeBeforeImgView) {
         _likeBeforeImgView = [UIImageView new];
         _likeBeforeImgView.image = [UIImage imageNamed:@"ic_home_like_before"];
-//        _likeBeforeImgView.userInteractionEnabled = YES;
-        _likeBeforeImgView.tag = 0;
-        
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
-        [_likeBeforeImgView addGestureRecognizer:tap];
     }
     return _likeBeforeImgView;
 }
@@ -146,14 +160,17 @@
     if (!_likeAfterImgView) {
         _likeAfterImgView = [UIImageView new];
         _likeAfterImgView.image = [UIImage imageNamed:@"ic_home_like_after"];
-//        _likeAfterImgView.userInteractionEnabled = YES;
-        _likeAfterImgView.tag = 1;
-        _likeAfterImgView.hidden = YES;
-        
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
-        [_likeAfterImgView addGestureRecognizer:tap];
     }
     return _likeAfterImgView;
+}
+
+- (UILabel *)countLabel {
+    if (!_countLabel) {
+        _countLabel = [UILabel new];
+        _countLabel.textColor = [UIColor whiteColor];
+        _countLabel.font = [UIFont systemFontOfSize:13.0f];
+    }
+    return _countLabel;
 }
 
 @end

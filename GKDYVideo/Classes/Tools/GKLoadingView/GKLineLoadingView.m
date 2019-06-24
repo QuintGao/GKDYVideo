@@ -8,7 +8,7 @@
 
 #import "GKLineLoadingView.h"
 
-#define GKLineLoadingDuration  0.25
+#define GKLineLoadingDuration  0.75
 #define GKLineLoadingLineColor [UIColor whiteColor]
 
 @implementation GKLineLoadingView

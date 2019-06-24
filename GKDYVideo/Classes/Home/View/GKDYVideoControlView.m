@@ -97,7 +97,11 @@
             make.width.height.mas_equalTo(ADAPTATIONRATIO * 110.0f);
         }];
         
-        self.likeView.frame = CGRectMake(SCREEN_WIDTH - ADAPTATIONRATIO * 125.0f, SCREEN_HEIGHT - TABBAR_HEIGHT - ADAPTATIONRATIO * 520.0f, ADAPTATIONRATIO * 80.0f, ADAPTATIONRATIO * 80.0f);
+        [self.likeView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.shareBtn);
+            make.bottom.equalTo(self.commentBtn.mas_top).offset(-ADAPTATIONRATIO * 45.0f);
+            make.width.height.mas_equalTo(ADAPTATIONRATIO * 110.0f);
+        }];
         
         [self.iconView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.shareBtn);
@@ -129,8 +133,9 @@
     
     self.contentLabel.text = model.title;
     
-//    self.praiseBtn.selected = model.isAgree;
-//    [self.praiseBtn setTitle:model.agree_num forState:UIControlStateNormal];
+    [self.likeView setupLikeState:model.isAgree];
+    [self.likeView setupLikeCount:model.agree_num];
+    
     [self.commentBtn setTitle:model.comment_num forState:UIControlStateNormal];
     [self.shareBtn setTitle:model.share_num forState:UIControlStateNormal];
 }
@@ -157,11 +162,11 @@
 }
 
 - (void)showLikeAnimation {
-    [self.likeView startAnimIsLike:YES];
+    [self.likeView startAnimationWithIsLike:YES];
 }
 
 - (void)showUnLikeAnimation {
-    [self.likeView startAnimIsLike:NO];
+    [self.likeView startAnimationWithIsLike:NO];
 }
 
 #pragma mark - Action
@@ -238,7 +243,7 @@
 
 - (GKLikeView *)likeView {
     if (!_likeView) {
-        _likeView = [[GKLikeView alloc] initWithFrame:CGRectMake(0, 0, ADAPTATIONRATIO * 80.0f, ADAPTATIONRATIO * 80.0f)];
+        _likeView = [GKLikeView new];
     }
     return _likeView;
 }
