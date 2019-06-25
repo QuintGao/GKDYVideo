@@ -22,7 +22,11 @@ iOS仿抖音短视频
 
 ## 说明
 简书：[QuintGao](https://www.jianshu.com/u/ba61bbfc87e8)
+
 [iOS仿抖音—左右滑动切换效果](https://www.jianshu.com/p/9c3670e4a533)
+
 [iOS仿抖音—上下滑动播放视频](https://www.jianshu.com/p/36a4e57f1a53)
+
 [iOS仿抖音—评论视图滑动消失](https://www.jianshu.com/p/8a1f174a91e5)
+
 [iOS仿抖音—加载、点赞动画效果](https://www.jianshu.com/p/a5f08098efb0)
