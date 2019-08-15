@@ -10,8 +10,6 @@
 
 @interface GKDYListCollectionViewCell()
 
-@property (nonatomic, strong) UIImageView   *coverImgView;
-
 @property (nonatomic, strong) UIButton      *starBtn;
 
 @end

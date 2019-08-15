@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		60089113229BE0BD002A6D52 /* GKLikeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60089112229BE0BD002A6D52 /* GKLikeView.m */; };
+		600E01D122CC897700723B19 /* GKDYVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 600E01D022CC897700723B19 /* GKDYVideoViewController.m */; };
+		601140C322ED6CAD0014EF50 /* awemes.json in Resources */ = {isa = PBXBuildFile; fileRef = 601140C222ED6CAC0014EF50 /* awemes.json */; };
+		601140C622EFD0450014EF50 /* GKDYScaleVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 601140C522EFD0450014EF50 /* GKDYScaleVideoView.m */; };
+		6013272E22F1BF0700C055B3 /* GKDYPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6013272C22F1BF0700C055B3 /* GKDYPanGestureRecognizer.m */; };
 		60657EFA21C1110F000F97DA /* GKDYMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60657EF921C1110F000F97DA /* GKDYMainViewController.m */; };
 		60657EFC21C117F0000F97DA /* video1.json in Resources */ = {isa = PBXBuildFile; fileRef = 60657EFB21C117F0000F97DA /* video1.json */; };
 		60657F0221C12F87000F97DA /* UIImage+GKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 60657F0021C12F86000F97DA /* UIImage+GKCategory.m */; };
@@ -75,6 +79,13 @@
 		126D76C9517C38C3B7C81D53 /* Pods-GKDYVideo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GKDYVideo.release.xcconfig"; path = "Pods/Target Support Files/Pods-GKDYVideo/Pods-GKDYVideo.release.xcconfig"; sourceTree = "<group>"; };
 		60089111229BE0BD002A6D52 /* GKLikeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKLikeView.h; sourceTree = "<group>"; };
 		60089112229BE0BD002A6D52 /* GKLikeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKLikeView.m; sourceTree = "<group>"; };
+		600E01CF22CC897700723B19 /* GKDYVideoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYVideoViewController.h; sourceTree = "<group>"; };
+		600E01D022CC897700723B19 /* GKDYVideoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYVideoViewController.m; sourceTree = "<group>"; };
+		601140C222ED6CAC0014EF50 /* awemes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awemes.json; sourceTree = "<group>"; };
+		601140C422EFD0450014EF50 /* GKDYScaleVideoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYScaleVideoView.h; sourceTree = "<group>"; };
+		601140C522EFD0450014EF50 /* GKDYScaleVideoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYScaleVideoView.m; sourceTree = "<group>"; };
+		6013272C22F1BF0700C055B3 /* GKDYPanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKDYPanGestureRecognizer.m; sourceTree = "<group>"; };
+		6013272D22F1BF0700C055B3 /* GKDYPanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKDYPanGestureRecognizer.h; sourceTree = "<group>"; };
 		60657EF821C1110F000F97DA /* GKDYMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYMainViewController.h; sourceTree = "<group>"; };
 		60657EF921C1110F000F97DA /* GKDYMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYMainViewController.m; sourceTree = "<group>"; };
 		60657EFB21C117F0000F97DA /* video1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = video1.json; sourceTree = "<group>"; };
@@ -340,6 +351,7 @@
 				7988CB18227C4BAA00023A2B /* video4.json */,
 				7988CB16227C4BAA00023A2B /* video5.json */,
 				7988CB17227C4BAA00023A2B /* video6.json */,
+				601140C222ED6CAC0014EF50 /* awemes.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -464,6 +476,8 @@
 				60C6E0A121C345BD00C12F93 /* GKDYListViewController.m */,
 				7988CB1D227C9DB900023A2B /* GKDYShootViewController.h */,
 				7988CB1E227C9DB900023A2B /* GKDYShootViewController.m */,
+				600E01CF22CC897700723B19 /* GKDYVideoViewController.h */,
+				600E01D022CC897700723B19 /* GKDYVideoViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -475,6 +489,8 @@
 				79CC62E421573FC500101773 /* GKDYScrollView.m */,
 				79CC62E62157401E00101773 /* GKDYVideoView.h */,
 				79CC62E72157401E00101773 /* GKDYVideoView.m */,
+				601140C422EFD0450014EF50 /* GKDYScaleVideoView.h */,
+				601140C522EFD0450014EF50 /* GKDYScaleVideoView.m */,
 				79CC62E92157402800101773 /* GKDYVideoControlView.h */,
 				79CC62EA2157402800101773 /* GKDYVideoControlView.m */,
 				60C6E09E21C33F7900C12F93 /* GKDYHeaderView.h */,
@@ -483,6 +499,8 @@
 				60C6E0A421C345E100C12F93 /* GKDYListCollectionViewCell.m */,
 				79E16A142279A63200DE4967 /* GKDYCommentView.h */,
 				79E16A152279A63200DE4967 /* GKDYCommentView.m */,
+				6013272D22F1BF0700C055B3 /* GKDYPanGestureRecognizer.h */,
+				6013272C22F1BF0700C055B3 /* GKDYPanGestureRecognizer.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -641,6 +659,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7988CB1A227C4BAA00023A2B /* video6.json in Resources */,
+				601140C322ED6CAD0014EF50 /* awemes.json in Resources */,
 				606A77DF215E0B3000DC2F63 /* README.md in Resources */,
 				60657EFC21C117F0000F97DA /* video1.json in Resources */,
 				60C6E0B021CC8A9F00C12F93 /* video2.json in Resources */,
@@ -720,6 +739,8 @@
 				60C6E0A521C345E100C12F93 /* GKDYListCollectionViewCell.m in Sources */,
 				607CAB7F2282A8CF0062AC0F /* GKDYAttentViewController.m in Sources */,
 				607CAB852282A8E00062AC0F /* GKDYMineViewController.m in Sources */,
+				600E01D122CC897700723B19 /* GKDYVideoViewController.m in Sources */,
+				601140C622EFD0450014EF50 /* GKDYScaleVideoView.m in Sources */,
 				607CAB822282A8D80062AC0F /* GKDYMessageViewController.m in Sources */,
 				60657F0221C12F87000F97DA /* UIImage+GKCategory.m in Sources */,
 				79CC62D721573C2C00101773 /* GKDYPlayerViewController.m in Sources */,
@@ -735,6 +756,7 @@
 				79DD87CE226C268D008FB903 /* GKDYNavigationController.m in Sources */,
 				606A77DD215DFCB100DC2F63 /* GKDYPersonalViewController.m in Sources */,
 				79CC62F52158E44300101773 /* GKNetworking.m in Sources */,
+				6013272E22F1BF0700C055B3 /* GKDYPanGestureRecognizer.m in Sources */,
 				79CC62942157377400101773 /* AppDelegate.m in Sources */,
 				60089113229BE0BD002A6D52 /* GKLikeView.m in Sources */,
 				79CC62CB21573B4700101773 /* GKSliderView.m in Sources */,

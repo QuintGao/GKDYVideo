@@ -12,9 +12,13 @@
 #import <GKPageScrollView/GKPageScrollView.h>
 #import <JXCategoryView/JXCategoryView.h>
 #import "GKDYHeaderView.h"
-#import "GKDYListViewController.h"
+#import "GKDYVideoViewController.h"
+#import "GKDYListCollectionViewCell.h"
+#import "GKDYScaleVideoView.h"
+#import "GKDYCommentView.h"
+#import "GKSlidePopupView.h"
 
-@interface GKDYPersonalViewController ()<GKPageScrollViewDelegate, JXCategoryViewDelegate, UIScrollViewDelegate>
+@interface GKDYPersonalViewController ()<GKPageScrollViewDelegate, JXCategoryViewDelegate, UIScrollViewDelegate, GKDYVideoViewDelegate>
 
 @property (nonatomic, strong) GKPageScrollView      *pageScrollView;
 
@@ -27,6 +31,8 @@
 @property (nonatomic, strong) NSArray               *titles;
 
 @property (nonatomic, strong) UILabel               *titleView;
+
+@property (nonatomic, weak) GKDYScaleVideoView      *scaleView;
 
 @end
 
@@ -52,9 +58,37 @@
     self.headerView.model = self.model;
     
     [self.pageScrollView reloadData];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if (self.scaleView) {
+        [self.view bringSubviewToFront:self.scaleView];
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     
     // 默认点击第一个
     [self categoryView:self.categoryView didSelectedItemAtIndex:0];
+    
+    [self.scaleView.videoView resume];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self.scaleView.videoView pause];
+}
+
+- (void)showVideoVCWithVideos:(NSArray *)videos index:(NSInteger)index {
+    GKDYScaleVideoView *scaleView = [[GKDYScaleVideoView alloc] initWithVC:self videos:videos index:index];
+    scaleView.videoView.delegate = self;
+    [scaleView show];
+    
+    self.scaleView = scaleView;
 }
 
 #pragma mark - GKPageScrollViewDelegate
@@ -76,6 +110,13 @@
 
 - (id<GKPageListViewDelegate>)pageScrollView:(GKPageScrollView *)pageScrollView initListAtIndex:(NSInteger)index {
     GKDYListViewController *listVC = [GKDYListViewController new];
+    
+    @weakify(self);
+    listVC.itemClickBlock = ^(NSArray * _Nonnull videos, NSInteger index) {
+        @strongify(self);
+        [self showVideoVCWithVideos:videos index:index];
+    };
+    
     [self addChildViewController:listVC];
     return listVC;
 }
@@ -102,7 +143,7 @@
 
 #pragma mark - JXCategoryViewDelegate
 - (void)categoryView:(JXCategoryBaseView *)categoryView didSelectedItemAtIndex:(NSInteger)index {
-    
+    self.currentListVC = (GKDYListViewController *)self.pageScrollView.validListDict[@(index)];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -114,6 +155,22 @@
     [self.pageScrollView horizonScrollViewDidEndedScroll];
 }
 
+#pragma mark - GKDYVideoViewDelegate
+- (void)videoView:(GKDYVideoView *)videoView didClickIcon:(GKDYVideoModel *)videoModel {
+    GKDYPersonalViewController *personalVC = [GKDYPersonalViewController new];
+    personalVC.model = videoModel;
+    [self.navigationController pushViewController:personalVC animated:YES];
+}
+
+- (void)videoView:(GKDYVideoView *)videoView didClickComment:(GKDYVideoModel *)videoModel {
+    GKDYCommentView *commentView = [GKDYCommentView new];
+    commentView.frame = CGRectMake(0, 0, GK_SCREEN_WIDTH, ADAPTATIONRATIO * 980.0f);
+    
+    GKSlidePopupView *popupView = [GKSlidePopupView popupViewWithFrame:[UIScreen mainScreen].bounds contentView:commentView];
+    [popupView showFrom:[UIApplication sharedApplication].keyWindow completion:^{
+        [commentView requestData];
+    }];
+}
 
 #pragma mark - 懒加载
 - (GKPageScrollView *)pageScrollView {

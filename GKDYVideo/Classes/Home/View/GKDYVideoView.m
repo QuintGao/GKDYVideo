@@ -9,6 +9,7 @@
 #import "GKDYVideoView.h"
 #import "GKDYVideoPlayer.h"
 #import "GKDoubleLikeView.h"
+#import "GKDYPanGestureRecognizer.h"
 
 @interface GKDYVideoView()<UIScrollViewDelegate, GKDYVideoPlayerDelegate, GKDYVideoControlViewDelegate, UIGestureRecognizerDelegate>
 
@@ -21,9 +22,6 @@
 
 // 控制播放的索引，不完全等于当前播放内容的索引
 @property (nonatomic, assign) NSInteger                 index;
-
-// 当前播放内容是h索引
-@property (nonatomic, assign) NSInteger                 currentPlayIndex;
 
 @property (nonatomic, weak) UIViewController            *vc;
 @property (nonatomic, assign) BOOL                      isPushed;
@@ -40,9 +38,14 @@
 
 @property (nonatomic, assign) BOOL                      isRefreshMore;
 
-@property (nonatomic, strong) UIPanGestureRecognizer    *panGesture;
+@property (nonatomic, strong) GKDYPanGestureRecognizer  *panGesture;
+
+@property (nonatomic, assign) BOOL                      interacting;
 // 开始移动时的位置
 @property (nonatomic, assign) CGFloat                   startLocationY;
+
+@property (nonatomic, assign) CGPoint                   startLocation;
+@property (nonatomic, assign) CGRect                    startFrame;
 
 @property (nonatomic, strong) GKDoubleLikeView          *doubleLikeView;
 
@@ -87,6 +90,14 @@
             }];
             
             [self.scrollView addGestureRecognizer:self.panGesture];
+        }else {
+            [self addSubview:self.backBtn];
+
+            [self.backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(self).offset(15.0f);
+                make.top.equalTo(self).offset(GK_SAVEAREA_TOP + 20.0f);
+                make.width.height.mas_equalTo(44.0f);
+            }];
         }
     }
     return self;
@@ -364,7 +375,7 @@
 }
 
 #pragma mark - Gesture
-- (void)handlePanGesture:(UIPanGestureRecognizer *)panGesture {
+- (void)handlePanGesture:(GKDYPanGestureRecognizer *)panGesture {
     if (self.currentPlayIndex == 0) {
         CGPoint location = [panGesture locationInView:panGesture.view];
         
@@ -374,15 +385,17 @@
             }
                 break;
             case UIGestureRecognizerStateChanged: {
-                // 这里取整是解决上滑时可能出现的distance > 0的情况
-                CGFloat distance = ceil(location.y) - ceil(self.startLocationY);
-                if (distance > 0) { // 只要distance>0且没松手 就认为是下滑
-                    self.scrollView.panGestureRecognizer.enabled = NO;
-                }
-                
-                if (self.scrollView.panGestureRecognizer.enabled == NO) {
-                    if ([self.delegate respondsToSelector:@selector(videoView:didPanWithDistance:isEnd:)]) {
-                        [self.delegate videoView:self didPanWithDistance:distance isEnd:NO];
+                if (panGesture.direction == GKDYPanGestureRecognizerDirectionVertical) {
+                    // 这里取整是解决上滑时可能出现的distance > 0的情况
+                    CGFloat distance = ceil(location.y) - ceil(self.startLocationY);
+                    if (distance > 0) { // 只要distance>0且没松手 就认为是下滑
+                        self.scrollView.panGestureRecognizer.enabled = NO;
+                    }
+                    
+                    if (self.scrollView.panGestureRecognizer.enabled == NO) {
+                        if ([self.delegate respondsToSelector:@selector(videoView:didPanWithDistance:isEnd:)]) {
+                            [self.delegate videoView:self didPanWithDistance:distance isEnd:NO];
+                        }
                     }
                 }
             }
@@ -412,6 +425,30 @@
 // 允许多个手势响应
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     return YES;
+}
+
+
+/** 判断手势方向  */
+- (BOOL)commitTranslation:(CGPoint)translation {
+    CGFloat absX = fabs(translation.x);
+    CGFloat absY = fabs(translation.y);
+    // 设置滑动有效距离
+    if (MAX(absX, absY) < 5)
+        return NO;
+    if (absX > absY ) {
+        if (translation.x<0) {//向左滑动
+            return NO;
+        }else{//向右滑动
+            return NO;
+        }
+    } else if (absY > absX) {
+        if (translation.y<0) {//向上滑动
+            return NO;
+        }else{ //向下滑动
+            return YES;
+        }
+    }
+    return NO;
 }
 
 #pragma mark - GKDYVideoPlayerDelegate
@@ -551,6 +588,14 @@
     return _btmView;
 }
 
+- (UIButton *)backBtn {
+    if (!_backBtn) {
+        _backBtn = [UIButton new];
+        [_backBtn setImage:GKImage(@"btn_back_white") forState:UIControlStateNormal];
+    }
+    return _backBtn;
+}
+
 - (NSMutableArray *)videos {
     if (!_videos) {
         _videos = [NSMutableArray new];
@@ -566,10 +611,11 @@
     return _player;
 }
 
-- (UIPanGestureRecognizer *)panGesture {
+- (GKDYPanGestureRecognizer *)panGesture {
     if (!_panGesture) {
-        _panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
+        _panGesture = [[GKDYPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
         _panGesture.delegate = self;
+        _panGesture.direction = GKDYPanGestureRecognizerDirectionVertical;
     }
     return _panGesture;
 }

@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol GKDYVideoViewDelegate <NSObject>
 
+@optional
+
 - (void)videoView:(GKDYVideoView *)videoView didClickIcon:(GKDYVideoModel *)videoModel;
 - (void)videoView:(GKDYVideoView *)videoView didClickPraise:(GKDYVideoModel *)videoModel;
 - (void)videoView:(GKDYVideoView *)videoView didClickComment:(GKDYVideoModel *)videoModel;
@@ -27,11 +29,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GKDYVideoView : UIView
 
-@property (nonatomic, weak) id<GKDYVideoViewDelegate> delegate;
+@property (nonatomic, weak) id<GKDYVideoViewDelegate>   delegate;
 
-@property (nonatomic, strong) GKDYVideoViewModel    *viewModel;
+@property (nonatomic, strong) GKDYVideoViewModel        *viewModel;
 
+@property (nonatomic, strong) UIButton                  *backBtn;
+
+// 当前播放内容的视图
 @property (nonatomic, strong) GKDYVideoControlView      *currentPlayView;
+
+// 当前播放内容的索引
+@property (nonatomic, assign) NSInteger                 currentPlayIndex;
 
 - (instancetype)initWithVC:(UIViewController *)vc isPushed:(BOOL)isPushed;
 

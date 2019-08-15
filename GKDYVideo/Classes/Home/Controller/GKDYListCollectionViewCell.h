@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) GKDYVideoModel    *model;
 
+@property (nonatomic, strong) UIImageView   *coverImgView;
+
 @end
 
 NS_ASSUME_NONNULL_END

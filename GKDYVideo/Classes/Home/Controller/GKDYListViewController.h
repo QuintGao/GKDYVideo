@@ -13,6 +13,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GKDYListViewController : GKDYBaseViewController<GKPageListViewDelegate>
 
+@property (nonatomic, strong) UICollectionView  *collectionView;
+
+@property (nonatomic, assign) NSInteger         selectedIndex;
+
+@property (nonatomic, copy) void(^itemClickBlock)(NSArray *videos, NSInteger index);
+
 - (void)refreshData;
 
 @end

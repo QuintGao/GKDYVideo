@@ -8,20 +8,19 @@
 
 #import "GKDYListViewController.h"
 #import "GKDYListCollectionViewCell.h"
-#import "GKDYPlayerViewController.h"
+#import "GKDYVideoViewController.h"
 #import "GKBallLoadingView.h"
 
-@interface GKDYListViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
-
-@property (nonatomic, strong) UICollectionView  *collectionView;
+@interface GKDYListViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UIViewControllerTransitioningDelegate>
 
 @property (nonatomic, strong) UIView            *loadingBgView;
 
-@property (nonatomic, strong) NSArray           *videos;
+@property (nonatomic, strong) NSMutableArray    *videos;
 
 @property (nonatomic, copy) void(^scrollCallback)(UIScrollView *scrollView);
 
 @property (nonatomic, assign) BOOL              isRefresh;
+@property (nonatomic, assign) NSInteger         index;
 
 @end
 
@@ -38,17 +37,46 @@
         make.edges.equalTo(self.view);
     }];
     
+    self.collectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        self.index ++ ;
+        
+        NSString *fileName = [NSString stringWithFormat:@"video%zd", self.index];
+        NSString *videoPath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"json"];
+        NSData *jsonData = [NSData dataWithContentsOfFile:videoPath];
+        
+        if (!jsonData) {
+            [self.collectionView.mj_footer endRefreshingWithNoMoreData];
+            return;
+        }
+        
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableLeaves error:nil];
+        
+        NSArray *videoList = dic[@"data"][@"video_list"];
+        
+        NSMutableArray *array = [NSMutableArray array];
+        for (NSDictionary *dict in videoList) {
+            GKDYVideoModel *model = [GKDYVideoModel yy_modelWithDictionary:dict];
+            [array addObject:model];
+        }
+        
+        [self.videos addObjectsFromArray:array];
+        [self.collectionView reloadData];
+        
+        [self.collectionView.mj_footer endRefreshing];
+    }];
+    
     [self.view addSubview:self.loadingBgView];
     self.loadingBgView.frame = CGRectMake(0, 0, SCREEN_WIDTH, ADAPTATIONRATIO * 400.0f);
     
     // 模拟数据加载
     GKBallLoadingView *loadingView = [GKBallLoadingView loadingViewInView:self.loadingBgView];
-    [loadingView startLoading];;
+    [loadingView startLoading];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [loadingView stopLoading];
         [loadingView removeFromSuperview];
         self.loadingBgView.hidden = YES;
+        self.index = 1;
         
         NSString *videoPath = [[NSBundle mainBundle] pathForResource:@"video1" ofType:@"json"];
         
@@ -66,7 +94,8 @@
         
         self.isRefresh = YES;
         
-        self.videos = array;
+        [self.videos removeAllObjects];
+        [self.videos addObjectsFromArray:array];
         
         [self.collectionView.mj_header endRefreshing];
         
@@ -92,8 +121,12 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    GKDYPlayerViewController *playerVC = [[GKDYPlayerViewController alloc] initWithVideos:self.videos index:indexPath.item];
-    [self.navigationController pushViewController:playerVC animated:YES];
+    self.selectedIndex = indexPath.item;
+    
+//    GKDYVideoViewController *playerVC = [[GKDYVideoViewController alloc] initWithVideos:self.videos index:indexPath.item];
+//    [self.navigationController pushViewController:playerVC animated:YES];
+    
+    !self.itemClickBlock ? : self.itemClickBlock(self.videos, indexPath.item);
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -139,6 +172,13 @@
         _loadingBgView = [UIView new];
     }
     return _loadingBgView;
+}
+
+- (NSMutableArray *)videos {
+    if (!_videos) {
+        _videos = [NSMutableArray new];
+    }
+    return _videos;
 }
 
 @end

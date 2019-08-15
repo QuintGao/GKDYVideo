@@ -18,7 +18,7 @@
 // 过渡中心点
 #define kTransitionCenter   20.0f
 
-@interface GKDYPlayerViewController ()<GKDYVideoViewDelegate, GKViewControllerPushDelegate>
+@interface GKDYPlayerViewController ()<GKDYVideoViewDelegate, GKViewControllerPushDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, strong) UIView                *titleView;
 @property (nonatomic, strong) UIButton              *shootBtn;  // 随拍
