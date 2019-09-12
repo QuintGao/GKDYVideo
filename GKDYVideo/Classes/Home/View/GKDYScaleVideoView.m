@@ -86,6 +86,9 @@
             CGFloat progress = translation.x / [UIScreen mainScreen].bounds.size.width;
             progress = fminf(fmaxf(progress, 0.0f), 1.0f);
             if (progress < 0.2) { // 恢复
+                self.vc.gk_statusBarHidden = YES;
+                self.vc.gk_interactivePopDisabled = YES;
+                
                 [UIView animateWithDuration:0.25
                                       delay:0
                                     options:UIViewAnimationOptionCurveEaseOut
@@ -94,8 +97,6 @@
                                      self.videoView.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
                                  } completion:^(BOOL finished) {
                                      self.interacting = NO;
-                                     self.vc.gk_statusBarHidden = YES;
-                                     self.vc.gk_interactivePopDisabled = YES;
                                      
                                      [self.videoView resume];
                                      self.backgroundColor = [UIColor blackColor];
@@ -112,6 +113,11 @@
 }
 
 - (void)show {
+    // 隐藏状态栏及禁用手势
+    self.vc.gk_statusBarHidden = YES;
+    self.vc.gk_interactivePopDisabled = YES;
+    
+    // 添加视图
     [self.vc.view addSubview:self];
     
     // 获取当前显示的列表控制器
@@ -128,7 +134,8 @@
     self.center = CGPointMake(originalFrame.origin.x + originalFrame.size.width * 0.5, originalFrame.origin.y + originalFrame.size.height * 0.5);
     self.transform = CGAffineTransformMakeScale(originalFrame.size.width / finalFrame.size.width, originalFrame.size.height / finalFrame.size.height);
     
-    [UIView animateWithDuration:0.25
+    // 显示动画
+    [UIView animateWithDuration:0.3
                           delay:0
          usingSpringWithDamping:0.8
           initialSpringVelocity:1
@@ -136,10 +143,7 @@
                      animations:^{
                          self.center = CGPointMake(finalFrame.origin.x + finalFrame.size.width * 0.5, finalFrame.origin.y + finalFrame.size.height * 0.5);
                          self.transform = CGAffineTransformMakeScale(1, 1);
-                     } completion:^(BOOL finished) {
-                         self.vc.gk_statusBarHidden = YES;
-                         self.vc.gk_interactivePopDisabled = YES;
-                     }];
+                     } completion:nil];
 }
 
 - (void)dismiss {
@@ -167,6 +171,7 @@
     [self.videoView pause];
     self.backgroundColor = [UIColor clearColor];
     
+    // 隐藏动画
     [UIView animateWithDuration:0.25 delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:0.2 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         snapShotView.frame = finalFrame;
     } completion:^(BOOL finished) {
