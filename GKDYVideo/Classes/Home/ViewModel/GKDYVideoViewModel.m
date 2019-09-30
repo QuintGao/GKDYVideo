@@ -41,11 +41,11 @@
 - (void)refreshMoreListWithSuccess:(void (^)(NSArray * _Nonnull))success failure:(void (^)(NSError * _Nonnull))failure {
     self.pn ++;
     
-    if (self.pn >= 4) {
-        NSArray *array = nil;
-        !success ? : success(array);
-        return;
-    } 
+//    if (self.pn >= 4) {
+//        NSArray *array = nil;
+//        !success ? : success(array);
+//        return;
+//    } 
 
     NSString *fileName = [NSString stringWithFormat:@"video%zd", self.pn];
     
