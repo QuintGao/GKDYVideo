@@ -66,6 +66,9 @@
         // 不是push过来的，添加下拉刷新
         if (!isPushed) {
             self.scrollView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+                if (self.isRefreshMore) return;
+                self.isRefreshMore = YES;
+                
                 [self.player pausePlay];
                 // 当播放索引为最后一个时才会触发下拉刷新
                 self.currentPlayIndex = self.videos.count - 1;
@@ -83,6 +86,8 @@
                     }else {
                         [self.scrollView.mj_footer endRefreshingWithNoMoreData];
                     }
+                    
+                    self.scrollView.contentOffset = CGPointMake(0, 2 * SCREEN_HEIGHT);
                 } failure:^(NSError * _Nonnull error) {
                     self.isRefreshMore = NO;
                     [self.scrollView.mj_footer endRefreshingWithNoMoreData];
@@ -278,6 +283,7 @@
     
     // 判断是从中间视图上滑还是下滑
     if (scrollView.contentOffset.y >= 2 * SCREEN_HEIGHT) {  // 上滑
+        NSLog(@"上滑");
         [self.player removeVideo];  // 在这里移除播放，解决闪动的bug
         if (self.index == 0) {
             self.index += 2;
@@ -330,11 +336,8 @@
     
     // 自动刷新，如果想要去掉自动刷新功能，去掉下面代码即可
     if (scrollView.contentOffset.y == SCREEN_HEIGHT) {
-        if (self.isRefreshMore) return;
-        
         // 播放到倒数第二个时，请求更多内容
         if (self.currentPlayIndex == self.videos.count - 3) {
-            self.isRefreshMore = YES;
             [self refreshMore];
         }
     }
@@ -359,6 +362,9 @@
 }
 
 - (void)refreshMore {
+    if (self.isRefreshMore) return;
+    self.isRefreshMore = YES;
+    
     [self.viewModel refreshMoreListWithSuccess:^(NSArray * _Nonnull list) {
         self.isRefreshMore = NO;
         if (list) {
@@ -366,6 +372,10 @@
             [self.scrollView.mj_footer endRefreshing];
         }else {
             [self.scrollView.mj_footer endRefreshingWithNoMoreData];
+        }
+        
+        if (self.scrollView.contentOffset.y > 2 * SCREEN_HEIGHT) {
+            self.scrollView.contentOffset = CGPointMake(0, 2 * SCREEN_HEIGHT);
         }
     } failure:^(NSError * _Nonnull error) {
         NSLog(@"%@", error);
