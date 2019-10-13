@@ -121,6 +121,12 @@
     
     self.sliderView.value = 0;
     
+    if (model.video_width > model.video_height) {
+        self.coverImgView.contentMode = UIViewContentModeScaleAspectFit;
+    }else {
+        self.coverImgView.contentMode = UIViewContentModeScaleAspectFill;
+    }
+    
     [self.coverImgView sd_setImageWithURL:[NSURL URLWithString:model.thumbnail_url] placeholderImage:[UIImage imageNamed:@"img_video_loading"]];
     
     self.nameLabel.text = [NSString stringWithFormat:@"@%@", model.author.name_show];

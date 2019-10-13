@@ -518,3 +518,5 @@ Podfile.lock
 Pods/MJRefresh/MJRefresh/MJRefreshConfig.h
 Pods/MJRefresh/MJRefresh/MJRefreshConfig.m
 Pods/MJRefresh/MJRefresh/MJRefresh.bundle/ko.lproj/Localizable.strings
+Pods/GKNavigationBarViewController/GKNavigationBarViewController/TransitionAnimation/UIViewController+GKCapture.h
+Pods/GKNavigationBarViewController/GKNavigationBarViewController/TransitionAnimation/UIViewController+GKCapture.m
