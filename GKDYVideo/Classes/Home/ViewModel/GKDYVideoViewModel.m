@@ -40,6 +40,12 @@
 
 - (void)refreshMoreListWithSuccess:(void (^)(NSArray * _Nonnull))success failure:(void (^)(NSError * _Nonnull))failure {
     self.pn ++;
+    
+//    if (self.pn >= 4) {
+//        NSArray *array = nil;
+//        !success ? : success(array);
+//        return;
+//    } 
 
     NSString *fileName = [NSString stringWithFormat:@"video%zd", self.pn];
     
@@ -63,7 +69,7 @@
         [array addObject:model];
     }
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         !success ? : success(array);
     });
 }
