@@ -50,7 +50,7 @@
     
     [self.backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(15.0f);
-        make.top.equalTo(self.view).offset(GK_SAVEAREA_TOP + 20.0f);
+        make.top.equalTo(self.view).offset(GK_SAFEAREA_TOP + 20.0f);
         make.width.height.mas_equalTo(44.0f);
     }];
     
@@ -167,7 +167,7 @@
 - (UIButton *)backBtn {
     if (!_backBtn) {
         _backBtn = [UIButton new];
-        [_backBtn setImage:GKImage(@"btn_back_white") forState:UIControlStateNormal];
+        [_backBtn setImage:[UIImage gk_imageNamed:@"btn_back_white"] forState:UIControlStateNormal];
         [_backBtn addTarget:self action:@selector(backClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _backBtn;

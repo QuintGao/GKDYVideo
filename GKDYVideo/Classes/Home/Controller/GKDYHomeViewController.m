@@ -121,11 +121,11 @@
     UINavigationController *nav = (UINavigationController *)viewController;
     
     if ([nav.topViewController isKindOfClass:[GKDYPlayerViewController class]]) {
-        [self.mainVC.tabBar setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor] size:CGSizeMake(SCREEN_WIDTH, TABBAR_HEIGHT)]];
+        [self.mainVC.tabBar setBackgroundImage:[UIImage gk_imageWithColor:[UIColor clearColor] size:CGSizeMake(SCREEN_WIDTH, TABBAR_HEIGHT)]];
         
         self.gk_statusBarHidden = YES;
     }else {
-        [self.mainVC.tabBar setBackgroundImage:[UIImage imageWithColor:[UIColor blackColor] size:CGSizeMake(SCREEN_WIDTH, TABBAR_HEIGHT)]];
+        [self.mainVC.tabBar setBackgroundImage:[UIImage gk_imageWithColor:[UIColor blackColor] size:CGSizeMake(SCREEN_WIDTH, TABBAR_HEIGHT)]];
         
         self.gk_statusBarHidden = NO;
     }

@@ -14,7 +14,7 @@
 #import "GKBallLoadingView.h"
 #import "GKLikeView.h"
 
-#define kTitleViewY         (GK_SAVEAREA_TOP + 20.0f)
+#define kTitleViewY         (GK_SAFEAREA_TOP + 20.0f)
 // 过渡中心点
 #define kTransitionCenter   20.0f
 
@@ -82,7 +82,7 @@
         [self.view addSubview:self.backBtn];
         [self.backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.view).offset(15.0f);
-            make.top.equalTo(self.view).offset(GK_SAVEAREA_TOP + 20.0f);
+            make.top.equalTo(self.view).offset(GK_SAFEAREA_TOP + 20.0f);
             make.width.height.mas_equalTo(44.0f);
         }];
         
@@ -100,12 +100,12 @@
         [self.refreshView addSubview:self.refreshLabel];
         [self.view addSubview:self.loadingBgView];
         
-        self.loadingBgView.frame = CGRectMake(SCREEN_WIDTH - 15 - 44, GK_SAVEAREA_TOP, 44, 44);
+        self.loadingBgView.frame = CGRectMake(SCREEN_WIDTH - 15 - 44, GK_SAFEAREA_TOP, 44, 44);
         self.refreshLoadingView = [GKBallLoadingView loadingViewInView:self.loadingBgView];
         
         [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.equalTo(self.view);
-            make.top.equalTo(self.view).offset(GK_SAVEAREA_TOP + 20.0f);
+            make.top.equalTo(self.view).offset(GK_SAFEAREA_TOP + 20.0f);
             make.height.mas_equalTo(44.0f);
         }];
         
@@ -133,7 +133,7 @@
         
         [self.refreshView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.equalTo(self.view);
-            make.top.equalTo(self.view).offset(GK_SAVEAREA_BTM + 20.0f);
+            make.top.equalTo(self.view).offset(GK_SAFEAREA_BTM + 20.0f);
             make.height.mas_equalTo(44.0f);
         }];
         
@@ -365,7 +365,7 @@
 - (UIButton *)backBtn {
     if (!_backBtn) {
         _backBtn = [UIButton new];
-        [_backBtn setImage:GKImage(@"btn_back_white") forState:UIControlStateNormal];
+        [_backBtn setImage:[UIImage gk_imageNamed:@"btn_back_white"] forState:UIControlStateNormal];
         [_backBtn addTarget:self action:@selector(backClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _backBtn;
@@ -386,7 +386,7 @@
 - (UIButton *)searchBtn {
     if (!_searchBtn) {
         _searchBtn = [UIButton new];
-        [_searchBtn setImage:[[UIImage imageNamed:@"icHomeSearchPure"] changeImageWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+        [_searchBtn setImage:[UIImage gk_changeImage:[UIImage imageNamed:@"icHomeSearchPure"] color:[UIColor whiteColor]] forState:UIControlStateNormal];
         [_searchBtn addTarget:self action:@selector(searchClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _searchBtn;
