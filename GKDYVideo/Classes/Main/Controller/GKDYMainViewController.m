@@ -27,8 +27,6 @@
     
     self.delegate = self;
     
-    self.gk_statusBarHidden = NO;
-    
     // 替换系统tabbar
     self.dyTabBar = [GKDYTabBar new];
     [self setValue:self.dyTabBar forKey:@"tabBar"];

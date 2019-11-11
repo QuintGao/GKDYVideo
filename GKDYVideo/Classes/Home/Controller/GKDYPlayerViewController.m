@@ -70,7 +70,7 @@
     
     self.view.backgroundColor = [UIColor blackColor];
     self.gk_navigationBar.hidden = YES;
-    self.gk_statusBarHidden = YES;
+    self.gk_statusBarStyle = UIStatusBarStyleLightContent;
     
     [self.view addSubview:self.videoView];
     
