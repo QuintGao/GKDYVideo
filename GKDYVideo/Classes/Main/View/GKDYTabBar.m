@@ -21,18 +21,18 @@
     if (self = [super init]) {
         [self addSubview:self.publishBtn];
         
-        [self setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor] size:CGSizeMake(SCREEN_WIDTH, TABBAR_HEIGHT)]];
+        [self setBackgroundImage:[UIImage gk_imageWithColor:[UIColor clearColor] size:CGSizeMake(SCREEN_WIDTH, TABBAR_HEIGHT)]];
         [self showLine];
     }
     return self;
 }
 
 - (void)showLine {
-    self.shadowImage = [UIImage imageWithColor:[UIColor colorWithWhite:1.0f alpha:0.2f] size:CGSizeMake(SCREEN_WIDTH, 0.5f)];
+    self.shadowImage = [UIImage gk_imageWithColor:[UIColor colorWithWhite:1.0f alpha:0.2f] size:CGSizeMake(SCREEN_WIDTH, 0.5f)];
 }
 
 - (void)hideLine {
-    self.shadowImage = [UIImage imageWithColor:[UIColor clearColor] size:CGSizeMake(SCREEN_WIDTH, 0.5f)];
+    self.shadowImage = [UIImage gk_imageWithColor:[UIColor clearColor] size:CGSizeMake(SCREEN_WIDTH, 0.5f)];
 }
 
 - (void)layoutSubviews {

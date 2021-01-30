@@ -30,4 +30,12 @@
     [super pushViewController:viewController animated:animated];
 }
 
+- (UIViewController *)childViewControllerForStatusBarStyle {
+    UIViewController *topVC = self.topViewController;
+    if ([topVC isKindOfClass:[UITabBarController class]]) {
+        return ((UITabBarController *)topVC).selectedViewController;
+    }
+    return topVC;
+}
+
 @end

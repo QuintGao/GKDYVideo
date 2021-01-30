@@ -27,8 +27,6 @@
     
     self.delegate = self;
     
-    self.gk_statusBarHidden = NO;
-    
     // 替换系统tabbar
     self.dyTabBar = [GKDYTabBar new];
     [self setValue:self.dyTabBar forKey:@"tabBar"];
@@ -44,8 +42,8 @@
 
 - (void)addChildVC:(UIViewController *)childVC title:(NSString *)title {
     childVC.tabBarItem.title = title;
-    childVC.tabBarItem.image = [[UIImage imageWithColor:[UIColor clearColor] size:CGSizeMake(36, 3)] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    childVC.tabBarItem.selectedImage = [[UIImage imageWithColor:[UIColor whiteColor] size:CGSizeMake(36, 3)] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    childVC.tabBarItem.image = [[UIImage gk_imageWithColor:[UIColor clearColor] size:CGSizeMake(36, 3)] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    childVC.tabBarItem.selectedImage = [[UIImage gk_imageWithColor:[UIColor whiteColor] size:CGSizeMake(36, 3)] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     childVC.tabBarItem.titlePositionAdjustment = UIOffsetMake(0, -14);
     childVC.tabBarItem.imageInsets = UIEdgeInsetsMake(28, 0, -28, 0);

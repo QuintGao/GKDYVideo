@@ -18,7 +18,7 @@
 #import "GKDYCommentView.h"
 #import "GKSlidePopupView.h"
 
-@interface GKDYPersonalViewController ()<GKPageScrollViewDelegate, JXCategoryViewDelegate, UIScrollViewDelegate, GKDYVideoViewDelegate>
+@interface GKDYPersonalViewController ()<GKPageScrollViewDelegate, GKPageTableViewGestureDelegate, JXCategoryViewDelegate, UIScrollViewDelegate, GKDYVideoViewDelegate>
 
 @property (nonatomic, strong) GKPageScrollView      *pageScrollView;
 
@@ -172,10 +172,21 @@
     }];
 }
 
+#pragma mark - GKPageTableViewGestureDelegate
+- (BOOL)pageTableView:(GKPageTableView *)tableView gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
+}
+
+- (BOOL)prefersStatusBarHidden {
+    [self refreshNavBarFrame];
+    return self.gk_statusBarHidden;
+}
+
 #pragma mark - 懒加载
 - (GKPageScrollView *)pageScrollView {
     if (!_pageScrollView) {
         _pageScrollView = [[GKPageScrollView alloc] initWithDelegate:self];
+        _pageScrollView.mainTableView.gestureDelegate = self;
     }
     return _pageScrollView;
 }

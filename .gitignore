@@ -34,7 +34,7 @@ xcuserdata/
 # you should judge for yourself, the pros and cons are mentioned at:
 # https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
 #
-# Pods/
+Pods/
 
 # Carthage
 #
@@ -520,3 +520,106 @@ Pods/MJRefresh/MJRefresh/MJRefreshConfig.m
 Pods/MJRefresh/MJRefresh/MJRefresh.bundle/ko.lproj/Localizable.strings
 Pods/GKNavigationBarViewController/GKNavigationBarViewController/TransitionAnimation/UIViewController+GKCapture.h
 Pods/GKNavigationBarViewController/GKNavigationBarViewController/TransitionAnimation/UIViewController+GKCapture.m
+Pods/TXLiteAVSDK_Player/TXLiteAVSDK_Player/TXLiteAVSDK_Player.framework/Info.plist
+Pods/TXLiteAVSDK_Player/TXLiteAVSDK_Player/TXLiteAVSDK_Player.framework/TXLiteAVSDK_Player
+Pods/TXLiteAVSDK_Player/TXLiteAVSDK_Player/TXLiteAVSDK_Player.framework/Headers/TXAudioCustomProcessDelegate.h
+Pods/TXLiteAVSDK_Player/TXLiteAVSDK_Player/TXLiteAVSDK_Player.framework/Headers/TXAudioRawDataDelegate.h
+Pods/TXLiteAVSDK_Player/TXLiteAVSDK_Player/TXLiteAVSDK_Player.framework/Headers/TXBitrateItem.h
+Pods/TXLiteAVSDK_Player/TXLiteAVSDK_Player/TXLiteAVSDK_Player.framework/Headers/TXImageSprite.h
+Pods/TXLiteAVSDK_Player/TXLiteAVSDK_Player/TXLiteAVSDK_Player.framework/Headers/TXLiteAVCode.h
+Pods/TXLiteAVSDK_Player/TXLiteAVSDK_Player/TXLiteAVSDK_Player.framework/Headers/TXLiteAVSDK.h
+Pods/TXLiteAVSDK_Player/TXLiteAVSDK_Player/TXLiteAVSDK_Player.framework/Headers/TXLiveAudioSessionDelegate.h
+Pods/TXLiteAVSDK_Player/TXLiteAVSDK_Player/TXLiteAVSDK_Player.framework/Headers/TXLiveBase.h
+Pods/TXLiteAVSDK_Player/TXLiteAVSDK_Player/TXLiteAVSDK_Player.framework/Headers/TXLivePlayConfig.h
+Pods/TXLiteAVSDK_Player/TXLiteAVSDK_Player/TXLiteAVSDK_Player.framework/Headers/TXLivePlayer.h
+Pods/TXLiteAVSDK_Player/TXLiteAVSDK_Player/TXLiteAVSDK_Player.framework/Headers/TXLivePlayListener.h
+Pods/TXLiteAVSDK_Player/TXLiteAVSDK_Player/TXLiteAVSDK_Player.framework/Headers/TXLiveRecordListener.h
+Pods/TXLiteAVSDK_Player/TXLiteAVSDK_Player/TXLiteAVSDK_Player.framework/Headers/TXLiveRecordTypeDef.h
+Pods/TXLiteAVSDK_Player/TXLiteAVSDK_Player/TXLiteAVSDK_Player.framework/Headers/TXLiveSDKEventDef.h
+Pods/TXLiteAVSDK_Player/TXLiteAVSDK_Player/TXLiteAVSDK_Player.framework/Headers/TXLiveSDKTypeDef.h
+Pods/TXLiteAVSDK_Player/TXLiteAVSDK_Player/TXLiteAVSDK_Player.framework/Headers/TXPlayerAuthParams.h
+Pods/TXLiteAVSDK_Player/TXLiteAVSDK_Player/TXLiteAVSDK_Player.framework/Headers/TXVideoCustomProcessDelegate.h
+Pods/TXLiteAVSDK_Player/TXLiteAVSDK_Player/TXLiteAVSDK_Player.framework/Headers/TXVodDownloadManager.h
+Pods/TXLiteAVSDK_Player/TXLiteAVSDK_Player/TXLiteAVSDK_Player.framework/Headers/TXVodPlayConfig.h
+Pods/TXLiteAVSDK_Player/TXLiteAVSDK_Player/TXLiteAVSDK_Player.framework/Headers/TXVodPlayer.h
+Pods/TXLiteAVSDK_Player/TXLiteAVSDK_Player/TXLiteAVSDK_Player.framework/Headers/TXVodPlayListener.h
+Pods/TXLiteAVSDK_Player/TXLiteAVSDK_Player/TXLiteAVSDK_Player.framework/Modules/module.modulemap
+Pods/SDWebImage/SDWebImage/Private/SDDeviceHelper.h
+Pods/SDWebImage/SDWebImage/Private/SDDeviceHelper.m
+Pods/SDWebImage/SDWebImage/Private/SDDisplayLink.h
+Pods/SDWebImage/SDWebImage/Private/SDDisplayLink.m
+Pods/SDWebImage/SDWebImage/Private/SDImageHEICCoderInternal.h
+Pods/SDWebImage/SDWebImage/Private/SDImageIOAnimatedCoderInternal.h
+Pods/SDWebImage/SDWebImage/Core/SDWebImageDownloaderDecryptor.h
+Pods/SDWebImage/SDWebImage/Core/SDWebImageDownloaderDecryptor.m
+Pods/SDWebImage/SDWebImage/Core/SDWebImageDownloaderResponseModifier.h
+Pods/SDWebImage/SDWebImage/Core/SDWebImageDownloaderResponseModifier.m
+Pods/SDWebImage/SDWebImage/Core/SDImageHEICCoder.h
+Pods/SDWebImage/SDWebImage/Core/SDImageHEICCoder.m
+Pods/SDWebImage/SDWebImage/Core/SDImageIOAnimatedCoder.h
+Pods/SDWebImage/SDWebImage/Core/SDImageIOAnimatedCoder.m
+Pods/SDWebImage/SDWebImage/Core/SDAnimatedImagePlayer.h
+Pods/SDWebImage/SDWebImage/Core/SDAnimatedImagePlayer.m
+Pods/GKNavigationBarViewController/GKNavigationBarViewController/Category/UIImage+GKCategory.h
+Pods/GKNavigationBarViewController/GKNavigationBarViewController/Category/UIImage+GKCategory.m
+Pods/AFNetworking/UIKit+AFNetworking/WKWebView+AFNetworking.h
+Pods/AFNetworking/UIKit+AFNetworking/WKWebView+AFNetworking.m
+Pods/GKNavigationBarViewController/GKNavigationBarViewController/GKCategory/GKCategory.h
+Pods/GKNavigationBarViewController/GKNavigationBarViewController/GKCategory/UIBarButtonItem+GKCategory.h
+Pods/GKNavigationBarViewController/GKNavigationBarViewController/GKCategory/UIBarButtonItem+GKCategory.m
+Pods/GKNavigationBarViewController/GKNavigationBarViewController/GKCategory/UIImage+GKCategory.h
+Pods/GKNavigationBarViewController/GKNavigationBarViewController/GKCategory/UIImage+GKCategory.m
+Pods/GKNavigationBarViewController/GKNavigationBarViewController/GKCategory/UINavigationController+GKCategory.h
+Pods/GKNavigationBarViewController/GKNavigationBarViewController/GKCategory/UINavigationController+GKCategory.m
+Pods/GKNavigationBarViewController/GKNavigationBarViewController/GKCategory/UINavigationItem+GKCategory.h
+Pods/GKNavigationBarViewController/GKNavigationBarViewController/GKCategory/UINavigationItem+GKCategory.m
+Pods/GKNavigationBarViewController/GKNavigationBarViewController/GKCategory/UIScrollView+GKCategory.h
+Pods/GKNavigationBarViewController/GKNavigationBarViewController/GKCategory/UIScrollView+GKCategory.m
+Pods/GKNavigationBarViewController/GKNavigationBarViewController/GKCategory/UIViewController+GKCategory.h
+Pods/GKNavigationBarViewController/GKNavigationBarViewController/GKCategory/UIViewController+GKCategory.m
+Pods/GKNavigationBarViewController/GKNavigationBarViewController/GKConfigure/GKCommon.h
+Pods/GKNavigationBarViewController/GKNavigationBarViewController/GKConfigure/GKNavigationBar.h
+Pods/GKNavigationBarViewController/GKNavigationBarViewController/GKConfigure/GKNavigationBar.m
+Pods/GKNavigationBarViewController/GKNavigationBarViewController/GKConfigure/GKNavigationBarConfigure.h
+Pods/GKNavigationBarViewController/GKNavigationBarViewController/GKConfigure/GKNavigationBarConfigure.m
+Pods/GKNavigationBarViewController/GKNavigationBarViewController/GKTransition/GKBaseTransitionAnimation.h
+Pods/GKNavigationBarViewController/GKNavigationBarViewController/GKTransition/GKBaseTransitionAnimation.m
+Pods/GKNavigationBarViewController/GKNavigationBarViewController/GKTransition/GKDelegateHandler.h
+Pods/GKNavigationBarViewController/GKNavigationBarViewController/GKTransition/GKDelegateHandler.m
+Pods/GKNavigationBarViewController/GKNavigationBarViewController/GKTransition/GKPopTransitionAnimation.h
+Pods/GKNavigationBarViewController/GKNavigationBarViewController/GKTransition/GKPopTransitionAnimation.m
+Pods/GKNavigationBarViewController/GKNavigationBarViewController/GKTransition/GKPushTransitionAnimation.h
+Pods/GKNavigationBarViewController/GKNavigationBarViewController/GKTransition/GKPushTransitionAnimation.m
+Pods/MJRefresh/MJRefresh/MJRefresh.bundle/ru.lproj/Localizable.strings
+Pods/MJRefresh/MJRefresh/MJRefresh.bundle/uk.lproj/Localizable.strings
+Pods/Target Support Files/SDWebImage/SDWebImage.debug.xcconfig
+Pods/Target Support Files/SDWebImage/SDWebImage.release.xcconfig
+Pods/Target Support Files/TXLiteAVSDK_Player/TXLiteAVSDK_Player.debug.xcconfig
+Pods/Target Support Files/TXLiteAVSDK_Player/TXLiteAVSDK_Player.release.xcconfig
+Pods/Target Support Files/YYModel/YYModel.debug.xcconfig
+Pods/Target Support Files/YYModel/YYModel.release.xcconfig
+Pods/SDWebImage/SDWebImage/Private/NSBezierPath+SDRoundedCorners.h
+Pods/SDWebImage/SDWebImage/Private/NSBezierPath+SDRoundedCorners.m
+Pods/SDWebImage/SDWebImage/Private/SDAssociatedObject.h
+Pods/SDWebImage/SDWebImage/Private/SDAssociatedObject.m
+Pods/SDWebImage/SDWebImage/Private/SDFileAttributeHelper.h
+Pods/SDWebImage/SDWebImage/Private/SDFileAttributeHelper.m
+Pods/SDWebImage/SDWebImage/Private/UIColor+SDHexString.h
+Pods/SDWebImage/SDWebImage/Private/UIColor+SDHexString.m
+Pods/Target Support Files/AFNetworking/AFNetworking.debug.xcconfig
+Pods/Target Support Files/AFNetworking/AFNetworking.release.xcconfig
+Pods/Target Support Files/GKNavigationBarViewController/GKNavigationBarViewController.debug.xcconfig
+Pods/Target Support Files/GKNavigationBarViewController/GKNavigationBarViewController.release.xcconfig
+Pods/Target Support Files/GKPageScrollView/GKPageScrollView.debug.xcconfig
+Pods/Target Support Files/GKPageScrollView/GKPageScrollView.release.xcconfig
+Pods/Target Support Files/JXCategoryView/JXCategoryView.debug.xcconfig
+Pods/Target Support Files/JXCategoryView/JXCategoryView.release.xcconfig
+Pods/Target Support Files/Masonry/Masonry.debug.xcconfig
+Pods/Target Support Files/Masonry/Masonry.release.xcconfig
+Pods/Target Support Files/MJRefresh/MJRefresh.debug.xcconfig
+Pods/Target Support Files/MJRefresh/MJRefresh.release.xcconfig
+Pods/SDWebImage/SDWebImage/Core/SDWebImageOperation.m
+Pods/SDWebImage/SDWebImage/Core/UIImage+ExtendedCacheData.h
+Pods/SDWebImage/SDWebImage/Core/UIImage+ExtendedCacheData.m
+Pods/SDWebImage/SDWebImage/Core/SDGraphicsImageRenderer.h
+Pods/SDWebImage/SDWebImage/Core/SDGraphicsImageRenderer.m

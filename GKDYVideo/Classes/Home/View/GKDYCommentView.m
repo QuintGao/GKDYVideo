@@ -134,7 +134,7 @@
 - (UIButton *)closeBtn {
     if (!_closeBtn) {
         _closeBtn = [UIButton new];
-        [_closeBtn setImage:[[UIImage imageNamed:@"close"] changeImageWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+        [_closeBtn setImage:[UIImage gk_changeImage:[UIImage imageNamed:@"close"] color:[UIColor whiteColor]] forState:UIControlStateNormal];
     }
     return _closeBtn;
 }

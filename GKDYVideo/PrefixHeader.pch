@@ -32,17 +32,7 @@
 #define STATUSBAR_HEIGHT    (IS_iPhoneX ? 44.0f : 20.0f)
 
 // 判断是否是iPhone X系列
-#define IS_iPhoneX      ([UIScreen instancesRespondToSelector:@selector(currentMode)] ?\
-(\
-CGSizeEqualToSize(CGSizeMake(375, 812),[UIScreen mainScreen].bounds.size)\
-||\
-CGSizeEqualToSize(CGSizeMake(812, 375),[UIScreen mainScreen].bounds.size)\
-||\
-CGSizeEqualToSize(CGSizeMake(414, 896),[UIScreen mainScreen].bounds.size)\
-||\
-CGSizeEqualToSize(CGSizeMake(896, 414),[UIScreen mainScreen].bounds.size))\
-:\
-NO)
+#define IS_iPhoneX          GK_IS_iPhoneX
 
 // 颜色
 #define GKColorRGBA(r, g, b, a) [UIColor colorWithRed:(r / 255.0) green:(g / 255.0) blue:(b / 255.0) alpha:a]
