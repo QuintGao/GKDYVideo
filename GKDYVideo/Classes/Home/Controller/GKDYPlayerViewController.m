@@ -255,7 +255,8 @@
 
 - (void)videoView:(GKDYVideoView *)videoView didClickComment:(GKDYVideoModel *)videoModel {
     GKDYCommentView *commentView = [GKDYCommentView new];
-    commentView.frame = CGRectMake(0, 0, GK_SCREEN_WIDTH, ADAPTATIONRATIO * 980.0f);
+    commentView.backgroundColor = UIColor.whiteColor;
+    commentView.frame = CGRectMake(0, 0, GK_SCREEN_WIDTH, GK_SCREEN_HEIGHT - GK_STATUSBAR_NAVBAR_HEIGHT);
     
     GKSlidePopupView *popupView = [GKSlidePopupView popupViewWithFrame:[UIScreen mainScreen].bounds contentView:commentView];
     [popupView showFrom:[UIApplication sharedApplication].keyWindow completion:^{

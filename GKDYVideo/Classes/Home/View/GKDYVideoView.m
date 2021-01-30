@@ -138,6 +138,7 @@
         self.topView.hidden = NO;
         self.topView.model = self.videos.firstObject;
         
+        self.scrollView.contentOffset = CGPointZero;
         [self playVideoFrom:self.topView];
     }else if (models.count == 2) {
         [self.btmView removeFromSuperview];
@@ -154,6 +155,7 @@
             
             [self playVideoFrom:self.ctrView];
         }else {
+            self.scrollView.contentOffset = CGPointZero;
             [self playVideoFrom:self.topView];
         }
     }else {
@@ -166,6 +168,7 @@
             self.ctrView.model = self.videos[index + 1];
             self.btmView.model = self.videos[index + 2];
             
+            self.scrollView.contentOffset = CGPointZero;
             // 播放第一个
             [self playVideoFrom:self.topView];
         }else if (index == models.count - 1) { // 如果是最后一个，则显示最后视图，且预加载前两个
