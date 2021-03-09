@@ -158,6 +158,7 @@
         self.scrollView.panGestureRecognizer.enabled = YES;
         
         // 结束时的速度>0 滑动距离> 5 且UIScrollView滑动到最顶部
+        NSLog(@"%f", self.lastTransitionY);
         if (velocity.y > 0 && self.lastTransitionY > 5 && !self.isDragScrollView) {
             [self dismiss];
         }else {
