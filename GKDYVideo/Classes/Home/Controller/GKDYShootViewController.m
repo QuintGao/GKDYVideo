@@ -8,7 +8,6 @@
 
 #import "GKDYShootViewController.h"
 #import "GKDYMainViewController.h"
-#import "UIImage+GKCategory.h"
 #import <AVFoundation/AVFoundation.h>
 
 @interface GKDYShootViewController ()<GKViewControllerPushDelegate>
@@ -45,7 +44,7 @@
     self.gk_statusBarHidden = YES;
     self.gk_navBackgroundColor = [UIColor clearColor];
     
-    self.gk_navLeftBarButtonItem = [UIBarButtonItem itemWithTitle:nil image:[UIImage gk_changeImage:[UIImage imageNamed:@"close"] color:[UIColor whiteColor]] target:self action:@selector(closeAction)];
+    self.gk_navLeftBarButtonItem = [UIBarButtonItem gk_itemWithImage:[UIImage gk_changeImage:[UIImage imageNamed:@"close"] color:UIColor.whiteColor] target:self action:@selector(closeAction)];
     
     [self.view addSubview:self.coverView];
     [self.view addSubview:self.topLabel];

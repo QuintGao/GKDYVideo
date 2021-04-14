@@ -41,14 +41,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.gk_navBarAlpha = 0;
+    
     self.gk_navBackgroundColor = GKColorRGB(34, 33, 37);
-    
     self.gk_navTitleView = self.titleView;
-    
     self.gk_statusBarStyle = UIStatusBarStyleLightContent;
-    
     self.gk_navLineHidden = YES;
+    self.gk_navBarAlpha = 0;
     
     [self.view addSubview:self.pageScrollView];
     [self.pageScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -124,17 +122,18 @@
 - (void)mainTableViewDidScroll:(UIScrollView *)scrollView isMainCanScroll:(BOOL)isMainCanScroll {
     // 导航栏显隐
     CGFloat offsetY = scrollView.contentOffset.y;
-    // 0-200 0
-    // 200 - KDYHeaderHeigh - kNavBarheight 渐变从0-1
+    // 0-100 0
+    // 100 - KDYHeaderHeigh - kNavBarheight 渐变从0-1
     // > KDYHeaderHeigh - kNavBarheight 1
     CGFloat alpha = 0;
-    if (offsetY < 200) {
+    if (offsetY < 60) {
         alpha = 0;
-    }else if (offsetY > (kDYHeaderHeight - NAVBAR_HEIGHT)) {
+    }else if (offsetY > (kDYHeaderHeight - NAVBAR_HEIGHT - 40)) {
         alpha = 1;
     }else {
-        alpha = (offsetY - 200) / (kDYHeaderHeight - NAVBAR_HEIGHT - 200);
+        alpha = (offsetY - 60) / (kDYHeaderHeight - NAVBAR_HEIGHT - 60);
     }
+    NSLog(@"%f", alpha);
     self.gk_navBarAlpha = alpha;
     self.titleView.alpha = alpha;
     
@@ -156,13 +155,13 @@
 }
 
 #pragma mark - GKDYVideoViewDelegate
-- (void)videoView:(GKDYVideoView *)videoView didClickIcon:(GKDYVideoModel *)videoModel {
+- (void)videoView:(GKDYVideoView *)videoView didClickIcon:(GKAWEModel *)videoModel {
     GKDYPersonalViewController *personalVC = [GKDYPersonalViewController new];
     personalVC.model = videoModel;
     [self.navigationController pushViewController:personalVC animated:YES];
 }
 
-- (void)videoView:(GKDYVideoView *)videoView didClickComment:(GKDYVideoModel *)videoModel {
+- (void)videoView:(GKDYVideoView *)videoView didClickComment:(GKAWEModel *)videoModel {
     GKDYCommentView *commentView = [GKDYCommentView new];
     commentView.frame = CGRectMake(0, 0, GK_SCREEN_WIDTH, ADAPTATIONRATIO * 980.0f);
     
@@ -252,7 +251,7 @@
         _titleView.textColor = [UIColor whiteColor];
         _titleView.alpha = 0;
         _titleView.textAlignment = NSTextAlignmentCenter;
-        _titleView.text = self.model.author.name_show;
+        _titleView.text = self.model.author.nickname;
     }
     return _titleView;
 }

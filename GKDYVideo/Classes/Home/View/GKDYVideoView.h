@@ -12,16 +12,22 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+// 播放模式
+typedef NS_ENUM(NSUInteger, GKDYVideoPlayMode) {
+    GKDYVideoPlayModeOneLoop,       // 单个循环
+    GKDYVideoPlayModeListLoop       // 列表循环
+};
+
 @class GKDYVideoView;
 
 @protocol GKDYVideoViewDelegate <NSObject>
 
 @optional
 
-- (void)videoView:(GKDYVideoView *)videoView didClickIcon:(GKDYVideoModel *)videoModel;
-- (void)videoView:(GKDYVideoView *)videoView didClickPraise:(GKDYVideoModel *)videoModel;
-- (void)videoView:(GKDYVideoView *)videoView didClickComment:(GKDYVideoModel *)videoModel;
-- (void)videoView:(GKDYVideoView *)videoView didClickShare:(GKDYVideoModel *)videoModel;
+- (void)videoView:(GKDYVideoView *)videoView didClickIcon:(GKAWEModel *)videoModel;
+- (void)videoView:(GKDYVideoView *)videoView didClickPraise:(GKAWEModel *)videoModel;
+- (void)videoView:(GKDYVideoView *)videoView didClickComment:(GKAWEModel *)videoModel;
+- (void)videoView:(GKDYVideoView *)videoView didClickShare:(GKAWEModel *)videoModel;
 - (void)videoView:(GKDYVideoView *)videoView didScrollIsCritical:(BOOL)isCritical;
 - (void)videoView:(GKDYVideoView *)videoView didPanWithDistance:(CGFloat)distance isEnd:(BOOL)isEnd;
 
@@ -40,6 +46,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 // 当前播放内容的索引
 @property (nonatomic, assign) NSInteger                 currentPlayIndex;
+
+@property (nonatomic, assign) GKDYVideoPlayMode         playMode;
 
 - (instancetype)initWithVC:(UIViewController *)vc isPushed:(BOOL)isPushed;
 

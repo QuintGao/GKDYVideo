@@ -57,14 +57,14 @@
     return self;
 }
 
-- (void)setModel:(GKDYVideoModel *)model {
+- (void)setModel:(GKAWEModel *)model {
     _model = model;
     
-    self.nameLabel.text = model.author.name_show;
+    self.nameLabel.text = model.author.nickname;
     
-    self.dyIdLabel.text = [NSString stringWithFormat:@"ID号：%@", model.author.user_id];
+    self.dyIdLabel.text = [NSString stringWithFormat:@"ID号：%@", model.author.uid];
     
-    [self.iconImgView sd_setImageWithURL:[NSURL URLWithString:model.author.portrait] placeholderImage:[UIImage imageNamed:@"placeholderimg"]];
+    [self.iconImgView sd_setImageWithURL:[NSURL URLWithString:model.author.avatar_medium.url_list.firstObject] placeholderImage:[UIImage imageNamed:@"placeholderimg"]];
 }
 
 - (void)scrollViewDidScroll:(CGFloat)offsetY {

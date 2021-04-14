@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GKDYVideoModel.h"
+#import "GKAWEModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GKDYHeaderView : UIView
 
-@property (nonatomic, strong) GKDYVideoModel    *model;
+@property (nonatomic, strong) GKAWEModel    *model;
 
 - (void)scrollViewDidScroll:(CGFloat)offsetY;
 

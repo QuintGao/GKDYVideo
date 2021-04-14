@@ -7,7 +7,7 @@
 //
 
 #import "GKDYTabBar.h"
-#import "UIImage+GKCategory.h"
+#import <GKNavigationBar/UIImage+GKNavigationBar.h>
 
 @interface GKDYTabBar()
 
@@ -20,11 +20,19 @@
 - (instancetype)init {
     if (self = [super init]) {
         [self addSubview:self.publishBtn];
-        
-        [self setBackgroundImage:[UIImage gk_imageWithColor:[UIColor clearColor] size:CGSizeMake(SCREEN_WIDTH, TABBAR_HEIGHT)]];
         [self showLine];
     }
     return self;
+}
+
+- (void)setStyle:(GKDYTabBarStyle)style {
+    _style = style;
+    
+    if (style == GKDYTabBarStyleTransparent) {
+        [self setBackgroundImage:[UIImage gk_imageWithColor:UIColor.clearColor size:CGSizeMake(SCREEN_WIDTH, TABBAR_HEIGHT)]];
+    }else if (style == GKDYTabBarStyleTranslucent) {
+        [self setBackgroundImage:[UIImage gk_imageWithColor:[UIColor colorWithWhite:0 alpha:0.8] size:CGSizeMake(SCREEN_WIDTH, TABBAR_HEIGHT)]];
+    }
 }
 
 - (void)showLine {

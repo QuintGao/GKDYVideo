@@ -13,7 +13,6 @@
 #import "GKDYMainViewController.h"
 #import "GKDYScrollView.h"
 #import "GKDYVideoView.h"
-#import "UIImage+GKCategory.h"
 
 @interface GKDYHomeViewController()<UIScrollViewDelegate, GKViewControllerPushDelegate, UITabBarControllerDelegate>
 

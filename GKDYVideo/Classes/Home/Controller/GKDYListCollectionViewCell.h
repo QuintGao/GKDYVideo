@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GKDYVideoModel.h"
+#import "GKAWEModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface GKDYListCollectionViewCell : UICollectionViewCell
 
-@property (nonatomic, strong) GKDYVideoModel    *model;
+@property (nonatomic, strong) GKAWEModel    *model;
 
 @property (nonatomic, strong) UIImageView   *coverImgView;
 

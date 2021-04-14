@@ -50,7 +50,7 @@
     
     [self.backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(15.0f);
-        make.top.equalTo(self.view).offset(GK_SAFEAREA_TOP + 20.0f);
+        make.top.equalTo(self.view).offset(SAFE_TOP + 20.0f);
         make.width.height.mas_equalTo(44.0f);
     }];
     
@@ -123,25 +123,25 @@
 }
 
 #pragma mark - GKDYVideoViewDelegate
-- (void)videoView:(GKDYVideoView *)videoView didClickIcon:(GKDYVideoModel *)videoModel {
+- (void)videoView:(GKDYVideoView *)videoView didClickIcon:(GKAWEModel *)videoModel {
     
 }
 
-- (void)videoView:(GKDYVideoView *)videoView didClickPraise:(GKDYVideoModel *)videoModel {
-    GKDYVideoModel *model = videoModel;
-    model.isAgree = !model.isAgree;
+- (void)videoView:(GKDYVideoView *)videoView didClickPraise:(GKAWEModel *)videoModel {
+    GKAWEModel *model = videoModel;
+    model.is_like = !model.is_like;
     
-    int agreeNum = model.agree_num.intValue;
+    int agreeNum = model.statistics.digg_count.intValue;
     
-    if (model.isAgree) {
-        model.agree_num = [NSString stringWithFormat:@"%d", agreeNum + 1];
+    if (model.is_like) {
+        model.statistics.digg_count = [NSString stringWithFormat:@"%d", agreeNum + 1];
     }else {
-        model.agree_num = [NSString stringWithFormat:@"%d", agreeNum - 1];
+        model.statistics.digg_count = [NSString stringWithFormat:@"%d", agreeNum - 1];
     }
     videoView.currentPlayView.model = model;
 }
 
-- (void)videoView:(GKDYVideoView *)videoView didClickComment:(GKDYVideoModel *)videoModel {
+- (void)videoView:(GKDYVideoView *)videoView didClickComment:(GKAWEModel *)videoModel {
     GKDYCommentView *commentView = [GKDYCommentView new];
     commentView.frame = CGRectMake(0, 0, GK_SCREEN_WIDTH, ADAPTATIONRATIO * 980.0f);
     
@@ -151,7 +151,7 @@
     }];
 }
 
-- (void)videoView:(GKDYVideoView *)videoView didClickShare:(GKDYVideoModel *)videoModel {
+- (void)videoView:(GKDYVideoView *)videoView didClickShare:(GKAWEModel *)videoModel {
     
 }
 

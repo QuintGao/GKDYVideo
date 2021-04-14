@@ -100,7 +100,7 @@
 
             [self.backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(self).offset(15.0f);
-                make.top.equalTo(self).offset(GK_SAFEAREA_TOP + 20.0f);
+                make.top.equalTo(self).offset(SAFE_TOP + 20.0f);
                 make.width.height.mas_equalTo(44.0f);
             }];
         }
@@ -227,7 +227,7 @@
     self.currentPlayView.delegate = nil;
     
     // 切换播放视图
-    self.currentPlayId    = fromView.model.post_id;
+    self.currentPlayId    = fromView.model.aweme_id;
     self.currentPlayView  = fromView;
     self.currentPlayIndex = [self indexOfModel:fromView.model];
     
@@ -240,15 +240,16 @@
     @weakify(self);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         @strongify(self);
-        [self.player playVideoWithView:fromView.coverImgView url:fromView.model.video_url];
+        NSString *url = fromView.model.video.play_addr.url_list.firstObject;
+        [self.player playVideoWithView:fromView.coverImgView url:url];
     });
 }
 
 // 获取当前播放内容的索引
-- (NSInteger)indexOfModel:(GKDYVideoModel *)model {
+- (NSInteger)indexOfModel:(GKAWEModel *)model {
     __block NSInteger index = 0;
-    [self.videos enumerateObjectsUsingBlock:^(GKDYVideoModel *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([model.post_id isEqualToString:obj.post_id]) {
+    [self.videos enumerateObjectsUsingBlock:^(GKAWEModel *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([model.aweme_id isEqualToString:obj.aweme_id]) {
             index = idx;
         }
     }];
@@ -352,14 +353,18 @@
 
 // 结束滚动后开始播放
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    [self scrollViewDidEndScrollingAnimation:scrollView];
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
     if (scrollView.contentOffset.y == 0) {
-        if (self.currentPlayId == self.topView.model.post_id) return;
+        if (self.currentPlayId == self.topView.model.aweme_id) return;
         [self playVideoFrom:self.topView];
     }else if (scrollView.contentOffset.y == SCREEN_HEIGHT) {
-        if (self.currentPlayId == self.ctrView.model.post_id) return;
+        if (self.currentPlayId == self.ctrView.model.aweme_id) return;
         [self playVideoFrom:self.ctrView];
     }else if (scrollView.contentOffset.y == 2 * SCREEN_HEIGHT) {
-        if (self.currentPlayId == self.btmView.model.post_id) return;
+        if (self.currentPlayId == self.btmView.model.aweme_id) return;
         [self playVideoFrom:self.btmView];
     }
 }
@@ -490,7 +495,13 @@
         case GKDYVideoPlayerStatusEnded: {   // 播放结束
             // 重新开始播放
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [self.player resetPlay];
+                if (self.playMode == GKDYVideoPlayModeOneLoop) {
+                    [self.player resetPlay];
+                }else {
+                    CGFloat offsetY = self.scrollView.contentOffset.y;
+                    offsetY += SCREEN_HEIGHT;
+                    [self.scrollView setContentOffset:CGPointMake(0, offsetY) animated:YES];
+                }
             });
         }
             break;

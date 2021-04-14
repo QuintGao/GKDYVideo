@@ -7,14 +7,13 @@
 //
 
 #import "GKDYPlayerViewController.h"
-#import "UIImage+GKCategory.h"
 #import "GKDYPersonalViewController.h"
 #import "GKSlidePopupView.h"
 #import "GKDYCommentView.h"
 #import "GKBallLoadingView.h"
 #import "GKLikeView.h"
 
-#define kTitleViewY         (GK_SAFEAREA_TOP + 20.0f)
+#define kTitleViewY         (SAFE_TOP + 20.0f)
 // 过渡中心点
 #define kTransitionCenter   20.0f
 
@@ -34,7 +33,7 @@
 @property (nonatomic, strong) UIButton              *recBtn;
 @property (nonatomic, strong) UIButton              *cityBtn;
 
-@property (nonatomic, strong) GKDYVideoModel        *model;
+@property (nonatomic, strong) GKAWEModel            *model;
 @property (nonatomic, strong) NSArray               *videos;
 @property (nonatomic, assign) NSInteger             playIndex;
 
@@ -46,7 +45,7 @@
 
 @implementation GKDYPlayerViewController
 
-- (instancetype)initWithVideoModel:(GKDYVideoModel *)model {
+- (instancetype)initWithVideoModel:(GKAWEModel *)model {
     if (self = [super init]) {
         self.model = model;
         
@@ -82,7 +81,7 @@
         [self.view addSubview:self.backBtn];
         [self.backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.view).offset(15.0f);
-            make.top.equalTo(self.view).offset(GK_SAFEAREA_TOP + 20.0f);
+            make.top.equalTo(self.view).offset(SAFE_TOP + 20.0f);
             make.width.height.mas_equalTo(44.0f);
         }];
         
@@ -100,12 +99,12 @@
         [self.refreshView addSubview:self.refreshLabel];
         [self.view addSubview:self.loadingBgView];
         
-        self.loadingBgView.frame = CGRectMake(SCREEN_WIDTH - 15 - 44, GK_SAFEAREA_TOP, 44, 44);
+        self.loadingBgView.frame = CGRectMake(SCREEN_WIDTH - 15 - 44, SAFE_TOP, 44, 44);
         self.refreshLoadingView = [GKBallLoadingView loadingViewInView:self.loadingBgView];
         
         [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.equalTo(self.view);
-            make.top.equalTo(self.view).offset(GK_SAFEAREA_TOP + 20.0f);
+            make.top.equalTo(self.view).offset(SAFE_TOP + 20.0f);
             make.height.mas_equalTo(44.0f);
         }];
         
@@ -133,7 +132,7 @@
         
         [self.refreshView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.equalTo(self.view);
-            make.top.equalTo(self.view).offset(GK_SAFEAREA_BTM + 20.0f);
+            make.top.equalTo(self.view).offset(SAFE_BTM + 20.0f);
             make.height.mas_equalTo(44.0f);
         }];
         
@@ -153,6 +152,7 @@
             [loadingView removeFromSuperview];
             
             [self.videoView.viewModel refreshNewListWithSuccess:^(NSArray * _Nonnull list) {
+                @strongify(self);
                 [self.videoView setModels:list index:0];
             } failure:^(NSError * _Nonnull error) {
                 
@@ -193,7 +193,13 @@
 }
 
 - (void)searchClick:(id)sender {
-    
+    if (self.videoView.playMode == GKDYVideoPlayModeOneLoop) {
+        self.videoView.playMode = GKDYVideoPlayModeListLoop;
+        [self.searchBtn setTitle:@"列表循环" forState:UIControlStateNormal];
+    }else {
+        self.videoView.playMode = GKDYVideoPlayModeOneLoop;
+        [self.searchBtn setTitle:@"单个循环" forState:UIControlStateNormal];
+    }
 }
 
 - (void)shootClick:(id)sender {
@@ -230,41 +236,36 @@
 }
 
 #pragma mark - GKDYVideoViewDelegate
-- (void)videoView:(GKDYVideoView *)videoView didClickIcon:(GKDYVideoModel *)videoModel {
-    GKDYPersonalViewController *personalVC = [GKDYPersonalViewController new];
+- (void)videoView:(GKDYVideoView *)videoView didClickIcon:(GKAWEModel *)videoModel {
+    GKDYPersonalViewController *personalVC = [[GKDYPersonalViewController alloc] init];
     personalVC.model = videoModel;
     [self.navigationController pushViewController:personalVC animated:YES];
 }
 
-- (void)videoView:(GKDYVideoView *)videoView didClickPraise:(GKDYVideoModel *)videoModel {
-    
-    GKDYVideoModel *model = videoModel;
-    
-    model.isAgree = !model.isAgree;
-    
-    int agreeNum = model.agree_num.intValue;
-    
-    if (model.isAgree) {
-        model.agree_num = [NSString stringWithFormat:@"%d", agreeNum + 1];
+- (void)videoView:(GKDYVideoView *)videoView didClickPraise:(GKAWEModel *)videoModel {
+    GKAWEModel *model = videoModel;
+    model.is_like = !model.is_like;
+    int likeCount = model.statistics.digg_count.intValue;
+    if (model.is_like) {
+        model.statistics.digg_count = [NSString stringWithFormat:@"%d", likeCount + 1];
     }else {
-        model.agree_num = [NSString stringWithFormat:@"%d", agreeNum - 1];
+        model.statistics.digg_count = [NSString stringWithFormat:@"%d", likeCount - 1];
     }
-    
-    videoView.currentPlayView.model = videoModel;
+    videoView.currentPlayView.model = model;
 }
 
-- (void)videoView:(GKDYVideoView *)videoView didClickComment:(GKDYVideoModel *)videoModel {
+- (void)videoView:(GKDYVideoView *)videoView didClickComment:(GKAWEModel *)videoModel {
     GKDYCommentView *commentView = [GKDYCommentView new];
     commentView.backgroundColor = UIColor.whiteColor;
-    commentView.frame = CGRectMake(0, 0, GK_SCREEN_WIDTH, GK_SCREEN_HEIGHT - GK_STATUSBAR_NAVBAR_HEIGHT);
+    commentView.frame = CGRectMake(0, 0, SCREEN_WIDTH, ADAPTATIONRATIO * 980.0f);
     
-    GKSlidePopupView *popupView = [GKSlidePopupView popupViewWithFrame:[UIScreen mainScreen].bounds contentView:commentView];
-    [popupView showFrom:[UIApplication sharedApplication].keyWindow completion:^{
+    GKSlidePopupView *popupView = [GKSlidePopupView popupViewWithFrame:UIScreen.mainScreen.bounds contentView:commentView];
+    [popupView showFrom:UIApplication.sharedApplication.keyWindow completion:^{
         [commentView requestData];
     }];
 }
 
-- (void)videoView:(GKDYVideoView *)videoView didClickShare:(GKDYVideoModel *)videoModel {
+- (void)videoView:(GKDYVideoView *)videoView didClickShare:(GKAWEModel *)videoModel {
     
 }
 
@@ -377,7 +378,7 @@
         _shootBtn = [UIButton new];
         [_shootBtn setImage:[UIImage imageNamed:@"iconTitlebarSuipai"] forState:UIControlStateNormal];
         [_shootBtn setTitle:@"随拍" forState:UIControlStateNormal];
-        [_shootBtn setTitleColor:GKColorGray(169) forState:UIControlStateNormal];
+        [_shootBtn setTitleColor:[UIColor colorWithWhite:1.0 alpha:0.6] forState:UIControlStateNormal];
         _shootBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0);
         [_shootBtn addTarget:self action:@selector(shootClick:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -387,7 +388,9 @@
 - (UIButton *)searchBtn {
     if (!_searchBtn) {
         _searchBtn = [UIButton new];
-        [_searchBtn setImage:[UIImage gk_changeImage:[UIImage imageNamed:@"icHomeSearchPure"] color:[UIColor whiteColor]] forState:UIControlStateNormal];
+//        [_searchBtn setImage:[UIImage gk_changeImage:[UIImage imageNamed:@"icHomeSearchPure"] color:[UIColor whiteColor]] forState:UIControlStateNormal];
+        [_searchBtn setTitle:@"单个循环" forState:UIControlStateNormal];
+        [_searchBtn setTitleColor:[UIColor colorWithWhite:1.0 alpha:0.6] forState:UIControlStateNormal];
         [_searchBtn addTarget:self action:@selector(searchClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _searchBtn;
@@ -415,7 +418,7 @@
     if (!_cityBtn) {
         _cityBtn = [UIButton new];
         [_cityBtn setTitle:@"同城" forState:UIControlStateNormal];
-        [_cityBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+        [_cityBtn setTitleColor:[UIColor colorWithWhite:1.0 alpha:0.6] forState:UIControlStateNormal];
         _cityBtn.titleLabel.font = [UIFont systemFontOfSize:16.0f];
         [_cityBtn addTarget:self action:@selector(itemClick:) forControlEvents:UIControlEventTouchUpInside];
     }

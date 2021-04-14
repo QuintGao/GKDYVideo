@@ -7,7 +7,6 @@
 //
 
 #import "GKDYCommentView.h"
-#import "UIImage+GKCategory.h"
 #import "GKBallLoadingView.h"
 
 @interface GKDYCommentView()<UITableViewDataSource, UITableViewDelegate>

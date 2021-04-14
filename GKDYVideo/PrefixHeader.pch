@@ -9,7 +9,7 @@
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
 
-#import <GKNavigationBarViewController/GKNavigationBarViewController.h>
+#import <GKNavigationBar/GKNavigationBar.h>
 #import <AFNetworking/AFNetworking.h>
 #import <Masonry/Masonry.h>
 #import <YYModel/YYModel.h>
@@ -31,8 +31,12 @@
 // 状态栏高度
 #define STATUSBAR_HEIGHT    (IS_iPhoneX ? 44.0f : 20.0f)
 
+// 安全区域（不包含状态栏）
+#define SAFE_TOP            (IS_iPhoneX ? 24.0f : 0.0f)
+#define SAFE_BTM            (IS_iPhoneX ? 34.0f : 0.0f)
+
 // 判断是否是iPhone X系列
-#define IS_iPhoneX          GK_IS_iPhoneX
+#define IS_iPhoneX          GK_NOTCHED_SCREEN
 
 // 颜色
 #define GKColorRGBA(r, g, b, a) [UIColor colorWithRed:(r / 255.0) green:(g / 255.0) blue:(b / 255.0) alpha:a]

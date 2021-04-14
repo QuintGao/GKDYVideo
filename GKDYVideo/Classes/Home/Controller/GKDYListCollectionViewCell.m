@@ -33,12 +33,12 @@
     return self;
 }
 
-- (void)setModel:(GKDYVideoModel *)model {
+- (void)setModel:(GKAWEModel *)model {
     _model = model;
     
-    [self.coverImgView sd_setImageWithURL:[NSURL URLWithString:model.first_frame_cover]];
+    [self.coverImgView sd_setImageWithURL:[NSURL URLWithString:model.video.cover.url_list.firstObject]];
     
-    [self.starBtn setTitle:model.agree_num forState:UIControlStateNormal];
+    [self.starBtn setTitle:model.statistics.digg_count forState:UIControlStateNormal];
 }
 
 #pragma mark - 懒加载

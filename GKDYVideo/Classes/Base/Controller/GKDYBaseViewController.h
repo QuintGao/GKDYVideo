@@ -6,11 +6,11 @@
 //  Copyright © 2018 QuintGao. All rights reserved.
 //
 
-#import <GKNavigationBarViewController/GKNavigationBarViewController.h>
+#import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface GKDYBaseViewController : GKNavigationBarViewController
+@interface GKDYBaseViewController : UIViewController
 
 @end
 

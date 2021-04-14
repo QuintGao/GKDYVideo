@@ -27,6 +27,9 @@
         configure.gk_navItemLeftSpace   = 12.0f;
         configure.gk_navItemRightSpace  = 12.0f;
         configure.statusBarStyle        = UIStatusBarStyleLightContent;
+    }];
+    
+    [GKGestureConfigure setupCustomConfigure:^(GKGestureHandleConfigure * _Nonnull configure) {
         configure.gk_translationX       = 10.0f;
         configure.gk_translationY       = 15.0f;
         configure.gk_scaleX             = 0.90f;
@@ -36,7 +39,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     
-    GKDYNavigationController *nav = [GKDYNavigationController rootVC:[GKDYShootViewController new] translationScale:YES];
+    GKDYNavigationController *nav = [GKDYNavigationController rootVC:[GKDYShootViewController new]];
     
 //    GKDYNavigationController *nav = [GKDYNavigationController rootVC:[GKDYHomeViewController new] translationScale:NO];
     nav.gk_openScrollLeftPush = YES; // 开启左滑push功能

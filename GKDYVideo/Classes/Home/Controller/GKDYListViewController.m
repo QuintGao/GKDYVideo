@@ -51,11 +51,11 @@
         
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableLeaves error:nil];
         
-        NSArray *videoList = dic[@"data"][@"video_list"];
+        NSArray *videoList = dic[@"data"];
         
         NSMutableArray *array = [NSMutableArray array];
         for (NSDictionary *dict in videoList) {
-            GKDYVideoModel *model = [GKDYVideoModel yy_modelWithDictionary:dict];
+            GKAWEModel *model = [GKAWEModel yy_modelWithDictionary:dict];
             [array addObject:model];
         }
         
@@ -84,11 +84,11 @@
         
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableLeaves error:nil];
         
-        NSArray *videoList = dic[@"data"][@"video_list"];
+        NSArray *videoList = dic[@"data"];
         
         NSMutableArray *array = [NSMutableArray new];
         for (NSDictionary *dict in videoList) {
-            GKDYVideoModel *model = [GKDYVideoModel yy_modelWithDictionary:dict];
+            GKAWEModel *model = [GKAWEModel yy_modelWithDictionary:dict];
             [array addObject:model];
         }
         

@@ -11,8 +11,8 @@
 #import "GKDYAttentViewController.h"
 #import "GKDYMessageViewController.h"
 #import "GKDYMineViewController.h"
-#import "UIImage+GKCategory.h"
 #import "GKDYTabBar.h"
+#import "UITabBar+GKCategory.h"
 
 @interface GKDYMainViewController ()<UITabBarControllerDelegate, GKDYPlayerViewControllerDelegate, GKViewControllerPopDelegate>
 
@@ -42,18 +42,52 @@
 
 - (void)addChildVC:(UIViewController *)childVC title:(NSString *)title {
     childVC.tabBarItem.title = title;
-    childVC.tabBarItem.image = [[UIImage gk_imageWithColor:[UIColor clearColor] size:CGSizeMake(36, 3)] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    childVC.tabBarItem.selectedImage = [[UIImage gk_imageWithColor:[UIColor whiteColor] size:CGSizeMake(36, 3)] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    
-    childVC.tabBarItem.titlePositionAdjustment = UIOffsetMake(0, -14);
+    [self setTabbarStyle:GKDYTabBarStyleTransparent vc:childVC];
+
+    childVC.tabBarItem.titlePositionAdjustment = UIOffsetMake(0, -100);
     childVC.tabBarItem.imageInsets = UIEdgeInsetsMake(28, 0, -28, 0);
     
-    [childVC.tabBarItem setTitleTextAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:16], NSForegroundColorAttributeName: [UIColor colorWithWhite:1.0 alpha:0.6]} forState:UIControlStateNormal];
-    [childVC.tabBarItem setTitleTextAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:16.0f], NSForegroundColorAttributeName: [UIColor whiteColor]} forState:UIControlStateSelected];
-
-    GKDYNavigationController *nav = [GKDYNavigationController rootVC:childVC translationScale:NO];
+    GKDYNavigationController *nav = [GKDYNavigationController rootVC:childVC];
     nav.gk_openScrollLeftPush = YES;
     [self addChildViewController:nav];
+}
+
+- (void)setTabbarStyle:(GKDYTabBarStyle)style vc:(UIViewController *)vc {
+    self.dyTabBar.style = style;
+    
+    UIImage *normalImage = [UIImage gk_imageWithColor:UIColor.clearColor size:CGSizeMake(1, 1)];;
+    UIImage *selectImage = [UIImage gk_imageWithColor:[UIColor whiteColor] size:CGSizeMake(36, 3)];
+    UIColor *normalTitleColor = [UIColor colorWithWhite:1.0 alpha:0.6];
+    UIColor *selectTitleColor = UIColor.whiteColor;
+    UIFont *normalTitleFont = [UIFont boldSystemFontOfSize:15];
+    UIFont *selectTitleFont = [UIFont boldSystemFontOfSize:16];
+    UIImage *backgroundImage = nil;
+    UIImage *shadowImage = [UIImage gk_imageWithColor:[UIColor colorWithWhite:1.0f alpha:0.2f] size:CGSizeMake(SCREEN_WIDTH, 0.5f)];;
+    
+    if (style == GKDYTabBarStyleTransparent) {
+        backgroundImage = [UIImage gk_imageWithColor:UIColor.clearColor size:CGSizeMake(SCREEN_WIDTH, TABBAR_HEIGHT)];
+    }else if (style == GKDYTabBarStyleTranslucent) {
+        backgroundImage = [UIImage gk_imageWithColor:[UIColor colorWithWhite:0 alpha:0.8] size:CGSizeMake(SCREEN_WIDTH, TABBAR_HEIGHT)];
+    }
+    vc.tabBarItem.image = [normalImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    vc.tabBarItem.selectedImage = [selectImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    NSDictionary *normalTitleAttr = @{NSFontAttributeName: normalTitleFont, NSForegroundColorAttributeName: normalTitleColor};
+    NSDictionary *selectTitleAttr = @{NSFontAttributeName: selectTitleFont, NSForegroundColorAttributeName: selectTitleColor};
+    if (@available(iOS 13.0, *)) {
+        UITabBarAppearance *appearance = [UITabBarAppearance new];
+        [appearance ay_applyItemAppearanceWithBlock:^(UITabBarItemAppearance * _Nullable itemAppearance) {
+            itemAppearance.normal.titleTextAttributes = normalTitleAttr;
+            itemAppearance.selected.titleTextAttributes = selectTitleAttr;
+        }];
+        appearance.backgroundEffect = nil;
+        appearance.shadowImage = shadowImage;
+        appearance.backgroundImage = backgroundImage;
+        vc.tabBarItem.standardAppearance = appearance;
+    }else {
+        [vc.tabBarItem setTitleTextAttributes:normalTitleAttr forState:UIControlStateNormal];
+        [vc.tabBarItem setTitleTextAttributes:selectTitleAttr forState:UIControlStateSelected];
+    }
 }
 
 #pragma mark - GKDYPlayerViewControllerDelegate

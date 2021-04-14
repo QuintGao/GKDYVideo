@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) id<GKDYPlayerViewControllerDelegate> delegate;
 
 // 播放单个视频
-- (instancetype)initWithVideoModel:(GKDYVideoModel *)model;
+- (instancetype)initWithVideoModel:(GKAWEModel *)model;
 
 // 播放一组视频，并指定播放位置
 - (instancetype)initWithVideos:(NSArray *)videos index:(NSInteger)index;

@@ -116,34 +116,27 @@
     return self;
 }
 
-- (void)setModel:(GKDYVideoModel *)model {
+- (void)setModel:(GKAWEModel *)model {
     _model = model;
     
     self.sliderView.value = 0;
     
-    if (model.video_width > model.video_height) {
+    if (model.video.width.floatValue > model.video.height.floatValue) {
         self.coverImgView.contentMode = UIViewContentModeScaleAspectFit;
     }else {
         self.coverImgView.contentMode = UIViewContentModeScaleAspectFill;
     }
+    NSString *url = model.video.cover.url_list.firstObject;
+    [self.coverImgView sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"img_video_loading"]];
+    self.nameLabel.text = [NSString stringWithFormat:@"@%@", model.author.nickname];
+    [self.iconView sd_setImageWithURL:[NSURL URLWithString:model.author.avatar_thumb.url_list.firstObject] placeholderImage:[UIImage imageNamed:@"placeholderimg"]];
+    self.contentLabel.text = model.desc;
     
-    [self.coverImgView sd_setImageWithURL:[NSURL URLWithString:model.thumbnail_url] placeholderImage:[UIImage imageNamed:@"img_video_loading"]];
+    [self.likeView setupLikeState:model.is_like];
+    [self.likeView setupLikeCount:model.statistics.digg_count];
     
-    self.nameLabel.text = [NSString stringWithFormat:@"@%@", model.author.name_show];
-    
-    if ([model.author.portrait containsString:@"http"]) {
-         [self.iconView sd_setImageWithURL:[NSURL URLWithString:model.author.portrait] placeholderImage:[UIImage imageNamed:@"placeholderimg"]];
-    }else {
-        self.iconView.image = [UIImage imageNamed:@"placeholderimg"];
-    }
-    
-    self.contentLabel.text = model.title;
-    
-    [self.likeView setupLikeState:model.isAgree];
-    [self.likeView setupLikeCount:model.agree_num];
-    
-    [self.commentBtn setTitle:model.comment_num forState:UIControlStateNormal];
-    [self.shareBtn setTitle:model.share_num forState:UIControlStateNormal];
+    [self.commentBtn setTitle:model.statistics.comment_count forState:UIControlStateNormal];
+    [self.shareBtn setTitle:model.statistics.share_count forState:UIControlStateNormal];
 }
 
 #pragma mark - Public Methods
@@ -226,7 +219,7 @@
 - (UIImageView *)coverImgView {
     if (!_coverImgView) {
         _coverImgView = [UIImageView new];
-        _coverImgView.contentMode = UIViewContentModeScaleAspectFit;
+        _coverImgView.contentMode = UIViewContentModeScaleAspectFill;
         _coverImgView.clipsToBounds = YES;
     }
     return _coverImgView;
