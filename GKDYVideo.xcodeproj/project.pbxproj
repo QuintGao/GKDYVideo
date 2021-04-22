@@ -12,6 +12,7 @@
 		601140C322ED6CAD0014EF50 /* awemes.json in Resources */ = {isa = PBXBuildFile; fileRef = 601140C222ED6CAC0014EF50 /* awemes.json */; };
 		601140C622EFD0450014EF50 /* GKDYScaleVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 601140C522EFD0450014EF50 /* GKDYScaleVideoView.m */; };
 		6013272E22F1BF0700C055B3 /* GKDYPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6013272C22F1BF0700C055B3 /* GKDYPanGestureRecognizer.m */; };
+		603969E526315A5D0024ED97 /* NSString+GKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 603969E426315A5D0024ED97 /* NSString+GKCategory.m */; };
 		60657EFA21C1110F000F97DA /* GKDYMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60657EF921C1110F000F97DA /* GKDYMainViewController.m */; };
 		60657EFC21C117F0000F97DA /* video1.json in Resources */ = {isa = PBXBuildFile; fileRef = 60657EFB21C117F0000F97DA /* video1.json */; };
 		606A77DD215DFCB100DC2F63 /* GKDYPersonalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 606A77DB215DFCB000DC2F63 /* GKDYPersonalViewController.m */; };
@@ -88,6 +89,8 @@
 		601140C522EFD0450014EF50 /* GKDYScaleVideoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYScaleVideoView.m; sourceTree = "<group>"; };
 		6013272C22F1BF0700C055B3 /* GKDYPanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKDYPanGestureRecognizer.m; sourceTree = "<group>"; };
 		6013272D22F1BF0700C055B3 /* GKDYPanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKDYPanGestureRecognizer.h; sourceTree = "<group>"; };
+		603969E326315A5D0024ED97 /* NSString+GKCategory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+GKCategory.h"; sourceTree = "<group>"; };
+		603969E426315A5D0024ED97 /* NSString+GKCategory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+GKCategory.m"; sourceTree = "<group>"; };
 		60657EF821C1110F000F97DA /* GKDYMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYMainViewController.h; sourceTree = "<group>"; };
 		60657EF921C1110F000F97DA /* GKDYMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYMainViewController.m; sourceTree = "<group>"; };
 		60657EFB21C117F0000F97DA /* video1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = video1.json; sourceTree = "<group>"; };
@@ -346,6 +349,8 @@
 				60D7CF5C2626C529004D7477 /* NSMethodSignature+GKCategory.m */,
 				60D7CF5E2626C529004D7477 /* UITabBar+GKCategory.h */,
 				60D7CF5F2626C529004D7477 /* UITabBar+GKCategory.m */,
+				603969E326315A5D0024ED97 /* NSString+GKCategory.h */,
+				603969E426315A5D0024ED97 /* NSString+GKCategory.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -766,6 +771,7 @@
 				79CC62E221573F3C00101773 /* GKDYVideoModel.m in Sources */,
 				79DD87CE226C268D008FB903 /* GKDYNavigationController.m in Sources */,
 				606A77DD215DFCB100DC2F63 /* GKDYPersonalViewController.m in Sources */,
+				603969E526315A5D0024ED97 /* NSString+GKCategory.m in Sources */,
 				79CC62F52158E44300101773 /* GKNetworking.m in Sources */,
 				6013272E22F1BF0700C055B3 /* GKDYPanGestureRecognizer.m in Sources */,
 				79CC62942157377400101773 /* AppDelegate.m in Sources */,
@@ -941,9 +947,10 @@
 			baseConfigurationReference = ACB89D940248F84479D31DDA /* Pods-GKDYVideo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: xinjun zhang (DNJGV7XB9Q)";
+				CODE_SIGN_IDENTITY = "Apple Development: xinjun zhang (DNJGV7XB9Q)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = X52753HQNM;
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = GKDYVideo/PrefixHeader.pch;
 				INFOPLIST_FILE = GKDYVideo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -963,9 +970,10 @@
 			baseConfigurationReference = 126D76C9517C38C3B7C81D53 /* Pods-GKDYVideo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: xinjun zhang (DNJGV7XB9Q)";
+				CODE_SIGN_IDENTITY = "Apple Development: xinjun zhang (DNJGV7XB9Q)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = X52753HQNM;
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = GKDYVideo/PrefixHeader.pch;
 				INFOPLIST_FILE = GKDYVideo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

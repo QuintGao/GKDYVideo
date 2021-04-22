@@ -38,6 +38,8 @@ typedef NS_ENUM(NSUInteger, GKDYVideoPlayerStatus) {
 
 @property (nonatomic, assign) BOOL                          isPlaying;
 
+@property (nonatomic, assign) BOOL                          loop;
+
 
 /**
  根据指定url在指定视图上播放视频

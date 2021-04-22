@@ -109,6 +109,12 @@
     return self.player.isPlaying;
 }
 
+- (void)setLoop:(BOOL)loop {
+    _loop = loop;
+    
+    self.player.loop = loop;
+}
+
 #pragma mark - Private Methods
 - (void)playerStatusChanged:(GKDYVideoPlayerStatus)status {
     self.status = status;

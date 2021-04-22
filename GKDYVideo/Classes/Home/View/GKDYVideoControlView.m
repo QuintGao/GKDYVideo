@@ -8,6 +8,7 @@
 
 #import "GKDYVideoControlView.h"
 #import "GKLikeView.h"
+#import "NSString+GKCategory.h"
 
 @interface GKDYVideoItemButton : UIButton
 
@@ -133,10 +134,10 @@
     self.contentLabel.text = model.desc;
     
     [self.likeView setupLikeState:model.is_like];
-    [self.likeView setupLikeCount:model.statistics.digg_count];
+    [self.likeView setupLikeCount:[model.statistics.digg_count gk_unitConvert]];
     
-    [self.commentBtn setTitle:model.statistics.comment_count forState:UIControlStateNormal];
-    [self.shareBtn setTitle:model.statistics.share_count forState:UIControlStateNormal];
+    [self.commentBtn setTitle:[model.statistics.comment_count gk_unitConvert] forState:UIControlStateNormal];
+    [self.shareBtn setTitle:[model.statistics.share_count gk_unitConvert] forState:UIControlStateNormal];
 }
 
 #pragma mark - Public Methods

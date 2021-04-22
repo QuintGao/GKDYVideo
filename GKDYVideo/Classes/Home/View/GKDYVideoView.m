@@ -120,6 +120,16 @@
 }
 
 #pragma mark - Public Methods
+- (void)setPlayMode:(GKDYVideoPlayMode)playMode {
+    _playMode = playMode;
+    
+    if (playMode == GKDYVideoPlayModeOneLoop) {
+        self.player.loop = YES;
+    }else {
+        self.player.loop = NO;
+    }
+}
+
 - (void)setModels:(NSArray *)models index:(NSInteger)index {
     [self.videos removeAllObjects];
     [self.videos addObjectsFromArray:models];
@@ -495,9 +505,7 @@
         case GKDYVideoPlayerStatusEnded: {   // 播放结束
             // 重新开始播放
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                if (self.playMode == GKDYVideoPlayModeOneLoop) {
-                    [self.player resetPlay];
-                }else {
+                if (self.playMode == GKDYVideoPlayModeListLoop) {
                     CGFloat offsetY = self.scrollView.contentOffset.y;
                     offsetY += SCREEN_HEIGHT;
                     [self.scrollView setContentOffset:CGPointMake(0, offsetY) animated:YES];
@@ -631,6 +639,7 @@
     if (!_player) {
         _player = [GKDYVideoPlayer new];
         _player.delegate = self;
+        _player.loop = YES;
     }
     return _player;
 }
