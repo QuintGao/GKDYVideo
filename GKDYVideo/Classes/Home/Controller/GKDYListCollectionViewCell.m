@@ -7,6 +7,7 @@
 //
 
 #import "GKDYListCollectionViewCell.h"
+#import "NSString+GKCategory.h"
 
 @interface GKDYListCollectionViewCell()
 
@@ -36,15 +37,15 @@
 - (void)setModel:(GKAWEModel *)model {
     _model = model;
     
-    [self.coverImgView sd_setImageWithURL:[NSURL URLWithString:model.video.cover.url_list.firstObject]];
+    [self.coverImgView sd_setImageWithURL:[NSURL URLWithString:model.video.dynamic_cover.url_list.firstObject]];
     
-    [self.starBtn setTitle:model.statistics.digg_count forState:UIControlStateNormal];
+    [self.starBtn setTitle:[model.statistics.digg_count gk_unitConvert] forState:UIControlStateNormal];
 }
 
 #pragma mark - 懒加载
-- (UIImageView *)coverImgView {
+- (SDAnimatedImageView *)coverImgView {
     if (!_coverImgView) {
-        _coverImgView = [UIImageView new];
+        _coverImgView = [SDAnimatedImageView new];
         _coverImgView.contentMode = UIViewContentModeScaleAspectFill;
         _coverImgView.clipsToBounds = YES;
     }

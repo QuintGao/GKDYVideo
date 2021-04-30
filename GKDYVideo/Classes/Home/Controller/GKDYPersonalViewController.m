@@ -9,7 +9,7 @@
 #import "GKDYPersonalViewController.h"
 #import "GKNetworking.h"
 #import "GKDYPersonalModel.h"
-#import <GKPageScrollView/GKPageScrollView.h>
+#import <GKPageSmoothView/GKPageSmoothView.h>
 #import <JXCategoryView/JXCategoryView.h>
 #import "GKDYHeaderView.h"
 #import "GKDYVideoViewController.h"
@@ -18,9 +18,9 @@
 #import "GKDYCommentView.h"
 #import "GKSlidePopupView.h"
 
-@interface GKDYPersonalViewController ()<GKPageScrollViewDelegate, GKPageTableViewGestureDelegate, JXCategoryViewDelegate, UIScrollViewDelegate, GKDYVideoViewDelegate>
+@interface GKDYPersonalViewController ()<GKPageSmoothViewDataSource, GKPageSmoothViewDelegate, JXCategoryViewDelegate, UIScrollViewDelegate, GKDYVideoViewDelegate>
 
-@property (nonatomic, strong) GKPageScrollView      *pageScrollView;
+@property (nonatomic, strong) GKPageSmoothView      *smoothView;
 
 @property (nonatomic, strong) GKDYHeaderView        *headerView;
 
@@ -41,21 +41,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
     self.gk_navBackgroundColor = GKColorRGB(34, 33, 37);
     self.gk_navTitleView = self.titleView;
     self.gk_statusBarStyle = UIStatusBarStyleLightContent;
     self.gk_navLineHidden = YES;
     self.gk_navBarAlpha = 0;
     
-    [self.view addSubview:self.pageScrollView];
-    [self.pageScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.view addSubview:self.smoothView];
+    [self.smoothView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
     
+    self.categoryView.contentScrollView = self.smoothView.listCollectionView;
     self.headerView.model = self.model;
-    
-    [self.pageScrollView reloadData];
+    [self.smoothView reloadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -89,39 +88,39 @@
     self.scaleView = scaleView;
 }
 
-#pragma mark - GKPageScrollViewDelegate
-- (BOOL)shouldLazyLoadListInPageScrollView:(GKPageScrollView *)pageScrollView {
-    return YES;
-}
-
-- (UIView *)headerViewInPageScrollView:(GKPageScrollView *)pageScrollView {
+#pragma mark - GKPageSmoothViewDataSource
+- (UIView *)headerViewInSmoothView:(GKPageSmoothView *)smoothView {
     return self.headerView;
 }
 
-- (UIView *)segmentedViewInPageScrollView:(GKPageScrollView *)pageScrollView {
+- (UIView *)segmentedViewInSmoothView:(GKPageSmoothView *)smoothView {
     return self.categoryView;
 }
 
-- (NSInteger)numberOfListsInPageScrollView:(GKPageScrollView *)pageScrollView {
-    return self.titles.count;
+- (NSInteger)numberOfListsInSmoothView:(GKPageSmoothView *)smoothView {
+    return self.categoryView.titles.count;
 }
 
-- (id<GKPageListViewDelegate>)pageScrollView:(GKPageScrollView *)pageScrollView initListAtIndex:(NSInteger)index {
+- (id<GKPageSmoothListViewDelegate>)smoothView:(GKPageSmoothView *)smoothView initListAtIndex:(NSInteger)index {
     GKDYListViewController *listVC = [GKDYListViewController new];
-    
     @weakify(self);
     listVC.itemClickBlock = ^(NSArray * _Nonnull videos, NSInteger index) {
         @strongify(self);
         [self showVideoVCWithVideos:videos index:index];
     };
     
+    listVC.refreshBlock = ^{
+        [smoothView scrollToOriginalPoint];
+    };
+    
     [self addChildViewController:listVC];
     return listVC;
 }
 
-- (void)mainTableViewDidScroll:(UIScrollView *)scrollView isMainCanScroll:(BOOL)isMainCanScroll {
+#pragma mark - GKPageSmoothViewDelegate
+- (void)smoothView:(GKPageSmoothView *)smoothView listScrollViewDidScroll:(UIScrollView *)scrollView contentOffset:(CGPoint)contentOffset {
     // 导航栏显隐
-    CGFloat offsetY = scrollView.contentOffset.y;
+    CGFloat offsetY = contentOffset.y;
     // 0-100 0
     // 100 - KDYHeaderHeigh - kNavBarheight 渐变从0-1
     // > KDYHeaderHeigh - kNavBarheight 1
@@ -133,25 +132,18 @@
     }else {
         alpha = (offsetY - 60) / (kDYHeaderHeight - NAVBAR_HEIGHT - 60);
     }
-    NSLog(@"%f", alpha);
     self.gk_navBarAlpha = alpha;
     self.titleView.alpha = alpha;
     
+    if (offsetY > smoothView.headerContainerHeight) {
+        return;
+    }
     [self.headerView scrollViewDidScroll:offsetY];
 }
 
 #pragma mark - JXCategoryViewDelegate
 - (void)categoryView:(JXCategoryBaseView *)categoryView didSelectedItemAtIndex:(NSInteger)index {
-    self.currentListVC = (GKDYListViewController *)self.pageScrollView.validListDict[@(index)];
-}
-
-#pragma mark - UIScrollViewDelegate
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    [self.pageScrollView horizonScrollViewWillBeginScroll];
-}
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    [self.pageScrollView horizonScrollViewDidEndedScroll];
+    self.currentListVC = (GKDYListViewController *)self.smoothView.listDict[@(index)];
 }
 
 #pragma mark - GKDYVideoViewDelegate
@@ -172,22 +164,20 @@
 }
 
 #pragma mark - GKPageTableViewGestureDelegate
-- (BOOL)pageTableView:(GKPageTableView *)tableView gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    return YES;
-}
-
 - (BOOL)prefersStatusBarHidden {
     [self refreshNavBarFrame];
     return self.gk_statusBarHidden;
 }
 
 #pragma mark - 懒加载
-- (GKPageScrollView *)pageScrollView {
-    if (!_pageScrollView) {
-        _pageScrollView = [[GKPageScrollView alloc] initWithDelegate:self];
-        _pageScrollView.mainTableView.gestureDelegate = self;
+- (GKPageSmoothView *)smoothView {
+    if (!_smoothView) {
+        _smoothView = [[GKPageSmoothView alloc] initWithDataSource:self];
+        _smoothView.delegate = self;
+        _smoothView.ceilPointHeight = GK_STATUSBAR_NAVBAR_HEIGHT;
+        _smoothView.listCollectionView.gk_openGestureHandle = YES;
     }
-    return _pageScrollView;
+    return _smoothView;
 }
 
 - (GKDYHeaderView *)headerView {
@@ -212,7 +202,7 @@
     if (!_categoryView) {
         _categoryView = [[JXCategoryTitleView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40.0f)];
         _categoryView.backgroundColor = GKColorRGB(34, 33, 37);
-        _categoryView.titles = self.titles;
+        _categoryView.titles = @[@"作品 129", @"动态 129", @"喜欢 591"];
         _categoryView.delegate = self;
         _categoryView.titleColor = [UIColor grayColor];
         _categoryView.titleSelectedColor = [UIColor whiteColor];
@@ -225,8 +215,6 @@
         lineView.indicatorCornerRadius = 0;
         lineView.lineStyle = JXCategoryIndicatorLineStyle_Normal;
         _categoryView.indicators = @[lineView];
-        
-        _categoryView.contentScrollView = self.pageScrollView.listContainerView.collectionView;
         
         // 添加分割线
         UIView *btmLineView = [UIView new];

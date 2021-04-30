@@ -62,10 +62,12 @@
         [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self);
         }];
-        
+        isPushed = YES;
         // 不是push过来的，添加下拉刷新
         if (!isPushed) {
+            @weakify(self);
             self.scrollView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+                @strongify(self);
                 if (self.isRefreshMore) return;
                 self.isRefreshMore = YES;
                 
@@ -74,6 +76,7 @@
                 self.currentPlayIndex = self.videos.count - 1;
                 
                 [self.viewModel refreshMoreListWithSuccess:^(NSArray * _Nonnull list) {
+                    @strongify(self);
                     self.isRefreshMore = NO;
                     
                     if (list) {
@@ -89,6 +92,7 @@
                     
                     self.scrollView.contentOffset = CGPointMake(0, 2 * SCREEN_HEIGHT);
                 } failure:^(NSError * _Nonnull error) {
+                    @strongify(self);
                     self.isRefreshMore = NO;
                     [self.scrollView.mj_footer endRefreshingWithNoMoreData];
                 }];

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GKAWEModel.h"
+#import <SDWebImage/SDAnimatedImageView.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) GKAWEModel    *model;
 
-@property (nonatomic, strong) UIImageView   *coverImgView;
+@property (nonatomic, strong) SDAnimatedImageView   *coverImgView;
 
 @end
 

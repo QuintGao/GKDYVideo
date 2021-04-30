@@ -7,12 +7,13 @@ target 'GKDYVideo' do
 
   pod 'AFNetworking'
   pod 'SDWebImage'
+  pod 'SDWebImageWebPCoder'
   pod 'Masonry'
   pod 'YYModel'
   pod 'GKNavigationBar'
   pod 'TXLiteAVSDK_Player'  # 腾讯云播放器-独立播放器
   pod 'MJRefresh'
-  pod 'GKPageScrollView'
+  pod 'GKPageSmoothView'
   pod 'JXCategoryView'
 
 end

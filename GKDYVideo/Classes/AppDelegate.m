@@ -10,6 +10,8 @@
 #import "GKDYHomeViewController.h"
 #import "GKDYShootViewController.h"
 #import "GKDYNavigationController.h"
+#import <SDWebImage/SDWebImage.h>
+#import <SDWebImageWebPCoder/SDWebImageWebPCoder.h>
 
 @interface AppDelegate ()
 
@@ -47,6 +49,13 @@
     
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
+    
+    // Add WebPCoder
+    SDImageWebPCoder *webPCoder = [SDImageWebPCoder sharedCoder];
+    [[SDImageCodersManager sharedManager] addCoder:webPCoder];
+    
+    // Modify HTTP Accept Header
+    [[SDWebImageDownloader sharedDownloader] setValue:@"image/webp,image/*,*/*;q=0.8" forHTTPHeaderField:@"Accept"];
     
     return YES;
 }

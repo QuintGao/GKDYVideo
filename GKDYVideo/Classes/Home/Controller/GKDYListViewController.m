@@ -17,8 +17,6 @@
 
 @property (nonatomic, strong) NSMutableArray    *videos;
 
-@property (nonatomic, copy) void(^scrollCallback)(UIScrollView *scrollView);
-
 @property (nonatomic, assign) BOOL              isRefresh;
 @property (nonatomic, assign) NSInteger         index;
 
@@ -65,7 +63,7 @@
         [self.collectionView.mj_footer endRefreshing];
     }];
     
-    [self.view addSubview:self.loadingBgView];
+    [self.collectionView addSubview:self.loadingBgView];
     self.loadingBgView.frame = CGRectMake(0, 0, SCREEN_WIDTH, ADAPTATIONRATIO * 400.0f);
     
     // 模拟数据加载
@@ -98,7 +96,7 @@
         [self.videos addObjectsFromArray:array];
         
         [self.collectionView.mj_header endRefreshing];
-        
+        !self.refreshBlock ? : self.refreshBlock();
         [self.collectionView reloadData];
     });
 }
@@ -111,6 +109,7 @@
 
 #pragma mark - <UICollectionViewDataSource, UICollectionViewDelegate>
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    self.collectionView.mj_footer.hidden = self.videos.count == 0;
     return self.videos.count;
 }
 
@@ -122,29 +121,16 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     self.selectedIndex = indexPath.item;
-    
-//    GKDYVideoViewController *playerVC = [[GKDYVideoViewController alloc] initWithVideos:self.videos index:indexPath.item];
-//    [self.navigationController pushViewController:playerVC animated:YES];
-    
     !self.itemClickBlock ? : self.itemClickBlock(self.videos, indexPath.item);
 }
 
-#pragma mark - UIScrollViewDelegate
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    !self.scrollCallback ? : self.scrollCallback(scrollView);
-}
-
-#pragma mark - GKPageListViewDelegate
+#pragma mark - GKPageSmoothListViewDelegate
 - (UIView *)listView {
     return self.view;
 }
 
 - (UIScrollView *)listScrollView {
     return self.collectionView;
-}
-
-- (void)listViewDidScrollCallback:(void (^)(UIScrollView *))callback {
-    self.scrollCallback = callback;
 }
 
 #pragma mark - 懒加载

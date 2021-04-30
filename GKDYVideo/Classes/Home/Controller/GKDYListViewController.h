@@ -7,17 +7,18 @@
 //
 
 #import "GKDYBaseViewController.h"
-#import <GKPageScrollView/GKPageScrollView.h>
+#import <GKPageSmoothView/GKPageSmoothView.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface GKDYListViewController : GKDYBaseViewController<GKPageListViewDelegate>
+@interface GKDYListViewController : GKDYBaseViewController<GKPageSmoothListViewDelegate>
 
 @property (nonatomic, strong) UICollectionView  *collectionView;
 
 @property (nonatomic, assign) NSInteger         selectedIndex;
 
 @property (nonatomic, copy) void(^itemClickBlock)(NSArray *videos, NSInteger index);
+@property (nonatomic, copy) void(^refreshBlock)(void);
 
 - (void)refreshData;
 

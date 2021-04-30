@@ -68,6 +68,8 @@
 }
 
 - (void)scrollViewDidScroll:(CGFloat)offsetY {
+    NSLog(@"%f", offsetY);
+    
     CGRect frame = self.bgImgFrame;
     // 上下放大
     frame.size.height -= offsetY;
