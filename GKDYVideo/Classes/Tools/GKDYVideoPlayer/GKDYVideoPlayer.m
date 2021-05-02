@@ -52,6 +52,7 @@
     if (self.isNeedResume && self.status == GKDYVideoPlayerStatusPaused) {
         self.isNeedResume = NO;
         
+        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
         [[AVAudioSession sharedInstance] setActive:YES error:nil];
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
