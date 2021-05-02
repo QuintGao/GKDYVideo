@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		60089113229BE0BD002A6D52 /* GKLikeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60089112229BE0BD002A6D52 /* GKLikeView.m */; };
-		600E01D122CC897700723B19 /* GKDYVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 600E01D022CC897700723B19 /* GKDYVideoViewController.m */; };
 		601140C322ED6CAD0014EF50 /* awemes.json in Resources */ = {isa = PBXBuildFile; fileRef = 601140C222ED6CAC0014EF50 /* awemes.json */; };
 		601140C622EFD0450014EF50 /* GKDYScaleVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 601140C522EFD0450014EF50 /* GKDYScaleVideoView.m */; };
 		6013272E22F1BF0700C055B3 /* GKDYPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6013272C22F1BF0700C055B3 /* GKDYPanGestureRecognizer.m */; };
@@ -82,8 +81,6 @@
 		126D76C9517C38C3B7C81D53 /* Pods-GKDYVideo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GKDYVideo.release.xcconfig"; path = "Pods/Target Support Files/Pods-GKDYVideo/Pods-GKDYVideo.release.xcconfig"; sourceTree = "<group>"; };
 		60089111229BE0BD002A6D52 /* GKLikeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKLikeView.h; sourceTree = "<group>"; };
 		60089112229BE0BD002A6D52 /* GKLikeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKLikeView.m; sourceTree = "<group>"; };
-		600E01CF22CC897700723B19 /* GKDYVideoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYVideoViewController.h; sourceTree = "<group>"; };
-		600E01D022CC897700723B19 /* GKDYVideoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYVideoViewController.m; sourceTree = "<group>"; };
 		601140C222ED6CAC0014EF50 /* awemes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awemes.json; sourceTree = "<group>"; };
 		601140C422EFD0450014EF50 /* GKDYScaleVideoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYScaleVideoView.h; sourceTree = "<group>"; };
 		601140C522EFD0450014EF50 /* GKDYScaleVideoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYScaleVideoView.m; sourceTree = "<group>"; };
@@ -489,8 +486,6 @@
 				60C6E0A121C345BD00C12F93 /* GKDYListViewController.m */,
 				7988CB1D227C9DB900023A2B /* GKDYShootViewController.h */,
 				7988CB1E227C9DB900023A2B /* GKDYShootViewController.m */,
-				600E01CF22CC897700723B19 /* GKDYVideoViewController.h */,
-				600E01D022CC897700723B19 /* GKDYVideoViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -632,7 +627,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = GKDY;
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = QuintGao;
 				TargetAttributes = {
 					79CC628E2157377400101773 = {
@@ -755,7 +750,6 @@
 				60C6E0A521C345E100C12F93 /* GKDYListCollectionViewCell.m in Sources */,
 				607CAB7F2282A8CF0062AC0F /* GKDYAttentViewController.m in Sources */,
 				607CAB852282A8E00062AC0F /* GKDYMineViewController.m in Sources */,
-				600E01D122CC897700723B19 /* GKDYVideoViewController.m in Sources */,
 				601140C622EFD0450014EF50 /* GKDYScaleVideoView.m in Sources */,
 				607CAB822282A8D80062AC0F /* GKDYMessageViewController.m in Sources */,
 				79CC62D721573C2C00101773 /* GKDYPlayerViewController.m in Sources */,
@@ -856,6 +850,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -915,6 +910,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;

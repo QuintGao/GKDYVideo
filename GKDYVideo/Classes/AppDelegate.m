@@ -22,6 +22,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    [self setupNavBarStyle];
+    
+    [self setupKeyWindow];
+    
+    [self setupWebpSupprot];
+    
+    return YES;
+}
+
+- (void)setupNavBarStyle {
     [GKConfigure setupCustomConfigure:^(GKNavigationBarConfigure *configure) {
         configure.backStyle             = GKNavigationBarBackStyleWhite;
         configure.titleFont             = [UIFont systemFontOfSize:18.0f];
@@ -37,27 +47,26 @@
         configure.gk_scaleX             = 0.90f;
         configure.gk_scaleY             = 0.95f;
     }];
-    
+}
+
+- (void)setupKeyWindow {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     
     GKDYNavigationController *nav = [GKDYNavigationController rootVC:[GKDYShootViewController new]];
-    
-//    GKDYNavigationController *nav = [GKDYNavigationController rootVC:[GKDYHomeViewController new] translationScale:NO];
     nav.gk_openScrollLeftPush = YES; // 开启左滑push功能
-    nav.navigationBar.hidden = YES;
     
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
-    
+}
+
+- (void)setupWebpSupprot {
     // Add WebPCoder
     SDImageWebPCoder *webPCoder = [SDImageWebPCoder sharedCoder];
     [[SDImageCodersManager sharedManager] addCoder:webPCoder];
     
     // Modify HTTP Accept Header
     [[SDWebImageDownloader sharedDownloader] setValue:@"image/webp,image/*,*/*;q=0.8" forHTTPHeaderField:@"Accept"];
-    
-    return YES;
 }
 
 @end

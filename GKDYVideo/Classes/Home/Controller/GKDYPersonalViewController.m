@@ -12,7 +12,6 @@
 #import <GKPageSmoothView/GKPageSmoothView.h>
 #import <JXCategoryView/JXCategoryView.h>
 #import "GKDYHeaderView.h"
-#import "GKDYVideoViewController.h"
 #import "GKDYListCollectionViewCell.h"
 #import "GKDYScaleVideoView.h"
 #import "GKDYCommentView.h"
@@ -24,11 +23,7 @@
 
 @property (nonatomic, strong) GKDYHeaderView        *headerView;
 
-@property (nonatomic, strong) UIView                *pageView;
 @property (nonatomic, strong) JXCategoryTitleView   *categoryView;
-@property (nonatomic, strong) UIScrollView          *scrollView;
-
-@property (nonatomic, strong) NSArray               *titles;
 
 @property (nonatomic, strong) UILabel               *titleView;
 
@@ -187,17 +182,6 @@
     return _headerView;
 }
 
-- (UIView *)pageView {
-    if (!_pageView) {
-        _pageView = [UIView new];
-        _pageView.backgroundColor = [UIColor clearColor];
-        
-        [_pageView addSubview:self.categoryView];
-        [_pageView addSubview:self.scrollView];
-    }
-    return _pageView;
-}
-
 - (JXCategoryTitleView *)categoryView {
     if (!_categoryView) {
         _categoryView = [[JXCategoryTitleView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40.0f)];
@@ -223,13 +207,6 @@
         [_categoryView addSubview:btmLineView];
     }
     return _categoryView;
-}
-
-- (NSArray *)titles {
-    if (!_titles) {
-        _titles = @[@"作品 129", @"动态 129", @"喜欢 591"];
-    }
-    return _titles;
 }
 
 - (UILabel *)titleView {

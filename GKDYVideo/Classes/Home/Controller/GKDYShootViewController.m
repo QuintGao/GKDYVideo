@@ -76,10 +76,8 @@
         make.centerX.equalTo(self.view);
     }];
     
-    
     // 默认显示mainVC
     self.mainVC = [GKDYMainViewController new];
-    
     [self.navigationController pushViewController:self.mainVC animated:NO];
 }
 

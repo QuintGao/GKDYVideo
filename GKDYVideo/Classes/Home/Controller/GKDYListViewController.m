@@ -8,7 +8,6 @@
 
 #import "GKDYListViewController.h"
 #import "GKDYListCollectionViewCell.h"
-#import "GKDYVideoViewController.h"
 #import "GKBallLoadingView.h"
 
 @interface GKDYListViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UIViewControllerTransitioningDelegate>
