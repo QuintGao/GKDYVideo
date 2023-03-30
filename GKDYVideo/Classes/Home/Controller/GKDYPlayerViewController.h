@@ -7,7 +7,8 @@
 //
 
 #import "GKDYBaseViewController.h"
-#import "GKDYVideoView.h"
+#import "GKDYVideoModel.h"
+#import <JXCategoryView/JXCategoryView.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,23 +16,25 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol GKDYPlayerViewControllerDelegate <NSObject>
 
+@optional;
+
 - (void)playerVCDidClickShoot:(GKDYPlayerViewController *)playerVC;
 
-- (void)playerVC:(GKDYPlayerViewController *)playerVC controlView:(GKDYVideoControlView *)controlView isCritical:(BOOL)isCritical;
+//- (void)playerVC:(GKDYPlayerViewController *)playerVC controlView:(GKDYVideoControlView *)controlView isCritical:(BOOL)isCritical;
+
+- (void)playerVC:(GKDYPlayerViewController *)playerVC didDragDistance:(CGFloat)distance isEnd:(BOOL)isEnd;
 
 @end
 
-@interface GKDYPlayerViewController : GKDYBaseViewController
-
-@property (nonatomic, strong) GKDYVideoView *videoView;
+@interface GKDYPlayerViewController : GKDYBaseViewController<JXCategoryListContentViewDelegate>
 
 @property (nonatomic, weak) id<GKDYPlayerViewControllerDelegate> delegate;
 
-// 播放单个视频
-- (instancetype)initWithVideoModel:(GKAWEModel *)model;
+@property (nonatomic, copy) NSString *tab;
 
-// 播放一组视频，并指定播放位置
-- (instancetype)initWithVideos:(NSArray *)videos index:(NSInteger)index;
+@property (nonatomic, strong) GKDYVideoModel *model;
+
+- (void)requestData:(void(^)(void))completion;
 
 @end
 

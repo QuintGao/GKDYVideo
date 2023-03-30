@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showFrom:(UIView *)fromView completion:(void (^)(void))completion;
 
-- (void)dismiss;
+- (void)dismissCompletion:(nullable void(^)(void))completion;
 
 @end
 

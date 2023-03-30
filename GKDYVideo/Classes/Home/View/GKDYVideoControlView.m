@@ -9,34 +9,7 @@
 #import "GKDYVideoControlView.h"
 #import "GKLikeView.h"
 #import "NSString+GKCategory.h"
-
-@interface GKDYVideoItemButton : UIButton
-
-@end
-
-@implementation GKDYVideoItemButton
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    
-    [self.imageView sizeToFit];
-    [self.titleLabel sizeToFit];
-    
-    CGFloat width = self.frame.size.width;
-    CGFloat height = self.frame.size.height;
-    
-    CGFloat imgW = self.imageView.frame.size.width;
-    CGFloat imgH = self.imageView.frame.size.height;
-    
-    self.imageView.frame = CGRectMake((width - imgH) / 2, 0, imgW, imgH);
-    
-    CGFloat titleW = self.titleLabel.frame.size.width;
-    CGFloat titleH = self.titleLabel.frame.size.height;
-    
-    self.titleLabel.frame = CGRectMake((width - titleW) / 2, height - titleH, titleW, titleH);
-}
-
-@end
+#import "GKDYVideoItemButton.h"
 
 @interface GKDYVideoControlView()
 
@@ -49,6 +22,8 @@
 @property (nonatomic, strong) UILabel               *contentLabel;
 
 @property (nonatomic, strong) UIButton                  *playBtn;
+
+@property (nonatomic, strong) UILabel *label;
 
 @end
 
@@ -66,6 +41,7 @@
         [self addSubview:self.sliderView];
         
         [self addSubview:self.playBtn];
+        [self addSubview:self.label];
         
         [self.coverImgView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self);
@@ -113,32 +89,38 @@
         [self.playBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.center.equalTo(self);
         }];
+        
+        [self.label mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.equalTo(self);
+        }];
     }
     return self;
 }
 
-- (void)setModel:(GKAWEModel *)model {
-    _model = model;
-    
-    self.sliderView.value = 0;
-    
-    if (model.video.width.floatValue > model.video.height.floatValue) {
-        self.coverImgView.contentMode = UIViewContentModeScaleAspectFit;
-    }else {
-        self.coverImgView.contentMode = UIViewContentModeScaleAspectFill;
-    }
-    NSString *url = model.video.cover.url_list.firstObject;
-    [self.coverImgView sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"img_video_loading"]];
-    self.nameLabel.text = [NSString stringWithFormat:@"@%@", model.author.nickname];
-    [self.iconView sd_setImageWithURL:[NSURL URLWithString:model.author.avatar_thumb.url_list.firstObject] placeholderImage:[UIImage imageNamed:@"placeholderimg"]];
-    self.contentLabel.text = model.desc;
-    
-    [self.likeView setupLikeState:model.is_like];
-    [self.likeView setupLikeCount:[model.statistics.digg_count gk_unitConvert]];
-    
-    [self.commentBtn setTitle:[model.statistics.comment_count gk_unitConvert] forState:UIControlStateNormal];
-    [self.shareBtn setTitle:[model.statistics.share_count gk_unitConvert] forState:UIControlStateNormal];
-}
+//- (void)setModel:(GKAWEModel *)model {
+//    _model = model;
+//    
+//    self.sliderView.value = 0;
+//    
+//    if (model.video.width.floatValue > model.video.height.floatValue) {
+//        self.coverImgView.contentMode = UIViewContentModeScaleAspectFit;
+//    }else {
+//        self.coverImgView.contentMode = UIViewContentModeScaleAspectFill;
+//    }
+//    NSString *url = model.video.cover.url_list.firstObject;
+//    [self.coverImgView sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"img_video_loading"]];
+//    self.nameLabel.text = [NSString stringWithFormat:@"@%@", model.author.nickname];
+//    [self.iconView sd_setImageWithURL:[NSURL URLWithString:model.author.avatar_thumb.url_list.firstObject] placeholderImage:[UIImage imageNamed:@"placeholderimg"]];
+//    self.contentLabel.text = model.desc;
+//    
+//    [self.likeView setupLikeState:model.is_like];
+//    [self.likeView setupLikeCount:[model.statistics.digg_count gk_unitConvert]];
+//    
+//    [self.commentBtn setTitle:[model.statistics.comment_count gk_unitConvert] forState:UIControlStateNormal];
+//    [self.shareBtn setTitle:[model.statistics.share_count gk_unitConvert] forState:UIControlStateNormal];
+//    
+//    self.label.text = [NSString stringWithFormat:@"第%zd个", model.index];
+//}
 
 #pragma mark - Public Methods
 - (void)setProgress:(float)progress {
@@ -311,6 +293,16 @@
         _playBtn.hidden = YES;
     }
     return _playBtn;
+}
+
+- (UILabel *)label {
+    if (!_label) {
+        _label = [[UILabel alloc] init];
+        _label.font = [UIFont systemFontOfSize:30];
+        _label.backgroundColor = UIColor.blackColor;
+        _label.textColor = UIColor.whiteColor;
+    }
+    return _label;
 }
 
 @end

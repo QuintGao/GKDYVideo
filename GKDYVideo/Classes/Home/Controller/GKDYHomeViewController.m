@@ -9,21 +9,19 @@
 #import "GKDYHomeViewController.h"
 #import "GKDYSearchViewController.h"
 #import "GKDYPlayerViewController.h"
-#import "GKDYPersonalViewController.h"
+#import "GKDYUserViewController.h"
 #import "GKDYMainViewController.h"
 #import "GKDYScrollView.h"
-#import "GKDYVideoView.h"
+#import "GKDYTitleView.h"
+#import "GKBallLoadingView.h"
 
-@interface GKDYHomeViewController()<UIScrollViewDelegate, GKViewControllerPushDelegate, UITabBarControllerDelegate>
+@interface GKDYHomeViewController()<UIScrollViewDelegate, GKViewControllerPushDelegate, JXCategoryViewDelegate, JXCategoryListContainerViewDelegate, GKDYPlayerViewControllerDelegate>
 
-@property (nonatomic, strong) GKDYScrollView    *mainScrolView;
+@property (nonatomic, strong) GKDYTitleView *titleView;
 
-@property (nonatomic, strong) NSArray           *childVCs;
+@property (nonatomic, strong) JXCategoryListContainerView *containerView;
 
-@property (nonatomic, strong) GKDYSearchViewController  *searchVC;
-//@property (nonatomic, strong) GKDYPlayerViewController  *playerVC;
-@property (nonatomic, strong) GKDYMainViewController    *mainVC;
-
+@property (nonatomic, strong) NSArray *titles;
 
 @end
 
@@ -32,50 +30,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.gk_navigationBar.hidden    = YES;
-    
-    [self.view addSubview:self.mainScrolView];
-    
-    self.childVCs = @[self.searchVC, self.mainVC];
-    
-    CGFloat scrollW = SCREEN_WIDTH;
-    CGFloat scrollH = SCREEN_HEIGHT;
-    self.mainScrolView.frame = CGRectMake(0, 0, scrollW, scrollH);
-    self.mainScrolView.contentSize = CGSizeMake(self.childVCs.count * scrollW, scrollH);
-    
-    [self.childVCs enumerateObjectsUsingBlock:^(UIViewController *vc, NSUInteger idx, BOOL * _Nonnull stop) {
-        [self addChildViewController:vc];
-        [self.mainScrolView addSubview:vc.view];
-        
-        vc.view.frame = CGRectMake(idx * scrollW, 0, scrollW, scrollH);
-    }];
-    
-    self.mainScrolView.contentOffset = CGPointMake(scrollW, 0);
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeToSearch:) name:@"PlayerSearchClickNotification" object:nil];
+    [self initUI];
+    [self requestData];
 }
 
 - (void)changeToSearch:(NSNotification *)notify {
-    [self.mainScrolView setContentOffset:CGPointZero animated:YES];
+//    [self.mainScrolView setContentOffset:CGPointZero animated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    if (self.mainScrolView.contentOffset.x == SCREEN_WIDTH) {
-        self.gk_statusBarHidden = YES;
-    }else {
-        self.gk_statusBarHidden = NO;
-    }
-    
     // 设置左滑push代理
-    self.gk_pushDelegate = self;
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    [self.mainVC.playerVC.videoView resume];
+    if (self.titleView.categoryView.selectedIndex == self.titles.count - 1) {
+        self.gk_pushDelegate = self;
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -83,84 +52,115 @@
     
     // 取消push代理
     self.gk_pushDelegate = nil;
-    
-    [self.mainVC.playerVC.videoView pause];
 }
 
-#pragma mark - UIScrollViewDelegate
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    self.gk_statusBarHidden = NO;
+- (void)initUI {
+    self.gk_navigationBar.hidden    = YES;
     
-    // 右滑开始时暂停
-    if (scrollView.contentOffset.x == SCREEN_WIDTH) {
-        [self.mainVC.playerVC.videoView pause];
-    }
+    [self.view addSubview:self.containerView];
+    [self.view addSubview:self.titleView];
+    
+    [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
+    
+    [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.view);
+        make.top.equalTo(self.view).offset(GK_SAFEAREA_TOP);
+        make.height.mas_equalTo(44);
+    }];
 }
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    // 滑动结束，如果是播放页则恢复播放
-    if (scrollView.contentOffset.x == SCREEN_WIDTH) {
-        self.gk_statusBarHidden = YES;
-        
-        [self.mainVC.playerVC.videoView resume];
-    }
+- (void)requestData {
+    self.titles = @[@{@"title": @"影视", @"tab": @"yingshi_new"},
+                    @{@"title": @"音乐", @"tab": @"yinyue_new"},
+                    @{@"title": @"游戏", @"tab": @"youxi_new"},
+                    @{@"title": @"搞笑", @"tab": @"gaoxiao_new"},
+                    @{@"title": @"推荐", @"tab": @"recommend"}];
+    
+    NSMutableArray *titles = [NSMutableArray array];
+    [self.titles enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [titles addObject:obj[@"title"]];
+    }];
+    self.titleView.categoryView.titles = titles;
+    self.titleView.categoryView.defaultSelectedIndex = titles.count - 1;
+    [self.titleView.categoryView reloadData];
+}
+
+- (void)requestCurrentList {
+    @weakify(self);
+    [self.playerVC requestData:^{
+        @strongify(self);
+        [self.titleView loadingEnd];
+    }];
+}
+
+- (GKDYPlayerViewController *)playerVC {
+    return (GKDYPlayerViewController *)self.containerView.validListDict[@(self.titleView.categoryView.selectedIndex)];
 }
 
 #pragma mark - GKViewControllerPushDelegate
 - (void)pushToNextViewController {
-    GKDYPersonalViewController *personalVC = [GKDYPersonalViewController new];
-    personalVC.model = self.mainVC.playerVC.videoView.currentPlayView.model;
-    [self.navigationController pushViewController:personalVC animated:YES];
+    GKDYUserViewController *userVC = [GKDYUserViewController new];
+    userVC.model = self.playerVC.model;
+    [self.navigationController pushViewController:userVC animated:YES];
 }
 
-#pragma mark - UITabBarControllerDelegate
-- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
-    NSLog(@"%@", viewController.tabBarItem.title);
-    
-    UINavigationController *nav = (UINavigationController *)viewController;
-    
-    if ([nav.topViewController isKindOfClass:[GKDYPlayerViewController class]]) {
-        [self.mainVC.tabBar setBackgroundImage:[UIImage gk_imageWithColor:[UIColor clearColor] size:CGSizeMake(SCREEN_WIDTH, TABBAR_HEIGHT)]];
-        
-        self.gk_statusBarHidden = YES;
+#pragma mark - JXCategoryViewDelegate
+- (void)categoryView:(JXCategoryBaseView *)categoryView didSelectedItemAtIndex:(NSInteger)index {
+    if (index == self.titles.count - 1) {
+        self.gk_pushDelegate = self;
     }else {
-        [self.mainVC.tabBar setBackgroundImage:[UIImage gk_imageWithColor:[UIColor blackColor] size:CGSizeMake(SCREEN_WIDTH, TABBAR_HEIGHT)]];
-        
-        self.gk_statusBarHidden = NO;
+        self.gk_pushDelegate = nil;
     }
+}
+
+#pragma mark - JXCategoryListContainerViewDelegate
+- (NSInteger)numberOfListsInlistContainerView:(JXCategoryListContainerView *)listContainerView {
+    return self.titles.count;
+}
+
+- (id<JXCategoryListContentViewDelegate>)listContainerView:(JXCategoryListContainerView *)listContainerView initListForIndex:(NSInteger)index {
+    GKDYPlayerViewController *playerVC = [[GKDYPlayerViewController alloc] init];
+    playerVC.tab = self.titles[index][@"tab"];
+    playerVC.delegate = self;
+    return playerVC;
+}
+
+- (Class)scrollViewClassInlistContainerView:(JXCategoryListContainerView *)listContainerView {
+    return GKDYScrollView.class;
+}
+
+#pragma mark - GKDYPlayerViewControllerDelegate
+- (void)playerVC:(GKDYPlayerViewController *)playerVC didDragDistance:(CGFloat)distance isEnd:(BOOL)isEnd {
+    [self.titleView changeAlphaWithDistance:distance isEnd:isEnd];
+}
+
+- (void)searchClick:(id)sender {
+    
 }
 
 #pragma mark - 懒加载
-- (GKDYScrollView *)mainScrolView {
-    if (!_mainScrolView) {
-        _mainScrolView = [GKDYScrollView new];
-        _mainScrolView.pagingEnabled = YES;
-        _mainScrolView.showsHorizontalScrollIndicator = NO;
-        _mainScrolView.showsVerticalScrollIndicator = NO;
-        _mainScrolView.bounces = NO; // 禁止边缘滑动
-        _mainScrolView.delegate = self;
-        if (@available(iOS 11.0, *)) {
-            _mainScrolView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-        } else {
-            // Fallback on earlier versions
-        }
+- (GKDYTitleView *)titleView {
+    if (!_titleView) {
+        _titleView = [[GKDYTitleView alloc] init];
+        _titleView.categoryView.delegate = self;
+        _titleView.categoryView.listContainer = self.containerView;
+        
+        @weakify(self);
+        _titleView.loadingBlock = ^{
+            @strongify(self);
+            [self requestCurrentList];
+        };
     }
-    return _mainScrolView;
+    return _titleView;
 }
 
-- (GKDYSearchViewController *)searchVC {
-    if (!_searchVC) {
-        _searchVC = [GKDYSearchViewController new];
+- (JXCategoryListContainerView *)containerView {
+    if (!_containerView) {
+        _containerView = [[JXCategoryListContainerView alloc] initWithType:JXCategoryListContainerType_ScrollView delegate:self];
     }
-    return _searchVC;
-}
-
-- (GKDYMainViewController *)mainVC {
-    if (!_mainVC) {
-        _mainVC = [GKDYMainViewController new];
-        _mainVC.delegate = self;
-    }
-    return _mainVC;
+    return _containerView;
 }
 
 @end

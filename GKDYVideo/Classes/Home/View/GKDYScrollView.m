@@ -34,7 +34,7 @@
         UIGestureRecognizerState state = gestureRecognizer.state;
         
         // 设置手势滑动的位置距屏幕左边的区域
-        CGFloat locationDistance = [UIScreen mainScreen].bounds.size.width;
+        CGFloat locationDistance = self.bounds.size.width;
         
         if (state == UIGestureRecognizerStateBegan || state == UIGestureRecognizerStatePossible) {
             CGPoint location = [gestureRecognizer locationInView:self];
@@ -43,11 +43,11 @@
             }
             
             // 临界点：scrollView滑动到最后一屏时的x轴位置，可根据需求改变
-            CGFloat criticalPoint = [UIScreen mainScreen].bounds.size.width;
+            CGFloat criticalPoint = self.frame.size.width;
             
             // point.x < 0 代表左滑即手指从屏幕右边向左移动
             // 当UIScrollview滑动到临界点时，则不再相应UIScrollview的滑动左滑手势，防止与左滑手势冲突
-            if (point.x < 0 && self.contentOffset.x == criticalPoint) {
+            if (point.x < 0 && self.contentOffset.x + criticalPoint >= self.contentSize.width) {
                 return YES;
             }
         }

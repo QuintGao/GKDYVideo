@@ -67,6 +67,12 @@ typedef NS_ENUM(NSUInteger, GKBallMoveDirection) {
     return self;
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    self.containerView.center = CGPointMake(self.bounds.size.width * 0.5, self.bounds.size.height * 0.5);
+}
+
 - (void)setupUI {
     self.containerView = [[UIView alloc] init];
     self.containerView.center = self.center;

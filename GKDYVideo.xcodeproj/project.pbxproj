@@ -8,80 +8,63 @@
 
 /* Begin PBXBuildFile section */
 		60089113229BE0BD002A6D52 /* GKLikeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60089112229BE0BD002A6D52 /* GKLikeView.m */; };
-		601140C322ED6CAD0014EF50 /* awemes.json in Resources */ = {isa = PBXBuildFile; fileRef = 601140C222ED6CAC0014EF50 /* awemes.json */; };
 		601140C622EFD0450014EF50 /* GKDYScaleVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 601140C522EFD0450014EF50 /* GKDYScaleVideoView.m */; };
 		6013272E22F1BF0700C055B3 /* GKDYPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6013272C22F1BF0700C055B3 /* GKDYPanGestureRecognizer.m */; };
 		603969E526315A5D0024ED97 /* NSString+GKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 603969E426315A5D0024ED97 /* NSString+GKCategory.m */; };
 		60657EFA21C1110F000F97DA /* GKDYMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60657EF921C1110F000F97DA /* GKDYMainViewController.m */; };
-		60657EFC21C117F0000F97DA /* video1.json in Resources */ = {isa = PBXBuildFile; fileRef = 60657EFB21C117F0000F97DA /* video1.json */; };
-		606A77DD215DFCB100DC2F63 /* GKDYPersonalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 606A77DB215DFCB000DC2F63 /* GKDYPersonalViewController.m */; };
 		606A77DF215E0B3000DC2F63 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 606A77DE215E0B3000DC2F63 /* README.md */; };
-		607CAB7322818FEA0062AC0F /* GKLineLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 607CAB7222818FEA0062AC0F /* GKLineLoadingView.m */; };
 		607CAB7622818FF50062AC0F /* GKBallLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 607CAB7522818FF50062AC0F /* GKBallLoadingView.m */; };
 		607CAB7F2282A8CF0062AC0F /* GKDYAttentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 607CAB7E2282A8CF0062AC0F /* GKDYAttentViewController.m */; };
 		607CAB822282A8D80062AC0F /* GKDYMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 607CAB812282A8D80062AC0F /* GKDYMessageViewController.m */; };
 		607CAB852282A8E00062AC0F /* GKDYMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 607CAB842282A8E00062AC0F /* GKDYMineViewController.m */; };
 		607CAB882282BB3F0062AC0F /* GKDYTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 607CAB872282BB3F0062AC0F /* GKDYTabBar.m */; };
 		6099CDCC22BA31B4005098EE /* GKDoubleLikeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6099CDCB22BA31B4005098EE /* GKDoubleLikeView.m */; };
-		60C6E09F21C33F7900C12F93 /* GKDYHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C6E09D21C33F7900C12F93 /* GKDYHeaderView.m */; };
-		60C6E0A221C345BD00C12F93 /* GKDYListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C6E0A121C345BD00C12F93 /* GKDYListViewController.m */; };
-		60C6E0A521C345E100C12F93 /* GKDYListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C6E0A421C345E100C12F93 /* GKDYListCollectionViewCell.m */; };
-		60C6E0B021CC8A9F00C12F93 /* video2.json in Resources */ = {isa = PBXBuildFile; fileRef = 60C6E0AF21CC8A9E00C12F93 /* video2.json */; };
-		60C6E0B221CC8AD600C12F93 /* video3.json in Resources */ = {isa = PBXBuildFile; fileRef = 60C6E0B121CC8AD600C12F93 /* video3.json */; };
 		60D7CF602626C529004D7477 /* NSMethodSignature+GKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D7CF5C2626C529004D7477 /* NSMethodSignature+GKCategory.m */; };
 		60D7CF612626C529004D7477 /* UITabBar+GKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D7CF5F2626C529004D7477 /* UITabBar+GKCategory.m */; };
-		60DE55442626ABA300CC3538 /* GKAWEModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DE55432626ABA300CC3538 /* GKAWEModel.m */; };
-		7988CB19227C4BAA00023A2B /* video5.json in Resources */ = {isa = PBXBuildFile; fileRef = 7988CB16227C4BAA00023A2B /* video5.json */; };
-		7988CB1A227C4BAA00023A2B /* video6.json in Resources */ = {isa = PBXBuildFile; fileRef = 7988CB17227C4BAA00023A2B /* video6.json */; };
-		7988CB1B227C4BAA00023A2B /* video4.json in Resources */ = {isa = PBXBuildFile; fileRef = 7988CB18227C4BAA00023A2B /* video4.json */; };
 		7988CB1F227C9DB900023A2B /* GKDYShootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7988CB1E227C9DB900023A2B /* GKDYShootViewController.m */; };
+		799277D329C837A000A410DC /* GKDYTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 799277D229C837A000A410DC /* GKDYTools.m */; };
+		799277E929CA85EE00A410DC /* GKDYVideoSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 799277E829CA85EE00A410DC /* GKDYVideoSlider.m */; };
+		799277EC29CA9D9900A410DC /* GKDYVideoItemButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 799277EB29CA9D9800A410DC /* GKDYVideoItemButton.m */; };
+		799277EF29CAD17700A410DC /* GKDYVideoStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 799277EE29CAD17700A410DC /* GKDYVideoStatusBar.m */; };
+		799277F229CAE3D300A410DC /* UIButton+GKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 799277F129CAE3D300A410DC /* UIButton+GKCategory.m */; };
+		799277F529CAE45D00A410DC /* GKDYVideoMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 799277F429CAE45D00A410DC /* GKDYVideoMaskView.m */; };
+		799277F829CAF77300A410DC /* GKDYVideoPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 799277F729CAF77300A410DC /* GKDYVideoPreviewView.m */; };
+		79A5250C29D161C600CFB32F /* GKDYTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79A5250B29D161C600CFB32F /* GKDYTitleView.m */; };
+		79A5251529D18D4800CFB32F /* GKDYUserVideoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79A5251429D18D4800CFB32F /* GKDYUserVideoModel.m */; };
+		79A5251829D18E2100CFB32F /* GKDYUserVideoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79A5251729D18E2100CFB32F /* GKDYUserVideoViewModel.m */; };
+		79A5251B29D1902C00CFB32F /* GKDYUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79A5251A29D1902C00CFB32F /* GKDYUserViewController.m */; };
+		79A5251E29D190B600CFB32F /* GKDYUserHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79A5251D29D190B600CFB32F /* GKDYUserHeaderView.m */; };
+		79A5252129D197C800CFB32F /* GKDYVideoListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79A5252029D197C800CFB32F /* GKDYVideoListViewController.m */; };
+		79A5252429D1998100CFB32F /* GKDYVideoListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79A5252329D1998100CFB32F /* GKDYVideoListCell.m */; };
+		79A5252729D2831400CFB32F /* GKDYUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79A5252629D2831400CFB32F /* GKDYUserModel.m */; };
+		79C4207E29C42B1600A0AB84 /* GKDYVideoScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79C4207D29C42B1600A0AB84 /* GKDYVideoScrollView.m */; };
+		79C4208129C43C2200A0AB84 /* GKDYVideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79C4208029C43C2200A0AB84 /* GKDYVideoCell.m */; };
+		79C4208429C43CE500A0AB84 /* GKDYPlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 79C4208329C43CE500A0AB84 /* GKDYPlayerManager.m */; };
+		79C4208A29C448FA00A0AB84 /* GKDYVideoPortraitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79C4208929C448FA00A0AB84 /* GKDYVideoPortraitView.m */; };
+		79C4208D29C4490700A0AB84 /* GKDYVideoLandscapeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79C4208C29C4490700A0AB84 /* GKDYVideoLandscapeView.m */; };
 		79CC62942157377400101773 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CC62932157377400101773 /* AppDelegate.m */; };
 		79CC629C2157377600101773 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79CC629B2157377600101773 /* Assets.xcassets */; };
 		79CC629F2157377600101773 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79CC629D2157377600101773 /* LaunchScreen.storyboard */; };
 		79CC62A22157377600101773 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CC62A12157377600101773 /* main.m */; };
-		79CC62AC2157377700101773 /* GKDYVideoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CC62AB2157377700101773 /* GKDYVideoTests.m */; };
-		79CC62B72157377700101773 /* GKDYVideoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CC62B62157377700101773 /* GKDYVideoUITests.m */; };
-		79CC62CB21573B4700101773 /* GKSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CC62CA21573B4700101773 /* GKSliderView.m */; };
 		79CC62CE21573BD700101773 /* GKDYBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CC62CD21573BD700101773 /* GKDYBaseViewController.m */; };
 		79CC62D121573BFD00101773 /* GKDYHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CC62D021573BFD00101773 /* GKDYHomeViewController.m */; };
 		79CC62D421573C2300101773 /* GKDYSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CC62D321573C2300101773 /* GKDYSearchViewController.m */; };
 		79CC62D721573C2C00101773 /* GKDYPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CC62D621573C2C00101773 /* GKDYPlayerViewController.m */; };
-		79CC62DF21573CAE00101773 /* GKDYVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CC62DE21573CAE00101773 /* GKDYVideoPlayer.m */; };
 		79CC62E221573F3C00101773 /* GKDYVideoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CC62E121573F3C00101773 /* GKDYVideoModel.m */; };
 		79CC62E521573FC500101773 /* GKDYScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CC62E421573FC500101773 /* GKDYScrollView.m */; };
-		79CC62E82157401E00101773 /* GKDYVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CC62E72157401E00101773 /* GKDYVideoView.m */; };
 		79CC62EB2157402800101773 /* GKDYVideoControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CC62EA2157402800101773 /* GKDYVideoControlView.m */; };
 		79CC62EE2157405400101773 /* GKDYVideoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CC62ED2157405400101773 /* GKDYVideoViewModel.m */; };
 		79CC62F52158E44300101773 /* GKNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CC62F42158E44300101773 /* GKNetworking.m */; };
-		79CC62FB2158F2BB00101773 /* GKDYPersonalModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CC62FA2158F2BB00101773 /* GKDYPersonalModel.m */; };
 		79DD87CE226C268D008FB903 /* GKDYNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DD87CD226C268D008FB903 /* GKDYNavigationController.m */; };
 		79E16A132274748F00DE4967 /* GKSlidePopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79E16A122274748F00DE4967 /* GKSlidePopupView.m */; };
 		79E16A162279A63200DE4967 /* GKDYCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79E16A152279A63200DE4967 /* GKDYCommentView.m */; };
 		AA70E41FD2C5EC1F0C249206 /* Pods_GKDYVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81CC8427C037D4E8A4B61B49 /* Pods_GKDYVideo.framework */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		79CC62A82157377700101773 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 79CC62872157377400101773 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 79CC628E2157377400101773;
-			remoteInfo = GKDYVideo;
-		};
-		79CC62B32157377700101773 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 79CC62872157377400101773 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 79CC628E2157377400101773;
-			remoteInfo = GKDYVideo;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		126D76C9517C38C3B7C81D53 /* Pods-GKDYVideo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GKDYVideo.release.xcconfig"; path = "Pods/Target Support Files/Pods-GKDYVideo/Pods-GKDYVideo.release.xcconfig"; sourceTree = "<group>"; };
 		60089111229BE0BD002A6D52 /* GKLikeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKLikeView.h; sourceTree = "<group>"; };
 		60089112229BE0BD002A6D52 /* GKLikeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKLikeView.m; sourceTree = "<group>"; };
-		601140C222ED6CAC0014EF50 /* awemes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awemes.json; sourceTree = "<group>"; };
 		601140C422EFD0450014EF50 /* GKDYScaleVideoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYScaleVideoView.h; sourceTree = "<group>"; };
 		601140C522EFD0450014EF50 /* GKDYScaleVideoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYScaleVideoView.m; sourceTree = "<group>"; };
 		6013272C22F1BF0700C055B3 /* GKDYPanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKDYPanGestureRecognizer.m; sourceTree = "<group>"; };
@@ -90,12 +73,7 @@
 		603969E426315A5D0024ED97 /* NSString+GKCategory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+GKCategory.m"; sourceTree = "<group>"; };
 		60657EF821C1110F000F97DA /* GKDYMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYMainViewController.h; sourceTree = "<group>"; };
 		60657EF921C1110F000F97DA /* GKDYMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYMainViewController.m; sourceTree = "<group>"; };
-		60657EFB21C117F0000F97DA /* video1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = video1.json; sourceTree = "<group>"; };
-		606A77DB215DFCB000DC2F63 /* GKDYPersonalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKDYPersonalViewController.m; sourceTree = "<group>"; };
-		606A77DC215DFCB100DC2F63 /* GKDYPersonalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKDYPersonalViewController.h; sourceTree = "<group>"; };
 		606A77DE215E0B3000DC2F63 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
-		607CAB7122818FEA0062AC0F /* GKLineLoadingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKLineLoadingView.h; sourceTree = "<group>"; };
-		607CAB7222818FEA0062AC0F /* GKLineLoadingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKLineLoadingView.m; sourceTree = "<group>"; };
 		607CAB7422818FF50062AC0F /* GKBallLoadingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKBallLoadingView.h; sourceTree = "<group>"; };
 		607CAB7522818FF50062AC0F /* GKBallLoadingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKBallLoadingView.m; sourceTree = "<group>"; };
 		607CAB7D2282A8CF0062AC0F /* GKDYAttentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYAttentViewController.h; sourceTree = "<group>"; };
@@ -108,25 +86,55 @@
 		607CAB872282BB3F0062AC0F /* GKDYTabBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYTabBar.m; sourceTree = "<group>"; };
 		6099CDCA22BA31B4005098EE /* GKDoubleLikeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDoubleLikeView.h; sourceTree = "<group>"; };
 		6099CDCB22BA31B4005098EE /* GKDoubleLikeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDoubleLikeView.m; sourceTree = "<group>"; };
-		60C6E09D21C33F7900C12F93 /* GKDYHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKDYHeaderView.m; sourceTree = "<group>"; };
-		60C6E09E21C33F7900C12F93 /* GKDYHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKDYHeaderView.h; sourceTree = "<group>"; };
-		60C6E0A021C345BD00C12F93 /* GKDYListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYListViewController.h; sourceTree = "<group>"; };
-		60C6E0A121C345BD00C12F93 /* GKDYListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYListViewController.m; sourceTree = "<group>"; };
-		60C6E0A321C345E100C12F93 /* GKDYListCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GKDYListCollectionViewCell.h; path = ../Controller/GKDYListCollectionViewCell.h; sourceTree = "<group>"; };
-		60C6E0A421C345E100C12F93 /* GKDYListCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GKDYListCollectionViewCell.m; path = ../Controller/GKDYListCollectionViewCell.m; sourceTree = "<group>"; };
-		60C6E0AF21CC8A9E00C12F93 /* video2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = video2.json; sourceTree = "<group>"; };
-		60C6E0B121CC8AD600C12F93 /* video3.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = video3.json; sourceTree = "<group>"; };
 		60D7CF5C2626C529004D7477 /* NSMethodSignature+GKCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMethodSignature+GKCategory.m"; sourceTree = "<group>"; };
 		60D7CF5D2626C529004D7477 /* NSMethodSignature+GKCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMethodSignature+GKCategory.h"; sourceTree = "<group>"; };
 		60D7CF5E2626C529004D7477 /* UITabBar+GKCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBar+GKCategory.h"; sourceTree = "<group>"; };
 		60D7CF5F2626C529004D7477 /* UITabBar+GKCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+GKCategory.m"; sourceTree = "<group>"; };
-		60DE55422626ABA300CC3538 /* GKAWEModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKAWEModel.h; sourceTree = "<group>"; };
-		60DE55432626ABA300CC3538 /* GKAWEModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKAWEModel.m; sourceTree = "<group>"; };
-		7988CB16227C4BAA00023A2B /* video5.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = video5.json; sourceTree = "<group>"; };
-		7988CB17227C4BAA00023A2B /* video6.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = video6.json; sourceTree = "<group>"; };
-		7988CB18227C4BAA00023A2B /* video4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = video4.json; sourceTree = "<group>"; };
+		793231B229A44E39000A61ED /* TXLiteAVSDK_Player.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TXLiteAVSDK_Player.framework; path = Pods/TXLiteAVSDK_Player/TXLiteAVSDK_Player/TXLiteAVSDK_Player.framework; sourceTree = "<group>"; };
+		793231B329A44E39000A61ED /* TXSoundTouch.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = TXSoundTouch.xcframework; path = Pods/TXLiteAVSDK_Player/TXLiteAVSDK_Player/TXSoundTouch.xcframework; sourceTree = "<group>"; };
+		793231B429A44E39000A61ED /* TXFFmpeg.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = TXFFmpeg.xcframework; path = Pods/TXLiteAVSDK_Player/TXLiteAVSDK_Player/TXFFmpeg.xcframework; sourceTree = "<group>"; };
 		7988CB1D227C9DB900023A2B /* GKDYShootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYShootViewController.h; sourceTree = "<group>"; };
 		7988CB1E227C9DB900023A2B /* GKDYShootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYShootViewController.m; sourceTree = "<group>"; };
+		799277D129C837A000A410DC /* GKDYTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYTools.h; sourceTree = "<group>"; };
+		799277D229C837A000A410DC /* GKDYTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYTools.m; sourceTree = "<group>"; };
+		799277E729CA85EE00A410DC /* GKDYVideoSlider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYVideoSlider.h; sourceTree = "<group>"; };
+		799277E829CA85EE00A410DC /* GKDYVideoSlider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYVideoSlider.m; sourceTree = "<group>"; };
+		799277EA29CA9D9800A410DC /* GKDYVideoItemButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYVideoItemButton.h; sourceTree = "<group>"; };
+		799277EB29CA9D9800A410DC /* GKDYVideoItemButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYVideoItemButton.m; sourceTree = "<group>"; };
+		799277ED29CAD17700A410DC /* GKDYVideoStatusBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYVideoStatusBar.h; sourceTree = "<group>"; };
+		799277EE29CAD17700A410DC /* GKDYVideoStatusBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYVideoStatusBar.m; sourceTree = "<group>"; };
+		799277F029CAE3D300A410DC /* UIButton+GKCategory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+GKCategory.h"; sourceTree = "<group>"; };
+		799277F129CAE3D300A410DC /* UIButton+GKCategory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+GKCategory.m"; sourceTree = "<group>"; };
+		799277F329CAE45D00A410DC /* GKDYVideoMaskView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYVideoMaskView.h; sourceTree = "<group>"; };
+		799277F429CAE45D00A410DC /* GKDYVideoMaskView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYVideoMaskView.m; sourceTree = "<group>"; };
+		799277F629CAF77300A410DC /* GKDYVideoPreviewView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYVideoPreviewView.h; sourceTree = "<group>"; };
+		799277F729CAF77300A410DC /* GKDYVideoPreviewView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYVideoPreviewView.m; sourceTree = "<group>"; };
+		79A5250A29D161C600CFB32F /* GKDYTitleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYTitleView.h; sourceTree = "<group>"; };
+		79A5250B29D161C600CFB32F /* GKDYTitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYTitleView.m; sourceTree = "<group>"; };
+		79A5251329D18D4800CFB32F /* GKDYUserVideoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYUserVideoModel.h; sourceTree = "<group>"; };
+		79A5251429D18D4800CFB32F /* GKDYUserVideoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYUserVideoModel.m; sourceTree = "<group>"; };
+		79A5251629D18E2100CFB32F /* GKDYUserVideoViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYUserVideoViewModel.h; sourceTree = "<group>"; };
+		79A5251729D18E2100CFB32F /* GKDYUserVideoViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYUserVideoViewModel.m; sourceTree = "<group>"; };
+		79A5251929D1902C00CFB32F /* GKDYUserViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYUserViewController.h; sourceTree = "<group>"; };
+		79A5251A29D1902C00CFB32F /* GKDYUserViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYUserViewController.m; sourceTree = "<group>"; };
+		79A5251C29D190B600CFB32F /* GKDYUserHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYUserHeaderView.h; sourceTree = "<group>"; };
+		79A5251D29D190B600CFB32F /* GKDYUserHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYUserHeaderView.m; sourceTree = "<group>"; };
+		79A5251F29D197C800CFB32F /* GKDYVideoListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYVideoListViewController.h; sourceTree = "<group>"; };
+		79A5252029D197C800CFB32F /* GKDYVideoListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYVideoListViewController.m; sourceTree = "<group>"; };
+		79A5252229D1998100CFB32F /* GKDYVideoListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYVideoListCell.h; sourceTree = "<group>"; };
+		79A5252329D1998100CFB32F /* GKDYVideoListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYVideoListCell.m; sourceTree = "<group>"; };
+		79A5252529D2831400CFB32F /* GKDYUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYUserModel.h; sourceTree = "<group>"; };
+		79A5252629D2831400CFB32F /* GKDYUserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYUserModel.m; sourceTree = "<group>"; };
+		79C4207C29C42B1600A0AB84 /* GKDYVideoScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYVideoScrollView.h; sourceTree = "<group>"; };
+		79C4207D29C42B1600A0AB84 /* GKDYVideoScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYVideoScrollView.m; sourceTree = "<group>"; };
+		79C4207F29C43C2200A0AB84 /* GKDYVideoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYVideoCell.h; sourceTree = "<group>"; };
+		79C4208029C43C2200A0AB84 /* GKDYVideoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYVideoCell.m; sourceTree = "<group>"; };
+		79C4208229C43CE500A0AB84 /* GKDYPlayerManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYPlayerManager.h; sourceTree = "<group>"; };
+		79C4208329C43CE500A0AB84 /* GKDYPlayerManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYPlayerManager.m; sourceTree = "<group>"; };
+		79C4208829C448FA00A0AB84 /* GKDYVideoPortraitView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYVideoPortraitView.h; sourceTree = "<group>"; };
+		79C4208929C448FA00A0AB84 /* GKDYVideoPortraitView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYVideoPortraitView.m; sourceTree = "<group>"; };
+		79C4208B29C4490700A0AB84 /* GKDYVideoLandscapeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYVideoLandscapeView.h; sourceTree = "<group>"; };
+		79C4208C29C4490700A0AB84 /* GKDYVideoLandscapeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYVideoLandscapeView.m; sourceTree = "<group>"; };
 		79CC628F2157377400101773 /* GKDYVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GKDYVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79CC62922157377400101773 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		79CC62932157377400101773 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -134,15 +142,7 @@
 		79CC629E2157377600101773 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		79CC62A02157377600101773 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		79CC62A12157377600101773 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		79CC62A72157377700101773 /* GKDYVideoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GKDYVideoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		79CC62AB2157377700101773 /* GKDYVideoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYVideoTests.m; sourceTree = "<group>"; };
-		79CC62AD2157377700101773 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		79CC62B22157377700101773 /* GKDYVideoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GKDYVideoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		79CC62B62157377700101773 /* GKDYVideoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYVideoUITests.m; sourceTree = "<group>"; };
-		79CC62B82157377700101773 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		79CC62C4215739FD00101773 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		79CC62C921573B4700101773 /* GKSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKSliderView.h; sourceTree = "<group>"; };
-		79CC62CA21573B4700101773 /* GKSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKSliderView.m; sourceTree = "<group>"; };
 		79CC62CC21573BD700101773 /* GKDYBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYBaseViewController.h; sourceTree = "<group>"; };
 		79CC62CD21573BD700101773 /* GKDYBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYBaseViewController.m; sourceTree = "<group>"; };
 		79CC62CF21573BFD00101773 /* GKDYHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYHomeViewController.h; sourceTree = "<group>"; };
@@ -151,22 +151,16 @@
 		79CC62D321573C2300101773 /* GKDYSearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYSearchViewController.m; sourceTree = "<group>"; };
 		79CC62D521573C2C00101773 /* GKDYPlayerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYPlayerViewController.h; sourceTree = "<group>"; };
 		79CC62D621573C2C00101773 /* GKDYPlayerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYPlayerViewController.m; sourceTree = "<group>"; };
-		79CC62DD21573CAE00101773 /* GKDYVideoPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYVideoPlayer.h; sourceTree = "<group>"; };
-		79CC62DE21573CAE00101773 /* GKDYVideoPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYVideoPlayer.m; sourceTree = "<group>"; };
 		79CC62E021573F3C00101773 /* GKDYVideoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYVideoModel.h; sourceTree = "<group>"; };
 		79CC62E121573F3C00101773 /* GKDYVideoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYVideoModel.m; sourceTree = "<group>"; };
 		79CC62E321573FC500101773 /* GKDYScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYScrollView.h; sourceTree = "<group>"; };
 		79CC62E421573FC500101773 /* GKDYScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYScrollView.m; sourceTree = "<group>"; };
-		79CC62E62157401E00101773 /* GKDYVideoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYVideoView.h; sourceTree = "<group>"; };
-		79CC62E72157401E00101773 /* GKDYVideoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYVideoView.m; sourceTree = "<group>"; };
 		79CC62E92157402800101773 /* GKDYVideoControlView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYVideoControlView.h; sourceTree = "<group>"; };
 		79CC62EA2157402800101773 /* GKDYVideoControlView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYVideoControlView.m; sourceTree = "<group>"; };
 		79CC62EC2157405400101773 /* GKDYVideoViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYVideoViewModel.h; sourceTree = "<group>"; };
 		79CC62ED2157405400101773 /* GKDYVideoViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYVideoViewModel.m; sourceTree = "<group>"; };
 		79CC62F32158E44300101773 /* GKNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKNetworking.h; sourceTree = "<group>"; };
 		79CC62F42158E44300101773 /* GKNetworking.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKNetworking.m; sourceTree = "<group>"; };
-		79CC62F92158F2BB00101773 /* GKDYPersonalModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYPersonalModel.h; sourceTree = "<group>"; };
-		79CC62FA2158F2BB00101773 /* GKDYPersonalModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYPersonalModel.m; sourceTree = "<group>"; };
 		79DD87CC226C268D008FB903 /* GKDYNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYNavigationController.h; sourceTree = "<group>"; };
 		79DD87CD226C268D008FB903 /* GKDYNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYNavigationController.m; sourceTree = "<group>"; };
 		79E16A112274748F00DE4967 /* GKSlidePopupView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKSlidePopupView.h; sourceTree = "<group>"; };
@@ -186,26 +180,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		79CC62A42157377700101773 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		79CC62AF2157377700101773 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		0E873DF6F1A310CB74B47AA5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				793231B429A44E39000A61ED /* TXFFmpeg.xcframework */,
+				793231B229A44E39000A61ED /* TXLiteAVSDK_Player.framework */,
+				793231B329A44E39000A61ED /* TXSoundTouch.xcframework */,
 				81CC8427C037D4E8A4B61B49 /* Pods_GKDYVideo.framework */,
 			);
 			name = Frameworks;
@@ -280,8 +263,6 @@
 		607CAB7022818FC20062AC0F /* GKLoadingView */ = {
 			isa = PBXGroup;
 			children = (
-				607CAB7122818FEA0062AC0F /* GKLineLoadingView.h */,
-				607CAB7222818FEA0062AC0F /* GKLineLoadingView.m */,
 				607CAB7422818FF50062AC0F /* GKBallLoadingView.h */,
 				607CAB7522818FF50062AC0F /* GKBallLoadingView.m */,
 			);
@@ -307,6 +288,9 @@
 		607CAB792282A84C0062AC0F /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				79A5251229D18CF600CFB32F /* Model */,
+				79A5251129D18CF100CFB32F /* ViewModel */,
+				79A5251029D18CEC00CFB32F /* View */,
 				607CAB7C2282A8BE0062AC0F /* Controller */,
 			);
 			path = Mine;
@@ -335,6 +319,10 @@
 			children = (
 				607CAB832282A8E00062AC0F /* GKDYMineViewController.h */,
 				607CAB842282A8E00062AC0F /* GKDYMineViewController.m */,
+				79A5251929D1902C00CFB32F /* GKDYUserViewController.h */,
+				79A5251A29D1902C00CFB32F /* GKDYUserViewController.m */,
+				79A5251F29D197C800CFB32F /* GKDYVideoListViewController.h */,
+				79A5252029D197C800CFB32F /* GKDYVideoListViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -348,30 +336,49 @@
 				60D7CF5F2626C529004D7477 /* UITabBar+GKCategory.m */,
 				603969E326315A5D0024ED97 /* NSString+GKCategory.h */,
 				603969E426315A5D0024ED97 /* NSString+GKCategory.m */,
+				799277F029CAE3D300A410DC /* UIButton+GKCategory.h */,
+				799277F129CAE3D300A410DC /* UIButton+GKCategory.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
 		};
-		7988CB1C227C4CAB00023A2B /* Resources */ = {
+		79A5251029D18CEC00CFB32F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				60657EFB21C117F0000F97DA /* video1.json */,
-				60C6E0AF21CC8A9E00C12F93 /* video2.json */,
-				60C6E0B121CC8AD600C12F93 /* video3.json */,
-				7988CB18227C4BAA00023A2B /* video4.json */,
-				7988CB16227C4BAA00023A2B /* video5.json */,
-				7988CB17227C4BAA00023A2B /* video6.json */,
-				601140C222ED6CAC0014EF50 /* awemes.json */,
+				79A5251C29D190B600CFB32F /* GKDYUserHeaderView.h */,
+				79A5251D29D190B600CFB32F /* GKDYUserHeaderView.m */,
+				79A5252229D1998100CFB32F /* GKDYVideoListCell.h */,
+				79A5252329D1998100CFB32F /* GKDYVideoListCell.m */,
+				601140C422EFD0450014EF50 /* GKDYScaleVideoView.h */,
+				601140C522EFD0450014EF50 /* GKDYScaleVideoView.m */,
 			);
-			path = Resources;
+			path = View;
+			sourceTree = "<group>";
+		};
+		79A5251129D18CF100CFB32F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				79A5251629D18E2100CFB32F /* GKDYUserVideoViewModel.h */,
+				79A5251729D18E2100CFB32F /* GKDYUserVideoViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		79A5251229D18CF600CFB32F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				79A5251329D18D4800CFB32F /* GKDYUserVideoModel.h */,
+				79A5251429D18D4800CFB32F /* GKDYUserVideoModel.m */,
+				79A5252529D2831400CFB32F /* GKDYUserModel.h */,
+				79A5252629D2831400CFB32F /* GKDYUserModel.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		79CC62862157377400101773 = {
 			isa = PBXGroup;
 			children = (
 				79CC62912157377400101773 /* GKDYVideo */,
-				79CC62AA2157377700101773 /* GKDYVideoTests */,
-				79CC62B52157377700101773 /* GKDYVideoUITests */,
 				79CC62902157377400101773 /* Products */,
 				44FD68EAC1EACFC6A455A797 /* Pods */,
 				0E873DF6F1A310CB74B47AA5 /* Frameworks */,
@@ -382,8 +389,6 @@
 			isa = PBXGroup;
 			children = (
 				79CC628F2157377400101773 /* GKDYVideo.app */,
-				79CC62A72157377700101773 /* GKDYVideoTests.xctest */,
-				79CC62B22157377700101773 /* GKDYVideoUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -391,7 +396,6 @@
 		79CC62912157377400101773 /* GKDYVideo */ = {
 			isa = PBXGroup;
 			children = (
-				7988CB1C227C4CAB00023A2B /* Resources */,
 				79CC62C521573AB400101773 /* Classes */,
 				79CC629B2157377600101773 /* Assets.xcassets */,
 				79CC629D2157377600101773 /* LaunchScreen.storyboard */,
@@ -401,24 +405,6 @@
 				606A77DE215E0B3000DC2F63 /* README.md */,
 			);
 			path = GKDYVideo;
-			sourceTree = "<group>";
-		};
-		79CC62AA2157377700101773 /* GKDYVideoTests */ = {
-			isa = PBXGroup;
-			children = (
-				79CC62AB2157377700101773 /* GKDYVideoTests.m */,
-				79CC62AD2157377700101773 /* Info.plist */,
-			);
-			path = GKDYVideoTests;
-			sourceTree = "<group>";
-		};
-		79CC62B52157377700101773 /* GKDYVideoUITests */ = {
-			isa = PBXGroup;
-			children = (
-				79CC62B62157377700101773 /* GKDYVideoUITests.m */,
-				79CC62B82157377700101773 /* Info.plist */,
-			);
-			path = GKDYVideoUITests;
 			sourceTree = "<group>";
 		};
 		79CC62C521573AB400101773 /* Classes */ = {
@@ -451,24 +437,15 @@
 		79CC62C721573B2700101773 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				799277D129C837A000A410DC /* GKDYTools.h */,
+				799277D229C837A000A410DC /* GKDYTools.m */,
 				60D7CF5B2626C48D004D7477 /* Category */,
 				60089110229BDDB4002A6D52 /* GKLikeView */,
 				607CAB7022818FC20062AC0F /* GKLoadingView */,
 				79E16A102274746200DE4967 /* GKSlidePopupView */,
 				79CC62F22158E42D00101773 /* GKNetworking */,
-				79CC62DC21573C9B00101773 /* GKDYVideoPlayer */,
-				79CC62C821573B4700101773 /* GKSliderView */,
 			);
 			path = Tools;
-			sourceTree = "<group>";
-		};
-		79CC62C821573B4700101773 /* GKSliderView */ = {
-			isa = PBXGroup;
-			children = (
-				79CC62C921573B4700101773 /* GKSliderView.h */,
-				79CC62CA21573B4700101773 /* GKSliderView.m */,
-			);
-			path = GKSliderView;
 			sourceTree = "<group>";
 		};
 		79CC62D821573C6200101773 /* Controller */ = {
@@ -480,10 +457,6 @@
 				79CC62D321573C2300101773 /* GKDYSearchViewController.m */,
 				79CC62D521573C2C00101773 /* GKDYPlayerViewController.h */,
 				79CC62D621573C2C00101773 /* GKDYPlayerViewController.m */,
-				606A77DC215DFCB100DC2F63 /* GKDYPersonalViewController.h */,
-				606A77DB215DFCB000DC2F63 /* GKDYPersonalViewController.m */,
-				60C6E0A021C345BD00C12F93 /* GKDYListViewController.h */,
-				60C6E0A121C345BD00C12F93 /* GKDYListViewController.m */,
 				7988CB1D227C9DB900023A2B /* GKDYShootViewController.h */,
 				7988CB1E227C9DB900023A2B /* GKDYShootViewController.m */,
 			);
@@ -495,16 +468,28 @@
 			children = (
 				79CC62E321573FC500101773 /* GKDYScrollView.h */,
 				79CC62E421573FC500101773 /* GKDYScrollView.m */,
-				79CC62E62157401E00101773 /* GKDYVideoView.h */,
-				79CC62E72157401E00101773 /* GKDYVideoView.m */,
-				601140C422EFD0450014EF50 /* GKDYScaleVideoView.h */,
-				601140C522EFD0450014EF50 /* GKDYScaleVideoView.m */,
+				79A5250A29D161C600CFB32F /* GKDYTitleView.h */,
+				79A5250B29D161C600CFB32F /* GKDYTitleView.m */,
+				79C4207C29C42B1600A0AB84 /* GKDYVideoScrollView.h */,
+				79C4207D29C42B1600A0AB84 /* GKDYVideoScrollView.m */,
+				79C4207F29C43C2200A0AB84 /* GKDYVideoCell.h */,
+				79C4208029C43C2200A0AB84 /* GKDYVideoCell.m */,
+				799277E729CA85EE00A410DC /* GKDYVideoSlider.h */,
+				799277E829CA85EE00A410DC /* GKDYVideoSlider.m */,
+				799277EA29CA9D9800A410DC /* GKDYVideoItemButton.h */,
+				799277EB29CA9D9800A410DC /* GKDYVideoItemButton.m */,
+				79C4208829C448FA00A0AB84 /* GKDYVideoPortraitView.h */,
+				79C4208929C448FA00A0AB84 /* GKDYVideoPortraitView.m */,
+				79C4208B29C4490700A0AB84 /* GKDYVideoLandscapeView.h */,
+				79C4208C29C4490700A0AB84 /* GKDYVideoLandscapeView.m */,
+				799277ED29CAD17700A410DC /* GKDYVideoStatusBar.h */,
+				799277EE29CAD17700A410DC /* GKDYVideoStatusBar.m */,
+				799277F329CAE45D00A410DC /* GKDYVideoMaskView.h */,
+				799277F429CAE45D00A410DC /* GKDYVideoMaskView.m */,
+				799277F629CAF77300A410DC /* GKDYVideoPreviewView.h */,
+				799277F729CAF77300A410DC /* GKDYVideoPreviewView.m */,
 				79CC62E92157402800101773 /* GKDYVideoControlView.h */,
 				79CC62EA2157402800101773 /* GKDYVideoControlView.m */,
-				60C6E09E21C33F7900C12F93 /* GKDYHeaderView.h */,
-				60C6E09D21C33F7900C12F93 /* GKDYHeaderView.m */,
-				60C6E0A321C345E100C12F93 /* GKDYListCollectionViewCell.h */,
-				60C6E0A421C345E100C12F93 /* GKDYListCollectionViewCell.m */,
 				79E16A142279A63200DE4967 /* GKDYCommentView.h */,
 				79E16A152279A63200DE4967 /* GKDYCommentView.m */,
 				6013272D22F1BF0700C055B3 /* GKDYPanGestureRecognizer.h */,
@@ -518,10 +503,6 @@
 			children = (
 				79CC62E021573F3C00101773 /* GKDYVideoModel.h */,
 				79CC62E121573F3C00101773 /* GKDYVideoModel.m */,
-				79CC62F92158F2BB00101773 /* GKDYPersonalModel.h */,
-				79CC62FA2158F2BB00101773 /* GKDYPersonalModel.m */,
-				60DE55422626ABA300CC3538 /* GKAWEModel.h */,
-				60DE55432626ABA300CC3538 /* GKAWEModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -531,17 +512,10 @@
 			children = (
 				79CC62EC2157405400101773 /* GKDYVideoViewModel.h */,
 				79CC62ED2157405400101773 /* GKDYVideoViewModel.m */,
+				79C4208229C43CE500A0AB84 /* GKDYPlayerManager.h */,
+				79C4208329C43CE500A0AB84 /* GKDYPlayerManager.m */,
 			);
 			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		79CC62DC21573C9B00101773 /* GKDYVideoPlayer */ = {
-			isa = PBXGroup;
-			children = (
-				79CC62DD21573CAE00101773 /* GKDYVideoPlayer.h */,
-				79CC62DE21573CAE00101773 /* GKDYVideoPlayer.m */,
-			);
-			path = GKDYVideoPlayer;
 			sourceTree = "<group>";
 		};
 		79CC62F22158E42D00101773 /* GKNetworking */ = {
@@ -584,42 +558,6 @@
 			productReference = 79CC628F2157377400101773 /* GKDYVideo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		79CC62A62157377700101773 /* GKDYVideoTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 79CC62BE2157377700101773 /* Build configuration list for PBXNativeTarget "GKDYVideoTests" */;
-			buildPhases = (
-				79CC62A32157377700101773 /* Sources */,
-				79CC62A42157377700101773 /* Frameworks */,
-				79CC62A52157377700101773 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				79CC62A92157377700101773 /* PBXTargetDependency */,
-			);
-			name = GKDYVideoTests;
-			productName = GKDYVideoTests;
-			productReference = 79CC62A72157377700101773 /* GKDYVideoTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		79CC62B12157377700101773 /* GKDYVideoUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 79CC62C12157377700101773 /* Build configuration list for PBXNativeTarget "GKDYVideoUITests" */;
-			buildPhases = (
-				79CC62AE2157377700101773 /* Sources */,
-				79CC62AF2157377700101773 /* Frameworks */,
-				79CC62B02157377700101773 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				79CC62B42157377700101773 /* PBXTargetDependency */,
-			);
-			name = GKDYVideoUITests;
-			productName = GKDYVideoUITests;
-			productReference = 79CC62B22157377700101773 /* GKDYVideoUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -627,19 +565,11 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = GKDY;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1420;
 				ORGANIZATIONNAME = QuintGao;
 				TargetAttributes = {
 					79CC628E2157377400101773 = {
 						CreatedOnToolsVersion = 10.0;
-					};
-					79CC62A62157377700101773 = {
-						CreatedOnToolsVersion = 10.0;
-						TestTargetID = 79CC628E2157377400101773;
-					};
-					79CC62B12157377700101773 = {
-						CreatedOnToolsVersion = 10.0;
-						TestTargetID = 79CC628E2157377400101773;
 					};
 				};
 			};
@@ -657,8 +587,6 @@
 			projectRoot = "";
 			targets = (
 				79CC628E2157377400101773 /* GKDYVideo */,
-				79CC62A62157377700101773 /* GKDYVideoTests */,
-				79CC62B12157377700101773 /* GKDYVideoUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -668,30 +596,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7988CB1A227C4BAA00023A2B /* video6.json in Resources */,
-				601140C322ED6CAD0014EF50 /* awemes.json in Resources */,
 				606A77DF215E0B3000DC2F63 /* README.md in Resources */,
-				60657EFC21C117F0000F97DA /* video1.json in Resources */,
-				60C6E0B021CC8A9F00C12F93 /* video2.json in Resources */,
 				79CC629F2157377600101773 /* LaunchScreen.storyboard in Resources */,
-				7988CB1B227C4BAA00023A2B /* video4.json in Resources */,
-				7988CB19227C4BAA00023A2B /* video5.json in Resources */,
 				79CC629C2157377600101773 /* Assets.xcassets in Resources */,
-				60C6E0B221CC8AD600C12F93 /* video3.json in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		79CC62A52157377700101773 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		79CC62B02157377700101773 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -740,77 +647,58 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				60C6E0A221C345BD00C12F93 /* GKDYListViewController.m in Sources */,
 				79E16A162279A63200DE4967 /* GKDYCommentView.m in Sources */,
+				79A5251529D18D4800CFB32F /* GKDYUserVideoModel.m in Sources */,
 				607CAB7622818FF50062AC0F /* GKBallLoadingView.m in Sources */,
+				799277F529CAE45D00A410DC /* GKDYVideoMaskView.m in Sources */,
 				60D7CF612626C529004D7477 /* UITabBar+GKCategory.m in Sources */,
+				79A5252129D197C800CFB32F /* GKDYVideoListViewController.m in Sources */,
+				799277EC29CA9D9900A410DC /* GKDYVideoItemButton.m in Sources */,
 				60657EFA21C1110F000F97DA /* GKDYMainViewController.m in Sources */,
-				60C6E09F21C33F7900C12F93 /* GKDYHeaderView.m in Sources */,
 				79CC62CE21573BD700101773 /* GKDYBaseViewController.m in Sources */,
-				60C6E0A521C345E100C12F93 /* GKDYListCollectionViewCell.m in Sources */,
+				799277E929CA85EE00A410DC /* GKDYVideoSlider.m in Sources */,
 				607CAB7F2282A8CF0062AC0F /* GKDYAttentViewController.m in Sources */,
 				607CAB852282A8E00062AC0F /* GKDYMineViewController.m in Sources */,
 				601140C622EFD0450014EF50 /* GKDYScaleVideoView.m in Sources */,
+				79A5252729D2831400CFB32F /* GKDYUserModel.m in Sources */,
 				607CAB822282A8D80062AC0F /* GKDYMessageViewController.m in Sources */,
 				79CC62D721573C2C00101773 /* GKDYPlayerViewController.m in Sources */,
 				79CC62D421573C2300101773 /* GKDYSearchViewController.m in Sources */,
+				79C4208429C43CE500A0AB84 /* GKDYPlayerManager.m in Sources */,
 				79CC62EB2157402800101773 /* GKDYVideoControlView.m in Sources */,
 				60D7CF602626C529004D7477 /* NSMethodSignature+GKCategory.m in Sources */,
+				79A5251E29D190B600CFB32F /* GKDYUserHeaderView.m in Sources */,
+				79C4207E29C42B1600A0AB84 /* GKDYVideoScrollView.m in Sources */,
 				79CC62A22157377600101773 /* main.m in Sources */,
-				79CC62E82157401E00101773 /* GKDYVideoView.m in Sources */,
+				79A5250C29D161C600CFB32F /* GKDYTitleView.m in Sources */,
 				7988CB1F227C9DB900023A2B /* GKDYShootViewController.m in Sources */,
+				79C4208129C43C2200A0AB84 /* GKDYVideoCell.m in Sources */,
 				79CC62E521573FC500101773 /* GKDYScrollView.m in Sources */,
+				79A5251B29D1902C00CFB32F /* GKDYUserViewController.m in Sources */,
 				79CC62EE2157405400101773 /* GKDYVideoViewModel.m in Sources */,
-				607CAB7322818FEA0062AC0F /* GKLineLoadingView.m in Sources */,
+				79C4208D29C4490700A0AB84 /* GKDYVideoLandscapeView.m in Sources */,
+				799277F229CAE3D300A410DC /* UIButton+GKCategory.m in Sources */,
 				79CC62E221573F3C00101773 /* GKDYVideoModel.m in Sources */,
 				79DD87CE226C268D008FB903 /* GKDYNavigationController.m in Sources */,
-				606A77DD215DFCB100DC2F63 /* GKDYPersonalViewController.m in Sources */,
+				79A5251829D18E2100CFB32F /* GKDYUserVideoViewModel.m in Sources */,
+				799277EF29CAD17700A410DC /* GKDYVideoStatusBar.m in Sources */,
 				603969E526315A5D0024ED97 /* NSString+GKCategory.m in Sources */,
 				79CC62F52158E44300101773 /* GKNetworking.m in Sources */,
 				6013272E22F1BF0700C055B3 /* GKDYPanGestureRecognizer.m in Sources */,
 				79CC62942157377400101773 /* AppDelegate.m in Sources */,
+				799277D329C837A000A410DC /* GKDYTools.m in Sources */,
 				60089113229BE0BD002A6D52 /* GKLikeView.m in Sources */,
-				79CC62CB21573B4700101773 /* GKSliderView.m in Sources */,
+				79C4208A29C448FA00A0AB84 /* GKDYVideoPortraitView.m in Sources */,
+				79A5252429D1998100CFB32F /* GKDYVideoListCell.m in Sources */,
 				79CC62D121573BFD00101773 /* GKDYHomeViewController.m in Sources */,
-				79CC62FB2158F2BB00101773 /* GKDYPersonalModel.m in Sources */,
-				60DE55442626ABA300CC3538 /* GKAWEModel.m in Sources */,
+				799277F829CAF77300A410DC /* GKDYVideoPreviewView.m in Sources */,
 				6099CDCC22BA31B4005098EE /* GKDoubleLikeView.m in Sources */,
 				79E16A132274748F00DE4967 /* GKSlidePopupView.m in Sources */,
 				607CAB882282BB3F0062AC0F /* GKDYTabBar.m in Sources */,
-				79CC62DF21573CAE00101773 /* GKDYVideoPlayer.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		79CC62A32157377700101773 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				79CC62AC2157377700101773 /* GKDYVideoTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		79CC62AE2157377700101773 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				79CC62B72157377700101773 /* GKDYVideoUITests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		79CC62A92157377700101773 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 79CC628E2157377400101773 /* GKDYVideo */;
-			targetProxy = 79CC62A82157377700101773 /* PBXContainerItemProxy */;
-		};
-		79CC62B42157377700101773 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 79CC628E2157377400101773 /* GKDYVideo */;
-			targetProxy = 79CC62B32157377700101773 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		79CC629D2157377600101773 /* LaunchScreen.storyboard */ = {
@@ -862,6 +750,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				EXCLUDED_ARCHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -922,6 +811,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXCLUDED_ARCHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -943,20 +833,24 @@
 			baseConfigurationReference = ACB89D940248F84479D31DDA /* Pods-GKDYVideo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development: xinjun zhang (DNJGV7XB9Q)";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = X52753HQNM;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 27K7U9AVTS;
 				ENABLE_BITCODE = NO;
+				EXCLUDED_ARCHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREFIX_HEADER = GKDYVideo/PrefixHeader.pch;
 				INFOPLIST_FILE = GKDYVideo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				INFOPLIST_KEY_CFBundleDisplayName = "抖音";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.dyvideo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = aystfm_dev_test;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -966,91 +860,25 @@
 			baseConfigurationReference = 126D76C9517C38C3B7C81D53 /* Pods-GKDYVideo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development: xinjun zhang (DNJGV7XB9Q)";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = X52753HQNM;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 27K7U9AVTS;
 				ENABLE_BITCODE = NO;
+				EXCLUDED_ARCHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREFIX_HEADER = GKDYVideo/PrefixHeader.pch;
 				INFOPLIST_FILE = GKDYVideo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				INFOPLIST_KEY_CFBundleDisplayName = "抖音";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.dyvideo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = aystfm_dev_test;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		79CC62BF2157377700101773 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = GKDYVideoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.aiyinsitanfm.GKDYVideoTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GKDYVideo.app/GKDYVideo";
-			};
-			name = Debug;
-		};
-		79CC62C02157377700101773 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = GKDYVideoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.aiyinsitanfm.GKDYVideoTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GKDYVideo.app/GKDYVideo";
-			};
-			name = Release;
-		};
-		79CC62C22157377700101773 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = GKDYVideoUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.aiyinsitanfm.GKDYVideoUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = GKDYVideo;
-			};
-			name = Debug;
-		};
-		79CC62C32157377700101773 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = GKDYVideoUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.aiyinsitanfm.GKDYVideoUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = GKDYVideo;
 			};
 			name = Release;
 		};
@@ -1071,24 +899,6 @@
 			buildConfigurations = (
 				79CC62BC2157377700101773 /* Debug */,
 				79CC62BD2157377700101773 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		79CC62BE2157377700101773 /* Build configuration list for PBXNativeTarget "GKDYVideoTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				79CC62BF2157377700101773 /* Debug */,
-				79CC62C02157377700101773 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		79CC62C12157377700101773 /* Build configuration list for PBXNativeTarget "GKDYVideoUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				79CC62C22157377700101773 /* Debug */,
-				79CC62C32157377700101773 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

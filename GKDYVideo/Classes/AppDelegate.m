@@ -10,8 +10,10 @@
 #import "GKDYHomeViewController.h"
 #import "GKDYShootViewController.h"
 #import "GKDYNavigationController.h"
+#import "GKDYMainViewController.h"
 #import <SDWebImage/SDWebImage.h>
 #import <SDWebImageWebPCoder/SDWebImageWebPCoder.h>
+#import <ZFPlayer/ZFLandscapeRotationManager.h>
 
 @interface AppDelegate ()
 
@@ -42,8 +44,6 @@
     }];
     
     [GKGestureConfigure setupCustomConfigure:^(GKGestureHandleConfigure * _Nonnull configure) {
-        configure.gk_translationX       = 10.0f;
-        configure.gk_translationY       = 15.0f;
         configure.gk_scaleX             = 0.90f;
         configure.gk_scaleY             = 0.95f;
     }];
@@ -53,9 +53,10 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     
-    GKDYNavigationController *nav = [GKDYNavigationController rootVC:[GKDYShootViewController new]];
-    nav.gk_openScrollLeftPush = YES; // 开启左滑push功能
+//    GKDYNavigationController *nav = [GKDYNavigationController rootVC:[GKDYShootViewController new]];
+//    nav.gk_openScrollLeftPush = YES; // 开启左滑push功能
     
+    GKDYNavigationController *nav = [GKDYNavigationController rootVC:[GKDYMainViewController new]];
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
 }
@@ -67,6 +68,14 @@
     
     // Modify HTTP Accept Header
     [[SDWebImageDownloader sharedDownloader] setValue:@"image/webp,image/*,*/*;q=0.8" forHTTPHeaderField:@"Accept"];
+}
+
+- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+    ZFInterfaceOrientationMask orientationMask = [ZFLandscapeRotationManager supportedInterfaceOrientationsForWindow:window];
+    if (orientationMask != ZFInterfaceOrientationMaskUnknow) {
+        return (UIInterfaceOrientationMask)orientationMask;
+    }
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 @end

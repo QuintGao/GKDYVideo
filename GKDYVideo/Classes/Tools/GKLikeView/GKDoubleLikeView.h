@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GKDoubleLikeView : NSObject
 
-- (void)createAnimationWithTouch:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event;
+- (void)createAnimationWithPoint:(CGPoint)point view:(UIView *)view completion:(nullable void(^)(void))completion;
 
 @end
 

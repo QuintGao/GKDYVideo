@@ -8,13 +8,15 @@
 
 #import "GKDoubleLikeView.h"
 
+@interface GKDoubleLikeView()
+
+@property (nonatomic, copy) void(^completion)(void);
+
+@end
+
 @implementation GKDoubleLikeView
 
-- (void)createAnimationWithTouch:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    UITouch *touch = [touches anyObject];
-    if (touch.tapCount <= 1.0f) return;
-    
-    CGPoint point = [touch locationInView:touch.view];
+- (void)createAnimationWithPoint:(CGPoint)point view:(UIView *)view completion:(void (^)(void))completion {
     UIImage *image = [UIImage imageNamed:@"likeHeart"];
     UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, ADAPTATIONRATIO * 160.0f, ADAPTATIONRATIO * 160.0f)];
     imgView.image = image;
@@ -25,7 +27,7 @@
     int leftOrRight = arc4random() % 2;
     leftOrRight = leftOrRight ? leftOrRight : -1;
     imgView.transform = CGAffineTransformRotate(imgView.transform, M_PI / 9.0f * leftOrRight);
-    [touch.view addSubview:imgView];
+    [view addSubview:imgView];
     
     // 出现的时候回弹一下
     __block UIImageView *blockImgV = imgView;
@@ -55,6 +57,7 @@
             [imgView removeFromSuperview];
             imgView = nil;
             image = nil;
+            !self.completion ?: self.completion();
         }];
     }
 }

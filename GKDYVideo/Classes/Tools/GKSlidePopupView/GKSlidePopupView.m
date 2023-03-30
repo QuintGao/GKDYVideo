@@ -60,13 +60,14 @@
     }];
 }
 
-- (void)dismiss {
+- (void)dismissCompletion:(void (^)(void))completion {
     [UIView animateWithDuration:0.25f animations:^{
         CGRect frame = self.contentView.frame;
         frame.origin.y = self.frame.size.height;
         self.contentView.frame = frame;
     }completion:^(BOOL finished) {
         [self removeFromSuperview];
+        !completion ?: completion();
     }];
 }
 
@@ -117,12 +118,12 @@
 - (void)handleTapGesture:(UITapGestureRecognizer *)tapGesture {
     CGPoint point = [tapGesture locationInView:self.contentView];
     if (![self.contentView.layer containsPoint:point] && tapGesture.view == self) {
-        [self dismiss];
+        [self dismissCompletion:nil];
     }
 }
 
 - (void)handlePanGesture:(UIPanGestureRecognizer *)panGesture {
-    CGPoint translation = [panGesture translationInView:self.contentView];
+    CGPoint translation = [panGesture translationInView:panGesture.view];
     if (self.isDragScrollView) {
         // 当UIScrollView在最顶部时，处理视图的滑动
         if (self.scrollView.contentOffset.y <= 0) {
@@ -150,17 +151,17 @@
         }
     }
     
-    [panGesture setTranslation:CGPointZero inView:self.contentView];
+    [panGesture setTranslation:CGPointZero inView:panGesture.view];
     
     if (panGesture.state == UIGestureRecognizerStateEnded) {
-        CGPoint velocity = [panGesture velocityInView:self.contentView];
+        CGPoint velocity = [panGesture velocityInView:panGesture.view];
         
         self.scrollView.panGestureRecognizer.enabled = YES;
         
         // 结束时的速度>0 滑动距离> 5 且UIScrollView滑动到最顶部
         NSLog(@"%f", self.lastTransitionY);
         if (velocity.y > 0 && self.lastTransitionY > 5 && !self.isDragScrollView) {
-            [self dismiss];
+            [self dismissCompletion:nil];
         }else {
             [self showWithCompletion:nil];
         }

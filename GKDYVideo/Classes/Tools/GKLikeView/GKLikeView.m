@@ -140,11 +140,8 @@
 
 #pragma mark - UITapGestureRecognizer
 - (void)tapAction:(UITapGestureRecognizer *)tap {
-    if (self.isLike) {
-        [self startAnimationWithIsLike:NO];
-    }else {
-        [self startAnimationWithIsLike:YES];
-    }
+    [self startAnimationWithIsLike:!self.isLike];
+    !self.likeBlock ?: self.likeBlock();
 }
 
 #pragma mark - 懒加载

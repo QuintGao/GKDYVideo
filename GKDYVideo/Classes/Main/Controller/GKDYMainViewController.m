@@ -13,6 +13,7 @@
 #import "GKDYMineViewController.h"
 #import "GKDYTabBar.h"
 #import "UITabBar+GKCategory.h"
+#import "GKDYHomeViewController.h"
 
 @interface GKDYMainViewController ()<UITabBarControllerDelegate, GKDYPlayerViewControllerDelegate, GKViewControllerPopDelegate>
 
@@ -29,20 +30,28 @@
     
     // 替换系统tabbar
     self.dyTabBar = [GKDYTabBar new];
+    self.dyTabBar.translucent = NO;
     [self setValue:self.dyTabBar forKey:@"tabBar"];
     
     self.playerVC = [GKDYPlayerViewController new];
     self.playerVC.delegate = self;
     
-    [self addChildVC:self.playerVC title:@"首页"];
+//    [self addChildVC:self.playerVC title:@"首页"];
+    [self addChildVC:[GKDYHomeViewController new] title:@"首页"];
     [self addChildVC:[GKDYAttentViewController new] title:@"关注"];
     [self addChildVC:[GKDYMessageViewController new] title:@"消息"];
     [self addChildVC:[GKDYMineViewController new] title:@"我"];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.navigationController setNavigationBarHidden:YES];
+}
+
 - (void)addChildVC:(UIViewController *)childVC title:(NSString *)title {
     childVC.tabBarItem.title = title;
-    [self setTabbarStyle:GKDYTabBarStyleTransparent vc:childVC];
+    [self setTabbarStyle:GKDYTabBarStyleTranslucent vc:childVC];
 
     childVC.tabBarItem.titlePositionAdjustment = UIOffsetMake(0, -100);
     childVC.tabBarItem.imageInsets = UIEdgeInsetsMake(28, 0, -28, 0);
@@ -96,18 +105,18 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)playerVC:(GKDYPlayerViewController *)playerVC controlView:(nonnull GKDYVideoControlView *)controlView isCritical:(BOOL)isCritical {
-    
-    GKSliderView *sliderView = controlView.sliderView;
-    
-    if (isCritical) { // 到达临界点，隐藏分割线
-        sliderView.maximumTrackTintColor = [UIColor colorWithWhite:1.0f alpha:0.2f];
-        [self.dyTabBar hideLine];
-    }else {
-        sliderView.maximumTrackTintColor = [UIColor clearColor];
-        [self.dyTabBar showLine];
-    }
-}
+//- (void)playerVC:(GKDYPlayerViewController *)playerVC controlView:(nonnull GKDYVideoControlView *)controlView isCritical:(BOOL)isCritical {
+//    
+//    GKSliderView *sliderView = controlView.sliderView;
+//    
+//    if (isCritical) { // 到达临界点，隐藏分割线
+//        sliderView.maximumTrackTintColor = [UIColor colorWithWhite:1.0f alpha:0.2f];
+//        [self.dyTabBar hideLine];
+//    }else {
+//        sliderView.maximumTrackTintColor = [UIColor clearColor];
+//        [self.dyTabBar showLine];
+//    }
+//}
 
 #pragma mark - UITabBarControllerDelegate
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {

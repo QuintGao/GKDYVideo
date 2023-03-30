@@ -19,7 +19,7 @@
 // 负责从AVCaptureDevice获取输入数据
 @property (nonatomic, strong) AVCaptureDeviceInput      *captureDeviceInput;
 // 照片输出流
-@property (nonatomic, strong) AVCaptureStillImageOutput *imageOutput;
+//@property (nonatomic, strong) AVCaptureStillImageOutput *imageOutput;
 // 视频输出流
 @property (nonatomic, strong) AVCaptureMovieFileOutput  *videoOutput;
 
@@ -41,7 +41,7 @@
     
     self.view.backgroundColor = [UIColor clearColor];
     
-    self.gk_statusBarHidden = YES;
+//    self.gk_statusBarHidden = YES;
     self.gk_navBackgroundColor = [UIColor clearColor];
     
     self.gk_navLeftBarButtonItem = [UIBarButtonItem gk_itemWithImage:[UIImage gk_changeImage:[UIImage imageNamed:@"close"] color:UIColor.whiteColor] target:self action:@selector(closeAction)];
@@ -79,6 +79,10 @@
     // 默认显示mainVC
     self.mainVC = [GKDYMainViewController new];
     [self.navigationController pushViewController:self.mainVC animated:NO];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

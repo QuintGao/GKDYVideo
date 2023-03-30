@@ -7,50 +7,39 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GKDYUserVideoModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface GKDYVideoAuthorModel : NSObject
-
-@property (nonatomic, copy) NSString        *fans_num;
-@property (nonatomic, copy) NSString        *follow_num;
-@property (nonatomic, copy) NSString        *gender;
-@property (nonatomic, copy) NSString        *intro;
-@property (nonatomic, copy) NSString        *is_follow;
-@property (nonatomic, copy) NSString        *name_show;
-@property (nonatomic, copy) NSString        *portrait;
-@property (nonatomic, copy) NSString        *user_id;
-@property (nonatomic, copy) NSString        *user_name;
-
-@end
-
 @interface GKDYVideoModel : NSObject
 
-@property (nonatomic, assign) BOOL          isAgree;
-@property (nonatomic, copy) NSString        *agree_num;
-@property (nonatomic, copy) NSString        *agreed_num;
-@property (nonatomic, strong) GKDYVideoAuthorModel   *author;
-@property (nonatomic, copy) NSString        *comment_num;
-@property (nonatomic, copy) NSString        *create_time;
-@property (nonatomic, copy) NSString        *first_frame_cover;
-@property (nonatomic, copy) NSString        *is_deleted;
-@property (nonatomic, copy) NSString        *is_private;
-@property (nonatomic, copy) NSString        *need_hide_title;
-@property (nonatomic, copy) NSString        *play_count;
-@property (nonatomic, copy) NSString        *post_id;
-@property (nonatomic, copy) NSString        *share_num;
-@property (nonatomic, copy) NSString        *tags;
-@property (nonatomic, copy) NSString        *thread_id;
-@property (nonatomic, copy) NSString        *thumbnail_height;
-@property (nonatomic, copy) NSString        *thumbnail_url;
-@property (nonatomic, copy) NSString        *thumbnail_width;
-@property (nonatomic, copy) NSString        *title;
-@property (nonatomic, copy) NSString        *video_duration;
-@property (nonatomic, copy) NSString        *video_height;
-@property (nonatomic, copy) NSString        *video_length;
-@property (nonatomic, copy) NSString        *video_log_id;
-@property (nonatomic, copy) NSString        *video_url;
-@property (nonatomic, copy) NSString        *video_width;
+@property (nonatomic, copy) NSString *video_id;
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *poster_small;
+@property (nonatomic, copy) NSString *poster_big;
+@property (nonatomic, copy) NSString *poster_pc;
+@property (nonatomic, copy) NSString *source_name;
+@property (nonatomic, copy) NSString *play_url;
+@property (nonatomic, copy) NSString *duration;
+@property (nonatomic, copy) NSString *url;
+@property (nonatomic, copy) NSString *show_tag;
+@property (nonatomic, copy) NSString *publish_time;
+@property (nonatomic, copy) NSString *is_pay_column;
+@property (nonatomic, copy) NSString *like;
+@property (nonatomic, copy) NSString *comment;
+@property (nonatomic, copy) NSString *playcnt;
+@property (nonatomic, copy) NSString *fmplaycnt;
+@property (nonatomic, copy) NSString *fmplaycnt_2;
+@property (nonatomic, copy) NSString *outstand_tag;
+@property (nonatomic, copy) NSString *previewUrlHttp;
+@property (nonatomic, copy) NSString *third_id;
+@property (nonatomic, copy) NSString *vip;
+@property (nonatomic, copy) NSString *author_avatar;
+
+@property (nonatomic, assign) BOOL isLike;
+@property (nonatomic, strong, nullable) NSURLSessionDataTask *task;
+
+- (instancetype)initWithModel:(GKDYUserVideoModel *)model;
 
 @end
 

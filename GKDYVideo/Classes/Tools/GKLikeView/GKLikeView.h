@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL      isLike;
 
+@property (nonatomic, copy) void(^likeBlock)(void);
+
 - (void)startAnimationWithIsLike:(BOOL)isLike;
 
 - (void)setupLikeState:(BOOL)isLike;

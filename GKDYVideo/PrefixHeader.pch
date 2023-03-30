@@ -15,6 +15,7 @@
 #import <YYModel/YYModel.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <MJRefresh/MJRefresh.h>
+#import "GKDYTools.h"
 
 #pragma mark - UI
 // 屏幕宽高

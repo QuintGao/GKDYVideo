@@ -1,7 +1,13 @@
 # GKDYVideo
 iOS仿抖音短视频
 
-由于github的限制，播放器无法上传，所以需要下载下来后pod install即可。
+## 更新
+### 2023-03-30：
+* 1、移除腾讯云播放器，使用[ZFPlayer](https://github.com/renzifeng/ZFPlayer)（腾讯云播放器需要认证，不能免费使用了）
+* 2、上下滑动切换修改为我新封装的一个库[GKVideoScrollView](https://github.com/QuintGao/GKVideoScrollView)
+* 3、视频数据修改为[好看视频](https://haokan.baidu.com/) 网页端数据，仅供学习使用，请勿用作商业用途
+* 4、个人详情页优化，手势缩放动画优化
+* 5、支持全屏观看视频
 
 ## 效果图
 ![抖音-列表](https://upload-images.jianshu.io/upload_images/1598505-1a3cacbdf910797a.gif?imageMogr2/auto-orient/strip)
