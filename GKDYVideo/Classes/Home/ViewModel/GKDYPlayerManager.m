@@ -11,12 +11,20 @@
 #import <ZFPlayer/ZFPlayer.h>
 #import <ZFPlayer/ZFAVPlayerManager.h>
 #import "GKDYVideoCell.h"
+#import "GKRotationManager.h"
+#import "GKDYVideoPortraitCell.h"
+#import "GKDYVideoLandscapeCell.h"
+#import "GKDYVideoFullscreenView.h"
 
-@interface GKDYPlayerManager()
+@interface GKDYPlayerManager()<GKVideoScrollViewDataSource, GKDYVideoScrollViewDelegate, GKDYVideoPortraitCellDelegate>
 
 @property (nonatomic, strong) ZFPlayerController *player;
 
+@property (nonatomic, strong) GKRotationManager *rotationManager;
+
 @property (nonatomic, assign) BOOL isSeeking;
+
+@property (nonatomic, strong) GKDYVideoFullscreenView *fullscreenView;
 
 @end
 
@@ -43,7 +51,6 @@
     player.currentPlayerManager = manager;
     player.disableGestureTypes = ZFPlayerDisableGestureTypesPan | ZFPlayerDisableGestureTypesPinch;
     player.allowOrentitaionRotation = NO; // 禁止自动旋转
-    player.controlView = self.portraitView; // 设置竖屏控制层
     self.player = player;
     
     @weakify(self);
@@ -59,33 +66,20 @@
         self.portraitView.playBtn.hidden = NO;
     };
     
-    // 加载状态改变
+    // 加载状态
     player.playerLoadStateChanged = ^(id<ZFPlayerMediaPlayback>  _Nonnull asset, ZFPlayerLoadState loadState) {
         @strongify(self);
         if ((loadState == ZFPlayerLoadStatePrepare || loadState == ZFPlayerLoadStateStalled) && self.player.currentPlayerManager.isPlaying) {
-            [self.currentCell.slider showLoading];
+            [self.portraitView.slider showLoading];
         }else {
-            [self.currentCell.slider hideLoading];
+            [self.portraitView.slider hideLoading];
         }
     };
     
-    // 播放状态改变
-    player.playerPlayStateChanged = ^(id<ZFPlayerMediaPlayback>  _Nonnull asset, ZFPlayerPlaybackState playState) {
-        @strongify(self);
-        if (playState == ZFPlayerPlayStatePaused) {
-            [self.currentCell showLargeSlider];
-//            self.portraitView.playBtn.hidden = NO;
-        }else {
-            [self.currentCell showSmallSlider];
-//            self.portraitView.playBtn.hidden = YES;
-        }
-    };
-    
-    // 播放进度改变
+    // 播放时间
     player.playerPlayTimeChanged = ^(id<ZFPlayerMediaPlayback>  _Nonnull asset, NSTimeInterval currentTime, NSTimeInterval duration) {
         @strongify(self);
-        if (self.isSeeking) return;
-        [self.currentCell.slider updateCurrentTime:currentTime totalTime:duration];
+        [self.portraitView.slider updateCurrentTime:currentTime totalTime:duration];
     };
     
     // 方向即将改变
@@ -110,46 +104,70 @@
             self.player.controlView = self.portraitView;
         }
     };
+    
+    self.rotationManager = [GKRotationManager rotationManager];
+    self.rotationManager.contentView = self.player.currentPlayerManager.view;
+    self.landscapeView.rotationManager = self.rotationManager;
+    
+    // 即将旋转时调用
+    self.rotationManager.orientationWillChange = ^(BOOL isFullscreen) {
+        @strongify(self);
+        self.player.controlView.hidden = YES;
+        if (isFullscreen) {
+            [self.landscapeView startTimer];
+        }else {
+            self.player.currentPlayerManager.view.backgroundColor = UIColor.clearColor;
+            self.portraitView.hidden = NO;
+            [self.landscapeView destoryTimer];
+            if (self.landscapeScrollView) {
+                UIView *superview = self.landscapeScrollView.superview;
+                [superview addSubview:self.rotationManager.contentView];
+                [self.landscapeScrollView removeFromSuperview];
+                self.landscapeScrollView = nil;
+                self.landscapeCell = nil;
+            }
+        }
+    };
+    
+    // 旋转结束时调用
+    self.rotationManager.orientationDidChanged = ^(BOOL isFullscreen) {
+        @strongify(self);
+        if (isFullscreen) {
+//            self.portraitView.hidden = YES;
+            self.landscapeView.hidden = NO;
+            [self.landscapeView hideContainerView:NO];
+            if (!self.landscapeScrollView) {
+                [self initLandscapeScrollView];
+                UIView *superview = self.rotationManager.contentView.superview;
+                [superview addSubview:self.landscapeScrollView];
+                self.landscapeScrollView.defaultIndex = self.scrollView.currentIndex;
+                [self.landscapeScrollView reloadData];
+            }
+            self.player.controlView = self.landscapeView;
+            [self.currentCell resetView];
+            [self.landscapeCell hideTopView];
+        }else {
+            self.portraitView.hidden = NO;
+            self.landscapeView.hidden = YES;
+            self.player.controlView = self.portraitView;
+            if (self.player.containerView != self.currentCell.coverImgView) {
+                self.player.containerView = self.currentCell.coverImgView;
+            }
+            self.player.currentPlayerManager.view.backgroundColor = UIColor.blackColor;
+        }
+    };
+}
+
+- (void)initLandscapeScrollView {
+    self.landscapeScrollView = [[GKDYVideoScrollView alloc] init];
+    self.landscapeScrollView.backgroundColor = UIColor.blackColor;
+    self.landscapeScrollView.dataSource = self;
+    self.landscapeScrollView.delegate = self;
+    [self.landscapeScrollView registerClass:GKDYVideoLandscapeCell.class forCellReuseIdentifier:@"GKDYVideoLandscapeCell"];
 }
 
 - (BOOL)isPlaying {
     return self.player.currentPlayerManager.isPlaying;
-}
-
-- (void)requestDataWithTab:(NSString *)tab completion:(void (^)(void))completion {
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    
-    // 好看视频 num=5，每次请求5条
-    NSString *url = [NSString stringWithFormat:@"https://haokan.baidu.com/web/video/feed?tab=%@&act=pcFeed&pd=pc&num=%d", tab, 5];
-    
-    @weakify(self);
-    [manager GET:url parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        @strongify(self);
-        if ([responseObject[@"errno"] integerValue] == 0) {
-            NSArray *videos = responseObject[@"data"][@"response"][@"videos"];
-            
-            if (self.page == 1) {
-                [self.dataSources removeAllObjects];
-            }
-            
-            [videos enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                GKDYVideoModel *model = [GKDYVideoModel yy_modelWithDictionary:obj];
-                [self.dataSources addObject:model];
-            }];
-            
-            [self.scrollView.mj_footer endRefreshing];
-            
-            if (self.page >= 10) { // 最多10页
-                [self.scrollView.mj_footer endRefreshingWithNoMoreData];
-            }
-            [self.scrollView reloadData];
-        }
-        !completion ?: completion();
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        @strongify(self);
-        [self.scrollView.mj_footer endRefreshing];
-        !completion ?: completion();
-    }];
 }
 
 - (void)requestPlayUrlWithModel:(GKDYVideoModel *)model completion:(nullable void (^)(void))completion {
@@ -193,16 +211,31 @@
 - (void)playVideoWithCell:(GKDYVideoCell *)cell index:(NSInteger)index {
     GKDYVideoModel *model = self.dataSources[index];
     
-    // 记录cell
-    self.currentCell = cell;
     self.landscapeView.model = model;
-    if (!self.currentCell.slider.player) {
-        self.currentCell.slider.player = self.player;
+    
+    if ([cell isKindOfClass:GKDYVideoPortraitCell.class]) {
+        self.currentCell = (GKDYVideoPortraitCell *)cell;
+        self.portraitView = self.currentCell.portraitView;
+        self.rotationManager.containerView = cell.coverImgView;
+        if (self.rotationManager.isFullscreen) return;
+    }else {
+        self.landscapeCell = (GKDYVideoLandscapeCell *)cell;
+        [self.landscapeCell autoHide];
+        [self.scrollView scrollToPageWithIndex:index];
     }
     
     // 设置播放内容视图
     if (self.player.containerView != cell.coverImgView) {
         self.player.containerView = cell.coverImgView;
+    }
+    
+    // 设置播放器控制层视图
+    if ([cell isKindOfClass:GKDYVideoPortraitCell.class]) {
+        GKDYVideoPortraitCell *portraitCell = (GKDYVideoPortraitCell *)cell;
+        if (self.player.controlView != portraitCell.portraitView) {
+            self.player.controlView = portraitCell.portraitView;
+            self.portraitView = portraitCell.portraitView;
+        }
     }
     
     // 设置封面图片
@@ -241,11 +274,15 @@
     if (![self.player.assetURL.absoluteString isEqualToString:model.play_url]) return;
     
     [self.player stop];
-    [self.currentCell resetView];
+    if ([self.player.controlView isKindOfClass:GKDYVideoPortraitView.class]) {
+        [self.player.controlView removeFromSuperview];
+        self.player.controlView = nil;
+    }
+    [cell resetView];
 }
 
-- (void)enterFullscreen {
-    [self.player enterFullScreen:YES animated:YES];
+- (void)rotate {
+    [self.rotationManager rotate];
 }
 
 - (void)play {
@@ -269,21 +306,134 @@
         model = self.currentCell.model;
     }
     model.isLike = YES;
-    [self.currentCell showLikeAnimation];
+    [self.scrollView reloadData];
+//    [self.currentCell showLikeAnimation];
+}
+
+#pragma mark - GKVideoScrollViewDataSource
+- (NSInteger)numberOfRowsInScrollView:(GKVideoScrollView *)scrollView {
+    return self.dataSources.count;
+}
+
+- (GKVideoViewCell *)scrollView:(GKVideoScrollView *)scrollView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    GKDYVideoModel *model = self.dataSources[indexPath.row];
+    if (scrollView == self.scrollView) {
+        GKDYVideoPortraitCell *cell = [scrollView dequeueReusableCellWithIdentifier:@"GKDYVideoPortraitCell" forIndexPath:indexPath];
+        cell.delegate = self;
+        cell.manager = self;
+        cell.portraitView.slider.player = self.player;
+        [cell loadData:model];
+        return cell;
+    }else {
+        GKDYVideoLandscapeCell *cell = [scrollView dequeueReusableCellWithIdentifier:@"GKDYVideoLandscapeCell" forIndexPath:indexPath];
+        [cell loadData:model];
+        @weakify(self);
+        cell.backClickBlock = ^{
+            @strongify(self);
+            [self rotate];
+        };
+        [cell showTopView];
+        return cell;
+    }
+}
+
+#pragma mark - GKDYVideoScrollViewDelegate
+- (void)scrollView:(GKVideoScrollView *)scrollView didEndScrollingCell:(GKVideoViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self playVideoWithCell:(GKDYVideoCell *)cell index:indexPath.row];
+}
+
+- (void)scrollView:(GKVideoScrollView *)scrollView didEndDisplayingCell:(GKVideoViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self stopPlayWithCell:(GKDYVideoCell *)cell index:indexPath.row];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (scrollView == self.scrollView) {
+        if (self.scrollView.currentIndex == 0 && scrollView.contentOffset.y < 0) {
+            self.scrollView.contentOffset = CGPointZero;
+        }
+    }
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self.portraitView willBeginDragging];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [self.portraitView didEndDragging];
+}
+
+- (void)scrollView:(GKDYVideoScrollView *)scrollView didPanWithDistance:(CGFloat)distance isEnd:(BOOL)isEnd {
+    if ([self.delegate respondsToSelector:@selector(scrollViewDidPanDistance:isEnd:)]) {
+        [self.delegate scrollViewDidPanDistance:distance isEnd:isEnd];
+    }
+}
+
+#pragma mark - GKDYVideoPortraitCellDelegate
+- (void)videoCell:(GKDYVideoPortraitCell *)cell didClickIcon:(GKDYVideoModel *)model {
+    if ([self.delegate respondsToSelector:@selector(cellDidClickIcon:)]) {
+        [self.delegate cellDidClickIcon:model];
+    }
+}
+
+- (void)videoCell:(GKDYVideoPortraitCell *)cell didClickLike:(GKDYVideoModel *)model {
+    [self.scrollView reloadData];
+}
+
+- (void)videoCell:(GKDYVideoPortraitCell *)cell didClickComment:(GKDYVideoModel *)model {
+    if ([self.delegate respondsToSelector:@selector(cellDidClickComment:)]) {
+        [self.delegate cellDidClickComment:model];
+    }
+}
+
+- (void)videoCell:(GKDYVideoPortraitCell *)cell didClickShare:(GKDYVideoModel *)model {
+    
+}
+
+- (void)videoCell:(GKDYVideoPortraitCell *)cell didClickDanmu:(GKDYVideoModel *)model {
+    
+}
+
+- (void)videoCell:(GKDYVideoPortraitCell *)cell didClickFullscreen:(GKDYVideoModel *)model {
+    [self rotate];
+}
+
+- (void)videoCell:(GKDYVideoPortraitCell *)cell zoomBegan:(GKDYVideoModel *)model {
+    self.player.controlView.hidden = YES;
+    if ([self.delegate respondsToSelector:@selector(cellZoomBegan:)]) {
+        [self.delegate cellZoomBegan:model];
+    }
+}
+
+- (void)videoCell:(GKDYVideoPortraitCell *)cell zoomEnded:(GKDYVideoModel *)model isFullscreen:(BOOL)isFullscreen {
+    if (isFullscreen) {
+        self.fullscreenView.hidden = NO;
+        if (self.player.controlView != self.fullscreenView) {
+            self.player.controlView = self.fullscreenView;
+            self.player.disableGestureTypes = ZFPlayerDisableGestureTypesPinch;
+        }
+    }else {
+        self.currentCell.portraitView.hidden = NO;
+        if (self.player.controlView != self.currentCell.portraitView) {
+            self.player.controlView = self.currentCell.portraitView;
+            self.player.disableGestureTypes = ZFPlayerDisableGestureTypesPan | ZFPlayerDisableGestureTypesPinch;
+        }
+    }
+    if ([self.delegate respondsToSelector:@selector(cellZoomEnded:isFullscreen:)]) {
+        [self.delegate cellZoomEnded:model isFullscreen:isFullscreen];
+    }
 }
 
 #pragma mark - Lazy
-- (GKDYVideoPortraitView *)portraitView {
-    if (!_portraitView) {
-        _portraitView = [[GKDYVideoPortraitView alloc] init];
-        
-        @weakify(self);
-        _portraitView.likeBlock = ^{
-            @strongify(self);
-            [self likeVideoWithModel:nil];
-        };
+- (GKDYVideoScrollView *)scrollView {
+    if (!_scrollView) {
+        _scrollView = [[GKDYVideoScrollView alloc] init];
+        _scrollView.dataSource = self;
+        _scrollView.delegate = self;
+        _scrollView.backgroundColor = UIColor.blackColor;
+        [_scrollView registerClass:GKDYVideoPortraitCell.class forCellReuseIdentifier:@"GKDYVideoPortraitCell"];
+        [_scrollView addPanGesture];
     }
-    return _portraitView;
+    return _scrollView;
 }
 
 - (GKDYVideoLandscapeView *)landscapeView {
@@ -295,8 +445,36 @@
             @strongify(self);
             [self likeVideoWithModel:model];
         };
+        
+        _landscapeView.singleTapBlock = ^{
+            @strongify(self);
+            if (self.landscapeCell.isShowTop) {
+                [self.landscapeCell hideTopView];
+                [self.landscapeView hideContainerView:NO];
+            }else {
+                [self.landscapeView autoHide];
+            }
+        };
     }
     return _landscapeView;
+}
+
+- (GKDYVideoFullscreenView *)fullscreenView {
+    if (!_fullscreenView) {
+        _fullscreenView = [[GKDYVideoFullscreenView alloc] init];
+        
+        @weakify(self);
+        _fullscreenView.closeFullscreenBlock = ^{
+            @strongify(self);
+            [self.currentCell closeFullscreen];
+        };
+        
+        _fullscreenView.likeBlock = ^{
+            @strongify(self);
+            [self likeVideoWithModel:nil];
+        };
+    }
+    return _fullscreenView;
 }
 
 - (NSMutableArray *)dataSources {

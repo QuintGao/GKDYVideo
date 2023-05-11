@@ -8,11 +8,12 @@
 
 #import "GKDYScaleVideoView.h"
 #import "GKDYVideoListCell.h"
-#import "GKDYVideoCell.h"
+#import "GKDYVideoPortraitCell.h"
+#import "GKDYVideoLandscapeCell.h"
 
 #define kBottomHeight (GK_SAFEAREA_BTM + 50)
 
-@interface GKDYScaleVideoView()<GKVideoScrollViewDataSource, GKDYVideoScrollViewDelegate, GKDYVideoCellDelegate, UIGestureRecognizerDelegate>
+@interface GKDYScaleVideoView()<GKVideoScrollViewDataSource, GKDYVideoScrollViewDelegate, GKDYVideoPortraitCellDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, assign) BOOL      interacting;
 
@@ -269,11 +270,22 @@
     return self.manager.dataSources.count;
 }
 
-- (UIView *)scrollView:(GKVideoScrollView *)scrollView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    GKDYVideoCell *cell = [scrollView dequeueReusableCellWithIdentifier:@"GKDYVideoCell" forIndexPath:indexPath];
-    cell.manager = self.manager;
-    cell.model = self.manager.dataSources[indexPath.row];
-    cell.delegate = self;
+- (GKVideoViewCell *)scrollView:(GKVideoScrollView *)scrollView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *identifier = scrollView == self.scrollView ? @"GKDYVideoPortraitCell" : @"GKDYVideoLandscapeCell";
+    GKDYVideoCell *cell = [scrollView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+    [cell loadData:self.manager.dataSources[indexPath.row]];
+    if ([cell isKindOfClass:GKDYVideoPortraitCell.class]) {
+        GKDYVideoPortraitCell *portraitCell = (GKDYVideoPortraitCell *)cell;
+        portraitCell.delegate = self;
+        portraitCell.manager = self.manager;
+    }else {
+        GKDYVideoLandscapeCell *landscapeCell = (GKDYVideoLandscapeCell *)cell;
+        @weakify(self);
+        landscapeCell.backClickBlock = ^{
+            @strongify(self);
+            [self.manager rotate];
+        };
+    }
     return cell;
 }
 
@@ -304,7 +316,7 @@
         _scrollView = [[GKDYVideoScrollView alloc] init];
         _scrollView.dataSource = self;
         _scrollView.delegate = self;
-        [_scrollView registerClass:GKDYVideoCell.class forCellReuseIdentifier:@"GKDYVideoCell"];
+        [_scrollView registerClass:GKDYVideoPortraitCell.class forCellReuseIdentifier:@"GKDYVideoPortraitCell"];
     }
     return _scrollView;
 }

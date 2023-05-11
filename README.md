@@ -2,6 +2,12 @@
 iOS仿抖音短视频
 
 ## 更新
+
+### 2023-05-11
+* 1、支持横屏后可以上下滑动切换视频
+* 2、支持手势放大缩小后清屏显示
+* 3、双击和单击手势点击优化，解决冲突问题
+
 ### 2023-03-30：
 * 1、移除腾讯云播放器，使用[ZFPlayer](https://github.com/renzifeng/ZFPlayer)（腾讯云播放器需要认证，不能免费使用了）
 * 2、上下滑动切换修改为我新封装的一个库[GKVideoScrollView](https://github.com/QuintGao/GKVideoScrollView)

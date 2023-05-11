@@ -15,12 +15,14 @@
 #import "GKDYVideoScrollView.h"
 #import "GKDYVideoCell.h"
 #import "GKDYPlayerManager.h"
+#import "GKDYVideoPortraitCell.h"
+#import "GKDYVideoLandscapeCell.h"
 
-@interface GKDYPlayerViewController ()<GKVideoScrollViewDataSource, GKDYVideoScrollViewDelegate, GKViewControllerPushDelegate, GKDYVideoCellDelegate>
-
-@property (nonatomic, strong) GKDYVideoScrollView   *scrollView;
+@interface GKDYPlayerViewController ()<GKDYPlayerManagerDelegate>
 
 @property (nonatomic, strong) GKDYPlayerManager     *manager;
+
+@property (nonatomic, assign) NSInteger page;
 
 @end
 
@@ -34,19 +36,6 @@
     [self requestData];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-}
-
 - (void)dealloc {
     
     NSLog(@"playerVC dealloc");
@@ -55,19 +44,19 @@
 - (void)initUI {
     self.view.backgroundColor = [UIColor blackColor];
 
-    [self.view addSubview:self.scrollView];
+    [self.view addSubview:self.manager.scrollView];
     
-    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.manager.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
 }
 
 - (void)setupRefresh {
     @weakify(self);
-    self.scrollView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+    self.manager.scrollView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         @strongify(self);
-        self.manager.page++;
-        [self.manager requestDataWithTab:self.tab completion:nil];
+        self.page++;
+        [self requestData:nil];
     }];
 }
 
@@ -77,16 +66,50 @@
     
     self.manager.page = 1;
     @weakify(loadingView);
-    [self.manager requestDataWithTab:self.tab completion:^{
+    [self requestData:^{
         @strongify(loadingView);
         [loadingView stopLoading];
         [loadingView removeFromSuperview];
     }];
 }
 
-- (void)requestData:(void (^)(void))completion {
-    self.manager.page = 1;
-    [self.manager requestDataWithTab:self.tab completion:^{
+- (void)refreshData:(void (^)(void))completion {
+    self.page = 1;
+    [self requestData:completion];
+}
+
+- (void)requestData:(nullable void (^)(void))completion {
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    // 好看视频 num=5，每次请求5条
+    NSString *url = [NSString stringWithFormat:@"https://haokan.baidu.com/web/video/feed?tab=%@&act=pcFeed&pd=pc&num=%d", self.tab, 5];
+    
+    @weakify(self);
+    [manager GET:url parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        @strongify(self);
+        if ([responseObject[@"errno"] integerValue] == 0) {
+            NSArray *videos = responseObject[@"data"][@"response"][@"videos"];
+            
+            if (self.page == 1) {
+                [self.manager.dataSources removeAllObjects];
+            }
+            
+            [videos enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                GKDYVideoModel *model = [GKDYVideoModel yy_modelWithDictionary:obj];
+                [self.manager.dataSources addObject:model];
+            }];
+            
+            [self.manager.scrollView.mj_footer endRefreshing];
+            
+            if (self.page >= 10) { // 最多10页
+                [self.manager.scrollView.mj_footer endRefreshingWithNoMoreData];
+            }
+            [self.manager.scrollView reloadData];
+        }
+        !completion ?: completion();
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        @strongify(self);
+        [self.manager.scrollView.mj_footer endRefreshing];
         !completion ?: completion();
     }];
 }
@@ -113,55 +136,20 @@
     self.manager.isAppeared = NO;
 }
 
-#pragma mark - GKDYVideoScrollViewDataSource
-- (NSInteger)numberOfRowsInScrollView:(GKVideoScrollView *)scrollView {
-    return self.manager.dataSources.count;
-}
-
-- (UIView *)scrollView:(GKVideoScrollView *)scrollView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    GKDYVideoCell *cell = [scrollView dequeueReusableCellWithIdentifier:@"GKDYVideoCell" forIndexPath:indexPath];
-    cell.model = self.manager.dataSources[indexPath.row];
-    cell.delegate = self;
-    cell.manager = self.manager;
-    return cell;
-}
-
-#pragma mark - GKDYVideoScrollViewDelegate
-- (void)scrollView:(GKVideoScrollView *)scrollView didEndScrollingCell:(UIView *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.manager playVideoWithCell:(GKDYVideoCell *)cell index:indexPath.row];
-}
-
-- (void)scrollView:(GKVideoScrollView *)scrollView didEndDisplayingCell:(UIView *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.manager stopPlayWithCell:(GKDYVideoCell *)cell index:indexPath.row];
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (self.scrollView.currentIndex == 0 && scrollView.contentOffset.y < 0) {
-        self.scrollView.contentOffset = CGPointZero;
-    }
-}
-
-- (void)scrollView:(GKDYVideoScrollView *)scrollView didPanWithDistance:(CGFloat)distance isEnd:(BOOL)isEnd {
+#pragma mark - GKDYPlayerManagerDelegate
+- (void)scrollViewDidPanDistance:(CGFloat)distance isEnd:(BOOL)isEnd {
     if ([self.delegate respondsToSelector:@selector(playerVC:didDragDistance:isEnd:)]) {
         [self.delegate playerVC:self didDragDistance:distance isEnd:isEnd];
     }
 }
 
-#pragma mark - GKDYVideoCellDelegate
-- (void)videoCell:(GKDYVideoCell *)cell didClickIcon:(GKDYVideoModel *)model {
+- (void)cellDidClickIcon:(GKDYVideoModel *)model {
     GKDYUserViewController *userVC = [[GKDYUserViewController alloc] init];
     userVC.model = model;
     [self.navigationController pushViewController:userVC animated:YES];
 }
 
-- (void)videoCell:(GKDYVideoCell *)cell didClickLike:(GKDYVideoModel *)model {
-    model.isLike = !model.isLike;
-    [self.scrollView reloadData];
-}
-
-- (void)videoCell:(GKDYVideoCell *)cell didClickComment:(GKDYVideoModel *)model {
-    
-    self.tabBarController.tabBar.hidden = YES;
+- (void)cellDidClickComment:(GKDYVideoModel *)model {
     GKDYCommentView *commentView = [GKDYCommentView new];
     commentView.backgroundColor = UIColor.whiteColor;
     commentView.frame = CGRectMake(0, 0, SCREEN_WIDTH, ADAPTATIONRATIO * 980.0f);
@@ -172,31 +160,23 @@
     }];
 }
 
-- (void)videoCell:(GKDYVideoCell *)cell didClickShare:(GKDYVideoModel *)model {
-    
+- (void)cellZoomBegan:(GKDYVideoModel *)model {
+    if ([self.delegate respondsToSelector:@selector(playerVC:cellZoomBegan:)]) {
+        [self.delegate playerVC:self cellZoomBegan:model];
+    }
 }
 
-- (void)videoCell:(GKDYVideoCell *)cell didClickDanmu:(GKDYVideoModel *)model {
-    
+- (void)cellZoomEnded:(GKDYVideoModel *)model isFullscreen:(BOOL)isFullscreen {
+    if ([self.delegate respondsToSelector:@selector(playerVC:cellZoomEnded:isFullscreen:)]) {
+        [self.delegate playerVC:self cellZoomEnded:model isFullscreen:isFullscreen];
+    }
 }
 
 #pragma mark - 懒加载
-- (GKDYVideoScrollView *)scrollView {
-    if (!_scrollView) {
-        _scrollView = [[GKDYVideoScrollView alloc] init];
-        _scrollView.dataSource = self;
-        _scrollView.delegate = self;
-        _scrollView.backgroundColor = UIColor.blackColor;
-        [_scrollView registerClass:GKDYVideoCell.class forCellReuseIdentifier:@"GKDYVideoCell"];
-        [_scrollView addPanGesture];
-    }
-    return _scrollView;
-}
-
 - (GKDYPlayerManager *)manager {
     if (!_manager) {
         _manager = [[GKDYPlayerManager alloc] init];
-        _manager.scrollView = self.scrollView;
+        _manager.delegate = self;
     }
     return _manager;
 }

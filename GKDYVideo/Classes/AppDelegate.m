@@ -14,6 +14,7 @@
 #import <SDWebImage/SDWebImage.h>
 #import <SDWebImageWebPCoder/SDWebImageWebPCoder.h>
 #import <ZFPlayer/ZFLandscapeRotationManager.h>
+#import "GKRotationManager.h"
 
 @interface AppDelegate ()
 
@@ -71,6 +72,11 @@
 }
 
 - (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+    GKInterfaceOrientationMask mask = [GKRotationManager supportedInterfaceOrientationsForWindow:window];
+    if (mask != GKInterfaceOrientationMaskUnknow) {
+        return (UIInterfaceOrientationMask)mask;
+    }
+    
     ZFInterfaceOrientationMask orientationMask = [ZFLandscapeRotationManager supportedInterfaceOrientationsForWindow:window];
     if (orientationMask != ZFInterfaceOrientationMaskUnknow) {
         return (UIInterfaceOrientationMask)orientationMask;

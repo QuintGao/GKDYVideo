@@ -22,6 +22,13 @@
 		60D7CF602626C529004D7477 /* NSMethodSignature+GKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D7CF5C2626C529004D7477 /* NSMethodSignature+GKCategory.m */; };
 		60D7CF612626C529004D7477 /* UITabBar+GKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D7CF5F2626C529004D7477 /* UITabBar+GKCategory.m */; };
 		7988CB1F227C9DB900023A2B /* GKDYShootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7988CB1E227C9DB900023A2B /* GKDYShootViewController.m */; };
+		7991D4DB2A04DEAD002AADCD /* GKRotationManager_iOS_9_15.m in Sources */ = {isa = PBXBuildFile; fileRef = 7991D4CD2A04DEAC002AADCD /* GKRotationManager_iOS_9_15.m */; };
+		7991D4DC2A04DEAD002AADCD /* GKRotationManager_iOS_16_Later.m in Sources */ = {isa = PBXBuildFile; fileRef = 7991D4CF2A04DEAC002AADCD /* GKRotationManager_iOS_16_Later.m */; };
+		7991D4DD2A04DEAD002AADCD /* GKRotationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7991D4D02A04DEAC002AADCD /* GKRotationManager.m */; };
+		7991D4DF2A04DEAD002AADCD /* GKLandscapeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7991D4D22A04DEAC002AADCD /* GKLandscapeViewController.m */; };
+		7991D4E02A04DEAD002AADCD /* GKLandscapeWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 7991D4D42A04DEAC002AADCD /* GKLandscapeWindow.m */; };
+		7991D4E42A04E499002AADCD /* GKDYVideoLandscapeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7991D4E32A04E499002AADCD /* GKDYVideoLandscapeCell.m */; };
+		7991D4E72A04E7E1002AADCD /* GKDYVideoPortraitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7991D4E62A04E7E1002AADCD /* GKDYVideoPortraitCell.m */; };
 		799277D329C837A000A410DC /* GKDYTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 799277D229C837A000A410DC /* GKDYTools.m */; };
 		799277E929CA85EE00A410DC /* GKDYVideoSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 799277E829CA85EE00A410DC /* GKDYVideoSlider.m */; };
 		799277EC29CA9D9900A410DC /* GKDYVideoItemButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 799277EB29CA9D9800A410DC /* GKDYVideoItemButton.m */; };
@@ -58,6 +65,7 @@
 		79DD87CE226C268D008FB903 /* GKDYNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DD87CD226C268D008FB903 /* GKDYNavigationController.m */; };
 		79E16A132274748F00DE4967 /* GKSlidePopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79E16A122274748F00DE4967 /* GKSlidePopupView.m */; };
 		79E16A162279A63200DE4967 /* GKDYCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79E16A152279A63200DE4967 /* GKDYCommentView.m */; };
+		79F46BD72A08CC7A006E3B85 /* GKDYVideoFullscreenView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F46BD62A08CC7A006E3B85 /* GKDYVideoFullscreenView.m */; };
 		AA70E41FD2C5EC1F0C249206 /* Pods_GKDYVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81CC8427C037D4E8A4B61B49 /* Pods_GKDYVideo.framework */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +103,20 @@
 		793231B429A44E39000A61ED /* TXFFmpeg.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = TXFFmpeg.xcframework; path = Pods/TXLiteAVSDK_Player/TXLiteAVSDK_Player/TXFFmpeg.xcframework; sourceTree = "<group>"; };
 		7988CB1D227C9DB900023A2B /* GKDYShootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYShootViewController.h; sourceTree = "<group>"; };
 		7988CB1E227C9DB900023A2B /* GKDYShootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYShootViewController.m; sourceTree = "<group>"; };
+		7991D4CD2A04DEAC002AADCD /* GKRotationManager_iOS_9_15.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKRotationManager_iOS_9_15.m; sourceTree = "<group>"; };
+		7991D4CE2A04DEAC002AADCD /* GKLandscapeWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKLandscapeWindow.h; sourceTree = "<group>"; };
+		7991D4CF2A04DEAC002AADCD /* GKRotationManager_iOS_16_Later.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKRotationManager_iOS_16_Later.m; sourceTree = "<group>"; };
+		7991D4D02A04DEAC002AADCD /* GKRotationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKRotationManager.m; sourceTree = "<group>"; };
+		7991D4D22A04DEAC002AADCD /* GKLandscapeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKLandscapeViewController.m; sourceTree = "<group>"; };
+		7991D4D42A04DEAC002AADCD /* GKLandscapeWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKLandscapeWindow.m; sourceTree = "<group>"; };
+		7991D4D52A04DEAC002AADCD /* GKRotationManager_iOS_9_15.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKRotationManager_iOS_9_15.h; sourceTree = "<group>"; };
+		7991D4D62A04DEAC002AADCD /* GKRotationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKRotationManager.h; sourceTree = "<group>"; };
+		7991D4D72A04DEAC002AADCD /* GKRotationManager_iOS_16_Later.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKRotationManager_iOS_16_Later.h; sourceTree = "<group>"; };
+		7991D4DA2A04DEAC002AADCD /* GKLandscapeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKLandscapeViewController.h; sourceTree = "<group>"; };
+		7991D4E22A04E499002AADCD /* GKDYVideoLandscapeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYVideoLandscapeCell.h; sourceTree = "<group>"; };
+		7991D4E32A04E499002AADCD /* GKDYVideoLandscapeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYVideoLandscapeCell.m; sourceTree = "<group>"; };
+		7991D4E52A04E7E1002AADCD /* GKDYVideoPortraitCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYVideoPortraitCell.h; sourceTree = "<group>"; };
+		7991D4E62A04E7E1002AADCD /* GKDYVideoPortraitCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYVideoPortraitCell.m; sourceTree = "<group>"; };
 		799277D129C837A000A410DC /* GKDYTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYTools.h; sourceTree = "<group>"; };
 		799277D229C837A000A410DC /* GKDYTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYTools.m; sourceTree = "<group>"; };
 		799277E729CA85EE00A410DC /* GKDYVideoSlider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYVideoSlider.h; sourceTree = "<group>"; };
@@ -167,6 +189,8 @@
 		79E16A122274748F00DE4967 /* GKSlidePopupView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKSlidePopupView.m; sourceTree = "<group>"; };
 		79E16A142279A63200DE4967 /* GKDYCommentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYCommentView.h; sourceTree = "<group>"; };
 		79E16A152279A63200DE4967 /* GKDYCommentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYCommentView.m; sourceTree = "<group>"; };
+		79F46BD52A08CC7A006E3B85 /* GKDYVideoFullscreenView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYVideoFullscreenView.h; sourceTree = "<group>"; };
+		79F46BD62A08CC7A006E3B85 /* GKDYVideoFullscreenView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYVideoFullscreenView.m; sourceTree = "<group>"; };
 		81CC8427C037D4E8A4B61B49 /* Pods_GKDYVideo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GKDYVideo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACB89D940248F84479D31DDA /* Pods-GKDYVideo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GKDYVideo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GKDYVideo/Pods-GKDYVideo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -342,6 +366,23 @@
 			path = Category;
 			sourceTree = "<group>";
 		};
+		7991D4CC2A04DEAC002AADCD /* GKRotationManager */ = {
+			isa = PBXGroup;
+			children = (
+				7991D4D62A04DEAC002AADCD /* GKRotationManager.h */,
+				7991D4D02A04DEAC002AADCD /* GKRotationManager.m */,
+				7991D4CE2A04DEAC002AADCD /* GKLandscapeWindow.h */,
+				7991D4D42A04DEAC002AADCD /* GKLandscapeWindow.m */,
+				7991D4D52A04DEAC002AADCD /* GKRotationManager_iOS_9_15.h */,
+				7991D4CD2A04DEAC002AADCD /* GKRotationManager_iOS_9_15.m */,
+				7991D4CF2A04DEAC002AADCD /* GKRotationManager_iOS_16_Later.m */,
+				7991D4D72A04DEAC002AADCD /* GKRotationManager_iOS_16_Later.h */,
+				7991D4DA2A04DEAC002AADCD /* GKLandscapeViewController.h */,
+				7991D4D22A04DEAC002AADCD /* GKLandscapeViewController.m */,
+			);
+			path = GKRotationManager;
+			sourceTree = "<group>";
+		};
 		79A5251029D18CEC00CFB32F /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -444,6 +485,7 @@
 				607CAB7022818FC20062AC0F /* GKLoadingView */,
 				79E16A102274746200DE4967 /* GKSlidePopupView */,
 				79CC62F22158E42D00101773 /* GKNetworking */,
+				7991D4CC2A04DEAC002AADCD /* GKRotationManager */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -474,6 +516,10 @@
 				79C4207D29C42B1600A0AB84 /* GKDYVideoScrollView.m */,
 				79C4207F29C43C2200A0AB84 /* GKDYVideoCell.h */,
 				79C4208029C43C2200A0AB84 /* GKDYVideoCell.m */,
+				7991D4E52A04E7E1002AADCD /* GKDYVideoPortraitCell.h */,
+				7991D4E62A04E7E1002AADCD /* GKDYVideoPortraitCell.m */,
+				7991D4E22A04E499002AADCD /* GKDYVideoLandscapeCell.h */,
+				7991D4E32A04E499002AADCD /* GKDYVideoLandscapeCell.m */,
 				799277E729CA85EE00A410DC /* GKDYVideoSlider.h */,
 				799277E829CA85EE00A410DC /* GKDYVideoSlider.m */,
 				799277EA29CA9D9800A410DC /* GKDYVideoItemButton.h */,
@@ -482,6 +528,8 @@
 				79C4208929C448FA00A0AB84 /* GKDYVideoPortraitView.m */,
 				79C4208B29C4490700A0AB84 /* GKDYVideoLandscapeView.h */,
 				79C4208C29C4490700A0AB84 /* GKDYVideoLandscapeView.m */,
+				79F46BD52A08CC7A006E3B85 /* GKDYVideoFullscreenView.h */,
+				79F46BD62A08CC7A006E3B85 /* GKDYVideoFullscreenView.m */,
 				799277ED29CAD17700A410DC /* GKDYVideoStatusBar.h */,
 				799277EE29CAD17700A410DC /* GKDYVideoStatusBar.m */,
 				799277F329CAE45D00A410DC /* GKDYVideoMaskView.h */,
@@ -647,12 +695,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7991D4DC2A04DEAD002AADCD /* GKRotationManager_iOS_16_Later.m in Sources */,
 				79E16A162279A63200DE4967 /* GKDYCommentView.m in Sources */,
 				79A5251529D18D4800CFB32F /* GKDYUserVideoModel.m in Sources */,
 				607CAB7622818FF50062AC0F /* GKBallLoadingView.m in Sources */,
 				799277F529CAE45D00A410DC /* GKDYVideoMaskView.m in Sources */,
 				60D7CF612626C529004D7477 /* UITabBar+GKCategory.m in Sources */,
 				79A5252129D197C800CFB32F /* GKDYVideoListViewController.m in Sources */,
+				7991D4DD2A04DEAD002AADCD /* GKRotationManager.m in Sources */,
 				799277EC29CA9D9900A410DC /* GKDYVideoItemButton.m in Sources */,
 				60657EFA21C1110F000F97DA /* GKDYMainViewController.m in Sources */,
 				79CC62CE21573BD700101773 /* GKDYBaseViewController.m in Sources */,
@@ -661,15 +711,20 @@
 				607CAB852282A8E00062AC0F /* GKDYMineViewController.m in Sources */,
 				601140C622EFD0450014EF50 /* GKDYScaleVideoView.m in Sources */,
 				79A5252729D2831400CFB32F /* GKDYUserModel.m in Sources */,
+				79F46BD72A08CC7A006E3B85 /* GKDYVideoFullscreenView.m in Sources */,
+				7991D4DF2A04DEAD002AADCD /* GKLandscapeViewController.m in Sources */,
 				607CAB822282A8D80062AC0F /* GKDYMessageViewController.m in Sources */,
 				79CC62D721573C2C00101773 /* GKDYPlayerViewController.m in Sources */,
+				7991D4E02A04DEAD002AADCD /* GKLandscapeWindow.m in Sources */,
 				79CC62D421573C2300101773 /* GKDYSearchViewController.m in Sources */,
 				79C4208429C43CE500A0AB84 /* GKDYPlayerManager.m in Sources */,
 				79CC62EB2157402800101773 /* GKDYVideoControlView.m in Sources */,
+				7991D4DB2A04DEAD002AADCD /* GKRotationManager_iOS_9_15.m in Sources */,
 				60D7CF602626C529004D7477 /* NSMethodSignature+GKCategory.m in Sources */,
 				79A5251E29D190B600CFB32F /* GKDYUserHeaderView.m in Sources */,
 				79C4207E29C42B1600A0AB84 /* GKDYVideoScrollView.m in Sources */,
 				79CC62A22157377600101773 /* main.m in Sources */,
+				7991D4E72A04E7E1002AADCD /* GKDYVideoPortraitCell.m in Sources */,
 				79A5250C29D161C600CFB32F /* GKDYTitleView.m in Sources */,
 				7988CB1F227C9DB900023A2B /* GKDYShootViewController.m in Sources */,
 				79C4208129C43C2200A0AB84 /* GKDYVideoCell.m in Sources */,
@@ -690,6 +745,7 @@
 				60089113229BE0BD002A6D52 /* GKLikeView.m in Sources */,
 				79C4208A29C448FA00A0AB84 /* GKDYVideoPortraitView.m in Sources */,
 				79A5252429D1998100CFB32F /* GKDYVideoListCell.m in Sources */,
+				7991D4E42A04E499002AADCD /* GKDYVideoLandscapeCell.m in Sources */,
 				79CC62D121573BFD00101773 /* GKDYHomeViewController.m in Sources */,
 				799277F829CAF77300A410DC /* GKDYVideoPreviewView.m in Sources */,
 				6099CDCC22BA31B4005098EE /* GKDoubleLikeView.m in Sources */,

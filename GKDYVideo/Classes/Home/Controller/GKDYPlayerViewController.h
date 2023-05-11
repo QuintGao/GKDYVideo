@@ -9,6 +9,7 @@
 #import "GKDYBaseViewController.h"
 #import "GKDYVideoModel.h"
 #import <JXCategoryView/JXCategoryView.h>
+#import "GKDYVideoScrollView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -24,6 +25,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)playerVC:(GKDYPlayerViewController *)playerVC didDragDistance:(CGFloat)distance isEnd:(BOOL)isEnd;
 
+- (void)playerVC:(GKDYPlayerViewController *)playerVC cellZoomBegan:(GKDYVideoModel *)model;
+
+- (void)playerVC:(GKDYPlayerViewController *)playerVC cellZoomEnded:(GKDYVideoModel *)model isFullscreen:(BOOL)isFullscreen;
+
 @end
 
 @interface GKDYPlayerViewController : GKDYBaseViewController<JXCategoryListContentViewDelegate>
@@ -34,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) GKDYVideoModel *model;
 
-- (void)requestData:(void(^)(void))completion;
+- (void)refreshData:(nullable void(^)(void))completion;
 
 @end
 

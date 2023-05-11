@@ -34,6 +34,14 @@
     return self;
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    if (self.contentSize.height == 0) {
+        self.contentSize = CGSizeMake(self.bounds.size.width, self.bounds.size.height);
+    }
+}
+
 - (void)addPanGesture {
     [self addGestureRecognizer:self.panGesture];
 }

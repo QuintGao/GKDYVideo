@@ -43,8 +43,7 @@
 @property (nonatomic, strong) UIButton *exitBtn;
 
 @property (nonatomic, strong) GKDoubleLikeView *likeView;
-
-@property (nonatomic, assign) BOOL isContainerShow;
+@property (nonatomic, strong) NSDate *lastDoubleTapTime;
 
 @property (nonatomic, assign) BOOL isDragging;
 @property (nonatomic ,assign) BOOL isSeeking;
@@ -166,32 +165,24 @@
 - (void)videoPlayer:(ZFPlayerController *)videoPlayer orientationDidChanged:(ZFOrientationObserver *)observer {
     if (videoPlayer.isFullScreen) {
         [self showContainerView:NO];
-        [self startAutoHidden];
+        [self cancelAutoHidden];
+        [self performSelector:@selector(hideContainerView:) withObject:@(YES) afterDelay:5.0f];
     }
 }
 
 - (void)gestureSingleTapped:(ZFPlayerGestureControl *)gestureControl {
-    [self cancelAutoHidden];
-    if (self.isContainerShow) {
-        [self hideContainerView];
+    CGFloat diff = [NSDate date].timeIntervalSince1970 - self.lastDoubleTapTime.timeIntervalSince1970;
+    if (diff < 0.6) {
+        [self handleDoubleTapped:gestureControl.singleTap];
+        self.lastDoubleTapTime = [NSDate date];
     }else {
-        [self showContainerView:YES];
-        [self startAutoHidden];
+        [self handleSingleTapped];
     }
 }
 
 - (void)gestureDoubleTapped:(ZFPlayerGestureControl *)gestureControl {
-    [self cancelAutoHidden];
-    UIGestureRecognizer *gesture = gestureControl.doubleTap;
-    CGPoint point = [gesture locationInView:gesture.view];
-    @weakify(self);
-    [self.likeView createAnimationWithPoint:point view:gesture.view completion:^{
-        @strongify(self);
-        [self startAutoHidden];
-    }];
-    self.model.isLike = YES;
-    self.likeBtn.selected = self.model.isLike;
-    !self.likeBlock ?: self.likeBlock(self.model);
+    [self handleDoubleTapped:gestureControl.doubleTap];
+    self.lastDoubleTapTime = [NSDate date];
 }
 
 - (void)videoPlayer:(ZFPlayerController *)videoPlayer reachabilityChanged:(ZFReachabilityStatus)status {
@@ -205,7 +196,25 @@
     self.timeLabel.text = [NSString stringWithFormat:@"%@ / %@", [GKDYTools convertTimeSecond:currentTime], [GKDYTools convertTimeSecond:totalTime]];
 }
 
-#pragma mark - Private
+- (void)handleSingleTapped {
+    !self.singleTapBlock ?: self.singleTapBlock();
+}
+
+- (void)handleDoubleTapped:(UITapGestureRecognizer *)gesture {
+    [self cancelAutoHidden];
+    
+    CGPoint point = [gesture locationInView:gesture.view];
+    @weakify(self);
+    [self.likeView createAnimationWithPoint:point view:gesture.view completion:^{
+        @strongify(self);
+        [self performSelector:@selector(hideContainerView) withObject:nil afterDelay:5.0f];
+    }];
+    self.model.isLike = YES;
+    self.likeBtn.selected = self.model.isLike;
+    !self.likeBlock ?: self.likeBlock(self.model);
+}
+
+#pragma mark - Public
 - (void)showContainerView:(BOOL)animated {
     [self.topContainerView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self);
@@ -214,6 +223,9 @@
     [self.bottomContainerView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self);
     }];
+    
+    self.topContainerView.hidden = NO;
+    self.bottomContainerView.hidden = NO;
     
     NSTimeInterval duration = animated ? 0.2 : 0;
     
@@ -225,6 +237,10 @@
 }
 
 - (void)hideContainerView {
+    [self hideContainerView:YES];
+}
+
+- (void)hideContainerView:(BOOL)animated {
     [self.topContainerView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(-80);
     }];
@@ -233,16 +249,26 @@
         make.bottom.equalTo(self).offset(80);
     }];
     
-    [UIView animateWithDuration:0.2 animations:^{
+    NSTimeInterval duration = animated ? 0.15 : 0;
+    
+    [UIView animateWithDuration:duration animations:^{
         [self layoutIfNeeded];
     } completion:^(BOOL finished) {
         self.isContainerShow = NO;
+        self.topContainerView.hidden = YES;
+        self.bottomContainerView.hidden = YES;
     }];
 }
 
-- (void)startAutoHidden {
+- (void)autoHide {
     [self cancelAutoHidden];
-    [self performSelector:@selector(hideContainerView) withObject:nil afterDelay:5.0f];
+    
+    if (self.isContainerShow) {
+        [self hideContainerView:YES];
+    }else {
+        [self showContainerView:YES];
+        [self performSelector:@selector(hideContainerView) withObject:nil afterDelay:5.0];
+    }
 }
 
 - (void)cancelAutoHidden {
@@ -279,8 +305,8 @@
 
 #pragma mark - Action
 - (void)backAction {
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(hideContainerView) object:nil];
-    [self.player enterFullScreen:!self.player.isFullScreen animated:YES];
+    [self cancelAutoHidden];
+    [self.rotationManager rotate];
 }
 
 - (void)playAction {
@@ -292,7 +318,7 @@
         [manager play];
     }
     self.playBtn.selected = manager.isPlaying;
-    [self startAutoHidden];
+    [self autoHide];
 }
 
 - (void)likeAction {
@@ -300,7 +326,7 @@
     self.model.isLike = !self.model.isLike;
     self.likeBtn.selected = self.model.isLike;
     !self.likeBlock ?: self.likeBlock(self.model);
-    [self startAutoHidden];
+    [self autoHide];
 }
 
 - (void)exitAction {
@@ -317,7 +343,7 @@
 - (void)sliderView:(GKSliderView *)sliderView touchEnded:(float)value {
     self.isDragging = NO;
     [self showSmallSlider];
-    [self startAutoHidden];
+    [self autoHide];
 }
 
 #pragma mark - GKSliderViewPreviewDelegate

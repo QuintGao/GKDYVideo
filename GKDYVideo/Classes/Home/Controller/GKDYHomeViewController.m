@@ -89,7 +89,7 @@
 
 - (void)requestCurrentList {
     @weakify(self);
-    [self.playerVC requestData:^{
+    [self.playerVC refreshData:^{
         @strongify(self);
         [self.titleView loadingEnd];
     }];
@@ -134,6 +134,16 @@
 #pragma mark - GKDYPlayerViewControllerDelegate
 - (void)playerVC:(GKDYPlayerViewController *)playerVC didDragDistance:(CGFloat)distance isEnd:(BOOL)isEnd {
     [self.titleView changeAlphaWithDistance:distance isEnd:isEnd];
+}
+
+- (void)playerVC:(GKDYPlayerViewController *)playerVC cellZoomBegan:(GKDYVideoModel *)model {
+    self.titleView.hidden = YES;
+    self.tabBarController.tabBar.hidden = YES;
+}
+
+- (void)playerVC:(GKDYPlayerViewController *)playerVC cellZoomEnded:(GKDYVideoModel *)model isFullscreen:(BOOL)isFullscreen {
+    self.titleView.hidden = isFullscreen;
+    self.tabBarController.tabBar.hidden = isFullscreen;
 }
 
 - (void)searchClick:(id)sender {
