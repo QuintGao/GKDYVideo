@@ -33,7 +33,6 @@ iOS仿抖音短视频
 ![抖音-双击点赞](https://upload-images.jianshu.io/upload_images/1598505-ff4845163a16e9c9.gif?imageMogr2/auto-orient/strip)
 
 ## 说明
-简书：[QuintGao](https://www.jianshu.com/u/ba61bbfc87e8)
 
 [iOS仿抖音—左右滑动切换效果](https://www.jianshu.com/p/9c3670e4a533)
 
@@ -42,3 +41,18 @@ iOS仿抖音短视频
 [iOS仿抖音—评论视图滑动消失](https://www.jianshu.com/p/8a1f174a91e5)
 
 [iOS仿抖音—加载、点赞动画效果](https://www.jianshu.com/p/a5f08098efb0)
+
+## 作者
+
+- QQ： [1094887059](http://wpa.qq.com/msgrd?v=3&uin=1094887059&site=qq&menu=yes)  
+- QQ群：[1047100313](https://qm.qq.com/cgi-bin/qm/qr?k=Aj_f4C5-R3X1_KEdeb_Ttg8pxK_41ZJu&jump_from=webapi)
+
+- [简书](https://www.jianshu.com/u/ba61bbfc87e8)
+
+- 支持作者
+
+<img src="https://upload-images.jianshu.io/upload_images/1598505-1637d63e4e18e103.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" width="200" height="200">
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+<img src="https://upload-images.jianshu.io/upload_images/1598505-0be88fd4943d1994.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" width="200" height="200">
+
+[回到顶部](#readme)
