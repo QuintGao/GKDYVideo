@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -595,7 +595,7 @@
 				79CC628B2157377400101773 /* Sources */,
 				79CC628C2157377400101773 /* Frameworks */,
 				79CC628D2157377400101773 /* Resources */,
-				C2DE7B103C85505A457E70DD /* [CP] Embed Pods Frameworks */,
+				414B1670F0E8F0395EA482FF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -653,7 +653,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		C2DE7B103C85505A457E70DD /* [CP] Embed Pods Frameworks */ = {
+		414B1670F0E8F0395EA482FF /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -904,6 +904,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.dyvideo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -931,6 +932,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.dyvideo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

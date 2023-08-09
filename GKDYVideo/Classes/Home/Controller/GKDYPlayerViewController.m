@@ -43,7 +43,7 @@
 
 - (void)initUI {
     self.view.backgroundColor = [UIColor blackColor];
-
+    
     [self.view addSubview:self.manager.scrollView];
     
     [self.manager.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -82,12 +82,13 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
     // 好看视频 num=5，每次请求5条
-    NSString *url = [NSString stringWithFormat:@"https://haokan.baidu.com/web/video/feed?tab=%@&act=pcFeed&pd=pc&num=%d", self.tab, 5];
+//    NSString *url = [NSString stringWithFormat:@"https://haokan.baidu.com/haokan/ui-web/video/feed?tab=%@&act=pcFeed&pd=pc&num=%d", self.tab, 5];
+    NSString *url = [NSString stringWithFormat:@"https://haokan.baidu.com/haokan/ui-web/video/rec?tab=%@&act=pcFeed&pd=pc&num=%d", self.tab, 5];
     
     @weakify(self);
     [manager GET:url parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         @strongify(self);
-        if ([responseObject[@"errno"] integerValue] == 0) {
+        if ([responseObject[@"status"] integerValue] == 0) {
             NSArray *videos = responseObject[@"data"][@"response"][@"videos"];
             
             if (self.page == 1) {
@@ -153,7 +154,7 @@
     GKDYCommentView *commentView = [GKDYCommentView new];
     commentView.backgroundColor = UIColor.whiteColor;
     commentView.frame = CGRectMake(0, 0, SCREEN_WIDTH, ADAPTATIONRATIO * 980.0f);
-
+    
     GKSlidePopupView *popupView = [GKSlidePopupView popupViewWithFrame:UIScreen.mainScreen.bounds contentView:commentView];
     [popupView showFrom:UIApplication.sharedApplication.keyWindow completion:^{
         [commentView requestData];
