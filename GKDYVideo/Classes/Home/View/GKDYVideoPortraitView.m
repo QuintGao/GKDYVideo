@@ -45,13 +45,13 @@
 
 - (void)initUI {
     [self addSubview:self.bottomView];
-    [self.bottomView addSubview:self.slider];
     [self.bottomView addSubview:self.contentLabel];
     [self.bottomView addSubview:self.nameLabel];
     [self.bottomView addSubview:self.shareBtn];
     [self.bottomView addSubview:self.commentBtn];
     [self.bottomView addSubview:self.likeView];
     [self.bottomView addSubview:self.iconView];
+    [self addSubview:self.slider];
     [self addSubview:self.danmuBtn];
     [self addSubview:self.fullscreenBtn];
     [self addSubview:self.playBtn];

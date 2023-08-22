@@ -310,6 +310,10 @@
     [self.scrollView reloadData];
 }
 
+- (void)videoCell:(GKDYVideoPortraitCell *)cell didClickFullscreen:(GKDYVideoModel *)model {
+    [self.manager rotate];
+}
+
 #pragma mark - 懒加载
 - (GKDYVideoScrollView *)scrollView {
     if (!_scrollView) {

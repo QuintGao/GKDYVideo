@@ -375,8 +375,8 @@
 				7991D4D42A04DEAC002AADCD /* GKLandscapeWindow.m */,
 				7991D4D52A04DEAC002AADCD /* GKRotationManager_iOS_9_15.h */,
 				7991D4CD2A04DEAC002AADCD /* GKRotationManager_iOS_9_15.m */,
-				7991D4CF2A04DEAC002AADCD /* GKRotationManager_iOS_16_Later.m */,
 				7991D4D72A04DEAC002AADCD /* GKRotationManager_iOS_16_Later.h */,
+				7991D4CF2A04DEAC002AADCD /* GKRotationManager_iOS_16_Later.m */,
 				7991D4DA2A04DEAC002AADCD /* GKLandscapeViewController.h */,
 				7991D4D22A04DEAC002AADCD /* GKLandscapeViewController.m */,
 			);

@@ -39,6 +39,12 @@
     self.loadingBgView.frame = CGRectMake(0, 0, self.view.frame.size.width, 200);
 }
 
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    
+    self.view.frame = self.view.superview.bounds;
+}
+
 - (void)setupRefresh {
     @weakify(self);
     self.collectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
@@ -63,6 +69,12 @@
 
 - (void)scrollItemToIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.item > self.viewModel.dataList.count - 1) return;
+    
+//    GKDYVideoListCell *cell = [self.collectionView cellForItemAtIndexPath:indexPath];
+//    if ([self.collectionView.visibleCells containsObject:cell]) {
+//        return;
+//    }
+    
     [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];
 //    if (indexPath.row >= self.viewModel.dataList.count - 3) {
 //        [self.viewModel requestData];

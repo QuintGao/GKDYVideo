@@ -22,7 +22,7 @@
 
 @property (nonatomic, strong) GKDYPlayerManager     *manager;
 
-@property (nonatomic, assign) NSInteger page;
+//@property (nonatomic, assign) NSInteger page;
 
 @end
 
@@ -55,7 +55,7 @@
     @weakify(self);
     self.manager.scrollView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         @strongify(self);
-        self.page++;
+        self.manager.page++;
         [self requestData:nil];
     }];
 }
@@ -74,7 +74,7 @@
 }
 
 - (void)refreshData:(void (^)(void))completion {
-    self.page = 1;
+    self.manager.page = 1;
     [self requestData:completion];
 }
 
@@ -91,7 +91,7 @@
         if ([responseObject[@"status"] integerValue] == 0) {
             NSArray *videos = responseObject[@"data"][@"response"][@"videos"];
             
-            if (self.page == 1) {
+            if (self.manager.page == 1) {
                 [self.manager.dataSources removeAllObjects];
             }
             
@@ -102,7 +102,7 @@
             
             [self.manager.scrollView.mj_footer endRefreshing];
             
-            if (self.page >= 10) { // 最多10页
+            if (self.manager.page >= 10) { // 最多10页
                 [self.manager.scrollView.mj_footer endRefreshingWithNoMoreData];
             }
             [self.manager.scrollView reloadData];
