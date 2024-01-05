@@ -894,6 +894,7 @@
 				DEVELOPMENT_TEAM = 27K7U9AVTS;
 				ENABLE_BITCODE = NO;
 				EXCLUDED_ARCHS = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREFIX_HEADER = GKDYVideo/PrefixHeader.pch;
 				INFOPLIST_FILE = GKDYVideo/Info.plist;

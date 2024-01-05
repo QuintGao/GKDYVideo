@@ -34,4 +34,15 @@ post_install do |installer|
       end
     end
   end
+  
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      excluded_archs = config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]']
+      excluded_archs = excluded_archs.nil? ? '' : excluded_archs
+      if !excluded_archs.include?('arm64')
+        excluded_archs = "#{excluded_archs} arm64"
+      end
+      config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = excluded_archs
+    end
+  end
 end
