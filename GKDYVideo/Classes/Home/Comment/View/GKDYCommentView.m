@@ -8,17 +8,33 @@
 
 #import "GKDYCommentView.h"
 #import "GKBallLoadingView.h"
+#import "GKDYCommentModel.h"
+#import "GKDYCommentCell.h"
+#import <MJRefresh/MJRefresh.h>
 
 @interface GKDYCommentView()<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UIVisualEffectView    *effectView;
 @property (nonatomic, strong) UIView                *topView;
 @property (nonatomic, strong) UILabel               *countLabel;
+
+@property (nonatomic, strong) UIButton              *unfoldBtn;
+
 @property (nonatomic, strong) UIButton              *closeBtn;
 
 @property (nonatomic, strong) UITableView           *tableView;
 
 @property (nonatomic, assign) NSInteger             count;
+
+@property (nonatomic, strong) GKDYCommentModel      *commentModel;
+
+@property (nonatomic, strong) GKDYVideoModel        *model;
+
+@property (nonatomic, assign) NSInteger pn;
+
+@property (nonatomic, weak) GKBallLoadingView *loadingView;
+
+@property (nonatomic, strong) NSMutableArray *dataSources;
 
 @end
 
@@ -32,6 +48,7 @@
         [self addSubview:self.topView];
         [self addSubview:self.effectView];
         [self addSubview:self.countLabel];
+        [self addSubview:self.unfoldBtn];
         [self addSubview:self.closeBtn];
         [self addSubview:self.tableView];
         
@@ -48,9 +65,15 @@
             make.center.equalTo(self.topView);
         }];
         
+        [self.unfoldBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.closeBtn.mas_left).offset(-ADAPTATIONRATIO * 32);
+            make.centerY.equalTo(self.closeBtn);
+            make.width.height.mas_equalTo(ADAPTATIONRATIO * 36);
+        }];
+        
         [self.closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.topView);
-            make.right.equalTo(self).offset(-ADAPTATIONRATIO * 16.0f);
+            make.right.equalTo(self).offset(-ADAPTATIONRATIO * 32.0f);
             make.width.height.mas_equalTo(ADAPTATIONRATIO * 36.0f);
         }];
         
@@ -59,36 +82,105 @@
             make.top.equalTo(self.topView.mas_bottom);
         }];
         
-        self.countLabel.text = [NSString stringWithFormat:@"%zd条评论", self.count];
+        self.pn = 1;
+        
+        @weakify(self);
+        self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            @strongify(self);
+            self.pn ++;
+            [self requestData];
+        }];
     }
     return self;
 }
 
-- (void)requestData {
+- (void)requestDataWithModel:(GKDYVideoModel *)model {
+    if ([self.model.video_id isEqualToString:model.video_id]) {
+        if (self.model.isRequest) {
+            return;
+        }
+        
+        if (self.model.requested) {
+            return;
+        }
+    }
+    self.model = model;
+    
+    self.model.isRequest = YES;
+    
     GKBallLoadingView *loadingView = [GKBallLoadingView loadingViewInView:self.tableView];
     [loadingView startLoading];
+    self.loadingView = loadingView;
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [loadingView stopLoading];
-        [loadingView removeFromSuperview];
+    [self requestData];
+}
+
+- (void)requestData {
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    NSString *url = [NSString stringWithFormat:@"https://haokan.baidu.com/haokan/ui-web/v2/comment/get?rn=10&url_key=%@&pn=%zd", self.model.video_id, self.pn];
+    
+    @weakify(self);
+    [manager GET:url parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        @strongify(self);
+        if (self.loadingView) {
+            [self.loadingView stopLoading];
+            [self.loadingView removeFromSuperview];
+            self.loadingView = nil;
+        }
         
-        self.count = 30;
-        self.countLabel.text = [NSString stringWithFormat:@"%zd条评论", self.count];
+        self.model.isRequest = NO;
+        self.model.requested = YES;
+        
+        self.commentModel = [GKDYCommentModel yy_modelWithDictionary:responseObject[@"data"]];
+        self.countLabel.text = [NSString stringWithFormat:@"%@条评论", self.commentModel.comment_count];
+        [self.dataSources addObjectsFromArray:self.commentModel.list];
         [self.tableView reloadData];
-    });
+        
+        if (self.commentModel.is_over) {
+            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+        }else {
+            [self.tableView.mj_footer endRefreshing];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        @strongify(self);
+        self.model.isRequest = NO;
+        if (self.loadingView) {
+            [self.loadingView stopLoading];
+            [self.loadingView removeFromSuperview];
+            self.loadingView = nil;
+        }
+    }];
 }
 
 #pragma mark - <UITableViewDataSource, UITableViewDelegate>
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.count;
+    self.tableView.mj_footer.hidden = self.dataSources.count == 0;
+    return self.dataSources.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor clearColor];
-    cell.textLabel.text = [NSString stringWithFormat:@"这是第%zd条评论", indexPath.row];
-    cell.textLabel.textColor = [UIColor whiteColor];
+    GKDYCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GKDYCommentCell" forIndexPath:indexPath];
+    [cell loadData:self.dataSources[indexPath.row]];
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [GKDYCommentCell heightWithModel:self.dataSources[indexPath.row]];
+}
+
+#pragma mark - Action
+- (void)unfoldAction {
+    self.unfoldBtn.selected = !self.unfoldBtn.selected;
+    
+    if ([self.delegate respondsToSelector:@selector(commentView:didClickUnfold:)]) {
+        [self.delegate commentView:self didClickUnfold:self.unfoldBtn.selected];
+    }
+}
+
+- (void)closeAction {
+    if ([self.delegate respondsToSelector:@selector(commentViewDidClickClose:)]) {
+        [self.delegate commentViewDidClickClose:self];
+    }
 }
 
 #pragma mark - 懒加载
@@ -130,10 +222,22 @@
     return _countLabel;
 }
 
+- (UIButton *)unfoldBtn {
+    if (!_unfoldBtn) {
+        _unfoldBtn = [UIButton new];
+        [_unfoldBtn setImage:[UIImage imageNamed:@"arrow_close"] forState:UIControlStateNormal];
+        [_unfoldBtn setImage:[UIImage imageNamed:@"arrow_open"] forState:UIControlStateSelected];
+        [_unfoldBtn addTarget:self action:@selector(unfoldAction) forControlEvents:UIControlEventTouchUpInside];
+        _unfoldBtn.hidden = YES;
+    }
+    return _unfoldBtn;
+}
+
 - (UIButton *)closeBtn {
     if (!_closeBtn) {
         _closeBtn = [UIButton new];
         [_closeBtn setImage:[UIImage gk_changeImage:[UIImage imageNamed:@"close"] color:[UIColor whiteColor]] forState:UIControlStateNormal];
+        [_closeBtn addTarget:self action:@selector(closeAction) forControlEvents:UIControlEventTouchUpInside];
     }
     return _closeBtn;
 }
@@ -152,11 +256,17 @@
         _tableView.backgroundColor = [UIColor clearColor];
         if (@available(iOS 11.0, *)) {
             _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-        } else {
-            // Fallback on earlier versions
         }
+        [_tableView registerClass:GKDYCommentCell.class forCellReuseIdentifier:@"GKDYCommentCell"];
     }
     return _tableView;
+}
+
+- (NSMutableArray *)dataSources {
+    if (!_dataSources) {
+        _dataSources = [NSMutableArray array];
+    }
+    return _dataSources;
 }
 
 @end

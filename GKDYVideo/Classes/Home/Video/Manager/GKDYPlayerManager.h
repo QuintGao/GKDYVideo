@@ -11,6 +11,7 @@
 #import "GKDYVideoPortraitView.h"
 #import "GKDYVideoLandscapeView.h"
 #import "GKDYPlayerViewController.h"
+#import <ZFPlayer/ZFPlayer.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)cellDidClickIcon:(GKDYVideoModel *)model;
 
-- (void)cellDidClickComment:(GKDYVideoModel *)model;
+- (void)cellDidClickComment:(GKDYVideoModel *)model cell:(GKDYVideoPortraitCell *)cell;
 
 - (void)cellZoomBegan:(GKDYVideoModel *)model;
 
@@ -31,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface GKDYPlayerManager : NSObject
+
+@property (nonatomic, strong, readonly) ZFPlayerController *player;
 
 @property (nonatomic, weak) id<GKDYPlayerManagerDelegate> delegate;
 
@@ -49,6 +52,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 // 横屏控制层
 @property (nonatomic, strong) GKDYVideoLandscapeView *landscapeView;
+
+@property (nonatomic, assign) CGSize videoSize;
 
 /// 页码
 @property (nonatomic, assign) NSInteger page;

@@ -146,6 +146,10 @@
     self.tabBarController.tabBar.hidden = isFullscreen;
 }
 
+- (void)playerVC:(GKDYPlayerViewController *)playerVC commentShowOrHide:(BOOL)show {
+    self.titleView.hidden = show;
+}
+
 - (void)searchClick:(id)sender {
     
 }

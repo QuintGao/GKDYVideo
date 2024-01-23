@@ -156,6 +156,11 @@
             self.player.currentPlayerManager.view.backgroundColor = UIColor.blackColor;
         }
     };
+    
+    player.presentationSizeChanged = ^(id<ZFPlayerMediaPlayback>  _Nonnull asset, CGSize size) {
+        @strongify(self);
+        self.videoSize = size;
+    };
 }
 
 - (void)initLandscapeScrollView {
@@ -380,8 +385,8 @@
 }
 
 - (void)videoCell:(GKDYVideoPortraitCell *)cell didClickComment:(GKDYVideoModel *)model {
-    if ([self.delegate respondsToSelector:@selector(cellDidClickComment:)]) {
-        [self.delegate cellDidClickComment:model];
+    if ([self.delegate respondsToSelector:@selector(cellDidClickComment:cell:)]) {
+        [self.delegate cellDidClickComment:model cell:cell];
     }
 }
 

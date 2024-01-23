@@ -29,6 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)playerVC:(GKDYPlayerViewController *)playerVC cellZoomEnded:(GKDYVideoModel *)model isFullscreen:(BOOL)isFullscreen;
 
+- (void)playerVC:(GKDYPlayerViewController *)playerVC commentShowOrHide:(BOOL)show;
+
 @end
 
 @interface GKDYPlayerViewController : GKDYBaseViewController<JXCategoryListContentViewDelegate>

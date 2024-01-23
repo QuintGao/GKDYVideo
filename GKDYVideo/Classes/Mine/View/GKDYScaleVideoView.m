@@ -10,10 +10,13 @@
 #import "GKDYVideoListCell.h"
 #import "GKDYVideoPortraitCell.h"
 #import "GKDYVideoLandscapeCell.h"
+#import "GKDYCommentView.h"
+#import "GKDYCommentControlView.h"
+#import "GKPopupController.h"
 
 #define kBottomHeight (GK_SAFEAREA_BTM + 50)
 
-@interface GKDYScaleVideoView()<GKVideoScrollViewDataSource, GKDYVideoScrollViewDelegate, GKDYVideoPortraitCellDelegate, UIGestureRecognizerDelegate>
+@interface GKDYScaleVideoView()<GKVideoScrollViewDataSource, GKDYVideoScrollViewDelegate, GKDYVideoPortraitCellDelegate, UIGestureRecognizerDelegate, GKPopupProtocol>
 
 @property (nonatomic, assign) BOOL      interacting;
 
@@ -29,6 +32,16 @@
 
 // 底部
 @property (nonatomic, strong) UIView    *bottomView;
+
+@property (nonatomic, strong) UIView *containerView;
+
+@property (nonatomic, weak) GKDYVideoPortraitCell *currentCell;
+@property (nonatomic, weak) GKDYVideoModel *currentModel;
+
+@property (nonatomic, strong) GKDYCommentView *commentView;
+
+@property (nonatomic, assign) CGFloat playerW;
+@property (nonatomic, assign) CGFloat playerH;
 
 @end
 
@@ -314,6 +327,108 @@
     [self.manager rotate];
 }
 
+- (void)videoCell:(GKDYVideoPortraitCell *)cell didClickComment:(GKDYVideoModel *)model {
+    self.currentCell = cell;
+    self.currentModel = model;
+    
+    GKDYCommentControlView *controlView = [GKDYCommentControlView new];
+    self.manager.player.controlView = controlView;
+    
+    self.containerView.frame = self.bounds;
+    [self addSubview:self.containerView];
+    self.manager.player.containerView = self.containerView;
+    
+    UIView *playView = self.manager.player.currentPlayerManager.view;
+    CGRect frame = playView.frame;
+    frame.size.height = frame.size.width * self.manager.videoSize.height / self.manager.videoSize.width;
+    frame.origin.y = (self.bounds.size.height - frame.size.height) / 2;
+    playView.frame = frame;
+    self.playerW = frame.size.width;
+    self.playerH = frame.size.height;
+    
+    GKPopupController *controller = [[GKPopupController alloc] init];
+    controller.delegate = self;
+    [controller show];
+}
+
+#pragma mark - GKPopupProtocol
+@synthesize popupController;
+
+- (UIView *)contentView {
+    return self.commentView;
+}
+
+- (CGFloat)contentHeight {
+    CGFloat width = self.bounds.size.width;
+    CGFloat height = width * 9 / 16;
+    return (SCREEN_HEIGHT - GK_SAFEAREA_TOP - height);
+}
+
+- (UIColor *)backColor {
+    return UIColor.clearColor;
+}
+
+- (void)contentViewWillShow {
+    
+}
+
+- (void)contentViewDidShow {
+    [self.commentView requestDataWithModel:self.currentModel];
+}
+
+- (void)contentViewDidDismiss {
+    self.manager.player.containerView = self.currentCell.coverImgView;
+    self.manager.player.controlView = self.currentCell.portraitView;
+    [self.containerView removeFromSuperview];
+    self.containerView = nil;
+}
+
+- (void)contentViewShowAnimation {
+    UIView *playView = self.manager.player.currentPlayerManager.view;
+    CGRect frame = playView.frame;
+    frame.origin.y = GK_SAFEAREA_TOP;
+    frame.size.height = SCREEN_HEIGHT - self.contentHeight - GK_SAFEAREA_TOP;
+    frame.size.width = frame.size.height * self.playerW / self.playerH;
+    if (frame.size.width > self.bounds.size.width) {
+        frame.size.width = self.bounds.size.width;
+        frame.size.height = frame.size.width * self.playerH / self.playerW;
+    }
+    playView.frame = frame;
+    
+    CGPoint center = playView.center;
+    center.x = self.containerView.frame.size.width / 2;
+    playView.center = center;
+}
+
+- (void)contentViewDismissAnimation {
+    UIView *playView = self.manager.player.currentPlayerManager.view;
+    CGRect frame = playView.frame;
+    frame.size.width = self.bounds.size.width;
+    frame.size.height = frame.size.width * self.playerH / self.playerW;
+    frame.origin.y = (self.bounds.size.height - frame.size.height) / 2;
+    frame.origin.x = 0;
+    playView.frame = frame;
+}
+
+- (void)panSlideChangeWithRatio:(CGFloat)ratio {
+    CGFloat minH = SCREEN_HEIGHT - self.contentHeight - GK_SAFEAREA_TOP;
+    CGFloat minW = minH * self.playerW / self.playerH;
+    CGFloat minY = GK_SAFEAREA_TOP;
+    CGFloat height = self.bounds.size.width * self.playerH / self.playerW;
+    CGFloat maxY = (self.bounds.size.height - height) / 2;
+    
+    UIView *playView = self.manager.player.currentPlayerManager.view;
+    CGRect frame = playView.frame;
+    frame.origin.y = MAX(minY, minY + (maxY - minY) * ratio);
+    frame.size.width = MAX(minW, minW + (self.bounds.size.width - minW) * ratio);
+    frame.size.height = frame.size.width * self.playerH / self.playerW;
+    playView.frame = frame;
+    
+    CGPoint center = playView.center;
+    center.x = self.bounds.size.width * 0.5;
+    playView.center = center;
+}
+
 #pragma mark - 懒加载
 - (GKDYVideoScrollView *)scrollView {
     if (!_scrollView) {
@@ -382,6 +497,21 @@
         _searchLabel.text = @"搜索";
     }
     return _searchLabel;
+}
+
+- (UIView *)containerView {
+    if (!_containerView) {
+        _containerView = [[UIView alloc] init];
+        _containerView.backgroundColor = UIColor.blackColor;
+    }
+    return _containerView;
+}
+
+- (GKDYCommentView *)commentView {
+    if (!_commentView) {
+        _commentView = [[GKDYCommentView alloc] init];
+    }
+    return _commentView;
 }
 
 @end

@@ -16,9 +16,7 @@ target 'GKDYVideo' do
   pod 'GKSliderView'
   pod 'MJRefresh'
   pod 'JXCategoryView'
-  
   pod 'ZFPlayer/AVPlayer'
-  
   
   # 需要认证，不能免费使用了
   # pod 'TXLiteAVSDK_Player'  # 腾讯云播放器-独立播放器

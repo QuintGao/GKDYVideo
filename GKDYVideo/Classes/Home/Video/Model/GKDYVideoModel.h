@@ -39,6 +39,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isLike;
 @property (nonatomic, strong, nullable) NSURLSessionDataTask *task;
 
+@property (nonatomic, assign) BOOL isRequest;
+@property (nonatomic, assign) BOOL requested;
+
 - (instancetype)initWithModel:(GKDYUserVideoModel *)model;
 
 @end

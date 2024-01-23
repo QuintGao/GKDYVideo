@@ -149,6 +149,7 @@
             contentFrame.origin.y = MAX((self.contentView.frame.origin.y + translation.y), contentM);
             self.contentView.frame = contentFrame;
         }
+        NSLog(@"%f", translation.x);
     }
     
     [panGesture setTranslation:CGPointZero inView:panGesture.view];
