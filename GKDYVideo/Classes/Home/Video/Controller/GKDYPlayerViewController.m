@@ -223,6 +223,7 @@
     if ([self.delegate respondsToSelector:@selector(playerVC:commentShowOrHide:)]) {
         [self.delegate playerVC:self commentShowOrHide:YES];
     }
+    [self.commentView refreshDataWithModel:self.currentModel];
 }
 
 - (void)contentViewDidShow {

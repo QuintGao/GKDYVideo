@@ -94,6 +94,14 @@
     return self;
 }
 
+- (void)refreshDataWithModel:(GKDYVideoModel *)model {
+    if (![self.model.video_id isEqualToString:model.video_id]) {
+        [self.dataSources removeAllObjects];
+        [self.tableView reloadData];
+    }
+    self.countLabel.text = [NSString stringWithFormat:@"%@条评论", model.comment];
+}
+
 - (void)requestDataWithModel:(GKDYVideoModel *)model {
     if ([self.model.video_id isEqualToString:model.video_id]) {
         if (self.model.isRequest) {
@@ -107,6 +115,9 @@
     self.model = model;
     
     self.model.isRequest = YES;
+    
+    [self.dataSources removeAllObjects];
+    [self.tableView reloadData];
     
     GKBallLoadingView *loadingView = [GKBallLoadingView loadingViewInView:self.tableView];
     [loadingView startLoading];

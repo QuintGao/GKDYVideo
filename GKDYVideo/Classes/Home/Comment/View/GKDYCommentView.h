@@ -25,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) id<GKDYCommentViewDelegate> delegate;
 
+- (void)refreshDataWithModel:(GKDYVideoModel *)model;
+
 - (void)requestDataWithModel:(GKDYVideoModel *)model;
 
 @end

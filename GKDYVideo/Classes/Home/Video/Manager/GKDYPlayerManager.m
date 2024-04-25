@@ -139,6 +139,7 @@
             if (!self.landscapeScrollView) {
                 [self initLandscapeScrollView];
                 UIView *superview = self.rotationManager.contentView.superview;
+                self.landscapeScrollView.frame = superview.bounds;
                 [superview addSubview:self.landscapeScrollView];
                 self.landscapeScrollView.defaultIndex = self.scrollView.currentIndex;
                 [self.landscapeScrollView reloadData];
