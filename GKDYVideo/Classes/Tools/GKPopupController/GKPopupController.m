@@ -103,21 +103,29 @@ int const static kPopupPanTranslationThreshold = 5;
 }
 
 - (void)refreshContentHeight {
-    self.contentHeight = [self.delegate contentHeight];
-    if ([self.delegate respondsToSelector:@selector(refreshContentViewAnimation)]) {
-        [self.delegate refreshContentViewAnimation];
+    CGFloat contentHeight = [self.delegate contentHeight];
+    if (contentHeight > self.contentHeight) {
+        CGRect frame = self.contentView.frame;
+        frame.size.height = contentHeight;
+        self.contentView.frame = frame;
     }
-//    [UIView animateWithDuration:self.animationDuration delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-//        CGRect frame = self.contentView.frame;
-//        frame.origin.y = CGRectGetHeight(self.view.frame) - self.contentHeight;
-//        frame.size.height = self.contentHeight;
-//        self.contentView.frame = frame;
-//        if ([self.delegate respondsToSelector:@selector(refreshContentViewAnimation)]) {
-//            [self.delegate refreshContentViewAnimation];
-//        }
-//    } completion:^(BOOL finished) {
-//        
-//    }];
+    self.contentHeight = contentHeight;
+    
+    [UIView animateWithDuration:self.animationDuration delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        CGRect frame = self.contentView.frame;
+        frame.origin.y = CGRectGetHeight(self.view.frame) - self.contentHeight;
+        self.contentView.frame = frame;
+        if ([self.delegate respondsToSelector:@selector(contentViewRefreshAnimation)]) {
+            [self.delegate contentViewRefreshAnimation];
+        }
+    } completion:^(BOOL finished) {
+        CGRect frame = self.contentView.frame;
+        frame.size.height = self.contentHeight;
+        self.contentView.frame = frame;
+        if ([self.delegate respondsToSelector:@selector(contentViewRefreshCompletion)]) {
+            [self.delegate contentViewRefreshCompletion];
+        }
+    }];
 }
 
 #pragma mark - UIGestureRecognizerDelegate

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GKDYVideoModel.h"
+#import <ZFPlayer/ZFPlayer.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,9 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol GKDYCommentViewDelegate <NSObject>
 
-- (void)commentViewDidClickClose:(GKDYCommentView *)commentView;
-
-- (void)commentView:(GKDYCommentView *)commentView didClickUnfold:(BOOL)open;
+- (void)commentView:(GKDYCommentView *)commentView showOrHide:(BOOL)show;
 
 @end
 
@@ -25,9 +24,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) id<GKDYCommentViewDelegate> delegate;
 
+@property (nonatomic, weak) ZFPlayerController *player;
+
+@property (nonatomic, weak) UIView *containerView;
+
+@property (nonatomic, strong) GKDYVideoModel *videoModel;
+
 - (void)refreshDataWithModel:(GKDYVideoModel *)model;
 
 - (void)requestDataWithModel:(GKDYVideoModel *)model;
+
+- (void)show;
 
 @end
 

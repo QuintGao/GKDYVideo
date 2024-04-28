@@ -68,6 +68,8 @@
 
 - (void)contentViewDidDismiss;
 
-- (void)refreshContentViewAnimation;
+- (void)contentViewRefreshAnimation;
+
+- (void)contentViewRefreshCompletion;
 
 @end

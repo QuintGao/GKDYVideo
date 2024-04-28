@@ -67,8 +67,7 @@
     @weakify(self);
     self.manager.scrollView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         @strongify(self);
-        self.manager.page++;
-        [self requestData:nil];
+        [self requestMore];
     }];
 }
 
@@ -83,6 +82,11 @@
         [loadingView stopLoading];
         [loadingView removeFromSuperview];
     }];
+}
+
+- (void)requestMore {
+    self.manager.page++;
+    [self requestData:nil];
 }
 
 - (void)refreshData:(void (^)(void))completion {
@@ -150,6 +154,10 @@
 }
 
 #pragma mark - GKDYPlayerManagerDelegate
+- (void)scrollViewShouldLoadMore {
+    [self requestMore];
+}
+
 - (void)scrollViewDidPanDistance:(CGFloat)distance isEnd:(BOOL)isEnd {
     if ([self.delegate respondsToSelector:@selector(playerVC:didDragDistance:isEnd:)]) {
         [self.delegate playerVC:self didDragDistance:distance isEnd:isEnd];
@@ -166,24 +174,14 @@
     self.currentCell = cell;
     self.currentModel = model;
     
-    GKDYCommentControlView *controlView = [GKDYCommentControlView new];
-    self.manager.player.controlView = controlView;
+    self.commentView.player = self.manager.player;
+    self.commentView.videoModel = model;
     
     self.containerView.frame = self.view.bounds;
     [self.view addSubview:self.containerView];
-    self.manager.player.containerView = self.containerView;
+    self.commentView.containerView = self.containerView;
     
-    UIView *playView = self.manager.player.currentPlayerManager.view;
-    CGRect frame = playView.frame;
-    frame.size.height = frame.size.width * self.manager.videoSize.height / self.manager.videoSize.width;
-    frame.origin.y = (self.view.bounds.size.height - frame.size.height) / 2;
-    playView.frame = frame;
-    self.playerW = frame.size.width;
-    self.playerH = frame.size.height;
-    
-    GKPopupController *controller = [[GKPopupController alloc] init];
-    controller.delegate = self;
-    [controller show];
+    [self.commentView show];
 }
 
 - (void)cellZoomBegan:(GKDYVideoModel *)model {
@@ -198,105 +196,17 @@
     }
 }
 
-#pragma mark - GKPopupProtocol
-@synthesize popupController;
-
-- (UIView *)contentView {
-    return self.commentView;
-}
-
-- (CGFloat)contentHeight {
-    if (self.isOpen) {
-        return (SCREEN_HEIGHT - GK_SAFEAREA_TOP);
-    }
-    
-    CGFloat width = self.view.frame.size.width;
-    CGFloat height = width * 9 / 16;
-    return (SCREEN_HEIGHT - GK_SAFEAREA_TOP - height);
-}
-
-- (UIColor *)backColor {
-    return UIColor.clearColor;
-}
-
-- (void)contentViewWillShow {
-    if ([self.delegate respondsToSelector:@selector(playerVC:commentShowOrHide:)]) {
-        [self.delegate playerVC:self commentShowOrHide:YES];
-    }
-    [self.commentView refreshDataWithModel:self.currentModel];
-}
-
-- (void)contentViewDidShow {
-    [self.commentView requestDataWithModel:self.currentModel];
-}
-
-- (void)contentViewDidDismiss {
-    self.manager.player.containerView = self.currentCell.coverImgView;
-    self.manager.player.controlView = self.currentCell.portraitView;
-    [self.containerView removeFromSuperview];
-    self.containerView = nil;
-    if ([self.delegate respondsToSelector:@selector(playerVC:commentShowOrHide:)]) {
-        [self.delegate playerVC:self commentShowOrHide:NO];
-    }
-    self.isOpen = NO;
-}
-
-- (void)contentViewShowAnimation {
-    UIView *playView = self.manager.player.currentPlayerManager.view;
-    CGRect frame = playView.frame;
-    frame.origin.y = GK_SAFEAREA_TOP;
-    frame.size.height = SCREEN_HEIGHT - self.contentHeight - GK_SAFEAREA_TOP;
-    frame.size.width = frame.size.height * self.playerW / self.playerH;
-    
-    if (frame.size.width > self.view.frame.size.width) {
-        frame.size.width = self.view.frame.size.width;
-        frame.size.height = frame.size.width * self.playerH / self.playerW;
-    }
-    
-    playView.frame = frame;
-    
-    CGPoint center = playView.center;
-    center.x = self.containerView.frame.size.width / 2;
-    playView.center = center;
-}
-
-- (void)contentViewDismissAnimation {
-    UIView *playView = self.manager.player.currentPlayerManager.view;
-    CGRect frame = playView.frame;
-    frame.size.width = self.view.bounds.size.width;
-    frame.size.height = frame.size.width * self.playerH / self.playerW;
-    frame.origin.y = (self.view.bounds.size.height - frame.size.height) / 2;
-    frame.origin.x = 0;
-    playView.frame = frame;
-}
-
-- (void)panSlideChangeWithRatio:(CGFloat)ratio {
-    CGFloat minH = SCREEN_HEIGHT - self.contentHeight - GK_SAFEAREA_TOP;
-    CGFloat minW = minH * self.playerW / self.playerH;
-    CGFloat minY = GK_SAFEAREA_TOP;
-    CGFloat height = self.view.bounds.size.width * self.playerH / self.playerW;
-    CGFloat maxY = (self.view.bounds.size.height - height) / 2;
-    
-    UIView *playView = self.manager.player.currentPlayerManager.view;
-    CGRect frame = playView.frame;
-    frame.origin.y = MAX(minY, minY + (maxY - minY) * ratio);
-    frame.size.width = MAX(minW, minW + (self.view.bounds.size.width - minW) * ratio);
-    frame.size.height = frame.size.width * self.playerH / self.playerW;
-    playView.frame = frame;
-    
-    CGPoint center = playView.center;
-    center.x = self.view.bounds.size.width * 0.5;
-    playView.center = center;
-}
-
 #pragma mark - GKDYCommentViewDelegate
-- (void)commentViewDidClickClose:(GKDYCommentView *)commentView {
-    [self.popupController dismiss];
-}
-
-- (void)commentView:(GKDYCommentView *)commentView didClickUnfold:(BOOL)open {
-    self.isOpen = open;
-    [self.popupController refreshContentHeight];
+- (void)commentView:(GKDYCommentView *)commentView showOrHide:(BOOL)show {
+    if (!show) {
+        self.manager.player.containerView = self.currentCell.coverImgView;
+        self.manager.player.controlView = self.currentCell.portraitView;
+        [self.commentView.containerView removeFromSuperview];
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(playerVC:commentShowOrHide:)]) {
+        [self.delegate playerVC:self commentShowOrHide:show];
+    }
 }
 
 #pragma mark - 懒加载

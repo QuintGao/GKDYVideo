@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol GKDYPlayerManagerDelegate <NSObject>
 
+- (void)scrollViewShouldLoadMore;
+
 - (void)scrollViewDidPanDistance:(CGFloat)distance isEnd:(BOOL)isEnd;
 
 - (void)cellDidClickIcon:(GKDYVideoModel *)model;

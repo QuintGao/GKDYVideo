@@ -50,6 +50,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 是否全屏
 @property (nonatomic, assign, readonly) BOOL isFullscreen;
 
+/// 动画时长
+@property (nonatomic, assign) NSTimeInterval animationDuration;
+
 /// 即将旋转回调
 @property (nonatomic, copy, nullable) void(^orientationWillChange)(BOOL isFullscreen);
 

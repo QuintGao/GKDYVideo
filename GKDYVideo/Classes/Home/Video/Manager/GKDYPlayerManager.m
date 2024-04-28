@@ -215,6 +215,12 @@
 }
 
 - (void)playVideoWithCell:(GKDYVideoCell *)cell index:(NSInteger)index {
+    if (self.dataSources.count - index < 2) {
+        if ([self.delegate respondsToSelector:@selector(scrollViewShouldLoadMore)]) {
+            [self.delegate scrollViewShouldLoadMore];
+        }
+    }
+    
     GKDYVideoModel *model = self.dataSources[index];
     
     self.landscapeView.model = model;

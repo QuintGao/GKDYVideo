@@ -11,8 +11,10 @@
 #import "GKDYCommentModel.h"
 #import "GKDYCommentCell.h"
 #import <MJRefresh/MJRefresh.h>
+#import "GKPopupController.h"
+#import "GKDYCommentControlView.h"
 
-@interface GKDYCommentView()<UITableViewDataSource, UITableViewDelegate>
+@interface GKDYCommentView()<UITableViewDataSource, UITableViewDelegate, GKPopupProtocol>
 
 @property (nonatomic, strong) UIVisualEffectView    *effectView;
 @property (nonatomic, strong) UIView                *topView;
@@ -35,6 +37,9 @@
 @property (nonatomic, weak) GKBallLoadingView *loadingView;
 
 @property (nonatomic, strong) NSMutableArray *dataSources;
+
+@property (nonatomic, assign) CGFloat playerW;
+@property (nonatomic, assign) CGFloat playerH;
 
 @end
 
@@ -92,6 +97,29 @@
         }];
     }
     return self;
+}
+
+- (void)show {
+    GKDYCommentControlView *controlView = [[GKDYCommentControlView alloc] init];
+    self.player.controlView = controlView;
+    self.player.containerView = self.containerView;
+    
+    ZFPlayerView *playView = self.player.currentPlayerManager.view;
+    playView.playerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    playView.coverImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    
+    CGSize videoSize = self.player.currentPlayerManager.presentationSize;
+    
+    CGRect frame = playView.frame;
+    frame.size.height = frame.size.width * videoSize.height / videoSize.width;
+    frame.origin.y = (self.containerView.bounds.size.height - frame.size.height) / 2;
+    playView.frame = frame;
+    self.playerW = frame.size.width;
+    self.playerH = frame.size.height;
+    
+    GKPopupController *controller = [[GKPopupController alloc] init];
+    controller.delegate = self;
+    [controller show];
 }
 
 - (void)refreshDataWithModel:(GKDYVideoModel *)model {
@@ -182,16 +210,119 @@
 #pragma mark - Action
 - (void)unfoldAction {
     self.unfoldBtn.selected = !self.unfoldBtn.selected;
-    
-    if ([self.delegate respondsToSelector:@selector(commentView:didClickUnfold:)]) {
-        [self.delegate commentView:self didClickUnfold:self.unfoldBtn.selected];
-    }
+    [self.popupController refreshContentHeight];
 }
 
 - (void)closeAction {
-    if ([self.delegate respondsToSelector:@selector(commentViewDidClickClose:)]) {
-        [self.delegate commentViewDidClickClose:self];
+    [self.popupController dismiss];
+}
+
+#pragma mark - GKPopupProtocol
+@synthesize popupController;
+
+- (UIView *)contentView {
+    return self;
+}
+
+- (CGFloat)contentHeight {
+    if (self.unfoldBtn.selected) {
+        return (SCREEN_HEIGHT - GK_SAFEAREA_TOP);
+    }else {
+        CGFloat width = self.containerView.bounds.size.width;
+        CGFloat height = width * 9 / 16;
+        return (SCREEN_HEIGHT - GK_SAFEAREA_TOP - height);
     }
+}
+
+- (UIColor *)backColor { return UIColor.clearColor; }
+
+- (void)contentViewWillShow {
+    if ([self.delegate respondsToSelector:@selector(commentView:showOrHide:)]) {
+        [self.delegate commentView:self showOrHide:YES];
+    }
+    [self refreshDataWithModel:self.videoModel];
+}
+
+- (void)contentViewDidShow {
+    [self requestDataWithModel:self.videoModel];
+}
+
+- (void)contentViewDidDismiss {
+    self.unfoldBtn.selected = NO;
+    if ([self.delegate respondsToSelector:@selector(commentView:showOrHide:)]) {
+        [self.delegate commentView:self showOrHide:NO];
+    }
+}
+
+- (void)contentViewShowAnimation {
+    UIView *playView = self.player.currentPlayerManager.view;
+    CGRect frame = playView.frame;
+    frame.origin.y = GK_SAFEAREA_TOP;
+    frame.size.height = SCREEN_HEIGHT - self.contentHeight - GK_SAFEAREA_TOP;
+    frame.size.width = frame.size.height * self.playerW / self.playerH;
+    
+    if (frame.size.width > self.containerView.bounds.size.width) {
+        frame.size.width = self.containerView.bounds.size.width;
+        frame.size.height = frame.size.width * self.playerH / self.playerW;
+    }
+    
+    playView.frame = frame;
+    
+    CGPoint center = playView.center;
+    center.x = self.containerView.bounds.size.width * 0.5;
+    playView.center = center;
+}
+
+- (void)contentViewDismissAnimation {
+    UIView *playView = self.player.currentPlayerManager.view;
+    CGRect frame = playView.frame;
+    frame.size.width = self.containerView.bounds.size.width;
+    frame.size.height = frame.size.width * self.playerH / self.playerW;
+    frame.origin.y = (self.containerView.bounds.size.height - frame.size.height) / 2;
+    frame.origin.x = 0;
+    playView.frame = frame;
+}
+
+- (void)contentViewRefreshAnimation {
+    UIView *playView = self.player.currentPlayerManager.view;
+    CGRect frame = playView.frame;
+    frame.origin.y = GK_SAFEAREA_TOP;
+    if (self.unfoldBtn.selected) {
+        frame.size.width = 1;
+        frame.size.height = 1;
+    }else {
+        frame.size.height = SCREEN_HEIGHT - self.contentHeight - GK_SAFEAREA_TOP;
+        frame.size.width = frame.size.height * self.playerW / self.playerH;
+        
+        if (frame.size.width > self.containerView.bounds.size.width) {
+            frame.size.width = self.containerView.bounds.size.width;
+            frame.size.height = frame.size.width * self.playerH / self.playerW;
+        }
+    }
+    playView.frame = frame;
+    
+    CGPoint center = playView.center;
+    center.x = self.containerView.bounds.size.width / 2;
+    playView.center = center;
+}
+
+- (void)panSlideChangeWithRatio:(CGFloat)ratio {
+    CGFloat minH = SCREEN_HEIGHT - self.contentHeight - GK_SAFEAREA_TOP;
+    CGFloat minW = minH * self.playerW / self.playerH;
+    CGFloat minY = GK_SAFEAREA_TOP;
+    CGFloat height = (self.containerView.bounds.size.width * self.playerH / self.playerW);
+    CGFloat maxY = (self.containerView.bounds.size.height - height) / 2;
+    
+    UIView *playView = self.player.currentPlayerManager.view;
+    CGRect frame = playView.frame;
+    frame.origin.y = MAX(minY, minY + (maxY - minY) * ratio);
+    frame.size.width = MAX(minW, minW + (self.containerView.bounds.size.width - minW) * ratio);
+    frame.size.height = frame.size.width * self.playerH / self.playerW;
+    playView.frame = frame;
+    
+    CGPoint center = playView.center;
+    center.x = self.containerView.bounds.size.width * 0.5;
+    playView.center = center;
 }
 
 #pragma mark - 懒加载
@@ -239,7 +370,7 @@
         [_unfoldBtn setImage:[UIImage imageNamed:@"arrow_close"] forState:UIControlStateNormal];
         [_unfoldBtn setImage:[UIImage imageNamed:@"arrow_open"] forState:UIControlStateSelected];
         [_unfoldBtn addTarget:self action:@selector(unfoldAction) forControlEvents:UIControlEventTouchUpInside];
-        _unfoldBtn.hidden = YES;
+//        _unfoldBtn.hidden = YES;
     }
     return _unfoldBtn;
 }
