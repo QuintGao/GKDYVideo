@@ -18,6 +18,10 @@ target 'GKDYVideo' do
   pod 'JXCategoryView'
   pod 'ZFPlayer/AVPlayer'
   
+  ## 小红书开发的播放器
+  pod 'XYMediaFfmpeg', :path => "./ThirdParty/RedPlayer/XYMediaFfmpeg"
+  pod 'RedPlayer', :path => "./ThirdParty/RedPlayer/RedPlayer"
+  
   # 需要认证，不能免费使用了
   # pod 'TXLiteAVSDK_Player'  # 腾讯云播放器-独立播放器
 

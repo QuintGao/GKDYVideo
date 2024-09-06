@@ -12,7 +12,7 @@ typedef NS_ENUM(NSUInteger, GKPopupPanGestureDirection) {
     GKPopupPanGestureDirectionVelocity      // 竖直方向
 };
 
-int const static kPopupPanTranslationThreshold = 5;
+int const static kPopupPanTranslationThreshold = 10;
 
 @interface GKPopupPanGestureRecognizer : UIPanGestureRecognizer
 
@@ -214,7 +214,7 @@ int const static kPopupPanTranslationThreshold = 5;
                 CGFloat ratio = (translation.y - self.beginTranslation.y) / self.contentHeight;
                 if (self.isDragScrollView) { // 拖拽scrollView
                     // 当UIScrollView在最顶端时，处理视图的滑动
-                    if (self.scrollView.contentOffset.y <= 0 && translation.y > 0) {
+                    if (self.scrollView.contentOffset.y <= 0 && (translation.y - self.beginTranslation.y) > 0) {
                         self.scrollView.contentOffset = CGPointZero;
                         self.scrollView.panGestureRecognizer.enabled = NO;
                         self.isDragScrollView = NO;
@@ -253,7 +253,7 @@ int const static kPopupPanTranslationThreshold = 5;
                     }
                 }
             }else {
-                if (velocity.y > self.velocityThreshold || translationY > self.translationThreshold) {
+                if ((velocity.y > self.velocityThreshold || translationY > self.translationThreshold) && self.scrollView.contentOffset.y == 0) {
                     [self dismissWithCompletion:nil];
                     if ([self.delegate respondsToSelector:@selector(panSlideEnded:)]) {
                         [self.delegate panSlideEnded:NO];
@@ -313,6 +313,10 @@ int const static kPopupPanTranslationThreshold = 5;
 }
 
 - (void)showWithCompletion:(void(^)(void))completion {
+    if (self.contentView.frame.origin.y == (self.view.frame.size.height - self.contentHeight)) {
+        return;
+    }
+    
     if ([self.delegate respondsToSelector:@selector(contentViewWillShow)]) {
         [self.delegate contentViewWillShow];
     }
@@ -333,6 +337,10 @@ int const static kPopupPanTranslationThreshold = 5;
 }
 
 - (void)dismissWithCompletion:(void(^)(void))completion {
+    if (self.contentView.frame.origin.y == self.view.frame.size.height) {
+        return;
+    }
+    
     if ([self.delegate respondsToSelector:@selector(contentViewWillDismiss)]) {
         [self.delegate contentViewWillDismiss];
     }

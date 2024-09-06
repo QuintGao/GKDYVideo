@@ -15,6 +15,7 @@
 #import "GKDYVideoPortraitCell.h"
 #import "GKDYVideoLandscapeCell.h"
 #import "GKDYVideoFullscreenView.h"
+#import "GKRedPlayerManager.h"
 
 @interface GKDYPlayerManager()<GKVideoScrollViewDataSource, GKDYVideoScrollViewDelegate, GKDYVideoPortraitCellDelegate>
 
@@ -44,7 +45,8 @@
 
 - (void)initPlayer {
     // 初始化播放器
-    ZFAVPlayerManager *manager = [[ZFAVPlayerManager alloc] init];
+//    ZFAVPlayerManager *manager = [[ZFAVPlayerManager alloc] init];
+    GKRedPlayerManager *manager = [[GKRedPlayerManager alloc] init];
     manager.shouldAutoPlay = NO; // 自动播放
     
     ZFPlayerController *player = [[ZFPlayerController alloc] init];
@@ -119,6 +121,7 @@
             self.player.currentPlayerManager.view.backgroundColor = UIColor.clearColor;
             self.portraitView.hidden = NO;
             [self.landscapeView destoryTimer];
+            self.currentCell.coverImgView.hidden = YES;
             if (self.landscapeScrollView) {
                 UIView *superview = self.landscapeScrollView.superview;
                 [superview addSubview:self.rotationManager.contentView];
@@ -151,6 +154,7 @@
             self.portraitView.hidden = NO;
             self.landscapeView.hidden = YES;
             self.player.controlView = self.portraitView;
+            self.currentCell.coverImgView.hidden = NO;
             if (self.player.containerView != self.currentCell.coverImgView) {
                 self.player.containerView = self.currentCell.coverImgView;
             }
@@ -257,6 +261,8 @@
     if (model.play_url.length > 0) {
         // 播放内容一致，不做处理
         if ([self.player.assetURL.absoluteString isEqualToString:model.play_url]) return;
+        
+//        model.play_url = @"https://videos.pexels.com/video-files/9974047/9974047-sd_640_360_30fps.mp4";
         
         // 设置播放地址
         self.player.assetURL = [NSURL URLWithString:model.play_url];

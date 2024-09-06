@@ -24,6 +24,8 @@
 		79194D712B590225003EC779 /* GKPopupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79194D702B590225003EC779 /* GKPopupController.m */; };
 		79194D742B593A47003EC779 /* GKDYCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79194D732B593A47003EC779 /* GKDYCommentModel.m */; };
 		79194D7F2B593DCD003EC779 /* GKDYCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79194D7E2B593DCD003EC779 /* GKDYCommentCell.m */; };
+		79714C3D2BDE4E7900FCFBD1 /* GKRedPlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 79714C3C2BDE4E7900FCFBD1 /* GKRedPlayerManager.m */; };
+		79714C402BDF3FD700FCFBD1 /* GKRedPreloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 79714C3F2BDF3FD700FCFBD1 /* GKRedPreloadManager.m */; };
 		7988CB1F227C9DB900023A2B /* GKDYShootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7988CB1E227C9DB900023A2B /* GKDYShootViewController.m */; };
 		7991D4DB2A04DEAD002AADCD /* GKRotationManager_iOS_9_15.m in Sources */ = {isa = PBXBuildFile; fileRef = 7991D4CD2A04DEAC002AADCD /* GKRotationManager_iOS_9_15.m */; };
 		7991D4DC2A04DEAD002AADCD /* GKRotationManager_iOS_16_Later.m in Sources */ = {isa = PBXBuildFile; fileRef = 7991D4CF2A04DEAC002AADCD /* GKRotationManager_iOS_16_Later.m */; };
@@ -111,6 +113,10 @@
 		793231B229A44E39000A61ED /* TXLiteAVSDK_Player.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TXLiteAVSDK_Player.framework; path = Pods/TXLiteAVSDK_Player/TXLiteAVSDK_Player/TXLiteAVSDK_Player.framework; sourceTree = "<group>"; };
 		793231B329A44E39000A61ED /* TXSoundTouch.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = TXSoundTouch.xcframework; path = Pods/TXLiteAVSDK_Player/TXLiteAVSDK_Player/TXSoundTouch.xcframework; sourceTree = "<group>"; };
 		793231B429A44E39000A61ED /* TXFFmpeg.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = TXFFmpeg.xcframework; path = Pods/TXLiteAVSDK_Player/TXLiteAVSDK_Player/TXFFmpeg.xcframework; sourceTree = "<group>"; };
+		79714C3B2BDE4E7900FCFBD1 /* GKRedPlayerManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKRedPlayerManager.h; sourceTree = "<group>"; };
+		79714C3C2BDE4E7900FCFBD1 /* GKRedPlayerManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKRedPlayerManager.m; sourceTree = "<group>"; };
+		79714C3E2BDF3FD700FCFBD1 /* GKRedPreloadManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKRedPreloadManager.h; sourceTree = "<group>"; };
+		79714C3F2BDF3FD700FCFBD1 /* GKRedPreloadManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKRedPreloadManager.m; sourceTree = "<group>"; };
 		7988CB1D227C9DB900023A2B /* GKDYShootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKDYShootViewController.h; sourceTree = "<group>"; };
 		7988CB1E227C9DB900023A2B /* GKDYShootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKDYShootViewController.m; sourceTree = "<group>"; };
 		7991D4CD2A04DEAC002AADCD /* GKRotationManager_iOS_9_15.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKRotationManager_iOS_9_15.m; sourceTree = "<group>"; };
@@ -494,6 +500,17 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		79714C3A2BDE4E5A00FCFBD1 /* GKRedPlayerManager */ = {
+			isa = PBXGroup;
+			children = (
+				79714C3B2BDE4E7900FCFBD1 /* GKRedPlayerManager.h */,
+				79714C3C2BDE4E7900FCFBD1 /* GKRedPlayerManager.m */,
+				79714C3E2BDF3FD700FCFBD1 /* GKRedPreloadManager.h */,
+				79714C3F2BDF3FD700FCFBD1 /* GKRedPreloadManager.m */,
+			);
+			path = GKRedPlayerManager;
+			sourceTree = "<group>";
+		};
 		7991D4CC2A04DEAC002AADCD /* GKRotationManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -610,6 +627,7 @@
 		79CC62C721573B2700101773 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				79714C3A2BDE4E5A00FCFBD1 /* GKRedPlayerManager */,
 				799277D129C837A000A410DC /* GKDYTools.h */,
 				799277D229C837A000A410DC /* GKDYTools.m */,
 				79194D6D2B590225003EC779 /* GKPopupController */,
@@ -769,6 +787,7 @@
 				607CAB7F2282A8CF0062AC0F /* GKDYAttentViewController.m in Sources */,
 				607CAB852282A8E00062AC0F /* GKDYMineViewController.m in Sources */,
 				601140C622EFD0450014EF50 /* GKDYScaleVideoView.m in Sources */,
+				79714C402BDF3FD700FCFBD1 /* GKRedPreloadManager.m in Sources */,
 				79A5252729D2831400CFB32F /* GKDYUserModel.m in Sources */,
 				79F46BD72A08CC7A006E3B85 /* GKDYVideoFullscreenView.m in Sources */,
 				7991D4DF2A04DEAD002AADCD /* GKLandscapeViewController.m in Sources */,
@@ -808,6 +827,7 @@
 				79194D712B590225003EC779 /* GKPopupController.m in Sources */,
 				79CC62D121573BFD00101773 /* GKDYHomeViewController.m in Sources */,
 				799277F829CAF77300A410DC /* GKDYVideoPreviewView.m in Sources */,
+				79714C3D2BDE4E7900FCFBD1 /* GKRedPlayerManager.m in Sources */,
 				6099CDCC22BA31B4005098EE /* GKDoubleLikeView.m in Sources */,
 				79E16A132274748F00DE4967 /* GKSlidePopupView.m in Sources */,
 				607CAB882282BB3F0062AC0F /* GKDYTabBar.m in Sources */,
@@ -951,7 +971,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 27K7U9AVTS;
+				DEVELOPMENT_TEAM = JWMR39G949;
 				ENABLE_BITCODE = NO;
 				EXCLUDED_ARCHS = "";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -966,7 +986,7 @@
 				);
 				MARKETING_VERSION = 1.0.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.test.dyvideo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.demo.dyvideo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -980,7 +1000,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 27K7U9AVTS;
+				DEVELOPMENT_TEAM = JWMR39G949;
 				ENABLE_BITCODE = NO;
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -994,7 +1014,7 @@
 				);
 				MARKETING_VERSION = 1.0.0;
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.test.dyvideo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.demo.dyvideo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";

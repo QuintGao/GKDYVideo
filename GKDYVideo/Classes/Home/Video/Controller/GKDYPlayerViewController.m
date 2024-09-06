@@ -19,6 +19,7 @@
 #import "GKDYVideoPortraitCell.h"
 #import "GKDYVideoLandscapeCell.h"
 #import "GKPopupController.h"
+#import "GKRedPreloadManager.h"
 
 @interface GKDYPlayerViewController ()<GKDYPlayerManagerDelegate, GKPopupProtocol, GKDYCommentViewDelegate>
 
@@ -111,10 +112,16 @@
                 [self.manager.dataSources removeAllObjects];
             }
             
+            NSMutableArray *videoUrls = [NSMutableArray new];
             [videos enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 GKDYVideoModel *model = [GKDYVideoModel yy_modelWithDictionary:obj];
                 [self.manager.dataSources addObject:model];
+                
+                [videoUrls addObject:model.play_url];
             }];
+            
+            // 预加载
+            [self preloadVideoUrls:videoUrls];
             
             [self.manager.scrollView.mj_footer endRefreshing];
             
@@ -133,6 +140,12 @@
 
 - (GKDYVideoModel *)model {
     return self.manager.currentCell.model;
+}
+
+- (void)preloadVideoUrls:(NSArray *)videoUrls {
+    [videoUrls enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [GKRedPreloadManager preloadVideoURL:[NSURL URLWithString:obj]];
+    }];
 }
 
 #pragma mark - JXCategoryListContentViewDelegate

@@ -127,7 +127,8 @@
         [self.dataSources removeAllObjects];
         [self.tableView reloadData];
     }
-    self.countLabel.text = [NSString stringWithFormat:@"%@条评论", model.comment];
+    self.countLabel.text = [NSString stringWithFormat:@"%@条评论", @"0"];
+    self.pn = 1;
 }
 
 - (void)requestDataWithModel:(GKDYVideoModel *)model {
@@ -171,8 +172,8 @@
         self.model.requested = YES;
         
         self.commentModel = [GKDYCommentModel yy_modelWithDictionary:responseObject[@"data"]];
-        self.countLabel.text = [NSString stringWithFormat:@"%@条评论", self.commentModel.comment_count];
         [self.dataSources addObjectsFromArray:self.commentModel.list];
+        self.countLabel.text = [NSString stringWithFormat:@"%@条评论", self.commentModel.comment_count];
         [self.tableView reloadData];
         
         if (self.commentModel.is_over) {

@@ -1,0 +1,6 @@
+framework module RedPlayer {
+  umbrella header "RedPlayer-umbrella.h"
+
+  export *
+  module * { export * }
+}
