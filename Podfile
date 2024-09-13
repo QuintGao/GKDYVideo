@@ -14,6 +14,7 @@ target 'GKDYVideo' do
   pod 'GKVideoScrollView'
   pod 'GKPageSmoothView'
   pod 'GKSliderView'
+  pod 'GKPopupController'
   pod 'MJRefresh'
   pod 'JXCategoryView'
   pod 'ZFPlayer/AVPlayer'

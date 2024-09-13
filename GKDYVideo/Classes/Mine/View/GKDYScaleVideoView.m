@@ -346,9 +346,9 @@
     self.playerW = frame.size.width;
     self.playerH = frame.size.height;
     
-    GKPopupController *controller = [[GKPopupController alloc] init];
-    controller.delegate = self;
-    [controller show];
+//    GKPopupController *controller = [[GKPopupController alloc] init];
+//    controller.delegate = self;
+//    [controller show];
 }
 
 #pragma mark - GKPopupProtocol

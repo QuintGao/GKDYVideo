@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GKDYVideoModel.h"
 #import <ZFPlayer/ZFPlayer.h>
+#import "GKDYVideoPortraitCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -34,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)requestDataWithModel:(GKDYVideoModel *)model;
 
-- (void)show;
+- (void)showWithCell:(GKDYVideoPortraitCell *)cell containerView:(UIView *)containerView;
 
 @end
 

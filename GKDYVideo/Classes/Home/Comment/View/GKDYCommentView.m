@@ -38,8 +38,11 @@
 
 @property (nonatomic, strong) NSMutableArray *dataSources;
 
+@property (nonatomic, weak) GKDYVideoPortraitCell *cell;
+
 @property (nonatomic, assign) CGFloat playerW;
 @property (nonatomic, assign) CGFloat playerH;
+@property (nonatomic, assign) CGRect playerFrame;
 
 @end
 
@@ -99,16 +102,26 @@
     return self;
 }
 
-- (void)show {
+- (void)showWithCell:(GKDYVideoPortraitCell *)cell containerView:(UIView *)containerView {
+    self.cell = cell;
+    self.containerView = containerView;
+    self.player = cell.manager.player;
+    
+    CGFloat originH = cell.coverImgView.frame.size.height;
+    
     GKDYCommentControlView *controlView = [[GKDYCommentControlView alloc] init];
     self.player.controlView = controlView;
     self.player.containerView = self.containerView;
     
+    // 防止动画异常
     ZFPlayerView *playView = self.player.currentPlayerManager.view;
     playView.playerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     playView.coverImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
     CGSize videoSize = self.player.currentPlayerManager.presentationSize;
+    if (CGSizeEqualToSize(videoSize, CGSizeZero)) {
+        videoSize = cell.coverImgView.frame.size;
+    }
     
     CGRect frame = playView.frame;
     frame.size.height = frame.size.width * videoSize.height / videoSize.width;
@@ -117,7 +130,8 @@
     self.playerW = frame.size.width;
     self.playerH = frame.size.height;
     
-    GKPopupController *controller = [[GKPopupController alloc] init];
+    GKPopupController *controller = [[GKPopupController alloc] initWithContentView:self];
+    controller.bgColor = UIColor.clearColor;
     controller.delegate = self;
     [controller show];
 }
@@ -220,10 +234,6 @@
 #pragma mark - GKPopupProtocol
 @synthesize popupController;
 
-- (UIView *)contentView {
-    return self;
-}
-
 - (CGFloat)contentHeight {
     if (self.unfoldBtn.selected) {
         return (SCREEN_HEIGHT - GK_SAFEAREA_TOP);
@@ -233,8 +243,6 @@
         return (SCREEN_HEIGHT - GK_SAFEAREA_TOP - height);
     }
 }
-
-- (UIColor *)backColor { return UIColor.clearColor; }
 
 - (void)contentViewWillShow {
     if ([self.delegate respondsToSelector:@selector(commentView:showOrHide:)]) {
@@ -249,6 +257,10 @@
 
 - (void)contentViewDidDismiss {
     self.unfoldBtn.selected = NO;
+    self.player.controlView = self.cell.portraitView;
+    self.player.containerView = self.cell.coverImgView;
+    [self.containerView removeFromSuperview];
+    self.containerView = nil;
     if ([self.delegate respondsToSelector:@selector(commentView:showOrHide:)]) {
         [self.delegate commentView:self showOrHide:NO];
     }

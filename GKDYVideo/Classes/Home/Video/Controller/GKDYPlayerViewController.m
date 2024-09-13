@@ -8,7 +8,6 @@
 
 #import "GKDYPlayerViewController.h"
 #import "GKDYUserViewController.h"
-#import "GKSlidePopupView.h"
 #import "GKDYCommentView.h"
 #import "GKDYCommentControlView.h"
 #import "GKBallLoadingView.h"
@@ -18,23 +17,14 @@
 #import "GKDYPlayerManager.h"
 #import "GKDYVideoPortraitCell.h"
 #import "GKDYVideoLandscapeCell.h"
-#import "GKPopupController.h"
 
-@interface GKDYPlayerViewController ()<GKDYPlayerManagerDelegate, GKPopupProtocol, GKDYCommentViewDelegate>
+@interface GKDYPlayerViewController ()<GKDYPlayerManagerDelegate, GKDYCommentViewDelegate>
 
-@property (nonatomic, strong) GKDYPlayerManager     *manager;
-
-@property (nonatomic, strong) UIView *containerView;
-
-@property (nonatomic, weak) GKDYVideoPortraitCell *currentCell;
-@property (nonatomic, weak) GKDYVideoModel *currentModel;
+@property (nonatomic, strong) GKDYPlayerManager *manager;
 
 @property (nonatomic, strong) GKDYCommentView *commentView;
 
-@property (nonatomic, assign) CGFloat playerW;
-@property (nonatomic, assign) CGFloat playerH;
-
-@property (nonatomic, assign) BOOL isOpen;
+@property (nonatomic, weak) UIView *containerView;
  
 @end
 
@@ -171,17 +161,14 @@
 }
 
 - (void)cellDidClickComment:(GKDYVideoModel *)model cell:(GKDYVideoPortraitCell *)cell {
-    self.currentCell = cell;
-    self.currentModel = model;
+    UIView *containerView = [[UIView alloc] init];
+    containerView.backgroundColor = UIColor.blackColor;
+    containerView.frame = self.view.bounds;
+    [self.view addSubview:containerView];
+    self.containerView = containerView;
     
-    self.commentView.player = self.manager.player;
     self.commentView.videoModel = model;
-    
-    self.containerView.frame = self.view.bounds;
-    [self.view addSubview:self.containerView];
-    self.commentView.containerView = self.containerView;
-    
-    [self.commentView show];
+    [self.commentView showWithCell:cell containerView:self.containerView];
 }
 
 - (void)cellZoomBegan:(GKDYVideoModel *)model {
@@ -198,12 +185,6 @@
 
 #pragma mark - GKDYCommentViewDelegate
 - (void)commentView:(GKDYCommentView *)commentView showOrHide:(BOOL)show {
-    if (!show) {
-        self.manager.player.containerView = self.currentCell.coverImgView;
-        self.manager.player.controlView = self.currentCell.portraitView;
-        [self.commentView.containerView removeFromSuperview];
-    }
-    
     if ([self.delegate respondsToSelector:@selector(playerVC:commentShowOrHide:)]) {
         [self.delegate playerVC:self commentShowOrHide:show];
     }
@@ -224,14 +205,6 @@
         _commentView.delegate = self;
     }
     return _commentView;
-}
-
-- (UIView *)containerView {
-    if (!_containerView) {
-        _containerView = [[UIView alloc] init];
-        _containerView.backgroundColor = UIColor.blackColor;
-    }
-    return _containerView;
 }
 
 @end

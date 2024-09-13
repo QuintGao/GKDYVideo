@@ -12,8 +12,9 @@
 #import "GKDYUserHeaderView.h"
 #import "GKDYVideoListViewController.h"
 #import "GKDYScaleVideoView.h"
+#import "GKDYListPlayerController.h"
 
-@interface GKDYUserViewController ()<GKPageSmoothViewDataSource, GKPageSmoothViewDelegate>
+@interface GKDYUserViewController ()<GKPageSmoothViewDataSource, GKPageSmoothViewDelegate, GKDYListPlayerControllerDelegate>
 
 @property (nonatomic, strong) UILabel *titleView;
 
@@ -123,25 +124,43 @@
 
 #pragma mark - Private
 - (void)showVideoViewWithList:(NSArray *)list index:(NSInteger)index {
-    GKDYScaleVideoView *videoView = [[GKDYScaleVideoView alloc] initWithFrame:self.view.bounds];
-    
-    [list enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    GKDYListPlayerController *listVC = [[GKDYListPlayerController alloc] init];
+    [list enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL * _Nonnull stop) {
         GKDYVideoModel *model = [[GKDYVideoModel alloc] initWithModel:obj];
         model.source_name = self.headerView.model.author;
         model.author_avatar = self.headerView.model.author_icon;
-        [videoView.videoList addObject:model];
+        [listVC.videoList addObject:model];
     }];
+    listVC.index = index;
+    listVC.delegate = self;
+//    listVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+//    [self presentViewController:listVC animated:YES completion:nil];
     
-    @weakify(self);
-    [videoView setRequestBlock:^{
-        @strongify(self);
-        [self requestMoreList];
-    }];
+//    UINavigationController *nav = [UINavigationController rootVC:listVC];
+//    nav.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    GKDYPlayerNavigationController *nav = [GKDYPlayerNavigationController rootVC:listVC];
+    [self presentViewController:nav animated:YES completion:nil];
     
-    videoView.vc = self;
-    videoView.index = index;
-    [videoView show];
-    self.videoView = videoView;
+    
+//    GKDYScaleVideoView *videoView = [[GKDYScaleVideoView alloc] initWithFrame:self.view.bounds];
+//    
+//    [list enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        GKDYVideoModel *model = [[GKDYVideoModel alloc] initWithModel:obj];
+//        model.source_name = self.headerView.model.author;
+//        model.author_avatar = self.headerView.model.author_icon;
+//        [videoView.videoList addObject:model];
+//    }];
+//    
+//    @weakify(self);
+//    [videoView setRequestBlock:^{
+//        @strongify(self);
+//        [self requestMoreList];
+//    }];
+//    
+//    videoView.vc = self;
+//    videoView.index = index;
+//    [videoView show];
+//    self.videoView = videoView;
 }
 
 - (void)requestMoreList {
@@ -157,6 +176,15 @@
         }];
         [self.videoView reloadData];
     }];
+}
+
+#pragma mark - GKDYListPlayerControllerDelegate
+- (UIView *)sourceViewWithIndex:(NSInteger)index {
+    UICollectionViewCell *cell = [self.currentListVC.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+    if ([self.currentListVC.collectionView.visibleCells containsObject:cell]) {
+        return cell;
+    }
+    return nil;
 }
 
 #pragma mark - Lazy
