@@ -25,6 +25,8 @@
 @property (nonatomic, strong) GKDYCommentView *commentView;
 
 @property (nonatomic, weak) UIView *containerView;
+
+@property (nonatomic, weak) GKBallLoadingView *loadingView;
  
 @end
 
@@ -36,10 +38,11 @@
     [self initUI];
     [self setupRefresh];
     [self requestData];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkChange) name:@"NetworkChange" object:nil];
 }
 
 - (void)dealloc {
-    
     NSLog(@"playerVC dealloc");
 }
 
@@ -64,6 +67,7 @@
 - (void)requestData {
     GKBallLoadingView *loadingView = [GKBallLoadingView loadingViewInView:self.view];
     [loadingView startLoading];
+    self.loadingView = loadingView;
     
     self.manager.page = 1;
     @weakify(loadingView);
@@ -123,6 +127,13 @@
 
 - (GKDYVideoModel *)model {
     return self.manager.currentCell.model;
+}
+
+#pragma mark - notification
+- (void)networkChange {
+    if (self.manager.dataSources.count == 0 && !self.loadingView) {
+        [self requestData];
+    }
 }
 
 #pragma mark - JXCategoryListContentViewDelegate

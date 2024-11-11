@@ -31,6 +31,8 @@
     
     [self setupWebpSupprot];
     
+    [self setupNetworkCheck];
+    
     return YES;
 }
 
@@ -69,6 +71,18 @@
     
     // Modify HTTP Accept Header
     [[SDWebImageDownloader sharedDownloader] setValue:@"image/webp,image/*,*/*;q=0.8" forHTTPHeaderField:@"Accept"];
+}
+
+- (void)setupNetworkCheck {
+    AFNetworkReachabilityManager *networkManger = [AFNetworkReachabilityManager sharedManager];
+    [networkManger startMonitoring];
+    [networkManger setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        if (status == AFNetworkReachabilityStatusReachableViaWWAN || status == AFNetworkReachabilityStatusReachableViaWiFi) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"NetworkChange" object:nil];
+        }else {
+            NSLog(@"无网络");
+        }
+    }];
 }
 
 - (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
